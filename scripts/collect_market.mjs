@@ -19,7 +19,7 @@ let previous;try{previous=JSON.parse(await fs.readFile(output,'utf8'))}catch{}
 let stocks,sourceStatus='ok';
 try{
  const rows=parse(await (await request(source)).text(),{columns:true,skip_empty_lines:true});
- stocks=rows.map(r=>({symbol:r.Symbol,name:r.Security,sector:r['GICS Sector'],industry:r['GICS Sub-Industry'],kind:'stock'}));
+ stocks=rows.map(r=>({symbol:r.Symbol,name:r.Security,sector:r['GICS Sector'],industry:r['GICS Sub-Industry'],hq:r['Headquarters Location']||'',founded:r.Founded||'',kind:'stock'}));
  if(stocks.length<450||stocks.length>550||new Set(stocks.map(s=>s.symbol)).size!==stocks.length||stocks.some(s=>!s.name||!/^[A-Z0-9.\-]+$/.test(s.symbol)))throw Error('Invalid constituent list');
 }catch{if(!previous)throw Error('Constituent list unavailable');stocks=previous.assets.filter(s=>s.kind==='stock');sourceStatus='stale'}
 const assets=[...stocks,...etfs.map(symbol=>({symbol,name:symbol,sector:'ETF',industry:'',kind:'etf'}))];

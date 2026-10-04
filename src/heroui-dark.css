@@ -130,3 +130,51 @@ html.dark .report-method .accordion__item{border:0}
 .report-note{margin:14px 0 0;padding:12px;border-radius:12px;background:#2E1F05;color:#F7B750;font-size:12px;line-height:1.6}
 @media(max-width:1100px){.report-columns,.cal-layout{grid-template-columns:minmax(0,1fr)}.report-side{position:static}.cal-heading{flex-wrap:wrap}}
 @media(max-width:700px){html.dark .cal-main,html.dark .research-page{padding:24px 16px}.cal-stats{width:100%}.cal-stats>div{width:auto;flex:1;padding:12px}.cal-stats strong{font-size:20px}.report-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cal-title-row{flex-wrap:wrap}html.dark .reaction-section,html.dark .cal-card,html.dark .report-card{padding:16px}}
+
+/* Driver icons (shared: 월간 관측 · 일일 리포트) */
+.driver-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#27272A;color:#ECEDEE}
+.driver-icon.layer-icon-demand,.driver-icon.layer-icon-cost,.driver-icon.layer-icon-rates,.driver-icon.layer-icon-credit,.driver-icon.layer-icon-liquidity,.driver-icon.layer-icon-fx{background:#0B2B2A;color:#2DD4BF}
+.driver-icon.layer-icon-policy,.driver-icon.layer-icon-supply,.driver-icon.layer-icon-investment{background:#2E0F22;color:#F472B6}
+.driver-icon.layer-icon-revenue,.driver-icon.layer-icon-margin,.driver-icon.layer-icon-capital{background:#2E1F05;color:#FBBF24}
+html.dark .reaction-label.driver-definition{display:flex;align-items:center;gap:6px}
+.reaction-label .driver-icon{width:20px;height:20px;border-radius:6px}
+html.dark .reaction-row{grid-template-columns:200px repeat(var(--days),minmax(0,1fr))}
+.reaction-label small{font-size:9px;color:var(--muted);min-width:38px}
+.modal__heading .driver-icon{margin-right:8px;vertical-align:middle}
+
+/* 오늘의 Driver 카드 */
+.driver-grid-note{margin:-6px 0 14px}
+.driver-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.driver-card{display:flex;flex-direction:column;gap:10px;text-align:left;padding:14px;border-radius:14px;background:#000;border:1px solid #3F3F46;color:#ECEDEE;font:inherit;cursor:pointer;min-width:0;transition:border-color .15s,background .15s}
+.driver-card:hover{border-color:#52525B}.driver-card.is-open{border-color:#338EF7;background:#338EF70D}
+.driver-card.unknown{opacity:.62}.driver-card.unknown:hover,.driver-card.unknown.is-open{opacity:1}
+.driver-card.observed{border-color:#17C96455}
+.driver-card-head{display:flex;align-items:center;gap:10px}
+.driver-card-name{flex:1;min-width:0;font-weight:600;font-size:13px;line-height:1.3}.driver-card-name small{display:block;font-size:10px;font-weight:400;color:var(--muted)}
+.driver-card .chip{font-size:10px}
+.driver-card.observed .chip{background:#092A1A;color:#45D483}
+.driver-card-fact{font-size:12px;color:#D4D4D8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.driver-card-foot{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);border-top:1px solid #27272A;padding-top:8px}
+.driver-detail-panel{margin-top:14px;padding:18px;border-radius:14px;background:#27272A;font-size:12px;line-height:1.8;color:#D4D4D8}
+.driver-detail-title{display:flex;align-items:center;gap:10px}.driver-detail-title h3{font-size:15px;font-weight:700;color:#ECEDEE}
+
+/* 종목 로고 · 호버 카드 */
+.stock-logo{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:36px;height:36px;border-radius:10px;background:#27272A;overflow:hidden;font-size:11px;font-weight:700;color:var(--muted)}
+.stock-logo img{width:100%;height:100%;object-fit:contain;background:#fff}
+html.dark .candidate-identity{flex-direction:row;align-items:center;gap:12px;position:relative}
+.candidate-text{display:flex;flex-direction:column;gap:6px;min-width:0}.candidate-text>span{font-size:10px;color:#aaa}.candidate-text>span small{margin-left:10px;color:#777;font-size:10px}
+.stock-hover{position:absolute;left:0;top:calc(100% + 8px);z-index:20;width:300px;display:none;flex-direction:column;gap:8px;padding:14px;border-radius:14px;background:#18181B;border:1px solid #3F3F46;box-shadow:0 12px 32px #000a;text-align:left;cursor:default}
+.candidate-identity:hover .stock-hover,.accordion__trigger:focus-visible .stock-hover{display:flex}
+.stock-hover-head{display:flex;align-items:center;gap:10px}.stock-hover-head>span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}
+.stock-hover-head b{font-size:14px}.stock-hover-head small{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stock-hover-head em{font-style:normal;font-weight:700;font-size:13px}
+.stock-hover-meta{font-size:11px;color:var(--muted)}
+.stock-hover-facts{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}.stock-hover-facts b{color:#ECEDEE;font-weight:600;margin-left:4px}
+.stock-hover>small{font-size:10px;color:var(--subtle)}
+.spark{width:100%;height:64px;border-radius:8px;background:#000}
+.spark-line{fill:none;stroke-width:1.6;vector-effect:non-scaling-stroke}.spark-area{stroke:none}
+.spark.up .spark-line{stroke:#17C964}.spark.up .spark-area{fill:#17C9641F}
+.spark.down .spark-line{stroke:#F54180}.spark.down .spark-area{fill:#F541801F}
+@media(max-width:1100px){.driver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.driver-grid{grid-template-columns:minmax(0,1fr)}.stock-hover{display:none!important}.stock-logo{width:30px;height:30px}html.dark .reaction-row{grid-template-columns:150px repeat(var(--days),minmax(0,1fr))}}
+#daily-candidates{position:relative;z-index:5}

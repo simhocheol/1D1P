@@ -21,10 +21,9 @@ try{
  await p.getByRole('button',{name:'정보기술 후보 필터'}).click();
  assert.equal(await p.locator('.candidate-identity strong').count(),1);
  await p.getByRole('button',{name:'연결 필터 초기화'}).click();
- await p.getByRole('tab',{name:'전체 12',exact:true}).click();
- assert.equal(await p.locator('.driver-ledger .accordion__item').count(),12);
- await p.getByRole('tab',{name:'관측됨 3',exact:true}).click();
- await p.locator('.driver-ledger .accordion__trigger').filter({hasText:'매출·주문'}).click();
+ assert.equal(await p.locator('.driver-card').count(),12);
+ assert.equal(await p.locator('.driver-card.observed').count(),3);
+ await p.locator('.driver-card').filter({hasText:'매출·주문'}).click();
  await p.getByRole('button',{name:'이 Driver의 연결',exact:true}).click();
  assert.equal(await p.locator('.candidate-identity strong').count(),1);
  await p.getByRole('button',{name:'연결 필터 초기화'}).click();

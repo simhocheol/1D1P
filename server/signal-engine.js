@@ -46,7 +46,7 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],date}={})
   const evidence=(news[a.symbol]||[]).filter(n=>inReactionWindow(n.publishedAt,asOf,rows[a.symbol]?.at(-2)?.t?day(rows[a.symbol].at(-2).t):null));
   const candidates=sector?.candidates.filter(d=>Math.sign(d.beta*d.change)===Math.sign(m.change))||[];
   const score=Math.min(Math.abs(m.z??0),5)*10+Math.min(m.volumeRatio??0,5)*5+Math.min(Math.abs(relative??0),5)*5;
-  return [{...a,...m,relativeToSector:relative,reasons,score,candidates,evidence,state:evidence.length?'관련 근거 있음 · 인과 미확정':candidates.length?'Driver 영향 후보 · 인과 미확정':'변화 감지 · 원인 미확인'}];
+  return [{...a,...m,spark:(rows[a.symbol]||[]).slice(-30).map(v=>Math.round(v.c*100)/100),relativeToSector:relative,reasons,score,candidates,evidence,state:evidence.length?'관련 근거 있음 · 인과 미확정':candidates.length?'Driver 영향 후보 · 인과 미확정':'변화 감지 · 원인 미확인'}];
  }).sort((a,b)=>b.score-a.score||a.symbol.localeCompare(b.symbol));
  const report={date:asOf,status:valid('SPY')?'ok':'missing_benchmark',drivers,sectors,stocks,events:events.filter(e=>inReactionWindow(e.publishedAt,asOf,rows.SPY?.at(-2)?.t?day(rows.SPY.at(-2).t):null)),coverage:assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).length,total:assets.filter(a=>a.kind==='stock').length,method:'rules-v2; driver-aligned candidates, not proven causation or trading recommendations'};
  const windowNews=Object.fromEntries(assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).map(a=>[a.symbol,(news[a.symbol]||[]).filter(e=>inReactionWindow(e.publishedAt,asOf,rows[a.symbol]?.at(-2)?.t?day(rows[a.symbol].at(-2).t):null))]));

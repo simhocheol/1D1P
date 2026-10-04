@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T08:30:46.002Z",
+  "checkedAt": "2026-10-04T08:34:26.266Z",
   "source": "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
   "sourceStatus": "ok",
   "scope": "current S&P 500 constituents + curated ETF watch universe (not all ETFs)",

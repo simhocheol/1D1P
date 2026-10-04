@@ -50,7 +50,7 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 ## OpenAI 키 설정
 
-`/settings`의 입력란은 마스킹된 키 연결 테스트용입니다. Vercel Function `/api/openai-connection`을 통해 모델 목록 조회 권한을 확인합니다. 키는 응답·로그·저장소에 남기지 않으며 입력란도 성공·실패 후 지웁니다. 실제 생성 API 권한과 결제 상태를 검증하는 테스트는 아닙니다.
+`/settings`의 입력란은 마스킹된 키 연결 테스트용입니다. Vercel Function `/api/openai-connection`을 통해 모델 목록 조회 권한을 확인합니다. 연결 검증 API는 키를 응답·로그에 남기지 않습니다. 관리자 인증 후 검증이 성공하면 설정 화면에서 암호화 저장을 자동으로 이어서 실행하며, 입력란은 성공·실패 후 지웁니다. 실제 생성 API 권한과 결제 상태를 검증하는 테스트는 아닙니다.
 
 예약 발행용 영구 키는 설정 화면에서 관리자 인증 후 암호화 저장하거나 GitHub Secrets에 직접 `OPENAI_API_KEY` 이름으로 등록합니다. 저장만으로 분석 리포트 생성이 활성화되지는 않습니다.
 
@@ -58,7 +58,7 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 ## Alpaca 연결
 
-시장 데이터 제공처를 Alpaca Basic / IEX로 설정했습니다. `/settings`에 API Key와 Secret Key를 입력해 읽기 전용 일봉 접근을 확인할 수 있습니다. 테스트는 AAPL IEX 일봉만 조회하며 가격 응답·키는 저장하거나 공개하지 않습니다. 주문·계좌 API는 호출하지 않습니다.
+시장 데이터 제공처를 Alpaca Basic / IEX로 설정했습니다. `/settings`에 API Key와 Secret Key를 입력해 읽기 전용 일봉 접근을 확인할 수 있습니다. 테스트는 AAPL IEX 일봉만 조회하며 가격 응답은 저장하거나 공개하지 않습니다. 관리자 인증 후 연결 확인에 성공한 키는 자동으로 암호화 저장합니다. 주문·계좌 API는 호출하지 않습니다.
 
 사이트의 암호화 저장은 두 키를 하나의 `ALPACA_CREDENTIALS_JSON` Secret에 묶어 원자적으로 등록합니다. 다음 수집 슬롯 또는 수동 실행에서 서버 인증·일봉 접근을 검증합니다. 기존 `ALPACA_API_KEY`, `ALPACA_SECRET_KEY` 수동 등록도 번들이 없을 때 지원합니다. `public/data/market-connection.json`에는 연결 상태와 조회 여부만 저장합니다. 키·가격·계좌 정보는 포함하지 않습니다.
 
@@ -68,7 +68,7 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 1. simhocheol 계정의 Fine-grained GitHub token을 생성합니다. 1D1P 저장소만 선택하고 Repository permissions의 Secrets를 Read and write로 설정합니다.
 2. 설정 화면의 관리자 인증에 입력합니다. 토큰은 현재 화면 메모리에서만 유지하며 브라우저 저장소·Git·서버 파일에 저장하지 않습니다.
-3. 제공처 키를 입력하고 암호화 저장을 누릅니다. 연결 테스트는 별도 동작이며 저장하지 않습니다.
+3. 제공처 키를 입력하고 연결 테스트를 누릅니다. 연결 확인에 성공하면 자동으로 암호화 저장합니다. 연결 성공과 저장 실패는 구분해 표시합니다. 별도 암호화 저장 버튼도 유지합니다.
 
 서버는 GitHub에서 소유자를 확인한 다음 저장소 공개키로 libsodium sealed-box 암호화를 수행합니다. GitHub에 전송하는 Secret 값은 암호문입니다. 관리자 인증 없이 저장·조회할 수 없으며 simhocheol 이외의 계정은 거부합니다. 새로고침·재배포 후에도 GitHub가 Secret을 보관합니다. 상태 조회는 존재 여부·변경 시각만 반환하고 원문이나 암호문을 브라우저에 돌려주지 않습니다.
 

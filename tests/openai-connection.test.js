@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {makeHandler} from '../api/openai-connection.js';
+const fakeKey='sk-unit-test-not-a-real-key-1234567890';
+async function request({status=200,body={apiKey:fakeKey},origin='https://1d1phocheol.vercel.app',method='POST',fetchError=false}={}){let called=false;const handler=makeHandler({env:{NODE_ENV:'production',OPENAI_API_KEY:'never-use-server-secret'},fetchImpl:async(url,options)=>{called=true;assert.equal(url,'https://api.openai.com/v1/models');assert.equal(options.headers.Authorization,`Bearer ${fakeKey}`);if(fetchError)throw Error('upstream secret details');return {ok:status===200,status,json:async()=>({data:[{id:'test'}],error:{message:fakeKey}})}}});const res={headers:{},setHeader(k,v){this.headers[k]=v},end(raw){this.raw=raw;this.body=JSON.parse(raw)}};await handler({method,headers:{origin,'content-type':'application/json'},body},res);assert.equal(res.raw.includes(fakeKey),false);assert.equal(res.raw.includes('never-use-server-secret'),false);assert.equal(res.headers['Cache-Control'],'no-store');return {...res,called}}
+test('tests only submitted key and never claims persistence',async()=>{const r=await request();assert.equal(r.statusCode,200);assert.equal(r.body.persisted,false);assert.equal(r.body.verified,true)});
+test('rejects cross-origin access before reaching upstream',async()=>{const r=await request({origin:'https://untrusted.example'});assert.equal(r.statusCode,403);assert.equal(r.called,false)});
+test('rejects missing key without using server credentials',async()=>{const r=await request({body:{}});assert.equal(r.statusCode,400);assert.equal(r.called,false)});
+test('does not expose upstream details or keys in failures',async()=>{for(const status of [401,403,429,500]){const r=await request({status});assert.ok(r.statusCode>=400)}const r=await request({fetchError:true});assert.equal(r.statusCode,502)});
+test('rejects oversized body and unsupported methods',async()=>{assert.equal((await request({body:{apiKey:'a'.repeat(5000)}})).statusCode,400);assert.equal((await request({method:'GET'})).statusCode,405)});

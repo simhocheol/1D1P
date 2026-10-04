@@ -55,6 +55,13 @@ jobs:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         run: node scripts/collect_market.mjs
+      - name: Collect S&P 500 earnings calendar
+        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        id: earnings
+        continue-on-error: true
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: node scripts/collect_earnings.mjs
       - uses: actions/upload-artifact@v4
         if: steps.market.outcome == 'success' || steps.market.outcome == 'failure'
         with:
@@ -66,11 +73,12 @@ jobs:
         run: |
           git add public/data/official-feed.json public/data/market-connection.json
           if [ -f public/data/universe.json ]; then git add public/data/universe.json; fi
+          if [ -f public/data/earnings.json ]; then git add public/data/earnings.json; fi
           if git diff --cached --quiet; then exit 0; fi
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com
           git commit -m 'Update official feed records'
           git push origin HEAD:main
       - name: Surface partial collection failures
-        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure'
+        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure' || steps.earnings.outcome == 'failure'
         run: exit 1

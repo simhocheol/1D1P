@@ -178,3 +178,13 @@ html.dark .candidate-identity{flex-direction:row;align-items:center;gap:12px;pos
 @media(max-width:1100px){.driver-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.driver-grid{grid-template-columns:minmax(0,1fr)}.stock-hover{display:none!important}.stock-logo{width:30px;height:30px}html.dark .reaction-row{grid-template-columns:150px repeat(var(--days),minmax(0,1fr))}}
 #daily-candidates{position:relative;z-index:5}
+
+/* Driver 카드 상태 연출: 미관측은 흑백, 관측은 색 배경 */
+.driver-card.unknown,.driver-card.quiet{filter:grayscale(1);opacity:.55;background:#0A0A0A}
+.driver-card.unknown:hover,.driver-card.quiet:hover,.driver-card.unknown.is-open,.driver-card.quiet.is-open{opacity:.85}
+.driver-card.quiet{opacity:.7}
+.driver-card.observed{background:linear-gradient(160deg,#0F3D27 0%,#0A1F15 55%,#000 100%);border-color:#17C964;box-shadow:0 0 0 1px #17C96433,0 8px 24px -12px #17C96480}
+.driver-card.observed .driver-card-fact{color:#ECEDEE;font-weight:600}
+.driver-card.observed .driver-card-foot{border-color:#17C96433;color:#A7F3C8}
+.driver-card.observed .chip{background:#17C964;color:#04210F;font-weight:700}
+.driver-card.observed.is-open{border-color:#338EF7;box-shadow:0 0 0 1px #338EF7}

@@ -29,6 +29,7 @@ React 19, HeroUI v3, Tailwind CSS v4, Vite 기반입니다.
 - `src/verified-sessions.js`: 10월 1·2일 수동 검증, BLS/Tesla/Nike 원문과 별도 마감 보도.
 - `src/calendar-data.js`: 공식 출처에서 수동 검토한 발표 예정 일정. 자동 일정 수집과 구분합니다.
 - `public/data/official-feed.json`: 연준 발표·연설 및 BLS 고용/CPI/PPI RSS 수집 결과.
+- `scripts/collect_earnings.mjs`: Finnhub 실적 캘린더에서 이번 달 S&P 500 실적 발표 일정을 받아 `public/data/earnings.json`에 저장. GitHub Secret `FINNHUB_API_KEY` 필요(무료 키). 실패 시 기존 기록 유지.
 - `scripts/collect_official.py`: 공식 XML 파서, ET 날짜, 조회 시각, 최초 조회 시각, URL, 재시도, 실패 시 기존 기록 유지, 원자적 저장.
 
 RSS는 제목·게시 시각·원문 링크만 수집합니다. 원문 분석·가격 인과관계·Driver 강도는 자동 생성하지 않습니다. BLS는 환경에 따라 HTTP 403을 반환하며 성공으로 위장하지 않습니다.

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import {parse} from 'csv-parse/sync';
 import {summarize,association} from '../server/market-metrics.js';
 import {seal} from '../server/market-vault.js';
+import {buildSignalReport} from '../server/signal-engine.js';
 const source='https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv';
 const output=new URL('../public/data/universe.json',import.meta.url);
 const checkedAt=new Date().toISOString();
@@ -66,6 +67,9 @@ const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituent
 await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
 await fs.writeFile(output,JSON.stringify(metadata,null,2)+'\n');
 await fs.mkdir('private-market',{recursive:true});
-if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
+let events=[];try{events=JSON.parse(await fs.readFile(new URL('../public/data/official-feed.json',import.meta.url),'utf8')).events||[]}catch{}
+if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
+const report=buildSignalReport({assets,bars,news,events});
+console.log(`Signal report ${report.date}; significant stocks=${report.stocks.length}; reacting sectors=${report.sectors.filter(s=>s.active).length}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);
 if(metadata.status!=='ok'||sourceStatus!=='ok')process.exitCode=1;

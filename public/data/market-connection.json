@@ -3,7 +3,8 @@
   "feed": "iex",
   "timeframe": "1Day",
   "mode": "market-data-read-only",
-  "checkedAt": "2026-10-04T08:09:09.457Z",
-  "status": "missing_keys",
-  "publishingEnabled": false
+  "checkedAt": "2026-10-04T08:19:53.903Z",
+  "status": "verified",
+  "publishingEnabled": false,
+  "hasData": true
 }

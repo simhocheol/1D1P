@@ -1,4 +1,3 @@
-import {drivers} from './report.js';
 const bls='https://www.bls.gov/schedule/2026/10_sched.htm',fed='https://www.federalreserve.gov/monetarypolicy.htm';
 export const calendarEvents=[
  {day:2,type:'economic',title:'미국 고용·실업률',time:'08:30 ET',source:'BLS',url:bls,drivers:['경기','금리'],note:'9월 고용 상황. 장후 리포트에 반응 기록이 있습니다.'},
@@ -13,5 +12,5 @@ export const calendarEvents=[
  {day:29,type:'economic',title:'소비지출 연간 통계',time:'10:00 ET',source:'BLS',url:bls,drivers:['소비'],note:'2025년 연간 소비지출 통계. 월간 PCE와 다릅니다.'},
  {day:30,type:'economic',title:'고용비용지수 ECI',time:'08:30 ET',source:'BLS',url:bls,drivers:['금리','경기'],note:'2026년 3분기 고용비용지수 발표 예정.'},
 ].map((e,i)=>({...e,drivers:e.type==='earnings'?['매출·주문','마진·현금흐름']:e.title.includes('FOMC')?['금리·할인율','유동성·자금흐름']:e.title.includes('물가')||e.title.includes('ECI')?['물가·비용','금리·할인율']:['수요·성장'],id:`event-${i}`,date:`2026-10-${String(e.day).padStart(2,'0')}`,region:'US',checked:'2026-10-04'}));
-export const driverSnapshots=drivers.filter(d=>d.score!==null).map(d=>({...d,date:'2026-10-02',session:'post'}));
+export const driverSnapshots=[];
 export function monthDays(y,m){return new Date(Date.UTC(y,m+1,0)).getUTCDate();}

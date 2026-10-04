@@ -12,8 +12,7 @@ test('calendar distinguishes scheduled events and recorded reactions',()=>{
  assert.equal(monthDays(2028,1),29);
  assert.ok(calendarEvents.every(e=>e.url.startsWith('https://')&&e.checked&&e.date));
  assert.equal(calendarEvents.find(e=>e.type==='earnings').date,'2026-10-21');
- assert.equal(driverSnapshots.length,2);
- assert.ok(driverSnapshots.every(s=>s.session==='post'&&s.date==='2026-10-02'));
+ assert.equal(driverSnapshots.length,0);
 });
 test('evidence connections reference known drivers, stocks and sources',()=>{
  for(const e of evidenceLinks){

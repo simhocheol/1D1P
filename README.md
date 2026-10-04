@@ -52,7 +52,7 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 `/settings`의 입력란은 마스킹된 키 연결 테스트용입니다. Vercel Function `/api/openai-connection`을 통해 모델 목록 조회 권한을 확인합니다. 키는 응답·로그·저장소에 남기지 않으며 입력란도 성공·실패 후 지웁니다. 실제 생성 API 권한과 결제 상태를 검증하는 테스트는 아닙니다.
 
-예약 발행용 영구 키는 설정 화면의 GitHub Secrets 링크에서 저장소 관리자 계정으로 `OPENAI_API_KEY` 이름에 등록합니다. 현재 공개 서비스에는 관리자 인증이나 비밀 저장소 관리 API가 없으므로 웹 폼을 통해 서비스의 영구 키를 변경하게 하지 않습니다. Secret 등록만으로 분석 리포트 생성이 활성화되지는 않습니다.
+예약 발행용 영구 키는 설정 화면에서 관리자 인증 후 암호화 저장하거나 GitHub Secrets에 직접 `OPENAI_API_KEY` 이름으로 등록합니다. 저장만으로 분석 리포트 생성이 활성화되지는 않습니다.
 
 무료 가격 API 비교와 라이선스 제약은 `MARKET_DATA_PROVIDERS.md`와 설정 화면에 있습니다. Alpaca는 개인 개발용 우선 후보이며 공개 재배포는 별도 확인이 필요합니다.
 
@@ -60,6 +60,16 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 시장 데이터 제공처를 Alpaca Basic / IEX로 설정했습니다. `/settings`에 API Key와 Secret Key를 입력해 읽기 전용 일봉 접근을 확인할 수 있습니다. 테스트는 AAPL IEX 일봉만 조회하며 가격 응답·키는 저장하거나 공개하지 않습니다. 주문·계좌 API는 호출하지 않습니다.
 
-GitHub Actions Secrets에 `ALPACA_API_KEY`, `ALPACA_SECRET_KEY`를 등록하면 다음 수집 슬롯 또는 수동 실행에서 서버 인증·일봉 접근을 검증합니다. `public/data/market-connection.json`에는 연결 상태와 조회 여부만 저장합니다. 키·가격·계좌 정보는 포함하지 않습니다.
+사이트의 암호화 저장은 두 키를 하나의 `ALPACA_CREDENTIALS_JSON` Secret에 묶어 원자적으로 등록합니다. 다음 수집 슬롯 또는 수동 실행에서 서버 인증·일봉 접근을 검증합니다. 기존 `ALPACA_API_KEY`, `ALPACA_SECRET_KEY` 수동 등록도 번들이 없을 때 지원합니다. `public/data/market-connection.json`에는 연결 상태와 조회 여부만 저장합니다. 키·가격·계좌 정보는 포함하지 않습니다.
 
 현재 공개 가격 수집·표시는 비활성화되어 있습니다. 개인 개발용 무료 데이터 접근은 서비스 재배포 권한이 아니므로 이용 허가 확인 후 가격 수집·기술지표 파이프라인을 연결해야 합니다. IEX 거래량은 전체 시장 거래량이 아닙니다.
+
+## 사이트에서 암호화 저장
+
+1. simhocheol 계정의 Fine-grained GitHub token을 생성합니다. 1D1P 저장소만 선택하고 Repository permissions의 Secrets를 Read and write로 설정합니다.
+2. 설정 화면의 관리자 인증에 입력합니다. 토큰은 현재 화면 메모리에서만 유지하며 브라우저 저장소·Git·서버 파일에 저장하지 않습니다.
+3. 제공처 키를 입력하고 암호화 저장을 누릅니다. 연결 테스트는 별도 동작이며 저장하지 않습니다.
+
+서버는 GitHub에서 소유자를 확인한 다음 저장소 공개키로 libsodium sealed-box 암호화를 수행합니다. GitHub에 전송하는 Secret 값은 암호문입니다. 관리자 인증 없이 저장·조회할 수 없으며 simhocheol 이외의 계정은 거부합니다. 새로고침·재배포 후에도 GitHub가 Secret을 보관합니다. 상태 조회는 존재 여부·변경 시각만 반환하고 원문이나 암호문을 브라우저에 돌려주지 않습니다.
+
+GitHub Actions는 저장된 Alpaca 번들을 환경 변수로 받아 기존 읽기 전용 검증에 사용합니다. 사이트 런타임은 GitHub Secrets의 원문을 읽을 수 없습니다. 삭제는 GitHub 저장소 Secrets 화면에서 가능하며 교체는 동일한 암호화 저장 버튼으로 수행합니다. API 키와 관리자 토큰은 채팅에 보내지 않습니다.

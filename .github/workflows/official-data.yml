@@ -42,6 +42,7 @@ jobs:
         id: alpaca
         continue-on-error: true
         env:
+          ALPACA_CREDENTIALS_JSON: ${{ secrets.ALPACA_CREDENTIALS_JSON }}
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         run: node scripts/check_alpaca.mjs

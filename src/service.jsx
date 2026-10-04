@@ -4,7 +4,9 @@ import {CalendarDays,FileText,ListFilter,Settings,Star} from 'lucide-react';
 import CalendarPage from './calendar.jsx';
 import VerifiedReport from './verified-report.jsx';
 import OfficialFeed from './official-feed.jsx';
-import ApiSettings from './api-settings.jsx';
+import ApiSettingsContent from './api-settings.jsx';
+import CredentialStore from './credential-store.jsx';
+function ApiSettings(){return <CredentialStore><ApiSettingsContent/></CredentialStore>}
 import {verifiedSessions,auditSources} from './verified-sessions.js';
 import './service.css';
 const routes=[['/','시장 캘린더',CalendarDays],['/report','일일 리포트',FileText],['/universe','종목·ETF',ListFilter],['/settings','수집 상태',Settings]];

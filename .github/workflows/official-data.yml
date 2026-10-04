@@ -59,7 +59,7 @@ jobs:
         if: steps.market.outcome == 'success' || steps.market.outcome == 'failure'
         with:
           name: market-data
-          path: private-market/market.json
+          path: private-market/market.enc
           retention-days: 7
           if-no-files-found: error
       - name: Commit collected data for Git-integrated Vercel deployment

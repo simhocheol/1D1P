@@ -70,7 +70,7 @@ API 키는 GitHub Secrets 또는 서버 환경 변수에만 등록합니다. `.e
 
 `collect_market.mjs`는 현재 S&P 500 구성 증권과 선정한 ETF 29종을 갱신하고, Alpaca IEX 분할 조정 일봉을 최근 180일 구간에서 페이지네이션 수집합니다. 구성 목록은 datasets 프로젝트의 커뮤니티 관리 CSV이며 S&P 공식 라이선스 피드가 아닙니다. 과거 날짜의 구성 종목을 복원하는 백테스트용 목록도 아닙니다.
 
-가격·거래량·뉴스는 공개 Git에 커밋하지 않습니다. GitHub Actions `market-data` Artifact에 7일간 보관하며 `/universe`에서 simhocheol 토큰으로 조회합니다. 조회 토큰에는 Repository permissions의 **Actions: Read** 권한이 추가로 필요합니다. 토큰과 시세는 브라우저 메모리에서만 유지합니다. 원문은 다음 예약 수집 때 갱신되며 장중 미완성 일봉은 제외합니다.
+가격·거래량·뉴스는 공개 Git에 커밋하지 않습니다. 공개 저장소의 Artifact도 다운로드될 수 있으므로 Alpaca Secret Key에서 HKDF로 유도한 키와 임의 salt/nonce를 사용해 AES-256-GCM으로 파일 자체를 암호화합니다. GitHub Actions `market-data` Artifact에 암호문을 7일간 보관하며 `/universe`에서 simhocheol 토큰과 수집 당시 Alpaca Secret Key로 조회합니다. 조회 토큰에는 Repository permissions의 **Actions: Read** 권한이 추가로 필요합니다. 토큰·입력 Secret·시세는 브라우저 메모리에서만 유지합니다. GitHub Secret은 원문을 읽을 수 없어 조회 세션에서 복호화용 Secret 입력이 필요합니다. 키를 교체하면 다시 수집해야 합니다. 원문은 다음 예약 수집 때 갱신되며 장중 미완성 일봉은 제외합니다.
 
 종가·전일비·IEX 거래량·20/50일 SMA·14일 Wilder RSI·이전 20일 평균 대비 거래량을 계산합니다. ETF 대리지표와 최근 최대 60개 일간 수익률의 상관·베타는 통계적 동반 움직임이며 거시 Driver 인과 기여도가 아닙니다. 같은 ET 거래일 기관 발표와 최근 7일 관련 뉴스 링크를 상세 화면에 표시하지만 가격 변화의 원인으로 확정하지 않습니다. 뉴스는 50종목 배치당 최근 최대 50건으로 전수 수집을 보장하지 않습니다. 미확인 값은 비워 두며 OpenAI 인과 분석, 전 세계 ETF 전수 목록, 웹·모바일 푸시는 별도 미구현입니다.
 

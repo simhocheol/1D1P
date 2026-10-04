@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import {parse} from 'csv-parse/sync';
 import {summarize,association} from '../server/market-metrics.js';
+import {seal} from '../server/market-vault.js';
 const source='https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv';
 const output=new URL('../public/data/universe.json',import.meta.url);
 const checkedAt=new Date().toISOString();
@@ -65,6 +66,6 @@ const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituent
 await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
 await fs.writeFile(output,JSON.stringify(metadata,null,2)+'\n');
 await fs.mkdir('private-market',{recursive:true});
-await fs.writeFile('private-market/market.json',JSON.stringify({...metadata,metrics,bars,news,newsErrors,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'}));
+if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);
 if(metadata.status!=='ok'||sourceStatus!=='ok')process.exitCode=1;

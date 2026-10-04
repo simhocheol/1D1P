@@ -62,7 +62,7 @@ if(key&&secret)for(let i=0;i<assets.length;i+=50){
  }catch{newsErrors.push(...symbols)}
 }
 const coverage=assets.filter(s=>metrics[s.symbol]).length;
-const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituents + curated ETF watch universe (not all ETFs)',feed:'iex',adjustment:'split',status:!key||!secret?'missing_keys':errors.length?'partial':'ok',coverage,total:assets.length,failedSymbols:errors,assets};
+const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituents + curated ETF watch universe (not all ETFs)',feed:'iex',adjustment:'split',status:!key||!secret?'missing_keys':errors.length?'partial':'ok',coverage,total:assets.length,failedSymbols:errors,newsStatus:!key||!secret?'missing_keys':newsErrors.length?'partial':'ok',newsSymbols:Object.keys(news).length,newsFailedSymbols:newsErrors,assets};
 await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
 await fs.writeFile(output,JSON.stringify(metadata,null,2)+'\n');
 await fs.mkdir('private-market',{recursive:true});

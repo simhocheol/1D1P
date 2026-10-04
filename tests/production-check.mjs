@@ -16,9 +16,9 @@ try{
  await page.goto(base+'/report?date=2026-10-01');await page.getByRole('heading',{name:'2026-10-01',exact:true}).waitFor();
  assert.equal(await page.locator('.audit-event').count(),1);
  await page.goto(base+'/report?date=2026-10-03');await page.getByRole('heading',{name:'해당 날짜는 미수집입니다'}).waitFor();
- await page.goto(base+'/universe');assert.equal(await page.locator('tbody tr').count(),2);
+ await page.goto(base+'/universe');await page.getByRole('button',{name:'AAPL',exact:true}).waitFor();assert.ok(await page.locator('tbody tr').count()>500);
  await page.getByRole('button',{name:'TSLA 관심 추가'}).click();await page.reload();await page.getByRole('button',{name:'TSLA 관심 해제'}).waitFor();
- await page.getByLabel('자산 유형').selectOption('etf');await page.getByText('수집된 기록이 없습니다.',{exact:true}).waitFor();
+ await page.getByLabel('자산 유형').selectOption('etf');assert.equal(await page.locator('tbody tr').count(),29);
  for(const width of [1440,390]){await page.setViewportSize({width,height:900});for(const route of ['/','/report','/settings']){await page.goto(base+route);await page.getByText('fed-press: 수집 성공',{exact:true}).waitFor();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${route} overflow at ${width}`);}await page.screenshot({path:`/private/tmp/1d1p-production-${width}.png`,fullPage:true});}
  assert.deepEqual(errors,[]);console.log('Production routes, real records, unknown dates, watchlist and responsive layout passed');
 }finally{await browser.close()}

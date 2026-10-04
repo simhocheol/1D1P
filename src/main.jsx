@@ -4,6 +4,7 @@ import './styles.css';
 import './dark.css';
 import Service from './service.jsx';
 import './neutral.css';
+import './research.css';
 document.documentElement.classList.add('dark');
 document.documentElement.dataset.theme='dark';
 createRoot(document.getElementById('root')).render(<Service/>);

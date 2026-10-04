@@ -1,4 +1,5 @@
 import {association,summarize} from './market-metrics.js';
+import {buildDriverThesis} from './driver-thesis.js';
 const day=t=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date(t));
 const sectorETF={'Information Technology':'XLK',Financials:'XLF',Energy:'XLE','Health Care':'XLV','Consumer Discretionary':'XLY','Consumer Staples':'XLP',Industrials:'XLI',Materials:'XLB',Utilities:'XLU','Real Estate':'XLRE','Communication Services':'XLC'};
 const proxies={SPY:'시장 위험선호',QQQ:'성장주 기대',TLT:'장기 국채 가격 · 금리 역방향 대리',GLD:'금 가격',USO:'원유 ETF 가격'};
@@ -47,5 +48,8 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],date}={})
   const score=Math.min(Math.abs(m.z??0),5)*10+Math.min(m.volumeRatio??0,5)*5+Math.min(Math.abs(relative??0),5)*5;
   return [{...a,...m,relativeToSector:relative,reasons,score,candidates,evidence,state:evidence.length?'관련 근거 있음 · 인과 미확정':candidates.length?'Driver 영향 후보 · 인과 미확정':'변화 감지 · 원인 미확인'}];
  }).sort((a,b)=>b.score-a.score||a.symbol.localeCompare(b.symbol));
- return {date:asOf,status:valid('SPY')?'ok':'missing_benchmark',drivers,sectors,stocks,events:events.filter(e=>inReactionWindow(e.publishedAt,asOf,rows.SPY?.at(-2)?.t?day(rows.SPY.at(-2).t):null)),coverage:assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).length,total:assets.filter(a=>a.kind==='stock').length,method:'rules-v1; ranking score is not a probability or trading recommendation'};
+ const report={date:asOf,status:valid('SPY')?'ok':'missing_benchmark',drivers,sectors,stocks,events:events.filter(e=>inReactionWindow(e.publishedAt,asOf,rows.SPY?.at(-2)?.t?day(rows.SPY.at(-2).t):null)),coverage:assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).length,total:assets.filter(a=>a.kind==='stock').length,method:'rules-v2; driver-aligned candidates, not proven causation or trading recommendations'};
+ const windowNews=Object.fromEntries(assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).map(a=>[a.symbol,(news[a.symbol]||[]).filter(e=>inReactionWindow(e.publishedAt,asOf,rows[a.symbol]?.at(-2)?.t?day(rows[a.symbol].at(-2).t):null))]));
+ report.thesis=buildDriverThesis({report,rows,windowNews});
+ return report;
 }

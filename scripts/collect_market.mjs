@@ -70,6 +70,6 @@ await fs.mkdir('private-market',{recursive:true});
 let events=[];try{events=JSON.parse(await fs.readFile(new URL('../public/data/official-feed.json',import.meta.url),'utf8')).events||[]}catch{}
 if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 const report=buildSignalReport({assets,bars,news,events});
-console.log(`Signal report ${report.date}; significant stocks=${report.stocks.length}; reacting sectors=${report.sectors.filter(s=>s.active).length}`);
+console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);
 if(metadata.status!=='ok'||sourceStatus!=='ok')process.exitCode=1;

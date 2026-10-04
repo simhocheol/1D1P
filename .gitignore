@@ -6,3 +6,4 @@ test-results/
 artifacts/
 .DS_Store
 __pycache__/
+private-market/

@@ -46,14 +46,31 @@ jobs:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         run: node scripts/check_alpaca.mjs
+      - name: Collect market universe and private bars
+        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        id: market
+        continue-on-error: true
+        env:
+          ALPACA_CREDENTIALS_JSON: ${{ secrets.ALPACA_CREDENTIALS_JSON }}
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: node scripts/collect_market.mjs
+      - uses: actions/upload-artifact@v4
+        if: steps.market.outcome == 'success' || steps.market.outcome == 'failure'
+        with:
+          name: market-data
+          path: private-market/market.json
+          retention-days: 7
+          if-no-files-found: error
       - name: Commit collected data for Git-integrated Vercel deployment
         run: |
           git add public/data/official-feed.json public/data/market-connection.json
+          if [ -f public/data/universe.json ]; then git add public/data/universe.json; fi
           if git diff --cached --quiet; then exit 0; fi
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com
           git commit -m 'Update official feed records'
           git push origin HEAD:main
       - name: Surface partial collection failures
-        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure'
+        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure'
         run: exit 1

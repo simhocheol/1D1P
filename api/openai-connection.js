@@ -1,6 +1,4 @@
-function respond(res,status,body){res.statusCode=status;res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.end(JSON.stringify(body));}
-function allowedOrigin(origin,env){const trusted=[env.APP_ORIGIN||'https://1d1phocheol.vercel.app',env.VERCEL_URL&&`https://${env.VERCEL_URL}`].filter(Boolean);if(trusted.includes(origin))return true;if(env.NODE_ENV==='production')return false;try{const u=new URL(origin);return u.protocol==='http:'&&['127.0.0.1','localhost'].includes(u.hostname)}catch{return false}}
-async function readBody(req){if(Number(req.headers['content-length'])>4096)throw Error('too-large');if(req.body!==undefined){const body=typeof req.body==='string'?req.body:JSON.stringify(req.body);if(Buffer.byteLength(body)>4096)throw Error('too-large');return JSON.parse(body)}let raw='';for await(const chunk of req){raw+=chunk.toString();if(Buffer.byteLength(raw)>4096)throw Error('too-large')}return JSON.parse(raw)}
+import {respond,allowedOrigin,readBody} from '../server/request.js';
 export function makeHandler({fetchImpl=fetch,env=process.env}={}){return async function handler(req,res){
  if(req.method!=='POST'){res.setHeader('Allow','POST');return respond(res,405,{message:'연결 테스트는 POST 요청만 지원합니다.'})}
  if(!allowedOrigin(req.headers.origin,env))return respond(res,403,{message:'허용된 설정 화면에서 요청해 주세요.'});

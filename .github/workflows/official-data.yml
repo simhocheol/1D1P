@@ -20,6 +20,14 @@ jobs:
         id: collection
         continue-on-error: true
         run: python scripts/collect_official.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }}
+      - name: Check whether collection slot ran
+        id: slot
+        run: |
+          if git diff --quiet -- public/data/official-feed.json; then
+            echo 'collected=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'collected=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -29,14 +37,22 @@ jobs:
       - run: npm test
       - run: npm run test:collector
       - run: npm run build
+      - name: Verify registered Alpaca market-data credentials
+        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        id: alpaca
+        continue-on-error: true
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: node scripts/check_alpaca.mjs
       - name: Commit collected data for Git-integrated Vercel deployment
         run: |
-          git add public/data/official-feed.json
+          git add public/data/official-feed.json public/data/market-connection.json
           if git diff --cached --quiet; then exit 0; fi
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com
           git commit -m 'Update official feed records'
           git push origin HEAD:main
       - name: Surface partial collection failures
-        if: steps.collection.outcome == 'failure'
+        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure'
         run: exit 1

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T12:05:50.441Z",
+  "checkedAt": "2026-10-04T14:55:39.296Z",
   "source": "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
   "sourceStatus": "ok",
   "scope": "current S&P 500 constituents + curated ETF watch universe (not all ETFs)",
@@ -10,7 +10,7 @@
   "total": 532,
   "failedSymbols": [],
   "newsStatus": "ok",
-  "newsSymbols": 224,
+  "newsSymbols": 220,
   "newsFailedSymbols": [],
   "assets": [
     {
@@ -18,6 +18,8 @@
       "name": "3M",
       "sector": "Industrials",
       "industry": "Industrial Conglomerates",
+      "hq": "Saint Paul, Minnesota",
+      "founded": "1902",
       "kind": "stock"
     },
     {
@@ -25,6 +27,8 @@
       "name": "A. O. Smith",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Milwaukee, Wisconsin",
+      "founded": "1916",
       "kind": "stock"
     },
     {
@@ -32,6 +36,8 @@
       "name": "Abbott Laboratories",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "North Chicago, Illinois",
+      "founded": "1888",
       "kind": "stock"
     },
     {
@@ -39,6 +45,8 @@
       "name": "AbbVie",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "North Chicago, Illinois",
+      "founded": "2013 (1888)",
       "kind": "stock"
     },
     {
@@ -46,6 +54,8 @@
       "name": "Accenture",
       "sector": "Information Technology",
       "industry": "IT Consulting & Other Services",
+      "hq": "Dublin, Ireland",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -53,6 +63,8 @@
       "name": "Adobe Inc.",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "San Jose, California",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -60,6 +72,8 @@
       "name": "Advanced Micro Devices",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Santa Clara, California",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -67,6 +81,8 @@
       "name": "AES Corporation",
       "sector": "Utilities",
       "industry": "Independent Power Producers & Energy Traders",
+      "hq": "Arlington, Virginia",
+      "founded": "1981",
       "kind": "stock"
     },
     {
@@ -74,6 +90,8 @@
       "name": "Aflac",
       "sector": "Financials",
       "industry": "Life & Health Insurance",
+      "hq": "Columbus, Georgia",
+      "founded": "1955",
       "kind": "stock"
     },
     {
@@ -81,6 +99,8 @@
       "name": "Agilent Technologies",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Santa Clara, California",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -88,6 +108,8 @@
       "name": "Air Products",
       "sector": "Materials",
       "industry": "Industrial Gases",
+      "hq": "Upper Macungie Township, Pennsylvania",
+      "founded": "1940",
       "kind": "stock"
     },
     {
@@ -95,6 +117,8 @@
       "name": "Airbnb",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "San Francisco, California",
+      "founded": "2008",
       "kind": "stock"
     },
     {
@@ -102,6 +126,8 @@
       "name": "Akamai Technologies",
       "sector": "Information Technology",
       "industry": "Internet Services & Infrastructure",
+      "hq": "Cambridge, Massachusetts",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -109,6 +135,8 @@
       "name": "Albemarle Corporation",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -116,6 +144,8 @@
       "name": "Alexandria Real Estate Equities",
       "sector": "Real Estate",
       "industry": "Office REITs",
+      "hq": "Pasadena, California",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -123,6 +153,8 @@
       "name": "Align Technology",
       "sector": "Health Care",
       "industry": "Health Care Supplies",
+      "hq": "Tempe, Arizona",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -130,6 +162,8 @@
       "name": "Allegion",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Dublin, Ireland",
+      "founded": "1908",
       "kind": "stock"
     },
     {
@@ -137,6 +171,8 @@
       "name": "Alliant Energy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Madison, Wisconsin",
+      "founded": "1917",
       "kind": "stock"
     },
     {
@@ -144,6 +180,8 @@
       "name": "Allstate",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Northbrook, Illinois",
+      "founded": "1931",
       "kind": "stock"
     },
     {
@@ -151,6 +189,8 @@
       "name": "Alphabet Inc. (Class A)",
       "sector": "Communication Services",
       "industry": "Interactive Media & Services",
+      "hq": "Mountain View, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -158,6 +198,8 @@
       "name": "Alphabet Inc. (Class C)",
       "sector": "Communication Services",
       "industry": "Interactive Media & Services",
+      "hq": "Mountain View, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -165,6 +207,8 @@
       "name": "Altria",
       "sector": "Consumer Staples",
       "industry": "Tobacco",
+      "hq": "Richmond, Virginia",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -172,6 +216,8 @@
       "name": "Amazon",
       "sector": "Consumer Discretionary",
       "industry": "Broadline Retail",
+      "hq": "Seattle, Washington",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -179,6 +225,8 @@
       "name": "Amcor",
       "sector": "Materials",
       "industry": "Paper & Plastic Packaging Products & Materials",
+      "hq": "Warmley, Bristol, United Kingdom",
+      "founded": "2019 (1860)",
       "kind": "stock"
     },
     {
@@ -186,6 +234,8 @@
       "name": "Ameren",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "St. Louis, Missouri",
+      "founded": "1902",
       "kind": "stock"
     },
     {
@@ -193,6 +243,8 @@
       "name": "American Electric Power",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Columbus, Ohio",
+      "founded": "1906",
       "kind": "stock"
     },
     {
@@ -200,6 +252,8 @@
       "name": "American Express",
       "sector": "Financials",
       "industry": "Consumer Finance",
+      "hq": "New York City, New York",
+      "founded": "1850",
       "kind": "stock"
     },
     {
@@ -207,6 +261,8 @@
       "name": "American International Group",
       "sector": "Financials",
       "industry": "Multi-line Insurance",
+      "hq": "New York City, New York",
+      "founded": "1919",
       "kind": "stock"
     },
     {
@@ -214,6 +270,8 @@
       "name": "American Tower",
       "sector": "Real Estate",
       "industry": "Telecom Tower REITs",
+      "hq": "Boston, Massachusetts",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -221,6 +279,8 @@
       "name": "American Water Works",
       "sector": "Utilities",
       "industry": "Water Utilities",
+      "hq": "Camden, New Jersey",
+      "founded": "1886",
       "kind": "stock"
     },
     {
@@ -228,6 +288,8 @@
       "name": "Ameriprise Financial",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Minneapolis, Minnesota",
+      "founded": "1894",
       "kind": "stock"
     },
     {
@@ -235,6 +297,8 @@
       "name": "Ametek",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "Berwyn, Pennsylvania",
+      "founded": "1930",
       "kind": "stock"
     },
     {
@@ -242,6 +306,8 @@
       "name": "Amgen",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Thousand Oaks, California",
+      "founded": "1980",
       "kind": "stock"
     },
     {
@@ -249,6 +315,8 @@
       "name": "Amphenol",
       "sector": "Information Technology",
       "industry": "Electronic Components",
+      "hq": "Wallingford, Connecticut",
+      "founded": "1932",
       "kind": "stock"
     },
     {
@@ -256,6 +324,8 @@
       "name": "Analog Devices",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Wilmington, Massachusetts",
+      "founded": "1965",
       "kind": "stock"
     },
     {
@@ -263,6 +333,8 @@
       "name": "Aon plc",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "London, United Kingdom",
+      "founded": "1982 (1919)",
       "kind": "stock"
     },
     {
@@ -270,6 +342,8 @@
       "name": "APA Corporation",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Houston, Texas",
+      "founded": "1954",
       "kind": "stock"
     },
     {
@@ -277,6 +351,8 @@
       "name": "Apollo Global Management",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "New York City, New York",
+      "founded": "1990",
       "kind": "stock"
     },
     {
@@ -284,6 +360,8 @@
       "name": "Apple Inc.",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Cupertino, California",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -291,6 +369,8 @@
       "name": "Applied Materials",
       "sector": "Information Technology",
       "industry": "Semiconductor Materials & Equipment",
+      "hq": "Santa Clara, California",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -298,6 +378,8 @@
       "name": "AppLovin",
       "sector": "Communication Services",
       "industry": "Advertising",
+      "hq": "Palo Alto, California",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -305,6 +387,8 @@
       "name": "Aptiv",
       "sector": "Consumer Discretionary",
       "industry": "Automotive Parts & Equipment",
+      "hq": "Schaffhausen, Switzerland",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -312,6 +396,8 @@
       "name": "Arch Capital Group",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Hamilton, Bermuda",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -319,6 +405,8 @@
       "name": "Archer Daniels Midland",
       "sector": "Consumer Staples",
       "industry": "Agricultural Products & Services",
+      "hq": "Chicago, Illinois",
+      "founded": "1902",
       "kind": "stock"
     },
     {
@@ -326,6 +414,8 @@
       "name": "Ares Management",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Los Angeles, California",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -333,6 +423,8 @@
       "name": "Arista Networks",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "Santa Clara, California",
+      "founded": "2004",
       "kind": "stock"
     },
     {
@@ -340,6 +432,8 @@
       "name": "Arthur J. Gallagher & Co.",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "Rolling Meadows, Illinois",
+      "founded": "1927",
       "kind": "stock"
     },
     {
@@ -347,6 +441,8 @@
       "name": "Assurant",
       "sector": "Financials",
       "industry": "Multi-line Insurance",
+      "hq": "Atlanta, Georgia",
+      "founded": "1892",
       "kind": "stock"
     },
     {
@@ -354,6 +450,8 @@
       "name": "AT&T",
       "sector": "Communication Services",
       "industry": "Integrated Telecommunication Services",
+      "hq": "Dallas, Texas",
+      "founded": "1983 (1885)",
       "kind": "stock"
     },
     {
@@ -361,6 +459,8 @@
       "name": "Atmos Energy",
       "sector": "Utilities",
       "industry": "Gas Utilities",
+      "hq": "Dallas, Texas",
+      "founded": "1906",
       "kind": "stock"
     },
     {
@@ -368,6 +468,8 @@
       "name": "Autodesk",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "San Francisco, California",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -375,6 +477,8 @@
       "name": "Automatic Data Processing",
       "sector": "Industrials",
       "industry": "Human Resource & Employment Services",
+      "hq": "Roseland, New Jersey",
+      "founded": "1949",
       "kind": "stock"
     },
     {
@@ -382,6 +486,8 @@
       "name": "AutoZone",
       "sector": "Consumer Discretionary",
       "industry": "Automotive Retail",
+      "hq": "Memphis, Tennessee",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -389,6 +495,8 @@
       "name": "Avery Dennison",
       "sector": "Materials",
       "industry": "Paper & Plastic Packaging Products & Materials",
+      "hq": "Mentor, Ohio",
+      "founded": "1935",
       "kind": "stock"
     },
     {
@@ -396,6 +504,8 @@
       "name": "Axon Enterprise",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Scottsdale, Arizona",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -403,6 +513,8 @@
       "name": "Baker Hughes",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
+      "hq": "Houston, Texas",
+      "founded": "2017",
       "kind": "stock"
     },
     {
@@ -410,6 +522,8 @@
       "name": "Ball Corporation",
       "sector": "Materials",
       "industry": "Metal, Glass & Plastic Containers",
+      "hq": "Broomfield, Colorado",
+      "founded": "1880",
       "kind": "stock"
     },
     {
@@ -417,6 +531,8 @@
       "name": "Bank of America",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1998 (1923 / 1874)",
       "kind": "stock"
     },
     {
@@ -424,6 +540,8 @@
       "name": "Baxter International",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Deerfield, Illinois",
+      "founded": "1931",
       "kind": "stock"
     },
     {
@@ -431,6 +549,8 @@
       "name": "Becton Dickinson",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Franklin Lakes, New Jersey",
+      "founded": "1897",
       "kind": "stock"
     },
     {
@@ -438,6 +558,8 @@
       "name": "Berkshire Hathaway",
       "sector": "Financials",
       "industry": "Multi-Sector Holdings",
+      "hq": "Omaha, Nebraska",
+      "founded": "1839",
       "kind": "stock"
     },
     {
@@ -445,6 +567,8 @@
       "name": "Best Buy",
       "sector": "Consumer Discretionary",
       "industry": "Computer & Electronics Retail",
+      "hq": "Richfield, Minnesota",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -452,6 +576,8 @@
       "name": "Bio-Techne",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Minneapolis, Minnesota",
+      "founded": "1976",
       "kind": "stock"
     },
     {
@@ -459,6 +585,8 @@
       "name": "Biogen",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Cambridge, Massachusetts",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -466,6 +594,8 @@
       "name": "BlackRock",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "New York City, New York",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -473,6 +603,8 @@
       "name": "Blackstone Inc.",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "New York City, New York",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -480,6 +612,8 @@
       "name": "Block, Inc.",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "none",
+      "founded": "2009",
       "kind": "stock"
     },
     {
@@ -487,6 +621,8 @@
       "name": "Bloom Energy",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "San Jose, California",
+      "founded": "2001",
       "kind": "stock"
     },
     {
@@ -494,6 +630,8 @@
       "name": "BNY Mellon",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "New York City, New York",
+      "founded": "2007 (1784)",
       "kind": "stock"
     },
     {
@@ -501,6 +639,8 @@
       "name": "Boeing",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Arlington, Virginia",
+      "founded": "1916",
       "kind": "stock"
     },
     {
@@ -508,6 +648,8 @@
       "name": "Booking Holdings",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Norwalk, Connecticut",
+      "founded": "1996",
       "kind": "stock"
     },
     {
@@ -515,6 +657,8 @@
       "name": "Boston Scientific",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Marlborough, Massachusetts",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -522,6 +666,8 @@
       "name": "Bristol Myers Squibb",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "New York City, New York",
+      "founded": "1989 (1887)",
       "kind": "stock"
     },
     {
@@ -529,6 +675,8 @@
       "name": "Broadcom",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Palo Alto, California",
+      "founded": "1961",
       "kind": "stock"
     },
     {
@@ -536,6 +684,8 @@
       "name": "Broadridge Financial Solutions",
       "sector": "Industrials",
       "industry": "Data Processing & Outsourced Services",
+      "hq": "Lake Success, New York",
+      "founded": "1962",
       "kind": "stock"
     },
     {
@@ -543,6 +693,8 @@
       "name": "Brown & Brown",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "Daytona Beach, Florida",
+      "founded": "1939",
       "kind": "stock"
     },
     {
@@ -550,6 +702,8 @@
       "name": "Brown–Forman",
       "sector": "Consumer Staples",
       "industry": "Distillers & Vintners",
+      "hq": "Louisville, Kentucky",
+      "founded": "1870",
       "kind": "stock"
     },
     {
@@ -557,6 +711,8 @@
       "name": "Bunge Global",
       "sector": "Consumer Staples",
       "industry": "Agricultural Products & Services",
+      "hq": "Chesterfield, Missouri",
+      "founded": "1818",
       "kind": "stock"
     },
     {
@@ -564,6 +720,8 @@
       "name": "BXP, Inc.",
       "sector": "Real Estate",
       "industry": "Office REITs",
+      "hq": "Boston, Massachusetts",
+      "founded": "1970",
       "kind": "stock"
     },
     {
@@ -571,6 +729,8 @@
       "name": "C.H. Robinson",
       "sector": "Industrials",
       "industry": "Air Freight & Logistics",
+      "hq": "Eden Prairie, Minnesota",
+      "founded": "1905",
       "kind": "stock"
     },
     {
@@ -578,6 +738,8 @@
       "name": "Cadence Design Systems",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "San Jose, California",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -585,6 +747,8 @@
       "name": "Camden Property Trust",
       "sector": "Real Estate",
       "industry": "Multi-Family Residential REITs",
+      "hq": "Houston, Texas",
+      "founded": "1981",
       "kind": "stock"
     },
     {
@@ -592,6 +756,8 @@
       "name": "Capital One",
       "sector": "Financials",
       "industry": "Consumer Finance",
+      "hq": "Tysons Corner, Virginia",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -599,6 +765,8 @@
       "name": "Cardinal Health",
       "sector": "Health Care",
       "industry": "Health Care Distributors",
+      "hq": "Dublin, Ohio",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -606,6 +774,8 @@
       "name": "Carnival Corporation",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Miami, Florida",
+      "founded": "1972",
       "kind": "stock"
     },
     {
@@ -613,6 +783,8 @@
       "name": "Carrier Global",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Palm Beach Gardens, Florida",
+      "founded": "2020 (1915, United Technologies spinoff)",
       "kind": "stock"
     },
     {
@@ -620,6 +792,8 @@
       "name": "Carvana",
       "sector": "Consumer Discretionary",
       "industry": "Automotive Retail",
+      "hq": "Tempe, Arizona",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -627,6 +801,8 @@
       "name": "Casey's",
       "sector": "Consumer Staples",
       "industry": "Food Retail",
+      "hq": "Ankeny, Iowa",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -634,6 +810,8 @@
       "name": "Caterpillar Inc.",
       "sector": "Industrials",
       "industry": "Construction Machinery & Heavy Transportation Equipment",
+      "hq": "Irving, Texas",
+      "founded": "1925",
       "kind": "stock"
     },
     {
@@ -641,6 +819,8 @@
       "name": "Cboe Global Markets",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "Chicago, Illinois",
+      "founded": "1973",
       "kind": "stock"
     },
     {
@@ -648,6 +828,8 @@
       "name": "CBRE Group",
       "sector": "Real Estate",
       "industry": "Real Estate Services",
+      "hq": "Dallas, Texas",
+      "founded": "1906",
       "kind": "stock"
     },
     {
@@ -655,6 +837,8 @@
       "name": "CDW Corporation",
       "sector": "Information Technology",
       "industry": "Technology Distributors",
+      "hq": "Vernon Hills, Illinois",
+      "founded": "1984",
       "kind": "stock"
     },
     {
@@ -662,6 +846,8 @@
       "name": "Cencora",
       "sector": "Health Care",
       "industry": "Health Care Distributors",
+      "hq": "Conshohocken, Pennsylvania",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -669,6 +855,8 @@
       "name": "Centene Corporation",
       "sector": "Health Care",
       "industry": "Managed Health Care",
+      "hq": "St. Louis, Missouri",
+      "founded": "1984",
       "kind": "stock"
     },
     {
@@ -676,6 +864,8 @@
       "name": "CenterPoint Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Houston, Texas",
+      "founded": "1882",
       "kind": "stock"
     },
     {
@@ -683,6 +873,8 @@
       "name": "CF Industries",
       "sector": "Materials",
       "industry": "Fertilizers & Agricultural Chemicals",
+      "hq": "Deerfield, Illinois",
+      "founded": "1946",
       "kind": "stock"
     },
     {
@@ -690,6 +882,8 @@
       "name": "Charles River Laboratories",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Wilmington, Massachusetts",
+      "founded": "1947",
       "kind": "stock"
     },
     {
@@ -697,6 +891,8 @@
       "name": "Charles Schwab Corporation",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "Westlake, Texas",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -704,6 +900,8 @@
       "name": "Charter Communications",
       "sector": "Communication Services",
       "industry": "Cable & Satellite",
+      "hq": "Stamford, Connecticut",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -711,6 +909,8 @@
       "name": "Chevron Corporation",
       "sector": "Energy",
       "industry": "Integrated Oil & Gas",
+      "hq": "Houston, Texas",
+      "founded": "1879",
       "kind": "stock"
     },
     {
@@ -718,6 +918,8 @@
       "name": "Chipotle Mexican Grill",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Newport Beach, California",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -725,6 +927,8 @@
       "name": "Chubb Limited",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Zurich, Switzerland",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -732,6 +936,8 @@
       "name": "Church & Dwight",
       "sector": "Consumer Staples",
       "industry": "Household Products",
+      "hq": "Ewing, New Jersey",
+      "founded": "1847",
       "kind": "stock"
     },
     {
@@ -739,6 +945,8 @@
       "name": "Ciena",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "Hanover, Maryland",
+      "founded": "1992",
       "kind": "stock"
     },
     {
@@ -746,6 +954,8 @@
       "name": "Cigna",
       "sector": "Health Care",
       "industry": "Health Care Services",
+      "hq": "Bloomfield, Connecticut",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -753,6 +963,8 @@
       "name": "Cincinnati Financial",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Fairfield, Ohio",
+      "founded": "1950",
       "kind": "stock"
     },
     {
@@ -760,6 +972,8 @@
       "name": "Cintas",
       "sector": "Industrials",
       "industry": "Diversified Support Services",
+      "hq": "Mason, Ohio",
+      "founded": "1929",
       "kind": "stock"
     },
     {
@@ -767,6 +981,8 @@
       "name": "Cisco",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "San Jose, California",
+      "founded": "1984",
       "kind": "stock"
     },
     {
@@ -774,6 +990,8 @@
       "name": "Citigroup",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "New York City, New York",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -781,6 +999,8 @@
       "name": "Citizens Financial Group",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Providence, Rhode Island",
+      "founded": "1828",
       "kind": "stock"
     },
     {
@@ -788,6 +1008,8 @@
       "name": "Clorox",
       "sector": "Consumer Staples",
       "industry": "Household Products",
+      "hq": "Oakland, California",
+      "founded": "1913",
       "kind": "stock"
     },
     {
@@ -795,6 +1017,8 @@
       "name": "CME Group",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "Chicago, Illinois",
+      "founded": "1848",
       "kind": "stock"
     },
     {
@@ -802,6 +1026,8 @@
       "name": "CMS Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Jackson, Michigan",
+      "founded": "1886",
       "kind": "stock"
     },
     {
@@ -809,6 +1035,8 @@
       "name": "Coca-Cola Company (The)",
       "sector": "Consumer Staples",
       "industry": "Soft Drinks & Non-alcoholic Beverages",
+      "hq": "Atlanta, Georgia",
+      "founded": "1886",
       "kind": "stock"
     },
     {
@@ -816,6 +1044,8 @@
       "name": "Cognizant",
       "sector": "Information Technology",
       "industry": "IT Consulting & Other Services",
+      "hq": "Teaneck, New Jersey",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -823,6 +1053,8 @@
       "name": "Coherent Corp.",
       "sector": "Information Technology",
       "industry": "Electronic Components",
+      "hq": "Saxonburg, Pennsylvania",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -830,6 +1062,8 @@
       "name": "Coinbase",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "New York City, New York",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -837,6 +1071,8 @@
       "name": "Colgate-Palmolive",
       "sector": "Consumer Staples",
       "industry": "Household Products",
+      "hq": "New York City, New York",
+      "founded": "1806",
       "kind": "stock"
     },
     {
@@ -844,6 +1080,8 @@
       "name": "Comcast",
       "sector": "Communication Services",
       "industry": "Cable & Satellite",
+      "hq": "Philadelphia, Pennsylvania",
+      "founded": "1963",
       "kind": "stock"
     },
     {
@@ -851,6 +1089,8 @@
       "name": "Comfort Systems USA",
       "sector": "Industrials",
       "industry": "Construction & Engineering",
+      "hq": "Houston, Texas",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -858,6 +1098,8 @@
       "name": "ConocoPhillips",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Houston, Texas",
+      "founded": "2002",
       "kind": "stock"
     },
     {
@@ -865,6 +1107,8 @@
       "name": "Consolidated Edison",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "New York City, New York",
+      "founded": "1823",
       "kind": "stock"
     },
     {
@@ -872,6 +1116,8 @@
       "name": "Constellation Brands",
       "sector": "Consumer Staples",
       "industry": "Distillers & Vintners",
+      "hq": "Rochester, New York",
+      "founded": "1945",
       "kind": "stock"
     },
     {
@@ -879,6 +1125,8 @@
       "name": "Constellation Energy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Baltimore, Maryland",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -886,6 +1134,8 @@
       "name": "Cooper Companies (The)",
       "sector": "Health Care",
       "industry": "Health Care Supplies",
+      "hq": "San Ramon, California",
+      "founded": "1958",
       "kind": "stock"
     },
     {
@@ -893,6 +1143,8 @@
       "name": "Copart",
       "sector": "Industrials",
       "industry": "Diversified Support Services",
+      "hq": "Dallas, Texas",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -900,6 +1152,8 @@
       "name": "Corning Inc.",
       "sector": "Information Technology",
       "industry": "Electronic Components",
+      "hq": "Corning, New York",
+      "founded": "1851",
       "kind": "stock"
     },
     {
@@ -907,6 +1161,8 @@
       "name": "Corpay",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Atlanta, Georgia",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -914,6 +1170,8 @@
       "name": "Corteva",
       "sector": "Materials",
       "industry": "Fertilizers & Agricultural Chemicals",
+      "hq": "Indianapolis, Indiana",
+      "founded": "2019",
       "kind": "stock"
     },
     {
@@ -921,6 +1179,8 @@
       "name": "CoStar Group",
       "sector": "Real Estate",
       "industry": "Real Estate Services",
+      "hq": "Washington, D.C.",
+      "founded": "1987",
       "kind": "stock"
     },
     {
@@ -928,6 +1188,8 @@
       "name": "Costco",
       "sector": "Consumer Staples",
       "industry": "Consumer Staples Merchandise Retail",
+      "hq": "Issaquah, Washington",
+      "founded": "1976",
       "kind": "stock"
     },
     {
@@ -935,6 +1197,8 @@
       "name": "CRH plc",
       "sector": "Materials",
       "industry": "Construction Materials",
+      "hq": "Dublin, Ireland",
+      "founded": "1970",
       "kind": "stock"
     },
     {
@@ -942,6 +1206,8 @@
       "name": "CrowdStrike",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Austin, Texas",
+      "founded": "2011",
       "kind": "stock"
     },
     {
@@ -949,6 +1215,8 @@
       "name": "Crown Castle",
       "sector": "Real Estate",
       "industry": "Telecom Tower REITs",
+      "hq": "Houston, Texas",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -956,6 +1224,8 @@
       "name": "CSX Corporation",
       "sector": "Industrials",
       "industry": "Rail Transportation",
+      "hq": "Jacksonville, Florida",
+      "founded": "1980",
       "kind": "stock"
     },
     {
@@ -963,6 +1233,8 @@
       "name": "Cummins",
       "sector": "Industrials",
       "industry": "Construction Machinery & Heavy Transportation Equipment",
+      "hq": "Columbus, Indiana",
+      "founded": "1919",
       "kind": "stock"
     },
     {
@@ -970,6 +1242,8 @@
       "name": "CVS Health",
       "sector": "Health Care",
       "industry": "Health Care Services",
+      "hq": "Woonsocket, Rhode Island",
+      "founded": "1996",
       "kind": "stock"
     },
     {
@@ -977,6 +1251,8 @@
       "name": "Danaher Corporation",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Washington, D.C.",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -984,6 +1260,8 @@
       "name": "Darden Restaurants",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Orlando, Florida",
+      "founded": "1938",
       "kind": "stock"
     },
     {
@@ -991,6 +1269,8 @@
       "name": "Datadog",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "New York City, New York",
+      "founded": "2010",
       "kind": "stock"
     },
     {
@@ -998,6 +1278,8 @@
       "name": "DaVita",
       "sector": "Health Care",
       "industry": "Health Care Services",
+      "hq": "Denver, Colorado",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -1005,6 +1287,8 @@
       "name": "Deckers Brands",
       "sector": "Consumer Discretionary",
       "industry": "Footwear",
+      "hq": "Goleta, California",
+      "founded": "1973",
       "kind": "stock"
     },
     {
@@ -1012,6 +1296,8 @@
       "name": "Deere & Company",
       "sector": "Industrials",
       "industry": "Agricultural & Farm Machinery",
+      "hq": "Moline, Illinois",
+      "founded": "1837",
       "kind": "stock"
     },
     {
@@ -1019,6 +1305,8 @@
       "name": "Dell Technologies",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Round Rock, Texas",
+      "founded": "2016",
       "kind": "stock"
     },
     {
@@ -1026,6 +1314,8 @@
       "name": "Delta Air Lines",
       "sector": "Industrials",
       "industry": "Passenger Airlines",
+      "hq": "Atlanta, Georgia",
+      "founded": "1929",
       "kind": "stock"
     },
     {
@@ -1033,6 +1323,8 @@
       "name": "Devon Energy",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Oklahoma City, Oklahoma",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -1040,6 +1332,8 @@
       "name": "Dexcom",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "San Diego, California",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -1047,6 +1341,8 @@
       "name": "Diamondback Energy",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Midland, Texas",
+      "founded": "2007",
       "kind": "stock"
     },
     {
@@ -1054,6 +1350,8 @@
       "name": "Digital Realty",
       "sector": "Real Estate",
       "industry": "Data Center REITs",
+      "hq": "Austin, Texas",
+      "founded": "2004",
       "kind": "stock"
     },
     {
@@ -1061,6 +1359,8 @@
       "name": "Dollar General",
       "sector": "Consumer Staples",
       "industry": "Consumer Staples Merchandise Retail",
+      "hq": "Goodlettsville, Tennessee",
+      "founded": "1939",
       "kind": "stock"
     },
     {
@@ -1068,6 +1368,8 @@
       "name": "Dollar Tree",
       "sector": "Consumer Staples",
       "industry": "Consumer Staples Merchandise Retail",
+      "hq": "Chesapeake, Virginia",
+      "founded": "1986",
       "kind": "stock"
     },
     {
@@ -1075,6 +1377,8 @@
       "name": "Dominion Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Richmond, Virginia",
+      "founded": "1983",
       "kind": "stock"
     },
     {
@@ -1082,6 +1386,8 @@
       "name": "Domino's",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Ann Arbor, Michigan",
+      "founded": "1960",
       "kind": "stock"
     },
     {
@@ -1089,6 +1395,8 @@
       "name": "DoorDash",
       "sector": "Consumer Discretionary",
       "industry": "Specialized Consumer Services",
+      "hq": "San Francisco, California",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -1096,6 +1404,8 @@
       "name": "Dover Corporation",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Downers Grove, Illinois",
+      "founded": "1955",
       "kind": "stock"
     },
     {
@@ -1103,6 +1413,8 @@
       "name": "Dow Inc.",
       "sector": "Materials",
       "industry": "Commodity Chemicals",
+      "hq": "Midland, Michigan",
+      "founded": "2019 (1897)",
       "kind": "stock"
     },
     {
@@ -1110,6 +1422,8 @@
       "name": "D. R. Horton",
       "sector": "Consumer Discretionary",
       "industry": "Homebuilding",
+      "hq": "Arlington, Texas",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -1117,6 +1431,8 @@
       "name": "DTE Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Detroit, Michigan",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -1124,6 +1440,8 @@
       "name": "Duke Energy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1904",
       "kind": "stock"
     },
     {
@@ -1131,6 +1449,8 @@
       "name": "DuPont",
       "sector": "Industrials",
       "industry": "Industrial Conglomerates",
+      "hq": "Wilmington, Delaware",
+      "founded": "2017 (1802)",
       "kind": "stock"
     },
     {
@@ -1138,6 +1458,8 @@
       "name": "Eaton Corporation",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "Dublin, Ireland",
+      "founded": "1911",
       "kind": "stock"
     },
     {
@@ -1145,6 +1467,8 @@
       "name": "eBay Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Broadline Retail",
+      "hq": "San Jose, California",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -1152,6 +1476,8 @@
       "name": "EchoStar",
       "sector": "Communication Services",
       "industry": "Wireless Telecommunication Services",
+      "hq": "Englewood, Colorado",
+      "founded": "2008",
       "kind": "stock"
     },
     {
@@ -1159,6 +1485,8 @@
       "name": "Ecolab",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "Saint Paul, Minnesota",
+      "founded": "1923",
       "kind": "stock"
     },
     {
@@ -1166,6 +1494,8 @@
       "name": "Edison International",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Rosemead, California",
+      "founded": "1886",
       "kind": "stock"
     },
     {
@@ -1173,6 +1503,8 @@
       "name": "Edwards Lifesciences",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Irvine, California",
+      "founded": "1958",
       "kind": "stock"
     },
     {
@@ -1180,6 +1512,8 @@
       "name": "Elevance Health",
       "sector": "Health Care",
       "industry": "Managed Health Care",
+      "hq": "Indianapolis, Indiana",
+      "founded": "2014 (1946)",
       "kind": "stock"
     },
     {
@@ -1187,6 +1521,8 @@
       "name": "Emcor",
       "sector": "Industrials",
       "industry": "Construction & Engineering",
+      "hq": "Norwalk, Connecticut",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -1194,6 +1530,8 @@
       "name": "Emerson Electric",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "Ferguson, Missouri",
+      "founded": "1890",
       "kind": "stock"
     },
     {
@@ -1201,6 +1539,8 @@
       "name": "Entergy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "New Orleans, Louisiana",
+      "founded": "1913",
       "kind": "stock"
     },
     {
@@ -1208,6 +1548,8 @@
       "name": "EOG Resources",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Houston, Texas",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -1215,6 +1557,8 @@
       "name": "EQT Corporation",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1888",
       "kind": "stock"
     },
     {
@@ -1222,6 +1566,8 @@
       "name": "Equifax",
       "sector": "Industrials",
       "industry": "Research & Consulting Services",
+      "hq": "Atlanta, Georgia",
+      "founded": "1899",
       "kind": "stock"
     },
     {
@@ -1229,6 +1575,8 @@
       "name": "Equinix",
       "sector": "Real Estate",
       "industry": "Data Center REITs",
+      "hq": "Redwood City, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -1236,6 +1584,8 @@
       "name": "Erie Indemnity",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "Erie, Pennsylvania",
+      "founded": "1925",
       "kind": "stock"
     },
     {
@@ -1243,6 +1593,8 @@
       "name": "Essex Property Trust",
       "sector": "Real Estate",
       "industry": "Multi-Family Residential REITs",
+      "hq": "San Mateo, California",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -1250,6 +1602,8 @@
       "name": "Estée Lauder Companies (The)",
       "sector": "Consumer Staples",
       "industry": "Personal Care Products",
+      "hq": "New York City, New York",
+      "founded": "1946",
       "kind": "stock"
     },
     {
@@ -1257,6 +1611,8 @@
       "name": "Everest Group",
       "sector": "Financials",
       "industry": "Reinsurance",
+      "hq": "Hamilton, Bermuda",
+      "founded": "1973",
       "kind": "stock"
     },
     {
@@ -1264,6 +1620,8 @@
       "name": "Evergy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Kansas City, Missouri",
+      "founded": "1909",
       "kind": "stock"
     },
     {
@@ -1271,6 +1629,8 @@
       "name": "Everpure",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Santa Clara, California",
+      "founded": "2009",
       "kind": "stock"
     },
     {
@@ -1278,6 +1638,8 @@
       "name": "Eversource Energy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Hartford, Connecticut",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -1285,6 +1647,8 @@
       "name": "Exelon",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Chicago, Illinois",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -1292,6 +1656,8 @@
       "name": "Expand Energy",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Oklahoma City, Oklahoma",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -1299,6 +1665,8 @@
       "name": "Expedia Group",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Seattle, Washington",
+      "founded": "1996",
       "kind": "stock"
     },
     {
@@ -1306,6 +1674,8 @@
       "name": "Expeditors International",
       "sector": "Industrials",
       "industry": "Air Freight & Logistics",
+      "hq": "Seattle, Washington",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -1313,6 +1683,8 @@
       "name": "Extra Space Storage",
       "sector": "Real Estate",
       "industry": "Self-Storage REITs",
+      "hq": "Salt Lake City, Utah",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -1320,6 +1692,8 @@
       "name": "ExxonMobil",
       "sector": "Energy",
       "industry": "Integrated Oil & Gas",
+      "hq": "Irving, Texas",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -1327,6 +1701,8 @@
       "name": "F5, Inc.",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "Seattle, Washington",
+      "founded": "1996",
       "kind": "stock"
     },
     {
@@ -1334,6 +1710,8 @@
       "name": "FactSet",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "Norwalk, Connecticut",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -1341,6 +1719,8 @@
       "name": "Fair Isaac",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Bozeman, Montana",
+      "founded": "1956",
       "kind": "stock"
     },
     {
@@ -1348,6 +1728,8 @@
       "name": "Fastenal",
       "sector": "Industrials",
       "industry": "Trading Companies & Distributors",
+      "hq": "Winona, Minnesota",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -1355,6 +1737,8 @@
       "name": "Federal Realty Investment Trust",
       "sector": "Real Estate",
       "industry": "Retail REITs",
+      "hq": "Rockville, Maryland",
+      "founded": "1962",
       "kind": "stock"
     },
     {
@@ -1362,6 +1746,8 @@
       "name": "FedEx",
       "sector": "Industrials",
       "industry": "Air Freight & Logistics",
+      "hq": "Memphis, Tennessee",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -1369,6 +1755,8 @@
       "name": "FedEx Freight",
       "sector": "Industrials",
       "industry": "Cargo Ground Transportation",
+      "hq": "Memphis, Tennessee",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -1376,6 +1764,8 @@
       "name": "Ferguson Enterprises",
       "sector": "Industrials",
       "industry": "Trading Companies & Distributors",
+      "hq": "Newport News, Virginia",
+      "founded": "1953",
       "kind": "stock"
     },
     {
@@ -1383,6 +1773,8 @@
       "name": "Fidelity National Information Services",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Jacksonville, Florida",
+      "founded": "1968",
       "kind": "stock"
     },
     {
@@ -1390,6 +1782,8 @@
       "name": "Fifth Third Bancorp",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Cincinnati, Ohio",
+      "founded": "1858",
       "kind": "stock"
     },
     {
@@ -1397,6 +1791,8 @@
       "name": "First Solar",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Tempe, Arizona",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -1404,6 +1800,8 @@
       "name": "FirstEnergy",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Akron, Ohio",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -1411,6 +1809,8 @@
       "name": "Fiserv",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Brookfield, Wisconsin",
+      "founded": "1984",
       "kind": "stock"
     },
     {
@@ -1418,6 +1818,8 @@
       "name": "Flex Ltd.",
       "sector": "Information Technology",
       "industry": "Electronic Manufacturing Services",
+      "hq": "Austin, Texas",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -1425,6 +1827,8 @@
       "name": "Ford Motor Company",
       "sector": "Consumer Discretionary",
       "industry": "Automobile Manufacturers",
+      "hq": "Dearborn, Michigan",
+      "founded": "1903",
       "kind": "stock"
     },
     {
@@ -1432,6 +1836,8 @@
       "name": "Fortinet",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Sunnyvale, California",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -1439,6 +1845,8 @@
       "name": "Fortive",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Everett, Washington",
+      "founded": "2016",
       "kind": "stock"
     },
     {
@@ -1446,6 +1854,8 @@
       "name": "Fox Corporation (Class A)",
       "sector": "Communication Services",
       "industry": "Broadcasting",
+      "hq": "New York City, New York",
+      "founded": "2019",
       "kind": "stock"
     },
     {
@@ -1453,6 +1863,8 @@
       "name": "Fox Corporation (Class B)",
       "sector": "Communication Services",
       "industry": "Broadcasting",
+      "hq": "New York City, New York",
+      "founded": "2019",
       "kind": "stock"
     },
     {
@@ -1460,6 +1872,8 @@
       "name": "Franklin Resources",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "San Mateo, California",
+      "founded": "1947",
       "kind": "stock"
     },
     {
@@ -1467,6 +1881,8 @@
       "name": "Freeport-McMoRan",
       "sector": "Materials",
       "industry": "Copper",
+      "hq": "Phoenix, Arizona",
+      "founded": "1912",
       "kind": "stock"
     },
     {
@@ -1474,6 +1890,8 @@
       "name": "Garmin",
       "sector": "Consumer Discretionary",
       "industry": "Consumer Electronics",
+      "hq": "Schaffhausen, Switzerland",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -1481,6 +1899,8 @@
       "name": "Gartner",
       "sector": "Information Technology",
       "industry": "IT Consulting & Other Services",
+      "hq": "Stamford, Connecticut",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -1488,6 +1908,8 @@
       "name": "GE Aerospace",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Evendale, Ohio",
+      "founded": "1892",
       "kind": "stock"
     },
     {
@@ -1495,6 +1917,8 @@
       "name": "GE HealthCare",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Chicago, Illinois",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -1502,6 +1926,8 @@
       "name": "GE Vernova",
       "sector": "Industrials",
       "industry": "Heavy Electrical Equipment",
+      "hq": "Cambridge, Massachusetts",
+      "founded": "2024",
       "kind": "stock"
     },
     {
@@ -1509,6 +1935,8 @@
       "name": "Gen Digital",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Tempe, Arizona",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -1516,6 +1944,8 @@
       "name": "Generac",
       "sector": "Industrials",
       "industry": "Heavy Electrical Equipment",
+      "hq": "Waukesha, Wisconsin",
+      "founded": "1959",
       "kind": "stock"
     },
     {
@@ -1523,6 +1953,8 @@
       "name": "General Dynamics",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Reston, Virginia",
+      "founded": "1899",
       "kind": "stock"
     },
     {
@@ -1530,6 +1962,8 @@
       "name": "General Mills",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Golden Valley, Minnesota",
+      "founded": "1856",
       "kind": "stock"
     },
     {
@@ -1537,6 +1971,8 @@
       "name": "General Motors",
       "sector": "Consumer Discretionary",
       "industry": "Automobile Manufacturers",
+      "hq": "Detroit, Michigan",
+      "founded": "1908",
       "kind": "stock"
     },
     {
@@ -1544,6 +1980,8 @@
       "name": "Genuine Parts Company",
       "sector": "Consumer Discretionary",
       "industry": "Distributors",
+      "hq": "Atlanta, Georgia",
+      "founded": "1925",
       "kind": "stock"
     },
     {
@@ -1551,6 +1989,8 @@
       "name": "Gilead Sciences",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Foster City, California",
+      "founded": "1987",
       "kind": "stock"
     },
     {
@@ -1558,6 +1998,8 @@
       "name": "Global Payments",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Atlanta, Georgia",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -1565,6 +2007,8 @@
       "name": "Globe Life",
       "sector": "Financials",
       "industry": "Life & Health Insurance",
+      "hq": "McKinney, Texas",
+      "founded": "1900",
       "kind": "stock"
     },
     {
@@ -1572,6 +2016,8 @@
       "name": "GoDaddy",
       "sector": "Information Technology",
       "industry": "Internet Services & Infrastructure",
+      "hq": "Tempe, Arizona",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -1579,6 +2025,8 @@
       "name": "Goldman Sachs",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "New York City, New York",
+      "founded": "1869",
       "kind": "stock"
     },
     {
@@ -1586,6 +2034,8 @@
       "name": "Halliburton",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
+      "hq": "Houston, Texas",
+      "founded": "1919",
       "kind": "stock"
     },
     {
@@ -1593,6 +2043,8 @@
       "name": "Hartford (The)",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Hartford, Connecticut",
+      "founded": "1810",
       "kind": "stock"
     },
     {
@@ -1600,6 +2052,8 @@
       "name": "Hasbro",
       "sector": "Consumer Discretionary",
       "industry": "Leisure Products",
+      "hq": "Pawtucket, Rhode Island",
+      "founded": "1923",
       "kind": "stock"
     },
     {
@@ -1607,6 +2061,8 @@
       "name": "HCA Healthcare",
       "sector": "Health Care",
       "industry": "Health Care Facilities",
+      "hq": "Nashville, Tennessee",
+      "founded": "1968",
       "kind": "stock"
     },
     {
@@ -1614,6 +2070,8 @@
       "name": "Healthpeak Properties",
       "sector": "Real Estate",
       "industry": "Health Care REITs",
+      "hq": "Denver, Colorado",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -1621,6 +2079,8 @@
       "name": "Henry Schein",
       "sector": "Health Care",
       "industry": "Health Care Distributors",
+      "hq": "Melville, New York",
+      "founded": "1932",
       "kind": "stock"
     },
     {
@@ -1628,6 +2088,8 @@
       "name": "Hershey Company (The)",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Hershey, Pennsylvania",
+      "founded": "1894",
       "kind": "stock"
     },
     {
@@ -1635,6 +2097,8 @@
       "name": "Hewlett Packard Enterprise",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Houston, Texas",
+      "founded": "2015",
       "kind": "stock"
     },
     {
@@ -1642,6 +2106,8 @@
       "name": "Hilton Worldwide",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Tysons Corner, Virginia",
+      "founded": "1919",
       "kind": "stock"
     },
     {
@@ -1649,6 +2115,8 @@
       "name": "Home Depot (The)",
       "sector": "Consumer Discretionary",
       "industry": "Home Improvement Retail",
+      "hq": "Atlanta, Georgia",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -1656,6 +2124,8 @@
       "name": "Honeywell Aerospace",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Phoenix, Arizona",
+      "founded": "1914",
       "kind": "stock"
     },
     {
@@ -1663,6 +2133,8 @@
       "name": "Honeywell Technologies",
       "sector": "Industrials",
       "industry": "Industrial Conglomerates",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1906",
       "kind": "stock"
     },
     {
@@ -1670,6 +2142,8 @@
       "name": "Hormel Foods",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Austin, Minnesota",
+      "founded": "1891",
       "kind": "stock"
     },
     {
@@ -1677,6 +2151,8 @@
       "name": "Host Hotels & Resorts",
       "sector": "Real Estate",
       "industry": "Hotel & Resort REITs",
+      "hq": "Bethesda, Maryland",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -1684,6 +2160,8 @@
       "name": "Howmet Aerospace",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1888",
       "kind": "stock"
     },
     {
@@ -1691,6 +2169,8 @@
       "name": "HP Inc.",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Palo Alto, California",
+      "founded": "1939 (2015)",
       "kind": "stock"
     },
     {
@@ -1698,6 +2178,8 @@
       "name": "Hubbell Incorporated",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Shelton, Connecticut",
+      "founded": "1888",
       "kind": "stock"
     },
     {
@@ -1705,6 +2187,8 @@
       "name": "Humana",
       "sector": "Health Care",
       "industry": "Managed Health Care",
+      "hq": "Louisville, Kentucky",
+      "founded": "1961",
       "kind": "stock"
     },
     {
@@ -1712,6 +2196,8 @@
       "name": "Huntington Bancshares",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Columbus, Ohio; Detroit, Michigan",
+      "founded": "1866",
       "kind": "stock"
     },
     {
@@ -1719,6 +2205,8 @@
       "name": "Huntington Ingalls Industries",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Newport News, Virginia",
+      "founded": "2011",
       "kind": "stock"
     },
     {
@@ -1726,6 +2214,8 @@
       "name": "IBM",
       "sector": "Information Technology",
       "industry": "IT Consulting & Other Services",
+      "hq": "Armonk, New York",
+      "founded": "1911",
       "kind": "stock"
     },
     {
@@ -1733,6 +2223,8 @@
       "name": "IDEX Corporation",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Northbrook, Illinois",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -1740,6 +2232,8 @@
       "name": "Idexx Laboratories",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Westbrook, Maine",
+      "founded": "1983",
       "kind": "stock"
     },
     {
@@ -1747,6 +2241,8 @@
       "name": "Illinois Tool Works",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Glenview, Illinois",
+      "founded": "1912",
       "kind": "stock"
     },
     {
@@ -1754,6 +2250,8 @@
       "name": "Illumina, Inc.",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "San Diego, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -1761,6 +2259,8 @@
       "name": "Incyte",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Wilmington, Delaware",
+      "founded": "1991",
       "kind": "stock"
     },
     {
@@ -1768,6 +2268,8 @@
       "name": "Ingersoll Rand",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Davidson, North Carolina",
+      "founded": "1859",
       "kind": "stock"
     },
     {
@@ -1775,6 +2277,8 @@
       "name": "Insulet Corporation",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Acton, Massachusetts",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -1782,6 +2286,8 @@
       "name": "Intel",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Santa Clara, California",
+      "founded": "1968",
       "kind": "stock"
     },
     {
@@ -1789,6 +2295,8 @@
       "name": "Interactive Brokers",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "Greenwich, Connecticut",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -1796,6 +2304,8 @@
       "name": "Intercontinental Exchange",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "Atlanta, Georgia",
+      "founded": "2000",
       "kind": "stock"
     },
     {
@@ -1803,6 +2313,8 @@
       "name": "International Flavors & Fragrances",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "New York City, New York",
+      "founded": "1958 (1889)",
       "kind": "stock"
     },
     {
@@ -1810,6 +2322,8 @@
       "name": "International Paper",
       "sector": "Materials",
       "industry": "Paper & Plastic Packaging Products & Materials",
+      "hq": "Memphis, Tennessee",
+      "founded": "1898",
       "kind": "stock"
     },
     {
@@ -1817,6 +2331,8 @@
       "name": "Intuit",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Mountain View, California",
+      "founded": "1983",
       "kind": "stock"
     },
     {
@@ -1824,6 +2340,8 @@
       "name": "Intuitive Surgical",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Sunnyvale, California",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -1831,6 +2349,8 @@
       "name": "Invesco",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Atlanta, Georgia",
+      "founded": "1935",
       "kind": "stock"
     },
     {
@@ -1838,6 +2358,8 @@
       "name": "Invitation Homes",
       "sector": "Real Estate",
       "industry": "Single-Family Residential REITs",
+      "hq": "Dallas, Texas",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -1845,6 +2367,8 @@
       "name": "IQVIA",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Durham, North Carolina",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -1852,6 +2376,8 @@
       "name": "Iron Mountain",
       "sector": "Real Estate",
       "industry": "Other Specialized REITs",
+      "hq": "Portsmouth, New Hampshire",
+      "founded": "1951",
       "kind": "stock"
     },
     {
@@ -1859,6 +2385,8 @@
       "name": "J.B. Hunt",
       "sector": "Industrials",
       "industry": "Cargo Ground Transportation",
+      "hq": "Lowell, Arkansas",
+      "founded": "1961",
       "kind": "stock"
     },
     {
@@ -1866,6 +2394,8 @@
       "name": "Jabil",
       "sector": "Information Technology",
       "industry": "Electronic Manufacturing Services",
+      "hq": "St. Petersburg, Florida",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -1873,6 +2403,8 @@
       "name": "Jack Henry & Associates",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Monett, Missouri",
+      "founded": "1976",
       "kind": "stock"
     },
     {
@@ -1880,6 +2412,8 @@
       "name": "Jacobs Solutions",
       "sector": "Industrials",
       "industry": "Construction & Engineering",
+      "hq": "Dallas, Texas",
+      "founded": "1947",
       "kind": "stock"
     },
     {
@@ -1887,6 +2421,8 @@
       "name": "Johnson & Johnson",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "New Brunswick, New Jersey",
+      "founded": "1886",
       "kind": "stock"
     },
     {
@@ -1894,6 +2430,8 @@
       "name": "Johnson Controls",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Cork, Ireland",
+      "founded": "1885",
       "kind": "stock"
     },
     {
@@ -1901,6 +2439,8 @@
       "name": "JPMorgan Chase",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "New York City, New York",
+      "founded": "2000 (1799 / 1871)",
       "kind": "stock"
     },
     {
@@ -1908,6 +2448,8 @@
       "name": "Kenvue",
       "sector": "Consumer Staples",
       "industry": "Personal Care Products",
+      "hq": "Skillman, New Jersey",
+      "founded": "2022 (Johnson & Johnson spinoff)",
       "kind": "stock"
     },
     {
@@ -1915,6 +2457,8 @@
       "name": "Keurig Dr Pepper",
       "sector": "Consumer Staples",
       "industry": "Soft Drinks & Non-alcoholic Beverages",
+      "hq": "Burlington, Massachusetts",
+      "founded": "1981",
       "kind": "stock"
     },
     {
@@ -1922,6 +2466,8 @@
       "name": "KeyCorp",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Cleveland, Ohio",
+      "founded": "1825",
       "kind": "stock"
     },
     {
@@ -1929,6 +2475,8 @@
       "name": "Keysight Technologies",
       "sector": "Information Technology",
       "industry": "Electronic Equipment & Instruments",
+      "hq": "Santa Rosa, California",
+      "founded": "2014 (1939)",
       "kind": "stock"
     },
     {
@@ -1936,6 +2484,8 @@
       "name": "Kimberly-Clark",
       "sector": "Consumer Staples",
       "industry": "Household Products",
+      "hq": "Irving, Texas",
+      "founded": "1872",
       "kind": "stock"
     },
     {
@@ -1943,6 +2493,8 @@
       "name": "Kimco Realty",
       "sector": "Real Estate",
       "industry": "Retail REITs",
+      "hq": "Jericho, New York",
+      "founded": "1958",
       "kind": "stock"
     },
     {
@@ -1950,6 +2502,8 @@
       "name": "Kinder Morgan",
       "sector": "Energy",
       "industry": "Oil & Gas Storage & Transportation",
+      "hq": "Houston, Texas",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -1957,6 +2511,8 @@
       "name": "KKR & Co.",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "New York City, New York",
+      "founded": "1976",
       "kind": "stock"
     },
     {
@@ -1964,6 +2520,8 @@
       "name": "KLA Corporation",
       "sector": "Information Technology",
       "industry": "Semiconductor Materials & Equipment",
+      "hq": "Milpitas, California",
+      "founded": "1975/1977 (1997)",
       "kind": "stock"
     },
     {
@@ -1971,6 +2529,8 @@
       "name": "Kraft Heinz",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Chicago, Illinois; Pittsburgh, Pennsylvania",
+      "founded": "2015 (1869)",
       "kind": "stock"
     },
     {
@@ -1978,6 +2538,8 @@
       "name": "Kroger",
       "sector": "Consumer Staples",
       "industry": "Food Retail",
+      "hq": "Cincinnati, Ohio",
+      "founded": "1883",
       "kind": "stock"
     },
     {
@@ -1985,6 +2547,8 @@
       "name": "L3Harris",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Melbourne, Florida",
+      "founded": "2019 (L3 1997, Harris 1895)",
       "kind": "stock"
     },
     {
@@ -1992,6 +2556,8 @@
       "name": "Labcorp",
       "sector": "Health Care",
       "industry": "Health Care Services",
+      "hq": "Burlington, North Carolina",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -1999,6 +2565,8 @@
       "name": "Lam Research",
       "sector": "Information Technology",
       "industry": "Semiconductor Materials & Equipment",
+      "hq": "Fremont, California",
+      "founded": "1980",
       "kind": "stock"
     },
     {
@@ -2006,6 +2574,8 @@
       "name": "Las Vegas Sands",
       "sector": "Consumer Discretionary",
       "industry": "Casinos & Gaming",
+      "hq": "Las Vegas, Nevada",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -2013,6 +2583,8 @@
       "name": "Leidos",
       "sector": "Industrials",
       "industry": "Diversified Support Services",
+      "hq": "Reston, Virginia",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -2020,6 +2592,8 @@
       "name": "Lennar",
       "sector": "Consumer Discretionary",
       "industry": "Homebuilding",
+      "hq": "Miami, Florida",
+      "founded": "1954",
       "kind": "stock"
     },
     {
@@ -2027,6 +2601,8 @@
       "name": "Lennox International",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Richardson, Texas",
+      "founded": "1895",
       "kind": "stock"
     },
     {
@@ -2034,6 +2610,8 @@
       "name": "Lilly (Eli)",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "Indianapolis, Indiana",
+      "founded": "1876",
       "kind": "stock"
     },
     {
@@ -2041,6 +2619,8 @@
       "name": "Linde plc",
       "sector": "Materials",
       "industry": "Industrial Gases",
+      "hq": "Guildford, United Kingdom",
+      "founded": "1879",
       "kind": "stock"
     },
     {
@@ -2048,6 +2628,8 @@
       "name": "Live Nation Entertainment",
       "sector": "Communication Services",
       "industry": "Movies & Entertainment",
+      "hq": "Beverly Hills, California",
+      "founded": "2010",
       "kind": "stock"
     },
     {
@@ -2055,6 +2637,8 @@
       "name": "Lockheed Martin",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Bethesda, Maryland",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -2062,6 +2646,8 @@
       "name": "Loews Corporation",
       "sector": "Financials",
       "industry": "Multi-line Insurance",
+      "hq": "New York City, New York",
+      "founded": "1959",
       "kind": "stock"
     },
     {
@@ -2069,6 +2655,8 @@
       "name": "Lowe's",
       "sector": "Consumer Discretionary",
       "industry": "Home Improvement Retail",
+      "hq": "Mooresville, North Carolina",
+      "founded": "1904/1946/1959",
       "kind": "stock"
     },
     {
@@ -2076,6 +2664,8 @@
       "name": "Lululemon Athletica",
       "sector": "Consumer Discretionary",
       "industry": "Apparel, Accessories & Luxury Goods",
+      "hq": "Vancouver, Canada",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -2083,6 +2673,8 @@
       "name": "Lumentum",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "San Jose, California",
+      "founded": "2015",
       "kind": "stock"
     },
     {
@@ -2090,6 +2682,8 @@
       "name": "LyondellBasell",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "Rotterdam, Netherlands",
+      "founded": "2007",
       "kind": "stock"
     },
     {
@@ -2097,6 +2691,8 @@
       "name": "M&T Bank",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Buffalo, New York",
+      "founded": "1856",
       "kind": "stock"
     },
     {
@@ -2104,6 +2700,8 @@
       "name": "Marathon Petroleum",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
+      "hq": "Findlay, Ohio",
+      "founded": "2009 (1887)",
       "kind": "stock"
     },
     {
@@ -2111,6 +2709,8 @@
       "name": "Marriott International",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Bethesda, Maryland",
+      "founded": "1927",
       "kind": "stock"
     },
     {
@@ -2118,6 +2718,8 @@
       "name": "Marsh McLennan",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "New York City, New York",
+      "founded": "1905",
       "kind": "stock"
     },
     {
@@ -2125,6 +2727,8 @@
       "name": "Martin Marietta Materials",
       "sector": "Materials",
       "industry": "Construction Materials",
+      "hq": "Raleigh, North Carolina",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -2132,6 +2736,8 @@
       "name": "Marvell Technology",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Santa Clara, California",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -2139,6 +2745,8 @@
       "name": "Masco",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Livonia, Michigan",
+      "founded": "1929",
       "kind": "stock"
     },
     {
@@ -2146,6 +2754,8 @@
       "name": "Mastercard",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "Harrison, New York",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -2153,6 +2763,8 @@
       "name": "McCormick & Company",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Hunt Valley, Maryland",
+      "founded": "1889",
       "kind": "stock"
     },
     {
@@ -2160,6 +2772,8 @@
       "name": "McDonald's",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Chicago, Illinois",
+      "founded": "1940",
       "kind": "stock"
     },
     {
@@ -2167,6 +2781,8 @@
       "name": "McKesson Corporation",
       "sector": "Health Care",
       "industry": "Health Care Distributors",
+      "hq": "Irving, Texas",
+      "founded": "1833",
       "kind": "stock"
     },
     {
@@ -2174,6 +2790,8 @@
       "name": "Medtronic",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Galway, Ireland",
+      "founded": "1949",
       "kind": "stock"
     },
     {
@@ -2181,6 +2799,8 @@
       "name": "Merck & Co.",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "Kenilworth, New Jersey",
+      "founded": "1891",
       "kind": "stock"
     },
     {
@@ -2188,6 +2808,8 @@
       "name": "Meta Platforms",
       "sector": "Communication Services",
       "industry": "Interactive Media & Services",
+      "hq": "Menlo Park, California",
+      "founded": "2004",
       "kind": "stock"
     },
     {
@@ -2195,6 +2817,8 @@
       "name": "MetLife",
       "sector": "Financials",
       "industry": "Life & Health Insurance",
+      "hq": "New York City, New York",
+      "founded": "1868",
       "kind": "stock"
     },
     {
@@ -2202,6 +2826,8 @@
       "name": "Mettler Toledo",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Columbus, Ohio",
+      "founded": "1945",
       "kind": "stock"
     },
     {
@@ -2209,6 +2835,8 @@
       "name": "MGM Resorts",
       "sector": "Consumer Discretionary",
       "industry": "Casinos & Gaming",
+      "hq": "Paradise, Nevada",
+      "founded": "1986",
       "kind": "stock"
     },
     {
@@ -2216,6 +2844,8 @@
       "name": "Microchip Technology",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Chandler, Arizona",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -2223,6 +2853,8 @@
       "name": "Micron Technology",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Boise, Idaho",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -2230,6 +2862,8 @@
       "name": "Microsoft",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Redmond, Washington",
+      "founded": "1975",
       "kind": "stock"
     },
     {
@@ -2237,6 +2871,8 @@
       "name": "Mid-America Apartment Communities",
       "sector": "Real Estate",
       "industry": "Multi-Family Residential REITs",
+      "hq": "Memphis, Tennessee",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -2244,6 +2880,8 @@
       "name": "Moderna",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Cambridge, Massachusetts",
+      "founded": "2010",
       "kind": "stock"
     },
     {
@@ -2251,6 +2889,8 @@
       "name": "Mondelez International",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Chicago, Illinois",
+      "founded": "2012",
       "kind": "stock"
     },
     {
@@ -2258,6 +2898,8 @@
       "name": "Monolithic Power Systems",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Kirkland, Washington",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -2265,6 +2907,8 @@
       "name": "Monster Beverage",
       "sector": "Consumer Staples",
       "industry": "Soft Drinks & Non-alcoholic Beverages",
+      "hq": "Corona, California",
+      "founded": "2012 (1935)",
       "kind": "stock"
     },
     {
@@ -2272,6 +2916,8 @@
       "name": "Moody's Corporation",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "New York City, New York",
+      "founded": "1909",
       "kind": "stock"
     },
     {
@@ -2279,6 +2925,8 @@
       "name": "Morgan Stanley",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "New York City, New York",
+      "founded": "1935",
       "kind": "stock"
     },
     {
@@ -2286,6 +2934,8 @@
       "name": "Mosaic Company (The)",
       "sector": "Materials",
       "industry": "Fertilizers & Agricultural Chemicals",
+      "hq": "Tampa, Florida",
+      "founded": "2004 (1865 / 1909)",
       "kind": "stock"
     },
     {
@@ -2293,6 +2943,8 @@
       "name": "Motorola Solutions",
       "sector": "Information Technology",
       "industry": "Communications Equipment",
+      "hq": "Chicago, Illinois",
+      "founded": "1928 (2011)",
       "kind": "stock"
     },
     {
@@ -2300,6 +2952,8 @@
       "name": "MSCI",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "New York City, New York",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -2307,6 +2961,8 @@
       "name": "Nasdaq, Inc.",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "New York City, New York",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -2314,6 +2970,8 @@
       "name": "NetApp",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "San Jose, California",
+      "founded": "1992",
       "kind": "stock"
     },
     {
@@ -2321,6 +2979,8 @@
       "name": "Netflix",
       "sector": "Communication Services",
       "industry": "Movies & Entertainment",
+      "hq": "Los Gatos, California",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -2328,6 +2988,8 @@
       "name": "Newmont",
       "sector": "Materials",
       "industry": "Gold",
+      "hq": "Denver, Colorado",
+      "founded": "1921",
       "kind": "stock"
     },
     {
@@ -2335,6 +2997,8 @@
       "name": "News Corp (Class A)",
       "sector": "Communication Services",
       "industry": "Publishing",
+      "hq": "New York City, New York",
+      "founded": "2013 (News Corporation 1980)",
       "kind": "stock"
     },
     {
@@ -2342,6 +3006,8 @@
       "name": "News Corp (Class B)",
       "sector": "Communication Services",
       "industry": "Publishing",
+      "hq": "New York City, New York",
+      "founded": "2013 (News Corporation 1980)",
       "kind": "stock"
     },
     {
@@ -2349,6 +3015,8 @@
       "name": "NextEra Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Juno Beach, Florida",
+      "founded": "1984 (1925)",
       "kind": "stock"
     },
     {
@@ -2356,6 +3024,8 @@
       "name": "Nike, Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Apparel, Accessories & Luxury Goods",
+      "hq": "Washington County, Oregon",
+      "founded": "1964",
       "kind": "stock"
     },
     {
@@ -2363,6 +3033,8 @@
       "name": "NiSource",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Merrillville, Indiana",
+      "founded": "1912",
       "kind": "stock"
     },
     {
@@ -2370,6 +3042,8 @@
       "name": "Nordson Corporation",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Westlake, Ohio",
+      "founded": "1935",
       "kind": "stock"
     },
     {
@@ -2377,6 +3051,8 @@
       "name": "Norfolk Southern",
       "sector": "Industrials",
       "industry": "Rail Transportation",
+      "hq": "Atlanta, Georgia",
+      "founded": "1881/1894 (1980)",
       "kind": "stock"
     },
     {
@@ -2384,6 +3060,8 @@
       "name": "Northern Trust",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Chicago, Illinois",
+      "founded": "1889",
       "kind": "stock"
     },
     {
@@ -2391,6 +3069,8 @@
       "name": "Northrop Grumman",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "West Falls Church, Virginia[2]",
+      "founded": "1994 (Northrop 1939, Grumman 1930)",
       "kind": "stock"
     },
     {
@@ -2398,6 +3078,8 @@
       "name": "Norwegian Cruise Line Holdings",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Miami-Dade County, Florida[3]",
+      "founded": "2011 (1966)",
       "kind": "stock"
     },
     {
@@ -2405,6 +3087,8 @@
       "name": "NRG Energy",
       "sector": "Utilities",
       "industry": "Independent Power Producers & Energy Traders",
+      "hq": "Houston, Texas",
+      "founded": "1992",
       "kind": "stock"
     },
     {
@@ -2412,6 +3096,8 @@
       "name": "Nucor",
       "sector": "Materials",
       "industry": "Steel",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1940",
       "kind": "stock"
     },
     {
@@ -2419,6 +3105,8 @@
       "name": "Nvidia",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Santa Clara, California",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -2426,6 +3114,8 @@
       "name": "NVR, Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Homebuilding",
+      "hq": "Reston, Virginia",
+      "founded": "1980",
       "kind": "stock"
     },
     {
@@ -2433,6 +3123,8 @@
       "name": "NXP Semiconductors",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Eindhoven, Netherlands",
+      "founded": "1953",
       "kind": "stock"
     },
     {
@@ -2440,6 +3132,8 @@
       "name": "O'Reilly Automotive",
       "sector": "Consumer Discretionary",
       "industry": "Automotive Retail",
+      "hq": "Springfield, Missouri",
+      "founded": "1957",
       "kind": "stock"
     },
     {
@@ -2447,6 +3141,8 @@
       "name": "Occidental Petroleum",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Houston, Texas",
+      "founded": "1920",
       "kind": "stock"
     },
     {
@@ -2454,6 +3150,8 @@
       "name": "Old Dominion",
       "sector": "Industrials",
       "industry": "Cargo Ground Transportation",
+      "hq": "Thomasville, North Carolina",
+      "founded": "1934",
       "kind": "stock"
     },
     {
@@ -2461,6 +3159,8 @@
       "name": "Omnicom Group",
       "sector": "Communication Services",
       "industry": "Advertising",
+      "hq": "New York City, New York",
+      "founded": "1986",
       "kind": "stock"
     },
     {
@@ -2468,6 +3168,8 @@
       "name": "ON Semiconductor",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Phoenix, Arizona",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -2475,6 +3177,8 @@
       "name": "Oneok",
       "sector": "Energy",
       "industry": "Oil & Gas Storage & Transportation",
+      "hq": "Tulsa, Oklahoma",
+      "founded": "1906",
       "kind": "stock"
     },
     {
@@ -2482,6 +3186,8 @@
       "name": "Oracle Corporation",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Austin, Texas",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -2489,6 +3195,8 @@
       "name": "Otis Worldwide",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Farmington, Connecticut",
+      "founded": "2020 (1853, United Technologies spinoff)",
       "kind": "stock"
     },
     {
@@ -2496,6 +3204,8 @@
       "name": "Paccar",
       "sector": "Industrials",
       "industry": "Construction Machinery & Heavy Transportation Equipment",
+      "hq": "Bellevue, Washington",
+      "founded": "1905",
       "kind": "stock"
     },
     {
@@ -2503,6 +3213,8 @@
       "name": "Packaging Corporation of America",
       "sector": "Materials",
       "industry": "Paper & Plastic Packaging Products & Materials",
+      "hq": "Lake Forest, Illinois",
+      "founded": "1959",
       "kind": "stock"
     },
     {
@@ -2510,6 +3222,8 @@
       "name": "Palantir Technologies",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Aventura, Florida",
+      "founded": "2003",
       "kind": "stock"
     },
     {
@@ -2517,6 +3231,8 @@
       "name": "Palo Alto Networks",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Santa Clara, California",
+      "founded": "2005",
       "kind": "stock"
     },
     {
@@ -2524,6 +3240,8 @@
       "name": "Paramount Skydance Corporation",
       "sector": "Communication Services",
       "industry": "Movies & Entertainment",
+      "hq": "Los Angeles, California",
+      "founded": "2025 (Paramount Pictures 1912)",
       "kind": "stock"
     },
     {
@@ -2531,6 +3249,8 @@
       "name": "Parker Hannifin",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Cleveland, Ohio",
+      "founded": "1917",
       "kind": "stock"
     },
     {
@@ -2538,6 +3258,8 @@
       "name": "Paychex",
       "sector": "Industrials",
       "industry": "Human Resource & Employment Services",
+      "hq": "Penfield, New York",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -2545,6 +3267,8 @@
       "name": "PayPal",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "San Jose, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -2552,6 +3276,8 @@
       "name": "Pentair",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Worsley, United Kingdom",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -2559,6 +3285,8 @@
       "name": "PepsiCo",
       "sector": "Consumer Staples",
       "industry": "Soft Drinks & Non-alcoholic Beverages",
+      "hq": "Purchase, New York",
+      "founded": "1898",
       "kind": "stock"
     },
     {
@@ -2566,6 +3294,8 @@
       "name": "Pfizer",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "New York City, New York",
+      "founded": "1849",
       "kind": "stock"
     },
     {
@@ -2573,6 +3303,8 @@
       "name": "PG&E Corporation",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Oakland, California",
+      "founded": "1905",
       "kind": "stock"
     },
     {
@@ -2580,6 +3312,8 @@
       "name": "Philip Morris International",
       "sector": "Consumer Staples",
       "industry": "Tobacco",
+      "hq": "New York City, New York",
+      "founded": "2008 (1847)",
       "kind": "stock"
     },
     {
@@ -2587,6 +3321,8 @@
       "name": "Phillips 66",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
+      "hq": "Houston, Texas",
+      "founded": "2012 (1917)",
       "kind": "stock"
     },
     {
@@ -2594,6 +3330,8 @@
       "name": "Pinnacle West Capital",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Phoenix, Arizona",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -2601,6 +3339,8 @@
       "name": "PNC Financial Services",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1845",
       "kind": "stock"
     },
     {
@@ -2608,6 +3348,8 @@
       "name": "PPG Industries",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1883",
       "kind": "stock"
     },
     {
@@ -2615,6 +3357,8 @@
       "name": "PPL Corporation",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Allentown, Pennsylvania",
+      "founded": "1920",
       "kind": "stock"
     },
     {
@@ -2622,6 +3366,8 @@
       "name": "Principal Financial Group",
       "sector": "Financials",
       "industry": "Life & Health Insurance",
+      "hq": "Des Moines, Iowa",
+      "founded": "1879",
       "kind": "stock"
     },
     {
@@ -2629,6 +3375,8 @@
       "name": "Procter & Gamble",
       "sector": "Consumer Staples",
       "industry": "Personal Care Products",
+      "hq": "Cincinnati, Ohio",
+      "founded": "1837",
       "kind": "stock"
     },
     {
@@ -2636,6 +3384,8 @@
       "name": "Progressive Corporation",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Mayfield Village, Ohio",
+      "founded": "1937",
       "kind": "stock"
     },
     {
@@ -2643,6 +3393,8 @@
       "name": "Prologis",
       "sector": "Real Estate",
       "industry": "Industrial REITs",
+      "hq": "San Francisco, California",
+      "founded": "1983",
       "kind": "stock"
     },
     {
@@ -2650,6 +3402,8 @@
       "name": "Prudential Financial",
       "sector": "Financials",
       "industry": "Life & Health Insurance",
+      "hq": "Newark, New Jersey",
+      "founded": "1875",
       "kind": "stock"
     },
     {
@@ -2657,6 +3411,8 @@
       "name": "Public Service Enterprise Group",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Newark, New Jersey",
+      "founded": "1903",
       "kind": "stock"
     },
     {
@@ -2664,6 +3420,8 @@
       "name": "PTC Inc.",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Boston, Massachusetts",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -2671,6 +3429,8 @@
       "name": "Public Storage",
       "sector": "Real Estate",
       "industry": "Self-Storage REITs",
+      "hq": "Glendale, California",
+      "founded": "1972",
       "kind": "stock"
     },
     {
@@ -2678,6 +3438,8 @@
       "name": "PulteGroup",
       "sector": "Consumer Discretionary",
       "industry": "Homebuilding",
+      "hq": "Atlanta, Georgia",
+      "founded": "1956",
       "kind": "stock"
     },
     {
@@ -2685,6 +3447,8 @@
       "name": "Quanta Services",
       "sector": "Industrials",
       "industry": "Construction & Engineering",
+      "hq": "Houston, Texas",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -2692,6 +3456,8 @@
       "name": "Qualcomm",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "San Diego, California",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -2699,6 +3465,8 @@
       "name": "Quest Diagnostics",
       "sector": "Health Care",
       "industry": "Health Care Services",
+      "hq": "Secaucus, New Jersey",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -2706,6 +3474,8 @@
       "name": "Qnity Electronics",
       "sector": "Information Technology",
       "industry": "Semiconductor Materials & Equipment",
+      "hq": "Wilmington, Delaware",
+      "founded": "2025",
       "kind": "stock"
     },
     {
@@ -2713,6 +3483,8 @@
       "name": "Ralph Lauren Corporation",
       "sector": "Consumer Discretionary",
       "industry": "Apparel, Accessories & Luxury Goods",
+      "hq": "New York City, New York",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -2720,6 +3492,8 @@
       "name": "Raymond James Financial",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "St. Petersburg, Florida",
+      "founded": "1962",
       "kind": "stock"
     },
     {
@@ -2727,6 +3501,8 @@
       "name": "Reddit",
       "sector": "Communication Services",
       "industry": "Interactive Media & Services",
+      "hq": "San Francisco, California",
+      "founded": "2005",
       "kind": "stock"
     },
     {
@@ -2734,6 +3510,8 @@
       "name": "RTX Corporation",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Waltham, Massachusetts",
+      "founded": "1922",
       "kind": "stock"
     },
     {
@@ -2741,6 +3519,8 @@
       "name": "Realty Income",
       "sector": "Real Estate",
       "industry": "Retail REITs",
+      "hq": "San Diego, California",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -2748,6 +3528,8 @@
       "name": "Regency Centers",
       "sector": "Real Estate",
       "industry": "Retail REITs",
+      "hq": "Jacksonville, Florida",
+      "founded": "1963",
       "kind": "stock"
     },
     {
@@ -2755,6 +3537,8 @@
       "name": "Regeneron Pharmaceuticals",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Tarrytown, New York",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -2762,6 +3546,8 @@
       "name": "Regions Financial Corporation",
       "sector": "Financials",
       "industry": "Regional Banks",
+      "hq": "Birmingham, Alabama",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -2769,6 +3555,8 @@
       "name": "Republic Services",
       "sector": "Industrials",
       "industry": "Environmental & Facilities Services",
+      "hq": "Phoenix, Arizona",
+      "founded": "1998 (1981)",
       "kind": "stock"
     },
     {
@@ -2776,6 +3564,8 @@
       "name": "ResMed|",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "San Diego, California",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -2783,6 +3573,8 @@
       "name": "Revvity",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Waltham, Massachusetts",
+      "founded": "1937",
       "kind": "stock"
     },
     {
@@ -2790,6 +3582,8 @@
       "name": "Robinhood Markets",
       "sector": "Financials",
       "industry": "Investment Banking & Brokerage",
+      "hq": "Menlo Park, California",
+      "founded": "2013",
       "kind": "stock"
     },
     {
@@ -2797,6 +3591,8 @@
       "name": "Rockwell Automation",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "Milwaukee, Wisconsin",
+      "founded": "1903",
       "kind": "stock"
     },
     {
@@ -2804,6 +3600,8 @@
       "name": "Rollins, Inc.",
       "sector": "Industrials",
       "industry": "Environmental & Facilities Services",
+      "hq": "Atlanta, Georgia",
+      "founded": "1948",
       "kind": "stock"
     },
     {
@@ -2811,6 +3609,8 @@
       "name": "Roper Technologies",
       "sector": "Information Technology",
       "industry": "Electronic Equipment & Instruments",
+      "hq": "Sarasota, Florida",
+      "founded": "1981",
       "kind": "stock"
     },
     {
@@ -2818,6 +3618,8 @@
       "name": "Ross Stores",
       "sector": "Consumer Discretionary",
       "industry": "Apparel Retail",
+      "hq": "Dublin, California",
+      "founded": "1982",
       "kind": "stock"
     },
     {
@@ -2825,6 +3627,8 @@
       "name": "Royal Caribbean Group",
       "sector": "Consumer Discretionary",
       "industry": "Hotels, Resorts & Cruise Lines",
+      "hq": "Miami, Florida",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -2832,6 +3636,8 @@
       "name": "S&P Global",
       "sector": "Financials",
       "industry": "Financial Exchanges & Data",
+      "hq": "New York City, New York",
+      "founded": "1917",
       "kind": "stock"
     },
     {
@@ -2839,6 +3645,8 @@
       "name": "Salesforce",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "San Francisco, California",
+      "founded": "1999",
       "kind": "stock"
     },
     {
@@ -2846,6 +3654,8 @@
       "name": "Sandisk",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Milpitas, California",
+      "founded": "1988",
       "kind": "stock"
     },
     {
@@ -2853,6 +3663,8 @@
       "name": "SBA Communications",
       "sector": "Real Estate",
       "industry": "Telecom Tower REITs",
+      "hq": "Boca Raton, Florida",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -2860,6 +3672,8 @@
       "name": "Schlumberger",
       "sector": "Energy",
       "industry": "Oil & Gas Equipment & Services",
+      "hq": "Houston, Texas",
+      "founded": "1926",
       "kind": "stock"
     },
     {
@@ -2867,6 +3681,8 @@
       "name": "Seagate Technology",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "Dublin, Ireland",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -2874,6 +3690,8 @@
       "name": "Sempra",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "San Diego, California",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -2881,6 +3699,8 @@
       "name": "ServiceNow",
       "sector": "Information Technology",
       "industry": "Systems Software",
+      "hq": "Santa Clara, California",
+      "founded": "2003",
       "kind": "stock"
     },
     {
@@ -2888,6 +3708,8 @@
       "name": "Sherwin-Williams",
       "sector": "Materials",
       "industry": "Specialty Chemicals",
+      "hq": "Cleveland, Ohio",
+      "founded": "1866",
       "kind": "stock"
     },
     {
@@ -2895,6 +3717,8 @@
       "name": "Simon Property Group",
       "sector": "Real Estate",
       "industry": "Retail REITs",
+      "hq": "Indianapolis, Indiana",
+      "founded": "2003",
       "kind": "stock"
     },
     {
@@ -2902,6 +3726,8 @@
       "name": "Skyworks Solutions",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Irvine, California",
+      "founded": "2002",
       "kind": "stock"
     },
     {
@@ -2909,6 +3735,8 @@
       "name": "J.M. Smucker Company (The)",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Orrville, Ohio",
+      "founded": "1897",
       "kind": "stock"
     },
     {
@@ -2916,6 +3744,8 @@
       "name": "Smurfit Westrock",
       "sector": "Materials",
       "industry": "Paper & Plastic Packaging Products & Materials",
+      "hq": "Dublin, Ireland",
+      "founded": "1934",
       "kind": "stock"
     },
     {
@@ -2923,6 +3753,8 @@
       "name": "Snap-on",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Kenosha, Wisconsin",
+      "founded": "1920",
       "kind": "stock"
     },
     {
@@ -2930,6 +3762,8 @@
       "name": "Solventum",
       "sector": "Health Care",
       "industry": "Health Care Technology",
+      "hq": "Saint Paul, Minnesota",
+      "founded": "2023",
       "kind": "stock"
     },
     {
@@ -2937,6 +3771,8 @@
       "name": "Southern Company",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Atlanta, Georgia",
+      "founded": "1945",
       "kind": "stock"
     },
     {
@@ -2944,6 +3780,8 @@
       "name": "Southwest Airlines",
       "sector": "Industrials",
       "industry": "Passenger Airlines",
+      "hq": "Dallas, Texas",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -2951,6 +3789,8 @@
       "name": "Stanley Black & Decker",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "New Britain, Connecticut",
+      "founded": "1843",
       "kind": "stock"
     },
     {
@@ -2958,6 +3798,8 @@
       "name": "Starbucks",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Seattle, Washington",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -2965,6 +3807,8 @@
       "name": "State Street Corporation",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Boston, Massachusetts",
+      "founded": "1792",
       "kind": "stock"
     },
     {
@@ -2972,6 +3816,8 @@
       "name": "Steel Dynamics",
       "sector": "Materials",
       "industry": "Steel",
+      "hq": "Fort Wayne, Indiana",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -2979,6 +3825,8 @@
       "name": "Steris",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Dublin, Ireland",
+      "founded": "1985",
       "kind": "stock"
     },
     {
@@ -2986,6 +3834,8 @@
       "name": "Stryker Corporation",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Kalamazoo, Michigan",
+      "founded": "1941",
       "kind": "stock"
     },
     {
@@ -2993,6 +3843,8 @@
       "name": "Supermicro",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "San Jose, California",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -3000,6 +3852,8 @@
       "name": "Synchrony Financial",
       "sector": "Financials",
       "industry": "Consumer Finance",
+      "hq": "Stamford, Connecticut",
+      "founded": "2003",
       "kind": "stock"
     },
     {
@@ -3007,6 +3861,8 @@
       "name": "Synopsys",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Sunnyvale, California",
+      "founded": "1986",
       "kind": "stock"
     },
     {
@@ -3014,6 +3870,8 @@
       "name": "Sysco",
       "sector": "Consumer Staples",
       "industry": "Food Distributors",
+      "hq": "Houston, Texas",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -3021,6 +3879,8 @@
       "name": "T-Mobile US",
       "sector": "Communication Services",
       "industry": "Wireless Telecommunication Services",
+      "hq": "Bellevue, Washington",
+      "founded": "1994",
       "kind": "stock"
     },
     {
@@ -3028,6 +3888,8 @@
       "name": "T. Rowe Price",
       "sector": "Financials",
       "industry": "Asset Management & Custody Banks",
+      "hq": "Baltimore, Maryland",
+      "founded": "1937",
       "kind": "stock"
     },
     {
@@ -3035,6 +3897,8 @@
       "name": "Take-Two Interactive",
       "sector": "Communication Services",
       "industry": "Interactive Home Entertainment",
+      "hq": "New York City, New York",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -3042,6 +3906,8 @@
       "name": "Tapestry, Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Apparel, Accessories & Luxury Goods",
+      "hq": "New York City, New York",
+      "founded": "2017",
       "kind": "stock"
     },
     {
@@ -3049,6 +3915,8 @@
       "name": "Targa Resources",
       "sector": "Energy",
       "industry": "Oil & Gas Storage & Transportation",
+      "hq": "Houston, Texas",
+      "founded": "2005",
       "kind": "stock"
     },
     {
@@ -3056,6 +3924,8 @@
       "name": "Target Corporation",
       "sector": "Consumer Staples",
       "industry": "Consumer Staples Merchandise Retail",
+      "hq": "Minneapolis, Minnesota",
+      "founded": "1902",
       "kind": "stock"
     },
     {
@@ -3063,6 +3933,8 @@
       "name": "TE Connectivity",
       "sector": "Information Technology",
       "industry": "Electronic Manufacturing Services",
+      "hq": "Galway, Ireland",
+      "founded": "2007",
       "kind": "stock"
     },
     {
@@ -3070,6 +3942,8 @@
       "name": "Teledyne Technologies",
       "sector": "Information Technology",
       "industry": "Electronic Equipment & Instruments",
+      "hq": "Thousand Oaks, California",
+      "founded": "1960",
       "kind": "stock"
     },
     {
@@ -3077,6 +3951,8 @@
       "name": "Teradyne",
       "sector": "Information Technology",
       "industry": "Semiconductor Materials & Equipment",
+      "hq": "North Reading, Massachusetts",
+      "founded": "1960",
       "kind": "stock"
     },
     {
@@ -3084,6 +3960,8 @@
       "name": "Tesla, Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Automobile Manufacturers",
+      "hq": "Austin, Texas",
+      "founded": "2003",
       "kind": "stock"
     },
     {
@@ -3091,6 +3969,8 @@
       "name": "Texas Instruments",
       "sector": "Information Technology",
       "industry": "Semiconductors",
+      "hq": "Dallas, Texas",
+      "founded": "1930",
       "kind": "stock"
     },
     {
@@ -3098,6 +3978,8 @@
       "name": "Texas Pacific Land Corporation",
       "sector": "Energy",
       "industry": "Oil & Gas Exploration & Production",
+      "hq": "Dallas, Texas",
+      "founded": "1888",
       "kind": "stock"
     },
     {
@@ -3105,6 +3987,8 @@
       "name": "Textron",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Providence, Rhode Island",
+      "founded": "1923",
       "kind": "stock"
     },
     {
@@ -3112,6 +3996,8 @@
       "name": "Thermo Fisher Scientific",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Waltham, Massachusetts",
+      "founded": "2006 (1902)",
       "kind": "stock"
     },
     {
@@ -3119,6 +4005,8 @@
       "name": "TJX Companies",
       "sector": "Consumer Discretionary",
       "industry": "Apparel Retail",
+      "hq": "Framingham, Massachusetts",
+      "founded": "1987",
       "kind": "stock"
     },
     {
@@ -3126,6 +4014,8 @@
       "name": "TKO Group Holdings",
       "sector": "Communication Services",
       "industry": "Movies & Entertainment",
+      "hq": "New York City, New York",
+      "founded": "2023",
       "kind": "stock"
     },
     {
@@ -3133,6 +4023,8 @@
       "name": "Tractor Supply",
       "sector": "Consumer Discretionary",
       "industry": "Other Specialty Retail",
+      "hq": "Brentwood, Tennessee",
+      "founded": "1938",
       "kind": "stock"
     },
     {
@@ -3140,6 +4032,8 @@
       "name": "Trane Technologies",
       "sector": "Industrials",
       "industry": "Building Products",
+      "hq": "Dublin, Ireland",
+      "founded": "1871",
       "kind": "stock"
     },
     {
@@ -3147,6 +4041,8 @@
       "name": "TransDigm Group",
       "sector": "Industrials",
       "industry": "Aerospace & Defense",
+      "hq": "Cleveland, Ohio",
+      "founded": "1993",
       "kind": "stock"
     },
     {
@@ -3154,6 +4050,8 @@
       "name": "Travelers Companies (The)",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "New York City, New York",
+      "founded": "1853",
       "kind": "stock"
     },
     {
@@ -3161,6 +4059,8 @@
       "name": "Trimble Inc.",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Westminster, Colorado",
+      "founded": "1978",
       "kind": "stock"
     },
     {
@@ -3168,6 +4068,8 @@
       "name": "Truist Financial",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "Charlotte, North Carolina",
+      "founded": "1872",
       "kind": "stock"
     },
     {
@@ -3175,6 +4077,8 @@
       "name": "Tyler Technologies",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Plano, Texas",
+      "founded": "1966",
       "kind": "stock"
     },
     {
@@ -3182,6 +4086,8 @@
       "name": "Tyson Foods",
       "sector": "Consumer Staples",
       "industry": "Packaged Foods & Meats",
+      "hq": "Springdale, Arkansas",
+      "founded": "1935",
       "kind": "stock"
     },
     {
@@ -3189,6 +4095,8 @@
       "name": "U.S. Bancorp",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "Minneapolis, Minnesota",
+      "founded": "1968",
       "kind": "stock"
     },
     {
@@ -3196,6 +4104,8 @@
       "name": "Uber",
       "sector": "Industrials",
       "industry": "Passenger Ground Transportation",
+      "hq": "San Francisco, California",
+      "founded": "2009",
       "kind": "stock"
     },
     {
@@ -3203,6 +4113,8 @@
       "name": "UDR, Inc.",
       "sector": "Real Estate",
       "industry": "Multi-Family Residential REITs",
+      "hq": "Highlands Ranch, Colorado",
+      "founded": "1972",
       "kind": "stock"
     },
     {
@@ -3210,6 +4122,8 @@
       "name": "Ulta Beauty",
       "sector": "Consumer Discretionary",
       "industry": "Other Specialty Retail",
+      "hq": "Bolingbrook, Illinois",
+      "founded": "1990",
       "kind": "stock"
     },
     {
@@ -3217,6 +4131,8 @@
       "name": "Union Pacific Corporation",
       "sector": "Industrials",
       "industry": "Rail Transportation",
+      "hq": "Omaha, Nebraska",
+      "founded": "1862",
       "kind": "stock"
     },
     {
@@ -3224,6 +4140,8 @@
       "name": "United Airlines Holdings",
       "sector": "Industrials",
       "industry": "Passenger Airlines",
+      "hq": "Chicago, Illinois",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -3231,6 +4149,8 @@
       "name": "United Parcel Service",
       "sector": "Industrials",
       "industry": "Air Freight & Logistics",
+      "hq": "Sandy Springs, Georgia",
+      "founded": "1907",
       "kind": "stock"
     },
     {
@@ -3238,6 +4158,8 @@
       "name": "United Rentals",
       "sector": "Industrials",
       "industry": "Trading Companies & Distributors",
+      "hq": "Stamford, Connecticut",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -3245,6 +4167,8 @@
       "name": "UnitedHealth Group",
       "sector": "Health Care",
       "industry": "Managed Health Care",
+      "hq": "Eden Prairie, Minnesota",
+      "founded": "1977",
       "kind": "stock"
     },
     {
@@ -3252,6 +4176,8 @@
       "name": "Universal Health Services",
       "sector": "Health Care",
       "industry": "Health Care Facilities",
+      "hq": "King of Prussia, Pennsylvania",
+      "founded": "1979",
       "kind": "stock"
     },
     {
@@ -3259,6 +4185,8 @@
       "name": "Valero Energy",
       "sector": "Energy",
       "industry": "Oil & Gas Refining & Marketing",
+      "hq": "San Antonio, Texas",
+      "founded": "1980",
       "kind": "stock"
     },
     {
@@ -3266,6 +4194,8 @@
       "name": "Veeva Systems",
       "sector": "Health Care",
       "industry": "Health Care Technology",
+      "hq": "Pleasanton, California",
+      "founded": "2007",
       "kind": "stock"
     },
     {
@@ -3273,6 +4203,8 @@
       "name": "Ventas",
       "sector": "Real Estate",
       "industry": "Health Care REITs",
+      "hq": "Chicago, Illinois",
+      "founded": "1998",
       "kind": "stock"
     },
     {
@@ -3280,6 +4212,8 @@
       "name": "Veralto",
       "sector": "Industrials",
       "industry": "Environmental & Facilities Services",
+      "hq": "Waltham, Massachusetts",
+      "founded": "2023",
       "kind": "stock"
     },
     {
@@ -3287,6 +4221,8 @@
       "name": "Verisign",
       "sector": "Information Technology",
       "industry": "Internet Services & Infrastructure",
+      "hq": "Reston, Virginia",
+      "founded": "1995",
       "kind": "stock"
     },
     {
@@ -3294,6 +4230,8 @@
       "name": "Verisk Analytics",
       "sector": "Industrials",
       "industry": "Research & Consulting Services",
+      "hq": "Jersey City, New Jersey",
+      "founded": "1971",
       "kind": "stock"
     },
     {
@@ -3301,6 +4239,8 @@
       "name": "Verizon",
       "sector": "Communication Services",
       "industry": "Integrated Telecommunication Services",
+      "hq": "New York City, New York",
+      "founded": "1983 (1877)",
       "kind": "stock"
     },
     {
@@ -3308,6 +4248,8 @@
       "name": "Vertex Pharmaceuticals",
       "sector": "Health Care",
       "industry": "Biotechnology",
+      "hq": "Boston, Massachusetts",
+      "founded": "1989",
       "kind": "stock"
     },
     {
@@ -3315,6 +4257,8 @@
       "name": "Vertiv",
       "sector": "Industrials",
       "industry": "Electrical Components & Equipment",
+      "hq": "Westerville, Ohio",
+      "founded": "2016",
       "kind": "stock"
     },
     {
@@ -3322,6 +4266,8 @@
       "name": "Viatris",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1961",
       "kind": "stock"
     },
     {
@@ -3329,6 +4275,8 @@
       "name": "Vici Properties",
       "sector": "Real Estate",
       "industry": "Hotel & Resort REITs",
+      "hq": "New York City, New York",
+      "founded": "2017",
       "kind": "stock"
     },
     {
@@ -3336,6 +4284,8 @@
       "name": "Visa Inc.",
       "sector": "Financials",
       "industry": "Transaction & Payment Processing Services",
+      "hq": "San Francisco, California",
+      "founded": "1958",
       "kind": "stock"
     },
     {
@@ -3343,6 +4293,8 @@
       "name": "Vistra Corp.",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Irving, Texas",
+      "founded": "2016",
       "kind": "stock"
     },
     {
@@ -3350,6 +4302,8 @@
       "name": "Vivmark Residential",
       "sector": "Real Estate",
       "industry": "Multi-Family Residential REITs",
+      "hq": "Chicago, Illinois",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -3357,6 +4311,8 @@
       "name": "Vulcan Materials Company",
       "sector": "Materials",
       "industry": "Construction Materials",
+      "hq": "Birmingham, Alabama",
+      "founded": "1909",
       "kind": "stock"
     },
     {
@@ -3364,6 +4320,8 @@
       "name": "W. R. Berkley Corporation",
       "sector": "Financials",
       "industry": "Property & Casualty Insurance",
+      "hq": "Greenwich, Connecticut",
+      "founded": "1967",
       "kind": "stock"
     },
     {
@@ -3371,6 +4329,8 @@
       "name": "W. W. Grainger",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "Lake Forest, Illinois",
+      "founded": "1927",
       "kind": "stock"
     },
     {
@@ -3378,6 +4338,8 @@
       "name": "Wabtec",
       "sector": "Industrials",
       "industry": "Construction Machinery & Heavy Transportation Equipment",
+      "hq": "Pittsburgh, Pennsylvania",
+      "founded": "1999 (1869)",
       "kind": "stock"
     },
     {
@@ -3385,6 +4347,8 @@
       "name": "Walmart",
       "sector": "Consumer Staples",
       "industry": "Consumer Staples Merchandise Retail",
+      "hq": "Bentonville, Arkansas",
+      "founded": "1962",
       "kind": "stock"
     },
     {
@@ -3392,6 +4356,8 @@
       "name": "Walt Disney Company (The)",
       "sector": "Communication Services",
       "industry": "Movies & Entertainment",
+      "hq": "Burbank, California",
+      "founded": "1923",
       "kind": "stock"
     },
     {
@@ -3399,6 +4365,8 @@
       "name": "Warner Bros. Discovery",
       "sector": "Communication Services",
       "industry": "Broadcasting",
+      "hq": "New York City, New York",
+      "founded": "2022 (Warner Bros. 1923)",
       "kind": "stock"
     },
     {
@@ -3406,6 +4374,8 @@
       "name": "Waste Management",
       "sector": "Industrials",
       "industry": "Environmental & Facilities Services",
+      "hq": "Houston, Texas",
+      "founded": "1968",
       "kind": "stock"
     },
     {
@@ -3413,6 +4383,8 @@
       "name": "Waters Corporation",
       "sector": "Health Care",
       "industry": "Life Sciences Tools & Services",
+      "hq": "Milford, Massachusetts",
+      "founded": "1958",
       "kind": "stock"
     },
     {
@@ -3420,6 +4392,8 @@
       "name": "WEC Energy Group",
       "sector": "Utilities",
       "industry": "Electric Utilities",
+      "hq": "Milwaukee, Wisconsin",
+      "founded": "1896",
       "kind": "stock"
     },
     {
@@ -3427,6 +4401,8 @@
       "name": "Wells Fargo",
       "sector": "Financials",
       "industry": "Diversified Banks",
+      "hq": "San Francisco, California",
+      "founded": "1852",
       "kind": "stock"
     },
     {
@@ -3434,6 +4410,8 @@
       "name": "Welltower",
       "sector": "Real Estate",
       "industry": "Health Care REITs",
+      "hq": "Toledo, Ohio",
+      "founded": "1970",
       "kind": "stock"
     },
     {
@@ -3441,6 +4419,8 @@
       "name": "West Pharmaceutical Services",
       "sector": "Health Care",
       "industry": "Health Care Supplies",
+      "hq": "Exton, Pennsylvania",
+      "founded": "1923",
       "kind": "stock"
     },
     {
@@ -3448,6 +4428,8 @@
       "name": "Western Digital",
       "sector": "Information Technology",
       "industry": "Technology Hardware, Storage & Peripherals",
+      "hq": "San Jose, California",
+      "founded": "1970",
       "kind": "stock"
     },
     {
@@ -3455,6 +4437,8 @@
       "name": "Weyerhaeuser",
       "sector": "Real Estate",
       "industry": "Timber REITs",
+      "hq": "Seattle, Washington",
+      "founded": "1900",
       "kind": "stock"
     },
     {
@@ -3462,6 +4446,8 @@
       "name": "Williams-Sonoma, Inc.",
       "sector": "Consumer Discretionary",
       "industry": "Homefurnishing Retail",
+      "hq": "San Francisco, California",
+      "founded": "1956",
       "kind": "stock"
     },
     {
@@ -3469,6 +4455,8 @@
       "name": "Williams Companies",
       "sector": "Energy",
       "industry": "Oil & Gas Storage & Transportation",
+      "hq": "Tulsa, Oklahoma",
+      "founded": "1908",
       "kind": "stock"
     },
     {
@@ -3476,6 +4464,8 @@
       "name": "Willis Towers Watson",
       "sector": "Financials",
       "industry": "Insurance Brokers",
+      "hq": "London, United Kingdom",
+      "founded": "2016",
       "kind": "stock"
     },
     {
@@ -3483,6 +4473,8 @@
       "name": "Workday, Inc.",
       "sector": "Information Technology",
       "industry": "Application Software",
+      "hq": "Pleasanton, California",
+      "founded": "2005",
       "kind": "stock"
     },
     {
@@ -3490,6 +4482,8 @@
       "name": "Wynn Resorts",
       "sector": "Consumer Discretionary",
       "industry": "Casinos & Gaming",
+      "hq": "Paradise, Nevada",
+      "founded": "2002",
       "kind": "stock"
     },
     {
@@ -3497,6 +4491,8 @@
       "name": "Xcel Energy",
       "sector": "Utilities",
       "industry": "Multi-Utilities",
+      "hq": "Minneapolis, Minnesota",
+      "founded": "1909",
       "kind": "stock"
     },
     {
@@ -3504,6 +4500,8 @@
       "name": "Xylem Inc.",
       "sector": "Industrials",
       "industry": "Industrial Machinery & Supplies & Components",
+      "hq": "White Plains, New York",
+      "founded": "2011",
       "kind": "stock"
     },
     {
@@ -3511,6 +4509,8 @@
       "name": "Yum! Brands",
       "sector": "Consumer Discretionary",
       "industry": "Restaurants",
+      "hq": "Louisville, Kentucky",
+      "founded": "1997",
       "kind": "stock"
     },
     {
@@ -3518,6 +4518,8 @@
       "name": "Zebra Technologies",
       "sector": "Information Technology",
       "industry": "Electronic Equipment & Instruments",
+      "hq": "Lincolnshire, Illinois",
+      "founded": "1969",
       "kind": "stock"
     },
     {
@@ -3525,6 +4527,8 @@
       "name": "Zimmer Biomet",
       "sector": "Health Care",
       "industry": "Health Care Equipment",
+      "hq": "Warsaw, Indiana",
+      "founded": "1927",
       "kind": "stock"
     },
     {
@@ -3532,6 +4536,8 @@
       "name": "Zoetis",
       "sector": "Health Care",
       "industry": "Pharmaceuticals",
+      "hq": "Parsippany, New Jersey",
+      "founded": "1952",
       "kind": "stock"
     },
     {

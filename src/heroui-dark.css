@@ -303,3 +303,14 @@ html.dark .service-header nav a:hover{color:#ECEDEE}
 .macro-list span{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}.macro-list span b{font-size:12px;margin-left:4px}
 .macro-list li>small{font-size:10px;color:var(--muted)}
 .evidence-quote{display:block;margin-top:6px;padding:6px 10px;border-left:2px solid #338EF7;background:#001731;color:#D4D4D8;font-size:11px;line-height:1.6;quotes:none}
+
+/* 장 시작 전 / 장 마감 후 */
+.session-toggle{display:flex;gap:2px;padding:3px;border-radius:12px;background:#27272A;margin-right:8px}
+.session-toggle button{display:flex;align-items:center;gap:6px;border:0;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:9px;cursor:pointer}
+.session-toggle button.is-active{background:#18181B;color:#ECEDEE}
+.session-toggle button.is-active:first-child svg{color:#FBBF24}.session-toggle button.is-active:last-child svg{color:#C4B5FD}
+.report-basis{margin:0;font-size:12px;color:var(--muted)}
+.kpi-intraday{font-size:12px;color:var(--muted)}.kpi-intraday b{font-weight:600}
+.change-cell{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.change-cell small{font-size:10px;color:var(--muted);font-weight:400}
+.archive-session{display:inline;vertical-align:-1px}.archive-session.pre{color:#FBBF24}.archive-session.post{color:#C4B5FD}
+.report-archive li strong em{font-style:normal;font-size:11px;font-weight:500;color:var(--muted)}

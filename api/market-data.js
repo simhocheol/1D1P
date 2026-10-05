@@ -9,6 +9,7 @@ export function makeHandler({fetchImpl=fetch,env=process.env}={}){return async(r
  if(!token)return respond(res,401,{message:'관리자 인증이 필요합니다.'});
  let body;try{body=await readBody(req);if(typeof body.secretKey!=='string'||!/^[A-Za-z0-9_-]{12,256}$/.test(body.secretKey))throw Error()}catch{return respond(res,400,{message:'암호화 파일 조회용 Alpaca Secret Key를 입력해 주세요.'})}
  if(body.date!==undefined&&!/^\d{4}-\d{2}-\d{2}$/.test(body.date))return respond(res,400,{message:'날짜 형식을 확인해 주세요.'});
+ if(body.session!==undefined&&!['pre','post'].includes(body.session))return respond(res,400,{message:'리포트 구분을 확인해 주세요.'});
  const headers={Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json'};
  try{
   const user=await fetchImpl('https://api.github.com/user',{headers,redirect:'error',signal:AbortSignal.timeout(10000)});
@@ -28,7 +29,7 @@ export function makeHandler({fetchImpl=fetch,env=process.env}={}){return async(r
   const zip=unzipSync(bytes,{filter:file=>file.name==='market.enc'&&file.originalSize<20000000});
   if(!zip['market.enc'])throw Error();
   const data=open(strFromU8(zip['market.enc']),body.secretKey);
-  const report=buildSignalReport({...data,date:body.date});
+  const report=buildSignalReport({...data,date:body.date,session:body.session||'post'});
   return respond(res,200,{checkedAt:data.checkedAt,feed:data.feed,metrics:data.metrics,news:data.news,newsErrors:data.newsErrors,status:data.status,report});
  }catch{return respond(res,502,{message:'암호화 시세 파일을 불러오지 못했습니다. 수집 당시 Alpaca Secret Key인지 확인해 주세요.'})}finally{body.secretKey=undefined}
 };}

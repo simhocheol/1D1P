@@ -4,6 +4,7 @@ import {summarize,association} from '../server/market-metrics.js';
 import {seal} from '../server/market-vault.js';
 import {buildSignalReport} from '../server/signal-engine.js';
 import {classifyEvidence} from './lib/classify-evidence.mjs';
+import {etInstant} from '../src/publish-schedule.js';
 const source='https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv';
 const output=new URL('../public/data/universe.json',import.meta.url);
 const checkedAt=new Date().toISOString();
@@ -63,6 +64,27 @@ if(key&&secret)for(let i=0;i<assets.length;i+=50){
   for(const item of result.news){let url;try{url=new URL(item.url);if(url.protocol!=='https:')continue}catch{continue}for(const symbol of item.symbols||[])if(symbols.includes(symbol)){(news[symbol]??=[]).push({title:item.headline,summary:(item.summary||'').slice(0,600),url:url.href,source:item.source,publishedAt:item.created_at})}}
  }catch{newsErrors.push(...symbols)}
 }
+// Pre-market snapshots at the 09:15 ET publication cutoff for the last 10 weekdays (IEX extended-hours trades).
+const premarket={},premarketErrors=[];
+if(key&&secret){
+ const etDay=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'});
+ const days=[];for(let back=0;days.length<10&&back<16;back++){const t=new Date(Date.now()-back*864e5),d=etDay.format(t),[y,m,dd]=d.split('-').map(Number),wd=new Date(Date.UTC(y,m-1,dd)).getUTCDay();if(wd===0||wd===6)continue;const cutoff=etInstant(y,m,dd,9,15);if(cutoff>new Date())continue;days.push({d,cutoff,start:etInstant(y,m,dd,4,0)})}
+ for(const {d,cutoff,start} of days){
+  const prices={};
+  for(let i=0;i<assets.length;i+=50){
+   const symbols=assets.slice(i,i+50).map(s=>s.symbol);let pageToken;
+   try{do{
+    const url=new URL('https://data.alpaca.markets/v2/stocks/bars');
+    url.search=new URLSearchParams({symbols:symbols.join(','),timeframe:'5Min',start:start.toISOString(),end:new Date(cutoff.getTime()-1).toISOString(),limit:'10000',feed:'iex',adjustment:'split',sort:'asc',...(pageToken?{page_token:pageToken}:{})}).toString();
+    const data=await (await request(url,{'APCA-API-KEY-ID':key,'APCA-API-SECRET-KEY':secret})).json();
+    for(const [symbol,list] of Object.entries(data.bars||{})){if(!symbols.includes(symbol)||!Array.isArray(list)||!list.length)continue;const last=list.at(-1),q=prices[symbol];prices[symbol]={c:last.c,t:last.t,h:Math.max(q?.h??-Infinity,...list.map(b=>b.h)),l:Math.min(q?.l??Infinity,...list.map(b=>b.l)),v:(q?.v||0)+list.reduce((s,b)=>s+b.v,0)}}
+    pageToken=data.next_page_token;
+   }while(pageToken)}catch{premarketErrors.push(`${d}:${i}`)}
+  }
+  if(Object.keys(prices).length)premarket[d]={cutoff:cutoff.toISOString(),prices};
+ }
+}
+console.log(`Pre-market snapshots ${Object.keys(premarket).map(d=>`${d}(${Object.keys(premarket[d].prices).length})`).join(', ')||'none'}${premarketErrors.length?` · ${premarketErrors.length} batch errors`:''}`);
 const coverage=assets.filter(s=>metrics[s.symbol]).length;
 const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituents + curated ETF watch universe (not all ETFs)',feed:'iex',adjustment:'split',status:!key||!secret?'missing_keys':errors.length?'partial':'ok',coverage,total:assets.length,failedSymbols:errors,newsStatus:!key||!secret?'missing_keys':newsErrors.length?'partial':'ok',newsSymbols:Object.keys(news).length,newsFailedSymbols:newsErrors,assets};
 await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
@@ -73,7 +95,7 @@ let macro=null,filings=null;try{macro=JSON.parse(await fs.readFile('private-mark
 try{filings=JSON.parse(await fs.readFile('private-market/filings.json','utf8'))}catch{}
 let classified=null;
 if(process.env.OPENAI_API_KEY){try{classified=await classifyEvidence({news,filings,key:process.env.OPENAI_API_KEY,ua:process.env.SEC_CONTACT_EMAIL?`1D1P market research ${process.env.SEC_CONTACT_EMAIL}`:null});console.log(`Classified ${Object.keys(classified.items).length}/${classified.inputs} items with ${classified.model}${classified.errors.length?` · ${classified.errors.length} batch errors`:''}`)}catch(e){console.error(`classification skipped: ${e.message}`)}}
-if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,classified,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
+if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,classified,premarket,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 const report=buildSignalReport({assets,bars,news,events,macro,filings,classified});
 console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}; observed drivers=${report.thesis?.drivers.filter(d=>d.status==="observed").map(d=>`${d.id}(${d.sectorIds.length}s/${d.candidateSymbols.length}c)`).join(",")||"none"}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);

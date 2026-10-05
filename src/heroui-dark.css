@@ -328,3 +328,12 @@ html.dark .service-header nav a:hover{color:#ECEDEE}
 .report-toolbar .admin-connect{border:1px solid #3F3F46;background:none;color:#ECEDEE;border-radius:12px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer}
 .public-table{min-width:0}.public-table td{overflow-wrap:anywhere}.public-table th:nth-child(2),.public-table td:nth-child(2){width:45%}
 @media(max-width:560px){.public-table th:nth-child(2),.public-table td:nth-child(2){display:none}}
+
+.report-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 20px;padding:10px 14px;border-radius:10px;font-size:13px;background:#18181b;color:#a1a1aa;min-width:0}
+.report-status strong{color:#fafafa;font-weight:600}.report-status span:last-child{min-width:0}
+.report-status-dot{width:8px;height:8px;border-radius:50%;background:#71717a;flex:none}
+.report-status.is-busy .report-status-dot{background:#3b82f6;animation:status-pulse 1s infinite}
+.report-status.is-wait{background:#2a1f05}.report-status.is-wait .report-status-dot{background:#f5a524}
+.report-status.is-error{background:#2b0c12}.report-status.is-error .report-status-dot{background:#f31260}
+.report-status.is-ok .report-status-dot{background:#17c964}
+@keyframes status-pulse{50%{opacity:.3}}

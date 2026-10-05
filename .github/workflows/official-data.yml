@@ -116,6 +116,7 @@ jobs:
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com
           git commit -m 'Update official feed records'
+          git pull --rebase origin main
           git push origin HEAD:main
       - name: Surface partial collection failures
         if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure' || steps.earnings.outcome == 'failure' || steps.fred.outcome == 'failure' || steps.edgar.outcome == 'failure'

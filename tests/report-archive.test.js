@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {zipSync,strToU8} from 'fflate';
+import {makeHandler} from '../api/report-archive.js';
+import {seal} from '../server/market-vault.js';
+const secret='archive-secret-12345';
+const zip=zipSync({'index.json':strToU8(JSON.stringify({items:[{key:'2026-10-02|pre',date:'2026-10-02',session:'pre'}]})),'2026-10-02-pre.enc':strToU8(seal({report:{date:'2026-10-02',session:'pre'},generatedAt:'x'},secret))});
+const fetchImpl=async(url,opts)=>{const u=String(url);
+ if(u.endsWith('/user'))return new Response(JSON.stringify({login:'simhocheol'}));
+ if(u.includes('artifacts?name=report-archive'))return new Response(JSON.stringify({artifacts:[{id:7,expired:false,created_at:'2026-10-05T00:00:00Z'}]}));
+ if(u.endsWith('/artifacts/7/zip'))return new Response(null,{status:302,headers:{location:'https://pipelines.actions.githubusercontent.com/a.zip'}});
+ if(u.startsWith('https://pipelines.actions.githubusercontent.com'))return new Response(zip);
+ throw Error('unexpected '+u)};
+const call=async body=>{let out;const res={setHeader(){},end(b){out=JSON.parse(b)}};await makeHandler({fetchImpl,env:{}})({method:'POST',headers:{origin:'http://127.0.0.1:5173',authorization:'Bearer github_pat_test_1234567890'},body},res);return {status:res.statusCode,body:out}};
+test('lists and opens archived reports with the collection secret',async()=>{
+ const list=await call({secretKey:secret});assert.equal(list.status,200);assert.equal(list.body.items[0].key,'2026-10-02|pre');
+ const one=await call({secretKey:secret,key:'2026-10-02|pre'});assert.equal(one.status,200);assert.equal(one.body.report.session,'pre');
+ assert.equal((await call({secretKey:'wrong-secret-123456',key:'2026-10-02|pre'})).status,502);
+ assert.equal((await call({secretKey:secret,key:'../x'})).status,400);
+ assert.equal((await call({secretKey:secret,key:'2026-10-03|post'})).status,404);
+});

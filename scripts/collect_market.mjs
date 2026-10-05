@@ -97,6 +97,22 @@ let classified=null;
 if(process.env.OPENAI_API_KEY){try{classified=await classifyEvidence({news,filings,key:process.env.OPENAI_API_KEY,ua:process.env.SEC_CONTACT_EMAIL?`1D1P market research ${process.env.SEC_CONTACT_EMAIL}`:null});console.log(`Classified ${Object.keys(classified.items).length}/${classified.inputs} items with ${classified.model}${classified.errors.length?` · ${classified.errors.length} batch errors`:''}`)}catch(e){console.error(`classification skipped: ${e.message}`)}}
 if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,classified,premarket,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 const report=buildSignalReport({assets,bars,news,events,macro,filings,classified});
+// Shared report archive: seal pre/post reports for recent days into private-market/archive (uploaded as a 90-day artifact).
+if(secret){
+ await fs.mkdir('private-market/archive',{recursive:true});
+ const data={assets,bars,news,events,macro,filings,classified,premarket},generatedAt=new Date().toISOString();
+ const etDay=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'});
+ const postDays=[...new Set((bars.SPY||[]).map(b=>etDay.format(new Date(b.t))))].slice(-10);
+ let index={items:[]};try{index=JSON.parse(await fs.readFile('private-market/archive/index.json','utf8'))}catch{}
+ const items=new Map((index.items||[]).map(i=>[i.key,i]));let written=0;
+ for(const [session,list] of [['post',postDays],['pre',Object.keys(premarket)]])for(const date of list){
+  try{const r=buildSignalReport({...data,date,session});if(r.status==='missing_data'||!r.thesis)continue;
+   await fs.writeFile(`private-market/archive/${date}-${session}.enc`,seal({report:r,generatedAt},secret));
+   items.set(`${date}|${session}`,{key:`${date}|${session}`,date,session,generatedAt,candidates:r.thesis.candidates.length,observed:r.thesis.drivers.filter(d=>d.status==='observed').length});written++}catch(e){console.error(`archive ${date} ${session}: ${e.message}`)}
+ }
+ await fs.writeFile('private-market/archive/index.json',JSON.stringify({updatedAt:generatedAt,items:[...items.values()].sort((a,b)=>b.key.localeCompare(a.key))}));
+ console.log(`Report archive: wrote ${written}, total ${items.size}`);
+}
 console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}; observed drivers=${report.thesis?.drivers.filter(d=>d.status==="observed").map(d=>`${d.id}(${d.sectorIds.length}s/${d.candidateSymbols.length}c)`).join(",")||"none"}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);
 if(metadata.status!=='ok'||sourceStatus!=='ok')process.exitCode=1;

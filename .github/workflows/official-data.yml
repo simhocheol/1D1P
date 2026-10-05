@@ -5,6 +5,7 @@ on:
     - cron: '15 * * * *'
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: official-data
   cancel-in-progress: false
@@ -60,6 +61,16 @@ jobs:
         env:
           SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
         run: node scripts/collect_edgar.mjs
+      - name: Restore shared report archive
+        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p private-market/archive
+          id=$(gh api "repos/${{ github.repository }}/actions/artifacts?name=report-archive&per_page=20" --jq '[.artifacts[]|select(.expired==false)]|sort_by(.created_at)|last|.id // empty')
+          if [ -n "$id" ]; then gh api "repos/${{ github.repository }}/actions/artifacts/$id/zip" > "$RUNNER_TEMP/archive.zip" && unzip -o -q "$RUNNER_TEMP/archive.zip" -d private-market/archive; fi
+          ls private-market/archive | wc -l
       - name: Collect market universe and private bars
         if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
         id: market
@@ -85,6 +96,13 @@ jobs:
           path: private-market/market.enc
           retention-days: 7
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.market.outcome == 'success' || steps.market.outcome == 'failure'
+        with:
+          name: report-archive
+          path: private-market/archive/
+          retention-days: 90
+          if-no-files-found: ignore
       - name: Commit collected data for Git-integrated Vercel deployment
         run: |
           git add public/data/official-feed.json public/data/market-connection.json

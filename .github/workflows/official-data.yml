@@ -108,6 +108,7 @@ jobs:
           git add public/data/official-feed.json public/data/market-connection.json
           if [ -f public/data/universe.json ]; then git add public/data/universe.json; fi
           if [ -f public/data/earnings.json ]; then git add public/data/earnings.json; fi
+          if [ -d public/data/reports ]; then git add public/data/reports; fi
           if git diff --cached --quiet; then exit 0; fi
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com

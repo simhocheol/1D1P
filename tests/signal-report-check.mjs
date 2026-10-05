@@ -8,6 +8,7 @@ try{
  const p=await b.newPage({reducedMotion:'reduce'});const errors=[];p.on('pageerror',e=>errors.push(e.message));
  await p.route('**/api/market-data',r=>r.fulfill({json:{report}}));
  await p.goto((process.env.TEST_URL||'http://127.0.0.1:5173')+'/report');
+ await p.getByRole('button',{name:'관리자 연결'}).click();
  await p.getByLabel('GitHub 관리자 토큰 · Actions: Read').fill('github_pat_test_1234567890');
  await p.getByLabel('리포트 복호화용 Alpaca Secret Key').fill('test-secret-1234567890');
  await p.getByRole('button',{name:'리포트 조회',exact:true}).click();

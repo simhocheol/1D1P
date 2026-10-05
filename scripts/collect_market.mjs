@@ -5,6 +5,7 @@ import {seal} from '../server/market-vault.js';
 import {buildSignalReport} from '../server/signal-engine.js';
 import {classifyEvidence} from './lib/classify-evidence.mjs';
 import {etInstant} from '../src/publish-schedule.js';
+import {toPublicReport} from '../server/public-report.js';
 const source='https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv';
 const output=new URL('../public/data/universe.json',import.meta.url);
 const checkedAt=new Date().toISOString();
@@ -65,26 +66,28 @@ if(key&&secret)for(let i=0;i<assets.length;i+=50){
  }catch{newsErrors.push(...symbols)}
 }
 // Pre-market snapshots at the 09:15 ET publication cutoff for the last 10 weekdays (IEX extended-hours trades).
-const premarket={},premarketErrors=[];
+const premarket={},premarketErrors=[];let premarketFeed='sip';
 if(key&&secret){
  const etDay=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'});
  const days=[];for(let back=0;days.length<10&&back<16;back++){const t=new Date(Date.now()-back*864e5),d=etDay.format(t),[y,m,dd]=d.split('-').map(Number),wd=new Date(Date.UTC(y,m-1,dd)).getUTCDay();if(wd===0||wd===6)continue;const cutoff=etInstant(y,m,dd,9,15);if(cutoff>new Date())continue;days.push({d,cutoff,start:etInstant(y,m,dd,4,0)})}
  for(const {d,cutoff,start} of days){
   const prices={};
+  // SIP (all US venues) is free for history older than 15 minutes; fall back to IEX if the plan refuses it.
+  const end=new Date(Math.min(cutoff.getTime()-1,Date.now()-16*60*1000));
   for(let i=0;i<assets.length;i+=50){
    const symbols=assets.slice(i,i+50).map(s=>s.symbol);let pageToken;
-   try{do{
+   for(let tryFeed=0;tryFeed<2;tryFeed++)try{do{
     const url=new URL('https://data.alpaca.markets/v2/stocks/bars');
-    url.search=new URLSearchParams({symbols:symbols.join(','),timeframe:'5Min',start:start.toISOString(),end:new Date(cutoff.getTime()-1).toISOString(),limit:'10000',feed:'iex',adjustment:'split',sort:'asc',...(pageToken?{page_token:pageToken}:{})}).toString();
+    url.search=new URLSearchParams({symbols:symbols.join(','),timeframe:'5Min',start:start.toISOString(),end:end.toISOString(),limit:'10000',feed:premarketFeed,adjustment:'split',sort:'asc',...(pageToken?{page_token:pageToken}:{})}).toString();
     const data=await (await request(url,{'APCA-API-KEY-ID':key,'APCA-API-SECRET-KEY':secret})).json();
     for(const [symbol,list] of Object.entries(data.bars||{})){if(!symbols.includes(symbol)||!Array.isArray(list)||!list.length)continue;const last=list.at(-1),q=prices[symbol];prices[symbol]={c:last.c,t:last.t,h:Math.max(q?.h??-Infinity,...list.map(b=>b.h)),l:Math.min(q?.l??Infinity,...list.map(b=>b.l)),v:(q?.v||0)+list.reduce((s,b)=>s+b.v,0)}}
     pageToken=data.next_page_token;
-   }while(pageToken)}catch{premarketErrors.push(`${d}:${i}`)}
+   }while(pageToken);break}catch(e){if(premarketFeed==='sip'&&/HTTP 4\d\d/.test(e.message)){premarketFeed='iex';pageToken=undefined;continue}premarketErrors.push(`${d}:${i}`);break}
   }
-  if(Object.keys(prices).length)premarket[d]={cutoff:cutoff.toISOString(),prices};
+  if(Object.keys(prices).length)premarket[d]={cutoff:cutoff.toISOString(),asOf:end.toISOString(),feed:premarketFeed,prices};
  }
 }
-console.log(`Pre-market snapshots ${Object.keys(premarket).map(d=>`${d}(${Object.keys(premarket[d].prices).length})`).join(', ')||'none'}${premarketErrors.length?` · ${premarketErrors.length} batch errors`:''}`);
+console.log(`Pre-market snapshots [${premarketFeed}] ${Object.keys(premarket).map(d=>`${d}(${Object.keys(premarket[d].prices).length})`).join(', ')||'none'}${premarketErrors.length?` · ${premarketErrors.length} batch errors`:''}`);
 const coverage=assets.filter(s=>metrics[s.symbol]).length;
 const metadata={checkedAt,source,sourceStatus,scope:'current S&P 500 constituents + curated ETF watch universe (not all ETFs)',feed:'iex',adjustment:'split',status:!key||!secret?'missing_keys':errors.length?'partial':'ok',coverage,total:assets.length,failedSymbols:errors,newsStatus:!key||!secret?'missing_keys':newsErrors.length?'partial':'ok',newsSymbols:Object.keys(news).length,newsFailedSymbols:newsErrors,assets};
 await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
@@ -108,9 +111,13 @@ if(secret){
  for(const [session,list] of [['post',postDays],['pre',Object.keys(premarket)]])for(const date of list){
   try{const r=buildSignalReport({...data,date,session});if(r.status==='missing_data'||!r.thesis)continue;
    await fs.writeFile(`private-market/archive/${date}-${session}.enc`,seal({report:r,generatedAt},secret));
+   const pub=toPublicReport(r,generatedAt);if(pub){await fs.mkdir('public/data/reports',{recursive:true});await fs.writeFile(`public/data/reports/${date}-${session}.json`,JSON.stringify(pub))}
    items.set(`${date}|${session}`,{key:`${date}|${session}`,date,session,generatedAt,candidates:r.thesis.candidates.length,observed:r.thesis.drivers.filter(d=>d.status==='observed').length});written++}catch(e){console.error(`archive ${date} ${session}: ${e.message}`)}
  }
  await fs.writeFile('private-market/archive/index.json',JSON.stringify({updatedAt:generatedAt,items:[...items.values()].sort((a,b)=>b.key.localeCompare(a.key))}));
+ const publicFiles=(await fs.readdir('public/data/reports').catch(()=>[])).filter(f=>/^\d{4}-\d{2}-\d{2}-(pre|post)\.json$/.test(f));
+ const publicItems=[...items.values()].filter(i=>publicFiles.includes(`${i.date}-${i.session}.json`)).map(({key,date,session,generatedAt,candidates,observed})=>({key,date,session,generatedAt,candidates,observed})).sort((a,b)=>b.key.localeCompare(a.key));
+ await fs.writeFile('public/data/reports/index.json',JSON.stringify({updatedAt:generatedAt,items:publicItems}));
  console.log(`Report archive: wrote ${written}, total ${items.size}`);
 }
 console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}; observed drivers=${report.thesis?.drivers.filter(d=>d.status==="observed").map(d=>`${d.id}(${d.sectorIds.length}s/${d.candidateSymbols.length}c)`).join(",")||"none"}`);

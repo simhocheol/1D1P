@@ -337,3 +337,23 @@ html.dark .service-header nav a:hover{color:#ECEDEE}
 .report-status.is-error{background:#2b0c12}.report-status.is-error .report-status-dot{background:#f31260}
 .report-status.is-ok .report-status-dot{background:#17c964}
 @keyframes status-pulse{50%{opacity:.3}}
+/* Flat driver art on a dark tile */
+.driver-card .driver-art,.driver-modal .driver-art{background:#18181B;border:1px solid #27272A;border-radius:12px}
+.driver-card .driver-art svg{padding:6px}
+.driver-card:not(.observed) .driver-art{filter:grayscale(1);opacity:.6}
+.driver-modal-head .driver-art{--layer:#A1A1AA;width:56px;height:56px;flex:none}.driver-modal-head .driver-art.layer-macro{--layer:#2DD4BF}.driver-modal-head .driver-art.layer-industry{--layer:#F472B6}.driver-modal-head .driver-art.layer-company{--layer:#FBBF24}
+.driver-modal{max-width:480px}.driver-modal-head{display:flex;gap:14px;align-items:center}
+.driver-modal-status{display:inline-block;margin-top:4px;font-size:12px;color:#A1A1AA}.driver-modal-status.observed{color:#45D483}
+.driver-modal h4{font-size:13px;color:#A1A1AA;margin:0 0 6px;font-weight:600}
+.driver-modal p{font-size:14px;line-height:1.7;color:#E4E4E7;margin:0 0 12px}
+.driver-modal-summary,.driver-modal-plain{background:#18181B;border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.driver-modal-fact{color:#FAFAFA;font-weight:600}
+.driver-modal-summary ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:13px;color:#A1A1AA}.driver-modal-summary b{color:#FAFAFA;font-weight:600}
+.driver-modal-more{font-size:13px;margin-bottom:12px;color:#D4D4D8}.driver-modal-more summary{cursor:pointer;color:#A1A1AA;margin-bottom:8px}
+.driver-modal-filter{width:100%;margin-bottom:8px}
+html.dark .reaction-point{width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;display:inline-block}
+html.dark .reaction-point.pre{background:#F5A524}html.dark .reaction-point.post{background:#338EF7}
+html.dark .reaction-cell:has(.reaction-point.pre + .reaction-point.post){gap:2px}
+html.dark .reaction-legend i.reaction-point{cursor:default;margin-right:4px}
+html.dark .reaction-legend i.legend-dot{position:static;display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}

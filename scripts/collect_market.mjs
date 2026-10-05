@@ -68,8 +68,9 @@ await fs.mkdir(new URL('../public/data/',import.meta.url),{recursive:true});
 await fs.writeFile(output,JSON.stringify(metadata,null,2)+'\n');
 await fs.mkdir('private-market',{recursive:true});
 let events=[];try{events=JSON.parse(await fs.readFile(new URL('../public/data/official-feed.json',import.meta.url),'utf8')).events||[]}catch{}
-let macro=null;try{macro=JSON.parse(await fs.readFile('private-market/macro.json','utf8'))}catch{}
-if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
+let macro=null,filings=null;try{macro=JSON.parse(await fs.readFile('private-market/macro.json','utf8'))}catch{}
+try{filings=JSON.parse(await fs.readFile('private-market/filings.json','utf8'))}catch{}
+if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 const report=buildSignalReport({assets,bars,news,events});
 console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);

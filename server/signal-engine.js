@@ -1,6 +1,7 @@
 import {association,summarize} from './market-metrics.js';
 import {buildDriverThesis} from './driver-thesis.js';
 import {macroSeries,macroSignal} from './macro-series.js';
+import {filingEvidence} from './edgar.js';
 const etDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}),etHour=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',hourCycle:'h23'});
 const dayCache=new Map();
 const day=t=>{let d=dayCache.get(t);if(d===undefined){d=etDate.format(new Date(t));if(dayCache.size>200000)dayCache.clear();dayCache.set(t,d)}return d};
@@ -30,7 +31,7 @@ function inReactionWindow(t,date,previousDate){
  if(!previousDate)return false;
  return d>previousDate&&d<date||d===previousDate&&hour>=16;
 }
-export function buildSignalReport({assets=[],bars={},news={},events=[],macro=null,date}={}){
+export function buildSignalReport({assets=[],bars={},news={},events=[],macro=null,filings=null,date}={}){
  const latest=bars.SPY?.at(-1)?.t;const asOf=date||(latest?day(latest):null);
  if(!asOf)return {date:null,drivers:[],sectors:[],stocks:[],status:'missing_data'};
  const rows=Object.fromEntries(Object.entries(bars).map(([s,b])=>[s,b.filter(v=>day(v.t)<=asOf).sort((a,b)=>Date.parse(a.t)-Date.parse(b.t))]));
@@ -65,7 +66,9 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],macro=nul
  const windowNews=Object.fromEntries(assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).map(a=>[a.symbol,(news[a.symbol]||[]).filter(e=>inReactionWindow(e.publishedAt,asOf,rows[a.symbol]?.at(-2)?.t?day(rows[a.symbol].at(-2).t):null))]));
  const prevSpy=rows.SPY?.at(-2)?.t?day(rows.SPY.at(-2).t):null;
  report.macro=macro?.series?macroSeries.map(s=>macroSignal(s,macro.series[s.id],asOf,t=>inReactionWindow(t,asOf,prevSpy))).filter(Boolean):[];
- report.thesis=buildDriverThesis({report,rows,windowNews});
+ const windowFilings={};for(const f of filings?.filings||[]){if(!assets.some(a=>a.symbol===f.symbol))continue;const prevDay=rows[f.symbol]?.at(-2)?.t?day(rows[f.symbol].at(-2).t):prevSpy;if(inReactionWindow(f.acceptedAt,asOf,prevDay))(windowFilings[f.symbol]??=[]).push(...filingEvidence(f))}
+ report.filingCount=Object.values(windowFilings).flat().length;
+ report.thesis=buildDriverThesis({report,rows,windowNews,windowFilings});
  // Charts are only rendered for candidates; keep the response small.
  for(const s of report.stocks)delete s.chart;
  return report;

@@ -53,10 +53,13 @@ function companyDirection(title, id) {
  return up === down ? 0 : up ? 1 : -1;
 }
 
-export function buildDriverThesis({report, rows, windowNews}) {
+export function buildDriverThesis({report, rows, windowNews, windowFilings = {}}) {
+ // Driver-level evidence only from companies that also moved abnormally; routine filings elsewhere are not observations.
+ const moved = new Set(report.stocks.map(s => s.symbol));
+ const filings = Object.values(windowFilings).flat().filter(f => moved.has(f.symbol));
  const observations = unique([...report.events, ...Object.values(windowNews).flat()].filter(safe));
  const drivers = taxonomy.map(d => {
-  const evidence = observations.filter(e => topics[d.id].test(e.title));
+  const evidence = [...filings.filter(f => f.driver === d.id), ...observations.filter(e => topics[d.id].test(e.title))];
   const proxySymbol = {rates:'TLT', cost:'USO'}[d.id];
   const proxy = report.drivers.find(p => p.symbol === proxySymbol);
   const macro = (report.macro || []).filter(m => m.driver === d.id);
@@ -79,6 +82,14 @@ export function buildDriverThesis({report, rows, windowNews}) {
       exposure, sectorExposure:{correlation:sectorExposure.correlation,samples:sectorExposure.samples}, evidence:[],
       caution:'시장 공통 요인도 상관관계를 만들 수 있습니다. 단일 변수 상관은 원인이나 영향 기여도를 입증하지 않습니다.'});
     }
+   }
+   const filed = (windowFilings[stock.symbol] || []).filter(f => f.driver === driver.id);
+   if (filed.length && (driver.layer === 'company' || driver.id === 'credit')) {
+    paths.push({driverId:driver.id,scope:'company',basis:'SEC 공시·가격 반응 동시 발생',evidence:filed,
+     reason:`${stock.symbol}이 반응 구간에 ${[...new Set(filed.map(f => `${f.form}${f.item ? ` Item ${f.item}` : ''}(${f.label})`))].join(', ')}를 공시했고 당일 ${fmt(stock.change)} 움직였습니다. ${stock.reasons.join(', ')}도 충족했습니다.`,
+     transmission:`${driver.name} 관련 공시 → ${stock.sector} 내 해당 기업 → 개별 주가 반응`,
+     caution:'공시 항목은 사건의 종류만 알려 주며 호재·악재 방향을 판정하지 않습니다. 원문의 수치와 시장 기대치를 확인해야 합니다.'});
+    continue;
    }
    if (driver.layer !== 'company') continue;
    const evidence = (windowNews[stock.symbol] || []).filter(e => safe(e) && mentionsCompany(e.title, stock) && topics[driver.id].test(e.title));

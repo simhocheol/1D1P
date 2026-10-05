@@ -260,3 +260,37 @@ html.dark .research-heading h1{margin:0}
 .candle-legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:9px;color:var(--muted)}
 .candle-legend i{display:inline-block;width:8px;height:2px;margin-right:4px;vertical-align:middle}.candle-legend b{color:#ECEDEE;font-weight:600}
 .stock-hover{width:340px}
+
+/* Navbar: 토스증권처럼 낮고 텍스트 중심 */
+html.dark .service-header{height:52px;gap:28px;padding-block:0}
+html.dark .service-brand{font-size:19px}html.dark .service-brand span{font-size:10px}
+html.dark .service-header nav{gap:22px}
+html.dark .service-header nav a{padding:0;border-radius:0;background:none;font-size:14px;font-weight:500;color:#8B8B93}
+html.dark .service-header nav a[aria-current]{background:none;color:#FFFFFF;font-weight:700;padding:0}
+html.dark .service-header nav a:hover{color:#ECEDEE}
+@media(max-width:600px){html.dark .service-header{height:auto;min-height:0;padding:10px 16px;gap:8px}html.dark .service-header nav{gap:14px;justify-content:flex-start}html.dark .service-header nav a{font-size:13px}}
+
+/* 리포트 발행 게이지 */
+.publish-gauges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:24px}
+.publish-gauge{display:flex;gap:14px;align-items:center;padding:16px 20px;border-radius:16px;background:#18181B;border:1px solid #3F3F46}
+.publish-icon{display:flex;align-items:center;justify-content:center;flex:0 0 40px;height:40px;border-radius:12px}
+.publish-gauge.am .publish-icon{background:#2E1F05;color:#FBBF24}.publish-gauge.pm .publish-icon{background:#1F0A33;color:#C4B5FD}
+.publish-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.publish-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.publish-top strong{font-size:14px}.publish-top span{font-size:11px;color:var(--muted)}.publish-top em{margin-left:auto;font-style:normal;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.publish-track{height:8px;border-radius:999px;background:#27272A;overflow:hidden}
+.publish-track i{display:block;height:100%;border-radius:999px;transition:width .6s}
+.publish-gauge.am .publish-track i{background:linear-gradient(90deg,#F59E0B,#FDE68A)}.publish-gauge.pm .publish-track i{background:linear-gradient(90deg,#7C3AED,#C4B5FD)}
+.publish-body small{font-size:11px;color:var(--muted)}
+@media(max-width:800px){.publish-gauges{grid-template-columns:minmax(0,1fr)}}
+
+/* 섹터 히트맵 */
+.sector-heatmap{margin:20px 0 28px;padding:20px;border-radius:16px;background:#18181B;border:1px solid #3F3F46}
+.heatmap-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}.heatmap-head h2{font-size:17px;font-weight:700;margin:0}.heatmap-head>span{font-size:11px;color:var(--muted)}
+.heatmap-scale{margin-left:auto;display:flex;align-items:center;gap:6px}.heatmap-scale i{display:inline-block;width:18px;height:10px;border-radius:3px}
+.heatmap-canvas{position:relative;width:100%;background:#000;border-radius:10px;overflow:hidden}
+.heatmap-sector{position:absolute;box-shadow:inset 0 0 0 1px #000}
+.heatmap-sector-name{position:absolute;left:6px;top:2px;font-size:11px;font-weight:600;color:#ECEDEE;white-space:nowrap;overflow:hidden;max-width:calc(100% - 12px);text-overflow:ellipsis}.heatmap-sector-name b{font-weight:600;margin-left:4px}
+.heatmap-tile{position:absolute;border:0;padding:2px;box-shadow:inset 0 0 0 1px #000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:default;font:inherit;overflow:hidden}
+.heatmap-tile:hover,.heatmap-tile:focus-visible{outline:2px solid #fff;outline-offset:-2px;z-index:2}
+.heatmap-tile strong{font-size:10px;line-height:1;letter-spacing:-.2px}.heatmap-tile small{font-size:9px;opacity:.9}
+@media(max-width:700px){.heatmap-canvas{aspect-ratio:3/4!important}}

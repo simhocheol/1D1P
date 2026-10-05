@@ -74,7 +74,7 @@ try{filings=JSON.parse(await fs.readFile('private-market/filings.json','utf8'))}
 let classified=null;
 if(process.env.OPENAI_API_KEY){try{classified=await classifyEvidence({news,filings,key:process.env.OPENAI_API_KEY,ua:process.env.SEC_CONTACT_EMAIL?`1D1P market research ${process.env.SEC_CONTACT_EMAIL}`:null});console.log(`Classified ${Object.keys(classified.items).length}/${classified.inputs} items with ${classified.model}${classified.errors.length?` · ${classified.errors.length} batch errors`:''}`)}catch(e){console.error(`classification skipped: ${e.message}`)}}
 if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,classified,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
-const report=buildSignalReport({assets,bars,news,events});
-console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}`);
+const report=buildSignalReport({assets,bars,news,events,macro,filings,classified});
+console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}; observed drivers=${report.thesis?.drivers.filter(d=>d.status==="observed").map(d=>`${d.id}(${d.sectorIds.length}s/${d.candidateSymbols.length}c)`).join(",")||"none"}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);
 if(metadata.status!=='ok'||sourceStatus!=='ok')process.exitCode=1;

@@ -68,7 +68,7 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],macro=nul
  report.macro=macro?.series?macroSeries.map(s=>macroSignal(s,macro.series[s.id],asOf,t=>inReactionWindow(t,asOf,prevSpy))).filter(Boolean):[];
  const windowFilings={};for(const f of filings?.filings||[]){if(!assets.some(a=>a.symbol===f.symbol))continue;const prevDay=rows[f.symbol]?.at(-2)?.t?day(rows[f.symbol].at(-2).t):prevSpy;if(inReactionWindow(f.acceptedAt,asOf,prevDay))(windowFilings[f.symbol]??=[]).push(...filingEvidence(f))}
  report.filingCount=Object.values(windowFilings).flat().length;
- report.thesis=buildDriverThesis({report,rows,windowNews,windowFilings,classified});
+ report.thesis=buildDriverThesis({report,rows,windowNews,windowFilings,classified,macro,asOf});
  // Charts are only rendered for candidates; keep the response small.
  for(const s of report.stocks)delete s.chart;
  return report;

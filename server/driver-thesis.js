@@ -1,5 +1,6 @@
 import {drivers as taxonomy} from '../src/framework.js';
 import {association} from './market-metrics.js';
+import {buildMacroLinks} from './macro-links.js';
 
 const topics = {
  demand: /\b(employment|payrolls|retail sales|gdp|consumer spending|unemployment)\b/i,
@@ -53,7 +54,8 @@ function companyDirection(title, id) {
  return up === down ? 0 : up ? 1 : -1;
 }
 
-export function buildDriverThesis({report, rows, windowNews, windowFilings = {}, classified = null}) {
+export function buildDriverThesis({report, rows, windowNews, windowFilings = {}, classified = null, macro = null, asOf = report.date}) {
+ const links = buildMacroLinks({report, rows, macro, asOf});
  // OpenAI classification (validated quotes) replaces title regexes for items it has checked.
  const cls = classified?.items || {}, checked = new Set(classified?.checked || []);
  const tagged = (e, id) => (cls[e.url] || []).find(c => c.driverId === id);
@@ -73,7 +75,7 @@ export function buildDriverThesis({report, rows, windowNews, windowFilings = {},
  });
  const candidates = report.stocks.flatMap(stock => {
   const sector = report.sectors.find(s => s.name === stock.sector);
-  const paths = [];
+  const paths = [...(links.stockPaths[stock.symbol] || [])];
   for (const driver of drivers) {
    const proxy = driver.proxy;
    const sectorExposure = sector?.candidates.find(c => c.symbol === proxy?.symbol);
@@ -113,10 +115,11 @@ export function buildDriverThesis({report, rows, windowNews, windowFilings = {},
  });
  const sectors = report.sectors.flatMap(sector => {
   const members = candidates.filter(c => c.sector === sector.name);
-  const sectorDrivers = drivers.filter(d => d.proxy?.active && channels[d.id]?.[sector.name] && sector.candidates.some(c => c.symbol === d.proxy.symbol && Math.sign(c.beta) === channels[d.id][sector.name][0])).map(d => d.id);
+  const macroLinks = links.sectorLinks.filter(l => l.sector === sector.name);
+  const sectorDrivers = [...new Set([...drivers.filter(d => d.proxy?.active && channels[d.id]?.[sector.name] && sector.candidates.some(c => c.symbol === d.proxy.symbol && Math.sign(c.beta) === channels[d.id][sector.name][0])).map(d => d.id), ...macroLinks.map(l => l.driverId)])];
   const companyDrivers = [...new Set(members.flatMap(c => c.paths.filter(p => p.scope === 'company').map(p => p.driverId)))];
   if (!sectorDrivers.length && !companyDrivers.length) return [];
-  const explanations=sectorDrivers.map(id=>({driverId:id,text:channels[id][sector.name][1],correlation:sector.candidates.find(c=>c.symbol===drivers.find(d=>d.id===id).proxy.symbol).correlation}));
+  const explanations=[...sectorDrivers.filter(id=>channels[id]?.[sector.name]&&drivers.find(d=>d.id===id).proxy?.active).map(id=>({driverId:id,text:channels[id][sector.name][1],correlation:sector.candidates.find(c=>c.symbol===drivers.find(d=>d.id===id).proxy.symbol)?.correlation??null})),...macroLinks.map(l=>({driverId:l.driverId,text:`${l.seriesLabel}: ${l.text}${l.kind==='release'?' (발표일 반응 · 예상치 대비 아님)':''}`,correlation:l.correlation}))];
   return [{...sector,driverIds:[...new Set([...sectorDrivers,...companyDrivers])],sectorDriverIds:sectorDrivers,companyDriverIds:companyDrivers,explanations,candidateSymbols:members.map(c => c.symbol)}];
  });
  for (const driver of drivers) {
@@ -125,5 +128,5 @@ export function buildDriverThesis({report, rows, windowNews, windowFilings = {},
  }
  return {version:2,drivers,sectors,candidates,unexplainedCount:report.stocks.length-candidates.length,
   newsSymbols:Object.keys(windowNews).filter(s => windowNews[s].length).length,
-  rules:'1% 이상 변동 + (2σ 이상 / 거래량 2배 / 섹터 대비 1.5%p) + Driver 연결 조건. 거시 연결은 사전 정의된 경제적 경로와 섹터·종목 각각의 상관 방향이 모두 일치해야 합니다. 상관 표본 30~60개, |r| ≥ 0.35, 관측 당일 제외. 기업 뉴스는 제목의 명시적 호재·악재와 가격 방향이 일치할 때만 후보화.'};
+  rules:'1% 이상 변동 + (2σ 이상 / 거래량 2배 / 섹터 대비 1.5%p) + Driver 연결 조건. 거시 연결은 사전 정의된 경제적 경로(대리지표·FRED 시리즈별)와 섹터·종목 각각의 상관 방향, 당일 반응 방향이 모두 일치해야 합니다(FRED 섹터 |r| ≥ 0.3, 종목 |r| ≥ 0.35). 상관 표본 30~60개, |r| ≥ 0.35, 관측 당일 제외. 기업 뉴스는 제목의 명시적 호재·악재와 가격 방향이 일치할 때만 후보화.'};
 }

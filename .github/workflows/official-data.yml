@@ -68,6 +68,8 @@ jobs:
           ALPACA_CREDENTIALS_JSON: ${{ secrets.ALPACA_CREDENTIALS_JSON }}
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
         run: node scripts/collect_market.mjs
       - name: Collect S&P 500 earnings calendar
         if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'

@@ -31,7 +31,7 @@ function inReactionWindow(t,date,previousDate){
  if(!previousDate)return false;
  return d>previousDate&&d<date||d===previousDate&&hour>=16;
 }
-export function buildSignalReport({assets=[],bars={},news={},events=[],macro=null,filings=null,date}={}){
+export function buildSignalReport({assets=[],bars={},news={},events=[],macro=null,filings=null,classified=null,date}={}){
  const latest=bars.SPY?.at(-1)?.t;const asOf=date||(latest?day(latest):null);
  if(!asOf)return {date:null,drivers:[],sectors:[],stocks:[],status:'missing_data'};
  const rows=Object.fromEntries(Object.entries(bars).map(([s,b])=>[s,b.filter(v=>day(v.t)<=asOf).sort((a,b)=>Date.parse(a.t)-Date.parse(b.t))]));
@@ -68,7 +68,7 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],macro=nul
  report.macro=macro?.series?macroSeries.map(s=>macroSignal(s,macro.series[s.id],asOf,t=>inReactionWindow(t,asOf,prevSpy))).filter(Boolean):[];
  const windowFilings={};for(const f of filings?.filings||[]){if(!assets.some(a=>a.symbol===f.symbol))continue;const prevDay=rows[f.symbol]?.at(-2)?.t?day(rows[f.symbol].at(-2).t):prevSpy;if(inReactionWindow(f.acceptedAt,asOf,prevDay))(windowFilings[f.symbol]??=[]).push(...filingEvidence(f))}
  report.filingCount=Object.values(windowFilings).flat().length;
- report.thesis=buildDriverThesis({report,rows,windowNews,windowFilings});
+ report.thesis=buildDriverThesis({report,rows,windowNews,windowFilings,classified});
  // Charts are only rendered for candidates; keep the response small.
  for(const s of report.stocks)delete s.chart;
  return report;

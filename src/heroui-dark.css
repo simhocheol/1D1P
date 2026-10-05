@@ -302,3 +302,4 @@ html.dark .service-header nav a:hover{color:#ECEDEE}
 .macro-list a{display:flex;align-items:center;gap:4px;color:#ECEDEE;font-size:12px;font-weight:600}.macro-list a small{color:var(--muted);font-weight:400}
 .macro-list span{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}.macro-list span b{font-size:12px;margin-left:4px}
 .macro-list li>small{font-size:10px;color:var(--muted)}
+.evidence-quote{display:block;margin-top:6px;padding:6px 10px;border-left:2px solid #338EF7;background:#001731;color:#D4D4D8;font-size:11px;line-height:1.6;quotes:none}

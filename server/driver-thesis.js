@@ -53,13 +53,18 @@ function companyDirection(title, id) {
  return up === down ? 0 : up ? 1 : -1;
 }
 
-export function buildDriverThesis({report, rows, windowNews, windowFilings = {}}) {
+export function buildDriverThesis({report, rows, windowNews, windowFilings = {}, classified = null}) {
+ // OpenAI classification (validated quotes) replaces title regexes for items it has checked.
+ const cls = classified?.items || {}, checked = new Set(classified?.checked || []);
+ const tagged = (e, id) => (cls[e.url] || []).find(c => c.driverId === id);
+ const matches = (e, id) => checked.has(e.url) ? !!tagged(e, id) : topics[id].test(e.title);
+ const withTag = (e, id) => { const t = tagged(e, id); return t ? {...e, quote:t.quote, direction:t.direction, classified:true} : e; };
  // Driver-level evidence only from companies that also moved abnormally; routine filings elsewhere are not observations.
  const moved = new Set(report.stocks.map(s => s.symbol));
  const filings = Object.values(windowFilings).flat().filter(f => moved.has(f.symbol));
  const observations = unique([...report.events, ...Object.values(windowNews).flat()].filter(safe));
  const drivers = taxonomy.map(d => {
-  const evidence = [...filings.filter(f => f.driver === d.id), ...observations.filter(e => topics[d.id].test(e.title))];
+  const evidence = [...filings.filter(f => f.driver === d.id), ...observations.filter(e => matches(e, d.id)).map(e => withTag(e, d.id))];
   const proxySymbol = {rates:'TLT', cost:'USO'}[d.id];
   const proxy = report.drivers.find(p => p.symbol === proxySymbol);
   const macro = (report.macro || []).filter(m => m.driver === d.id);
@@ -83,17 +88,19 @@ export function buildDriverThesis({report, rows, windowNews, windowFilings = {}}
       caution:'시장 공통 요인도 상관관계를 만들 수 있습니다. 단일 변수 상관은 원인이나 영향 기여도를 입증하지 않습니다.'});
     }
    }
-   const filed = (windowFilings[stock.symbol] || []).filter(f => f.driver === driver.id);
+   const filedAll = (windowFilings[stock.symbol] || []).filter(f => f.driver === driver.id).map(f => withTag(f, driver.id));
+   const filed = filedAll.filter(f => !f.classified || f.direction === 0 || f.direction === Math.sign(stock.change));
+   const confirmed = filed.some(f => f.classified && f.direction === Math.sign(stock.change));
    if (filed.length && (driver.layer === 'company' || driver.id === 'credit')) {
-    paths.push({driverId:driver.id,scope:'company',basis:'SEC 공시·가격 반응 동시 발생',evidence:filed,
+    paths.push({driverId:driver.id,scope:'company',basis:confirmed?'SEC 공시 원문 분류·가격 방향 일치':'SEC 공시·가격 반응 동시 발생',evidence:filed,
      reason:`${stock.symbol}이 반응 구간에 ${[...new Set(filed.map(f => `${f.form}${f.item ? ` Item ${f.item}` : ''}(${f.label})`))].join(', ')}를 공시했고 당일 ${fmt(stock.change)} 움직였습니다. ${stock.reasons.join(', ')}도 충족했습니다.`,
      transmission:`${driver.name} 관련 공시 → ${stock.sector} 내 해당 기업 → 개별 주가 반응`,
-     caution:'공시 항목은 사건의 종류만 알려 주며 호재·악재 방향을 판정하지 않습니다. 원문의 수치와 시장 기대치를 확인해야 합니다.'});
+     caution:confirmed?'원문 분류는 자동 판정입니다. 인용 문장과 수치를 직접 확인하고, 시장 기대치 대비 여부는 별도로 확인해야 합니다.':'공시 항목은 사건의 종류만 알려 주며 호재·악재 방향을 판정하지 않습니다. 원문의 수치와 시장 기대치를 확인해야 합니다.'});
     continue;
    }
    if (driver.layer !== 'company') continue;
-   const evidence = (windowNews[stock.symbol] || []).filter(e => safe(e) && mentionsCompany(e.title, stock) && topics[driver.id].test(e.title));
-   const directional = evidence.map(e => ({...e, direction:companyDirection(e.title,driver.id)})).filter(e => e.direction);
+   const evidence = (windowNews[stock.symbol] || []).filter(e => safe(e) && (checked.has(e.url) ? !!tagged(e, driver.id) : mentionsCompany(e.title, stock) && topics[driver.id].test(e.title)));
+   const directional = evidence.map(e => checked.has(e.url) ? withTag(e, driver.id) : {...e, direction:companyDirection(e.title,driver.id)}).filter(e => e.direction);
    const signs = new Set(directional.map(e => e.direction));
    if (signs.size === 1 && signs.has(Math.sign(stock.change))) {
     paths.push({driverId:driver.id,scope:'company',basis:'기업 뉴스·가격 방향 일치',evidence:directional,

@@ -3,6 +3,7 @@ import {parse} from 'csv-parse/sync';
 import {summarize,association} from '../server/market-metrics.js';
 import {seal} from '../server/market-vault.js';
 import {buildSignalReport} from '../server/signal-engine.js';
+import {classifyEvidence} from './lib/classify-evidence.mjs';
 const source='https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv';
 const output=new URL('../public/data/universe.json',import.meta.url);
 const checkedAt=new Date().toISOString();
@@ -59,7 +60,7 @@ if(key&&secret)for(let i=0;i<assets.length;i+=50){
   url.search=new URLSearchParams({symbols:symbols.join(','),start:new Date(Date.now()-7*86400000).toISOString(),limit:'50',sort:'desc',include_content:'false'}).toString();
   const result=await (await request(url,{'APCA-API-KEY-ID':key,'APCA-API-SECRET-KEY':secret})).json();
   if(!Array.isArray(result.news))throw Error();
-  for(const item of result.news){let url;try{url=new URL(item.url);if(url.protocol!=='https:')continue}catch{continue}for(const symbol of item.symbols||[])if(symbols.includes(symbol)){(news[symbol]??=[]).push({title:item.headline,url:url.href,source:item.source,publishedAt:item.created_at})}}
+  for(const item of result.news){let url;try{url=new URL(item.url);if(url.protocol!=='https:')continue}catch{continue}for(const symbol of item.symbols||[])if(symbols.includes(symbol)){(news[symbol]??=[]).push({title:item.headline,summary:(item.summary||'').slice(0,600),url:url.href,source:item.source,publishedAt:item.created_at})}}
  }catch{newsErrors.push(...symbols)}
 }
 const coverage=assets.filter(s=>metrics[s.symbol]).length;
@@ -70,7 +71,9 @@ await fs.mkdir('private-market',{recursive:true});
 let events=[];try{events=JSON.parse(await fs.readFile(new URL('../public/data/official-feed.json',import.meta.url),'utf8')).events||[]}catch{}
 let macro=null,filings=null;try{macro=JSON.parse(await fs.readFile('private-market/macro.json','utf8'))}catch{}
 try{filings=JSON.parse(await fs.readFile('private-market/filings.json','utf8'))}catch{}
-if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
+let classified=null;
+if(process.env.OPENAI_API_KEY){try{classified=await classifyEvidence({news,filings,key:process.env.OPENAI_API_KEY,ua:process.env.SEC_CONTACT_EMAIL?`1D1P market research ${process.env.SEC_CONTACT_EMAIL}`:null});console.log(`Classified ${Object.keys(classified.items).length}/${classified.inputs} items with ${classified.model}${classified.errors.length?` · ${classified.errors.length} batch errors`:''}`)}catch(e){console.error(`classification skipped: ${e.message}`)}}
+if(secret)await fs.writeFile('private-market/market.enc',seal({...metadata,metrics,bars,news,newsErrors,events,macro,filings,classified,newsScope:'last 7 days, up to 50 recent articles per 50-symbol batch; not exhaustive'},secret));
 const report=buildSignalReport({assets,bars,news,events});
 console.log(`Signal report ${report.date}; price anomalies=${report.stocks.length}; Driver candidates=${report.thesis?.candidates.length||0}; connected sectors=${report.thesis?.sectors.length||0}`);
 console.log(`Market universe ${assets.length}; data coverage ${coverage}; failed ${errors.length}; feed IEX; private storage only`);

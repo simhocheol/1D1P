@@ -40,7 +40,7 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],macro=nul
  if(!asOf)return {date:null,session,drivers:[],sectors:[],stocks:[],status:'missing_data'};
  // Pre-market: previous closes plus a synthetic bar at the publication cutoff (09:15 ET), compared with the prior close.
  const snap=pre?premarket?.[asOf]:null;
- if(pre&&!snap)return {date:asOf,session,drivers:[],sectors:[],stocks:[],status:'missing_data'};
+ if(pre&&!snap)return {date:asOf,session,drivers:[],sectors:[],stocks:[],status:'missing_premarket',premarketDates:Object.keys(premarket||{}).sort()};
  const cutoffMs=snap?Date.parse(snap.cutoff):null;
  // Non-overlapping evidence windows: pre = prior close 16:00 → 09:15 ET, post = 09:15 → 16:00 ET on the report date.
  const [ay,am,ad]=asOf.split('-').map(Number),publishMs=etInstant(ay,am,ad,9,15).getTime(),closeMs=etInstant(ay,am,ad,16,0).getTime();

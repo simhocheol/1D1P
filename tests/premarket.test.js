@@ -23,4 +23,4 @@ test('post-market report uses only 09:15–16:00 evidence and reports the regula
  assert.deepEqual(a.evidence.map(e=>e.title),['after publish']);
  assert.ok(Math.abs(a.intraday-((1.05/1.03-1)*100))<1e-6);
 });
-test('missing pre-market snapshot is reported as missing data',()=>{assert.equal(buildSignalReport({assets,bars,session:'pre',date:asOf}).status,'missing_data')});
+test('missing pre-market snapshot is reported as missing data',()=>{assert.equal(buildSignalReport({assets,bars,session:'pre',date:asOf}).status,'missing_premarket')});

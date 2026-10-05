@@ -30,6 +30,7 @@ export default function ReportView({report,limit,onMore}){
  const [driver,setDriver]=useState(''),[sector,setSector]=useState(''),[query,setQuery]=useState(''),[direction,setDirection]=useState('all');
  const [open,setOpen]=useState('');
  const thesis=report.thesis;
+ if(report.status==='missing_premarket')return <div className="report-empty"><strong>{report.date} 장 시작 전 가격이 아직 수집되지 않았습니다</strong><p>{report.premarketDates?.length?`수집된 장 시작 전 날짜: ${report.premarketDates.join(', ')}`:'장 시작 전 가격 수집이 포함된 자동 수집이 아직 끝나지 않았습니다. 수집 완료 후 다시 조회해 주세요.'}</p></div>;
  if(report.status==='missing_data')return <div className="report-empty"><strong>분석할 거래일 데이터가 없습니다</strong><p>수집 상태와 조회 날짜를 확인해 주세요.</p></div>;
  if(!thesis)return <Legacy report={report}/>;
  const observed=thesis.drivers.filter(d=>d.status==='observed');

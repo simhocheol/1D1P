@@ -1,6 +1,8 @@
 import {association,summarize} from './market-metrics.js';
 import {buildDriverThesis} from './driver-thesis.js';
-const day=t=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date(t));
+const etDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}),etHour=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',hourCycle:'h23'});
+const dayCache=new Map();
+const day=t=>{let d=dayCache.get(t);if(d===undefined){d=etDate.format(new Date(t));if(dayCache.size>200000)dayCache.clear();dayCache.set(t,d)}return d};
 const sectorETF={'Information Technology':'XLK',Financials:'XLF',Energy:'XLE','Health Care':'XLV','Consumer Discretionary':'XLY','Consumer Staples':'XLP',Industrials:'XLI',Materials:'XLB',Utilities:'XLU','Real Estate':'XLRE','Communication Services':'XLC'};
 const proxies={SPY:'시장 위험선호',QQQ:'성장주 기대',TLT:'장기 국채 가격 · 금리 역방향 대리',GLD:'금 가격',USO:'원유 ETF 가격'};
 function movement(rows){
@@ -14,14 +16,15 @@ const r2=v=>Math.round(v*100)/100;
 // Daily candles for the calendar month before asOf, with 20/50/60/120-day moving averages.
 export function dailyChart(rows,asOf){
  const [y,m,d]=asOf.split('-').map(Number),from=new Date(Date.UTC(y,m-2,d)).toISOString().slice(0,10);
- const ma=n=>rows.map((_,i)=>i+1>=n?r2(rows.slice(i+1-n,i+1).reduce((s,b)=>s+b.c,0)/n):null);
+ const sum=[0];for(const b of rows)sum.push(sum.at(-1)+b.c);
+ const ma=n=>rows.map((_,i)=>i+1>=n?r2((sum[i+1]-sum[i+1-n])/n):null);
  const all={20:ma(20),50:ma(50),60:ma(60),120:ma(120)},start=rows.findIndex(b=>day(b.t)>from);
  if(start<0)return null;
  return {from,to:asOf,bars:rows.slice(start).map(b=>({d:day(b.t),o:r2(b.o),h:r2(b.h),l:r2(b.l),c:r2(b.c)})),ma:Object.fromEntries(Object.entries(all).map(([k,v])=>[k,v.slice(start)]))};
 }
 function inReactionWindow(t,date,previousDate){
  if(!Number.isFinite(Date.parse(t)))return false;
- const d=day(t),hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',hourCycle:'h23'}).format(new Date(t)));
+ const d=day(t),hour=Number(etHour.format(new Date(t)));
  if(d===date)return hour<16;
  if(!previousDate)return false;
  return d>previousDate&&d<date||d===previousDate&&hour>=16;
@@ -60,5 +63,7 @@ export function buildSignalReport({assets=[],bars={},news={},events=[],date}={})
  const report={date:asOf,status:valid('SPY')?'ok':'missing_benchmark',drivers,sectors,stocks,events:events.filter(e=>inReactionWindow(e.publishedAt,asOf,rows.SPY?.at(-2)?.t?day(rows.SPY.at(-2).t):null)),coverage:assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).length,total:assets.filter(a=>a.kind==='stock').length,method:'rules-v2; driver-aligned candidates, not proven causation or trading recommendations'};
  const windowNews=Object.fromEntries(assets.filter(a=>a.kind==='stock'&&valid(a.symbol)).map(a=>[a.symbol,(news[a.symbol]||[]).filter(e=>inReactionWindow(e.publishedAt,asOf,rows[a.symbol]?.at(-2)?.t?day(rows[a.symbol].at(-2).t):null))]));
  report.thesis=buildDriverThesis({report,rows,windowNews});
+ // Charts are only rendered for candidates; keep the response small.
+ for(const s of report.stocks)delete s.chart;
  return report;
 }

@@ -179,12 +179,39 @@ html.dark .candidate-identity{flex-direction:row;align-items:center;gap:12px;pos
 @media(max-width:560px){.driver-grid{grid-template-columns:minmax(0,1fr)}.stock-hover{display:none!important}.stock-logo{width:30px;height:30px}html.dark .reaction-row{grid-template-columns:150px repeat(var(--days),minmax(0,1fr))}}
 #daily-candidates{position:relative;z-index:5}
 
-/* Driver 카드 상태 연출: 미관측은 흑백, 관측은 색 배경 */
-.driver-card.unknown,.driver-card.quiet{filter:grayscale(1);opacity:.55;background:#0A0A0A}
+/* Driver 카드: 일러스트 썸네일 + 층 컬러 */
+.driver-card{--layer:#A1A1AA;--layer-soft:#27272A;padding:0;overflow:hidden;gap:0}
+.driver-card.layer-macro{--layer:#2DD4BF;--layer-soft:#0B2B2A}.driver-card.layer-industry{--layer:#F472B6;--layer-soft:#2E0F22}.driver-card.layer-company{--layer:#FBBF24;--layer-soft:#2E1F05}
+.driver-card>.driver-card-head,.driver-card>.driver-card-fact,.driver-card>.driver-card-foot{margin-inline:14px}
+.driver-card>.driver-card-head{margin-top:12px}.driver-card>.driver-card-fact{margin-top:8px}.driver-card>.driver-card-foot{margin-top:10px;margin-bottom:12px}
+.driver-art{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;background:var(--layer-soft);color:var(--layer);overflow:hidden}
+.driver-art img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.driver-card:hover .driver-art img{transform:scale(1.04)}
+.driver-card.unknown,.driver-card.quiet{filter:grayscale(1);opacity:.5;background:#0A0A0A}
+.driver-card.quiet{opacity:.65}
 .driver-card.unknown:hover,.driver-card.quiet:hover,.driver-card.unknown.is-open,.driver-card.quiet.is-open{opacity:.85}
-.driver-card.quiet{opacity:.7}
-.driver-card.observed{background:linear-gradient(160deg,#0F3D27 0%,#0A1F15 55%,#000 100%);border-color:#17C964;box-shadow:0 0 0 1px #17C96433,0 8px 24px -12px #17C96480}
+.driver-card.observed{border-color:var(--layer);background:#0F0F11;box-shadow:0 0 0 1px var(--layer)}
+.driver-card.observed .driver-card-name{color:#fff}
 .driver-card.observed .driver-card-fact{color:#ECEDEE;font-weight:600}
-.driver-card.observed .driver-card-foot{border-color:#17C96433;color:#A7F3C8}
-.driver-card.observed .chip{background:#17C964;color:#04210F;font-weight:700}
-.driver-card.observed.is-open{border-color:#338EF7;box-shadow:0 0 0 1px #338EF7}
+.driver-card.observed .driver-card-foot{border-color:#3F3F46}
+.driver-card.observed .chip{background:var(--layer);color:#0A0A0A;font-weight:700}
+.driver-card.is-open{box-shadow:0 0 0 2px #338EF7;border-color:#338EF7}
+.driver-card .driver-card-head .driver-icon{display:none}
+
+/* 보관된 리포트 사이드바 */
+.report-shell{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:1700px;margin-inline:auto}
+.report-archive{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:32px 16px 24px 24px;border-right:1px solid #27272A;background:#0A0A0A}
+.report-archive-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:13px;color:#ECEDEE}.report-archive-head span{margin-left:auto;font-size:11px;color:var(--muted);background:#27272A;border-radius:999px;padding:1px 8px}
+.report-archive ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.report-archive li{position:relative;border-radius:12px}
+.report-archive li>button:first-child{width:100%;display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 30px 10px 12px;border:0;border-radius:12px;background:none;color:#ECEDEE;font:inherit;cursor:pointer}
+.report-archive li>button:first-child:hover{background:#18181B}
+.report-archive li.is-active>button:first-child{background:#001731;box-shadow:inset 2px 0 #338EF7}
+.report-archive li strong{font-size:13px;font-variant-numeric:tabular-nums}.report-archive li span{font-size:11px;color:#D4D4D8}.report-archive li small{font-size:10px;color:var(--muted)}
+.report-archive-remove{position:absolute;right:6px;top:10px;display:none;border:0;background:none;color:var(--muted);cursor:pointer;padding:3px;border-radius:6px}
+.report-archive li:hover .report-archive-remove,.report-archive-remove:focus-visible{display:block}.report-archive-remove:hover{background:#27272A;color:#F54180}
+.report-archive>.fine{font-size:11px;color:var(--subtle);margin-top:14px}
+@media(max-width:900px){.report-shell{grid-template-columns:minmax(0,1fr)}.report-archive{position:static;height:auto;border-right:0;border-bottom:1px solid #27272A;padding:16px}.report-archive ul{flex-direction:row;overflow-x:auto}.report-archive li{flex:0 0 170px}.report-archive-remove{display:block}}
+.report-shell>*{min-width:0}
+.driver-art{width:100%;min-width:0}.driver-art img{display:block;max-width:100%;min-width:0}.driver-card{width:100%}
+.report-shell>.research-page{width:100%;margin-inline:0}

@@ -1,0 +1,36 @@
+name: Generate Driver thumbnails
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: OpenAI image model id
+        default: gpt-image-2.5
+      drivers:
+        description: Comma-separated Driver ids (empty = all 12)
+        default: ''
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate images
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          IMAGE_MODEL: ${{ inputs.model }}
+          DRIVER_IDS: ${{ inputs.drivers }}
+        run: node scripts/generate_driver_art.mjs
+      - name: Commit thumbnails
+        if: always()
+        run: |
+          git add public/drivers
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name simhocheol
+          git config user.email 42663762+simhocheol@users.noreply.github.com
+          git commit -m 'Update Driver thumbnails'
+          git pull --rebase origin main
+          git push origin HEAD:main

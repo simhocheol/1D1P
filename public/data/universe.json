@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-05T15:59:48.855Z",
+  "checkedAt": "2026-10-05T21:20:58.962Z",
   "source": "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
   "sourceStatus": "ok",
   "scope": "current S&P 500 constituents + curated ETF watch universe (not all ETFs)",
@@ -10,7 +10,7 @@
   "total": 532,
   "failedSymbols": [],
   "newsStatus": "ok",
-  "newsSymbols": 247,
+  "newsSymbols": 285,
   "newsFailedSymbols": [],
   "assets": [
     {

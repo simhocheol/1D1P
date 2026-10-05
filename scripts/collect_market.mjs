@@ -27,7 +27,7 @@ let key=process.env.ALPACA_API_KEY,secret=process.env.ALPACA_SECRET_KEY;
 if(process.env.ALPACA_CREDENTIALS_JSON){const bundle=JSON.parse(process.env.ALPACA_CREDENTIALS_JSON);key=bundle.apiKey;secret=bundle.secretKey}
 const bars={},errors=[];
 if(key&&secret){
- const end=new Date(Date.now()-20*60*1000),start=new Date(end.getTime()-180*86400000);
+ const end=new Date(Date.now()-20*60*1000),start=new Date(end.getTime()-260*86400000);
  // Exclude today's unfinished regular-session bar, including the premarket slot.
  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(end);
  const hour=Number(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',hourCycle:'h23'}).format(end));

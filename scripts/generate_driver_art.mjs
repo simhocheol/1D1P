@@ -28,13 +28,13 @@ const subject={
  margin:'an open wallet and a piggy bank with coins and a shrinking/expanding gap meter',
  capital:'a leather briefcase with stock certificates and a handshake emblem',
 };
-const style='Isometric flat vector illustration, bold clean outlines in the darkest shade of the palette (not pure black), cel-shaded with two tones per surface, monochromatic analogous color scheme harmonized with the background, a few small sparkles and motion lines in the lightest tint, playful editorial style like a modern fintech blog hero illustration. Wide panoramic banner composition: a single compact object group placed in the exact center, kept within the middle 40% of the image height and middle 45% of the width, with wide empty background on the left and right and above and below so the image can be cropped to a 12:5 strip. No text, no letters, no numbers, no logos.';
+const style='3D rendered app icon illustration. Rendering and texture reference: soft glossy plastic and matte clay materials with smooth rounded bevels, subtle fine ribbed or corrugated surface texture on flat faces, gentle studio lighting with soft gradients and specular highlights, soft ambient occlusion and a faint contact shadow, no outlines at all (edges defined only by light and shading). Keep the composition compact: one object group centered, filling about 70% of a square canvas, viewed from a three-quarter isometric angle. Transparent background. No text, no letters, no numbers, no logos.';
 await fs.mkdir(new URL('../public/drivers/',import.meta.url),{recursive:true});
 let failed=0;
 for(const d of drivers.filter(d=>!only.length||only.includes(d.id))){
- const prompt=`${style} Subject: ${subject[d.id]}, representing the economic concept "${d.definition}". Colors: ${palette[d.layer]}.`;
+ const prompt=`${style} Subject: ${subject[d.id]}, representing the economic concept "${d.definition}". Colors: ${palette[d.layer].replace(/^solid [^;]*; /,'')}; the icon will sit on a ${d.layer==='macro'?'teal':d.layer==='industry'?'pink':'amber'} tile, so use tones harmonized with that tile and avoid using the exact tile color for large surfaces.`;
  try{
-  const r=await fetch('https://api.openai.com/v1/images/generations',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({model,prompt,size:'1536x1024',quality:'medium',output_format:'webp',n:1}),signal:AbortSignal.timeout(180000)});
+  const r=await fetch('https://api.openai.com/v1/images/generations',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({model,prompt,size:'1024x1024',quality:'medium',background:'transparent',output_format:'webp',n:1}),signal:AbortSignal.timeout(180000)});
   const body=await r.json();
   if(!r.ok||!body.data?.[0]?.b64_json)throw Error(`HTTP ${r.status} ${body.error?.message||''}`);
   await fs.writeFile(new URL(`../public/drivers/${d.id}.webp`,import.meta.url),Buffer.from(body.data[0].b64_json,'base64'));

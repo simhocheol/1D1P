@@ -215,3 +215,25 @@ html.dark .candidate-identity{flex-direction:row;align-items:center;gap:12px;pos
 .report-shell>*{min-width:0}
 .driver-art{width:100%;min-width:0}.driver-art img{display:block;max-width:100%;min-width:0}.driver-card{width:100%}
 .report-shell>.research-page{width:100%;margin-inline:0}
+
+/* .pen 03 반영: 분리된 Toolbar · 제목 · 수요·성장형 Driver 카드 */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.report-body{min-width:0;display:flex;flex-direction:column}
+.report-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 40px;background:#0A0A0A;border-bottom:1px solid #27272A}
+.report-toolbar-date{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.report-toolbar-date label{font-size:16px;font-weight:600;color:#ECEDEE;margin-right:5px}
+.report-toolbar-date .input{width:170px;height:36px;border-radius:12px;background:#27272A;border:1px solid #3F3F46}
+html.dark .report-toolbar .signal-snapshot{display:inline;background:none;padding:0;color:var(--muted);opacity:.5;font-size:13px;font-weight:500}
+.report-toolbar-connect{padding:16px 40px!important;background:#0A0A0A;border-bottom:1px solid #27272A}
+html.dark .research-page{padding-top:32px}
+html.dark .research-heading{justify-content:flex-start;gap:16px;margin-bottom:0}
+html.dark .research-heading h1{margin:0}
+.driver-card{background:#0A0A0A}
+.driver-card .driver-art{aspect-ratio:12/5}
+.driver-card>.driver-card-head{display:flex;align-items:center;gap:8px}
+.driver-card-head strong{font-size:13px;font-weight:600}.driver-card-head small{font-size:10px;color:var(--muted)}
+.driver-card>.driver-card-fact{min-height:0}
+.driver-card>.driver-card-foot{border-top:0;padding-top:0}
+.driver-card.observed{background:linear-gradient(0deg,color-mix(in srgb,var(--layer) 5%,transparent),color-mix(in srgb,var(--layer) 5%,transparent)),#0F0F11;border-color:var(--layer);box-shadow:none}
+.driver-card.observed .driver-card-head strong{color:#fff}
+@media(max-width:700px){.report-toolbar,.report-toolbar-connect{padding:14px 16px!important}.report-toolbar-date label{font-size:14px}}

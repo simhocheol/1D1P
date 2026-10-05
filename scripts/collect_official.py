@@ -63,7 +63,8 @@ def main():
     old = json.loads(OUTPUT.read_text()) if OUTPUT.exists() else {'events': [], 'feeds': []}
     slot = None
     if args.scheduled:
-        if eastern.weekday() > 4 or eastern.hour < 9:
+        # Pre-market slot waits until 09:31 ET so SIP data (15-minute delay) covers the 09:15 cutoff.
+        if eastern.weekday() > 4 or (eastern.hour, eastern.minute) < (9, 31):
             return
         slot = f'{eastern.date()}-{17 if eastern.hour >= 17 else 9}'
         if old.get('scheduledSlot') == slot:

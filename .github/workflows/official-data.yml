@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '15 * * * *'
+    # Extra attempts around the publication slots (UTC covers both EDT and EST); slot de-duplication keeps one collection each.
+    - cron: '35,50 13,14 * * 1-5'
+    - cron: '20,40 21,22 * * 1-5'
 permissions:
   contents: write
   actions: read

@@ -27031,31 +27031,9 @@
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "o2p0i",
-                                          "name": "Art",
-                                          "width": "fill_container",
-                                          "height": 93,
-                                          "fill": {
-                                            "type": "image",
-                                            "enabled": true,
-                                            "url": "public/drivers/demand.webp",
-                                            "mode": "cover",
-                                            "transform": [
-                                              1,
-                                              0,
-                                              0,
-                                              1.799197,
-                                              0,
-                                              -0.399598
-                                            ]
-                                          }
-                                        },
-                                        {
-                                          "type": "frame",
                                           "id": "xH7Nb",
                                           "name": "Body",
                                           "width": "fill_container",
-                                          "layout": "vertical",
                                           "gap": 8,
                                           "padding": [
                                             12,
@@ -27064,247 +27042,120 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "l8dSa8",
-                                              "name": "Head",
-                                              "width": "fill_container",
-                                              "gap": 10,
-                                              "alignItems": "center",
+                                              "id": "R8Q61e",
+                                              "name": "Art",
+                                              "width": 69,
+                                              "height": 69,
+                                              "fill": [
+                                                "#0eb0a5ff",
+                                                {
+                                                  "type": "image",
+                                                  "enabled": true,
+                                                  "url": "public/drivers/demand.webp",
+                                                  "mode": "contain",
+                                                  "transform": [
+                                                    1.6327,
+                                                    0,
+                                                    0,
+                                                    0.680292,
+                                                    -0.338246,
+                                                    0.159854
+                                                  ]
+                                                }
+                                              ],
+                                              "cornerRadius": 12
+                                            },
+                                            {
+                                              "type": "frame",
+                                              "id": "x1BM4",
+                                              "name": "Frame 4",
+                                              "width": 196,
+                                              "layout": "vertical",
+                                              "gap": 8,
+                                              "justifyContent": "space_around",
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "YtwrU",
-                                                  "name": "Name",
+                                                  "id": "l8dSa8",
+                                                  "name": "Head",
                                                   "width": "fill_container",
-                                                  "gap": 8,
+                                                  "gap": 10,
+                                                  "justifyContent": "space_between",
                                                   "alignItems": "center",
                                                   "children": [
                                                     {
-                                                      "type": "text",
-                                                      "id": "U2hsZ",
-                                                      "name": "t",
-                                                      "fill": "#FFFFFF",
-                                                      "content": "수요·성장",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 13,
-                                                      "fontWeight": "600"
-                                                    },
-                                                    {
-                                                      "type": "text",
-                                                      "id": "Qd82t",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "거시",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "normal"
+                                                      "type": "frame",
+                                                      "id": "YtwrU",
+                                                      "name": "Name",
+                                                      "width": "fill_container",
+                                                      "gap": 8,
+                                                      "alignItems": "center",
+                                                      "children": [
+                                                        {
+                                                          "type": "text",
+                                                          "id": "U2hsZ",
+                                                          "name": "t",
+                                                          "fill": "#FFFFFF",
+                                                          "content": "수요·성장",
+                                                          "fontFamily": "$font",
+                                                          "fontSize": 13,
+                                                          "fontWeight": "600"
+                                                        },
+                                                        {
+                                                          "type": "text",
+                                                          "id": "Qd82t",
+                                                          "name": "t",
+                                                          "fill": "$muted",
+                                                          "content": "거시",
+                                                          "fontFamily": "$font",
+                                                          "fontSize": 10,
+                                                          "fontWeight": "normal"
+                                                        }
+                                                      ]
                                                     }
                                                   ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "text",
-                                              "id": "TYWyc",
-                                              "name": "t",
-                                              "fill": "#ECEDEE",
-                                              "textGrowth": "fixed-width",
-                                              "width": "fill_container",
-                                              "content": "BLS 고용 상황 발표 · 9월",
-                                              "lineHeight": 1.4,
-                                              "fontFamily": "$font",
-                                              "fontSize": 12,
-                                              "fontWeight": "600"
-                                            },
-                                            {
-                                              "type": "frame",
-                                              "id": "c7MHwY",
-                                              "name": "Foot",
-                                              "width": "fill_container",
-                                              "justifyContent": "space_between",
-                                              "children": [
-                                                {
-                                                  "type": "text",
-                                                  "id": "Ogxim",
-                                                  "name": "t",
-                                                  "fill": "$muted",
-                                                  "content": "관련 자료 2건",
-                                                  "fontFamily": "$font",
-                                                  "fontSize": 11,
-                                                  "fontWeight": "normal"
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "Y9qBy",
+                                                  "id": "TYWyc",
                                                   "name": "t",
-                                                  "fill": "$muted",
-                                                  "content": "3 후보",
+                                                  "fill": "#ECEDEE",
+                                                  "textGrowth": "fixed-width",
+                                                  "width": 239,
+                                                  "content": "BLS 고용 상황 발표 · 9월",
+                                                  "lineHeight": 1.4,
                                                   "fontFamily": "$font",
-                                                  "fontSize": 11,
-                                                  "fontWeight": "normal"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "frame",
-                                      "id": "Fdrec",
-                                      "name": "Driver 물가·비용 (흑백)",
-                                      "opacity": 0.65,
-                                      "clip": true,
-                                      "width": "fill_container",
-                                      "fill": "#0A0A0A",
-                                      "cornerRadius": 14,
-                                      "stroke": "#3F3F46",
-                                      "strokeWidth": 1,
-                                      "layout": "vertical",
-                                      "children": [
-                                        {
-                                          "type": "frame",
-                                          "id": "ByClt",
-                                          "name": "Art",
-                                          "width": "fill_container",
-                                          "height": 178,
-                                          "fill": [
-                                            {
-                                              "type": "image",
-                                              "enabled": true,
-                                              "url": "public/drivers/cost.webp",
-                                              "mode": "cover"
-                                            },
-                                            {
-                                              "type": "color",
-                                              "color": "#808080",
-                                              "enabled": true,
-                                              "blendMode": "saturation"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "type": "frame",
-                                          "id": "v03TL",
-                                          "name": "Body",
-                                          "width": "fill_container",
-                                          "layout": "vertical",
-                                          "gap": 8,
-                                          "padding": [
-                                            12,
-                                            14
-                                          ],
-                                          "children": [
-                                            {
-                                              "type": "frame",
-                                              "id": "asujR",
-                                              "name": "Head",
-                                              "width": "fill_container",
-                                              "gap": 10,
-                                              "alignItems": "center",
-                                              "children": [
+                                                  "fontSize": 12,
+                                                  "fontWeight": "600"
+                                                },
                                                 {
                                                   "type": "frame",
-                                                  "id": "Ztu18",
-                                                  "name": "Name",
+                                                  "id": "jzRtT",
+                                                  "name": "Foot",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "justifyContent": "space_between",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "AIzAo",
+                                                      "id": "S8r0K0",
                                                       "name": "t",
-                                                      "fill": "$fg",
-                                                      "content": "물가·비용",
+                                                      "fill": "$muted",
+                                                      "content": "관련 자료 2건",
                                                       "fontFamily": "$font",
-                                                      "fontSize": 13,
-                                                      "fontWeight": "600"
+                                                      "fontSize": 11,
+                                                      "fontWeight": "normal"
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "lmkz3",
+                                                      "id": "Zs9c9",
                                                       "name": "t",
                                                       "fill": "$muted",
-                                                      "content": "거시",
+                                                      "content": "3 후보",
                                                       "fontFamily": "$font",
-                                                      "fontSize": 10,
+                                                      "fontSize": 11,
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "ePIRc",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "IMfa0",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "가격 기준 미달",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "type": "text",
-                                              "id": "L8jlT",
-                                              "name": "t",
-                                              "fill": "#D4D4D8",
-                                              "textGrowth": "fixed-width",
-                                              "width": "fill_container",
-                                              "content": "USO +0.42%",
-                                              "lineHeight": 1.4,
-                                              "fontFamily": "$font",
-                                              "fontSize": 12
-                                            },
-                                            {
-                                              "type": "frame",
-                                              "id": "rcTUo",
-                                              "name": "Foot",
-                                              "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
-                                              "justifyContent": "space_between",
-                                              "children": [
-                                                {
-                                                  "type": "text",
-                                                  "id": "T0eEZ",
-                                                  "name": "t",
-                                                  "fill": "$muted",
-                                                  "content": "원문 분석 미연결",
-                                                  "fontFamily": "$font",
-                                                  "fontSize": 11,
-                                                  "fontWeight": "normal"
-                                                },
-                                                {
-                                                  "type": "text",
-                                                  "id": "rbgVw",
-                                                  "name": "t",
-                                                  "fill": "$muted",
-                                                  "content": "0 후보",
-                                                  "fontFamily": "$font",
-                                                  "fontSize": 11,
-                                                  "fontWeight": "normal"
                                                 }
                                               ]
                                             }
@@ -27314,22 +27165,26 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "cXJVd",
+                                      "id": "U1Yk3",
                                       "name": "Driver 금리·할인율",
                                       "clip": true,
                                       "width": "fill_container",
-                                      "fill": "#0F0F11",
+                                      "fill": [
+                                        "#0F0F11",
+                                        "#2dd4bf0d"
+                                      ],
                                       "cornerRadius": 14,
-                                      "stroke": "#2DD4BF",
-                                      "strokeWidth": 1.5,
+                                      "stroke": "#2dd4bf",
+                                      "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "DpQRI",
+                                          "id": "Qzrvd",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": {
                                             "type": "image",
                                             "enabled": true,
@@ -27339,7 +27194,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "Bc31f",
+                                          "id": "mY3Hg",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -27351,7 +27206,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "f5nrz",
+                                              "id": "hM40M",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -27359,15 +27214,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "e0BZ2",
+                                                  "id": "HUwja",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "a1NCA",
+                                                      "id": "dKaru",
                                                       "name": "t",
                                                       "fill": "#FFFFFF",
                                                       "content": "금리·할인율",
@@ -27377,7 +27232,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "C7Wvk",
+                                                      "id": "n9yFC",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "거시",
@@ -27386,35 +27241,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "N54eJH",
-                                                  "name": "Chip",
-                                                  "fill": "#2DD4BF",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "sQewV",
-                                                      "name": "t",
-                                                      "fill": "#0A0A0A",
-                                                      "content": "관측됨",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "700"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "gVlcJ",
+                                              "id": "iYUuo",
                                               "name": "t",
                                               "fill": "#ECEDEE",
                                               "textGrowth": "fixed-width",
@@ -27427,24 +27259,14 @@
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "eyNE0",
+                                              "id": "wLOBS",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "X4aqF",
+                                                  "id": "PKDkQ",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "관련 자료 1건",
@@ -27454,7 +27276,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "bP9Se",
+                                                  "id": "e85Kb",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "2 후보",
@@ -27479,7 +27301,7 @@
                                   "children": [
                                     {
                                       "type": "frame",
-                                      "id": "whGhV",
+                                      "id": "NHEZ7",
                                       "name": "Driver 신용·자금조달 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -27488,14 +27310,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "O7CcRk",
+                                          "id": "O5eV3v",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -27513,7 +27336,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "L5PoR",
+                                          "id": "z4Z6hK",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -27525,7 +27348,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "VdIDf",
+                                              "id": "y73Ski",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -27533,15 +27356,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "JVbpF",
+                                                  "id": "T4a0JL",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "or5ke",
+                                                      "id": "QPNhH",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "신용·자금조달",
@@ -27551,7 +27374,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "UUS95",
+                                                      "id": "bLRSA",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "거시",
@@ -27560,35 +27383,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "u9NlTf",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "T76lVW",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "GHYwF",
+                                              "id": "dpEQI",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -27596,28 +27396,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "ItPQl",
+                                              "id": "Mb7JB",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "OI2R2",
+                                                  "id": "YhjrW",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -27627,7 +27418,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "yBA7d",
+                                                  "id": "RqoiX",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -27643,7 +27434,7 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "mpUl8",
+                                      "id": "U8NlfM",
                                       "name": "Driver 유동성·자금흐름 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -27652,14 +27443,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "DFUUn",
+                                          "id": "f4iGKf",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -27677,7 +27469,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "sa0pB",
+                                          "id": "e0Cu3",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -27689,7 +27481,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "Z5Kzc",
+                                              "id": "o48nt",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -27697,15 +27489,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "ZOXew",
+                                                  "id": "xDcN3",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "f1Aa7A",
+                                                      "id": "z8DGL9",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "유동성·자금흐름",
@@ -27715,7 +27507,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "d0a5fA",
+                                                      "id": "q15yNA",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "거시",
@@ -27724,35 +27516,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "lfPLY",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "bRS3N",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "a4UC2",
+                                              "id": "y4sEF2",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -27760,28 +27529,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "Gwwve",
+                                              "id": "jV0xy",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "x4fw8",
+                                                  "id": "V4nZhX",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -27791,7 +27551,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "d6AyE8",
+                                                  "id": "rT5aY",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -27807,7 +27567,7 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "b5yNcT",
+                                      "id": "tSTFE",
                                       "name": "Driver 환율 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -27816,14 +27576,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "AwCvq",
+                                          "id": "c0MgrG",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -27841,7 +27602,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "OxeuI",
+                                          "id": "I2otU",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -27853,7 +27614,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "PyNlI",
+                                              "id": "A2pS6",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -27861,15 +27622,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "GOm4r",
+                                                  "id": "Tvxi7",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "nQJZJ",
+                                                      "id": "MWe6f",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "환율",
@@ -27879,7 +27640,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "HtoOf",
+                                                      "id": "s5B68",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "거시",
@@ -27888,35 +27649,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "TGNOr",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "Ew8mX",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "BKCyj",
+                                              "id": "V3jQyJ",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -27924,28 +27662,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "QNOQZ",
+                                              "id": "AztI0",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "yUK3o",
+                                                  "id": "kQCTf",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -27955,7 +27684,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "znqTN",
+                                                  "id": "RLDnf",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -27980,7 +27709,7 @@
                                   "children": [
                                     {
                                       "type": "frame",
-                                      "id": "gF8U8",
+                                      "id": "Df00o",
                                       "name": "Driver 정책·규제·시장 접근 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -27989,14 +27718,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "e0QVOi",
+                                          "id": "J71Uls",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -28014,7 +27744,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "JG9IM",
+                                          "id": "vcD69",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28026,7 +27756,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "p6ps3X",
+                                              "id": "M55Nn",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28034,15 +27764,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "auQOB",
+                                                  "id": "neaVL",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "Oow8B",
+                                                      "id": "GGlyp",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "정책·규제·시장 접근",
@@ -28052,7 +27782,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "yNt6H",
+                                                      "id": "LlOD2",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "산업·정책",
@@ -28061,35 +27791,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "dRKIU",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "tUnuJ",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "HaAGl",
+                                              "id": "XjWfs",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -28097,28 +27804,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "w2p0m",
+                                              "id": "z1ZQgd",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "jv8mX",
+                                                  "id": "MbwiB",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -28128,7 +27826,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "DAr5b",
+                                                  "id": "bHb9r",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -28144,7 +27842,7 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "eXHbx",
+                                      "id": "S3Oin",
                                       "name": "Driver 공급·경쟁 구조 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -28153,14 +27851,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "qojfJ",
+                                          "id": "Ba2dq",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -28178,7 +27877,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "E20IR",
+                                          "id": "nkpat",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28190,7 +27889,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "BWdbt",
+                                              "id": "ecJH9",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28198,15 +27897,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "C9V0H",
+                                                  "id": "Ty8Ji",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "f98aLx",
+                                                      "id": "lRnWs",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "공급·경쟁 구조",
@@ -28216,7 +27915,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "Gv3G9",
+                                                      "id": "iAaOF",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "산업·정책",
@@ -28225,35 +27924,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "bLHbb",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "pS05E",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "pTQLr",
+                                              "id": "GlBf0",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -28261,28 +27937,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "fd0Pq",
+                                              "id": "y3Fq0",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "YoSJZ",
+                                                  "id": "SYER9",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -28292,7 +27959,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "pDnML",
+                                                  "id": "Ep05H",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -28308,7 +27975,7 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "n07x8",
+                                      "id": "gDnhx",
                                       "name": "Driver 투자·기술 전환 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -28317,14 +27984,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "PzJoz",
+                                          "id": "HlJVu",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -28342,7 +28010,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "T300X",
+                                          "id": "ILTIB",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28354,7 +28022,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "vtDmN",
+                                              "id": "o2npm",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28362,15 +28030,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "rYDu6",
+                                                  "id": "I3zpU",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "W7MqS",
+                                                      "id": "wSzhs",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "투자·기술 전환",
@@ -28380,7 +28048,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "TO2AD",
+                                                      "id": "aDl0e",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "산업·정책",
@@ -28389,35 +28057,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "FkvhN",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "Q07D09",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "u1gFM",
+                                              "id": "RJbNK",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -28425,28 +28070,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "AF0rn",
+                                              "id": "k8SQP",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "BzhUw",
+                                                  "id": "n9Au3T",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -28456,7 +28092,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "gGqgd",
+                                                  "id": "pVOsi",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",
@@ -28481,22 +28117,26 @@
                                   "children": [
                                     {
                                       "type": "frame",
-                                      "id": "htbCJ",
+                                      "id": "z2G0nv",
                                       "name": "Driver 매출·주문",
                                       "clip": true,
                                       "width": "fill_container",
-                                      "fill": "#0F0F11",
+                                      "fill": [
+                                        "#0F0F11",
+                                        "#fbbf240d"
+                                      ],
                                       "cornerRadius": 14,
-                                      "stroke": "#FBBF24",
-                                      "strokeWidth": 1.5,
+                                      "stroke": "#fbbf24",
+                                      "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "F95KP",
+                                          "id": "r9sd6",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": {
                                             "type": "image",
                                             "enabled": true,
@@ -28506,7 +28146,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "lTiqJ",
+                                          "id": "yrzUK",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28518,7 +28158,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "CUXkj",
+                                              "id": "vZOhn",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28526,15 +28166,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "VVlX2",
+                                                  "id": "rCd3Z",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "Yy8L9",
+                                                      "id": "yEQpN",
                                                       "name": "t",
                                                       "fill": "#FFFFFF",
                                                       "content": "매출·주문",
@@ -28544,7 +28184,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "F7l2w2",
+                                                      "id": "GQIzY",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "기업",
@@ -28553,35 +28193,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "I26PJ",
-                                                  "name": "Chip",
-                                                  "fill": "#FBBF24",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "L51Ozp",
-                                                      "name": "t",
-                                                      "fill": "#0A0A0A",
-                                                      "content": "관측됨",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "700"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "Wstxx",
+                                              "id": "tMpbh",
                                               "name": "t",
                                               "fill": "#ECEDEE",
                                               "textGrowth": "fixed-width",
@@ -28594,24 +28211,14 @@
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "J5UF1t",
+                                              "id": "EI21b",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "ZCCCS",
+                                                  "id": "qM34I",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "관련 자료 1건",
@@ -28621,7 +28228,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "q2xGHe",
+                                                  "id": "m4OWl",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "1 후보",
@@ -28637,22 +28244,26 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "j57udD",
+                                      "id": "yj9uL",
                                       "name": "Driver 마진·현금흐름",
                                       "clip": true,
                                       "width": "fill_container",
-                                      "fill": "#0F0F11",
+                                      "fill": [
+                                        "#0F0F11",
+                                        "#fbbf240d"
+                                      ],
                                       "cornerRadius": 14,
-                                      "stroke": "#FBBF24",
-                                      "strokeWidth": 1.5,
+                                      "stroke": "#fbbf24",
+                                      "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "e8hXm",
+                                          "id": "lNJoS",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": {
                                             "type": "image",
                                             "enabled": true,
@@ -28662,7 +28273,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "ajVHQ",
+                                          "id": "EaVKB",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28674,7 +28285,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "wElIR",
+                                              "id": "C7qxcU",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28682,15 +28293,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "NzDN7",
+                                                  "id": "cqFRK",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "WkpkZ",
+                                                      "id": "hYZgd",
                                                       "name": "t",
                                                       "fill": "#FFFFFF",
                                                       "content": "마진·현금흐름",
@@ -28700,7 +28311,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "SE7K2",
+                                                      "id": "ZtRDt",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "기업",
@@ -28709,35 +28320,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "ibCdn",
-                                                  "name": "Chip",
-                                                  "fill": "#FBBF24",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "Rr9ux",
-                                                      "name": "t",
-                                                      "fill": "#0A0A0A",
-                                                      "content": "관측됨",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "700"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "z9Ayu",
+                                              "id": "e3L7hP",
                                               "name": "t",
                                               "fill": "#ECEDEE",
                                               "textGrowth": "fixed-width",
@@ -28750,24 +28338,14 @@
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "a0M8c2",
+                                              "id": "rKhNl",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "d71aS",
+                                                  "id": "MQls0",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "관련 자료 1건",
@@ -28777,7 +28355,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "SRPF2",
+                                                  "id": "BDO7m",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "1 후보",
@@ -28793,7 +28371,7 @@
                                     },
                                     {
                                       "type": "frame",
-                                      "id": "rrI9D",
+                                      "id": "wVTR5",
                                       "name": "Driver 자본·기업 사건 (흑백)",
                                       "opacity": 0.5,
                                       "clip": true,
@@ -28802,14 +28380,15 @@
                                       "cornerRadius": 14,
                                       "stroke": "#3F3F46",
                                       "strokeWidth": 1,
+                                      "strokeAlignment": "inner",
                                       "layout": "vertical",
                                       "children": [
                                         {
                                           "type": "frame",
-                                          "id": "RRQG1",
+                                          "id": "z5EeaN",
                                           "name": "Art",
                                           "width": "fill_container",
-                                          "height": 178,
+                                          "height": 93,
                                           "fill": [
                                             {
                                               "type": "image",
@@ -28827,7 +28406,7 @@
                                         },
                                         {
                                           "type": "frame",
-                                          "id": "yrMVU",
+                                          "id": "xxuWL",
                                           "name": "Body",
                                           "width": "fill_container",
                                           "layout": "vertical",
@@ -28839,7 +28418,7 @@
                                           "children": [
                                             {
                                               "type": "frame",
-                                              "id": "jLr2p",
+                                              "id": "uuPUY",
                                               "name": "Head",
                                               "width": "fill_container",
                                               "gap": 10,
@@ -28847,15 +28426,15 @@
                                               "children": [
                                                 {
                                                   "type": "frame",
-                                                  "id": "zAg0L",
+                                                  "id": "dvXeM",
                                                   "name": "Name",
                                                   "width": "fill_container",
-                                                  "layout": "vertical",
-                                                  "gap": 1,
+                                                  "gap": 8,
+                                                  "alignItems": "center",
                                                   "children": [
                                                     {
                                                       "type": "text",
-                                                      "id": "LGIJa",
+                                                      "id": "WNLIW",
                                                       "name": "t",
                                                       "fill": "$fg",
                                                       "content": "자본·기업 사건",
@@ -28865,7 +28444,7 @@
                                                     },
                                                     {
                                                       "type": "text",
-                                                      "id": "grVMh",
+                                                      "id": "r16wB4",
                                                       "name": "t",
                                                       "fill": "$muted",
                                                       "content": "기업",
@@ -28874,35 +28453,12 @@
                                                       "fontWeight": "normal"
                                                     }
                                                   ]
-                                                },
-                                                {
-                                                  "type": "frame",
-                                                  "id": "BEvW0",
-                                                  "name": "Chip",
-                                                  "fill": "#27272A",
-                                                  "cornerRadius": 999,
-                                                  "padding": [
-                                                    2,
-                                                    8
-                                                  ],
-                                                  "children": [
-                                                    {
-                                                      "type": "text",
-                                                      "id": "z9q502",
-                                                      "name": "t",
-                                                      "fill": "$muted",
-                                                      "content": "미확인",
-                                                      "fontFamily": "$font",
-                                                      "fontSize": 10,
-                                                      "fontWeight": "500"
-                                                    }
-                                                  ]
                                                 }
                                               ]
                                             },
                                             {
                                               "type": "text",
-                                              "id": "O0c3p",
+                                              "id": "q5dJ7",
                                               "name": "t",
                                               "fill": "#D4D4D8",
                                               "textGrowth": "fixed-width",
@@ -28910,28 +28466,19 @@
                                               "content": "확인 가능한 관측 자료 없음",
                                               "lineHeight": 1.4,
                                               "fontFamily": "$font",
-                                              "fontSize": 12
+                                              "fontSize": 12,
+                                              "fontWeight": "normal"
                                             },
                                             {
                                               "type": "frame",
-                                              "id": "adhj0",
+                                              "id": "cKz6x",
                                               "name": "Foot",
                                               "width": "fill_container",
-                                              "stroke": "#27272A",
-                                              "strokeWidth": {
-                                                "top": 1
-                                              },
-                                              "padding": [
-                                                8,
-                                                0,
-                                                0,
-                                                0
-                                              ],
                                               "justifyContent": "space_between",
                                               "children": [
                                                 {
                                                   "type": "text",
-                                                  "id": "DLtjn",
+                                                  "id": "GoHdZ",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "원문 분석 미연결",
@@ -28941,7 +28488,7 @@
                                                 },
                                                 {
                                                   "type": "text",
-                                                  "id": "WGtpH",
+                                                  "id": "CI0PE",
                                                   "name": "t",
                                                   "fill": "$muted",
                                                   "content": "0 후보",

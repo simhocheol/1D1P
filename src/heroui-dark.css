@@ -294,3 +294,11 @@ html.dark .service-header nav a:hover{color:#ECEDEE}
 .heatmap-tile:hover,.heatmap-tile:focus-visible{outline:2px solid #fff;outline-offset:-2px;z-index:2}
 .heatmap-tile strong{font-size:10px;line-height:1;letter-spacing:-.2px}.heatmap-tile small{font-size:9px;opacity:.9}
 @media(max-width:700px){.heatmap-canvas{aspect-ratio:3/4!important}}
+
+/* FRED 거시 근거 */
+.macro-list{list-style:none;margin:12px 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.macro-list li{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:10px;background:#18181B;border:1px solid #3F3F46}
+.macro-list li.is-active{border-color:#338EF7;background:#001731}
+.macro-list a{display:flex;align-items:center;gap:4px;color:#ECEDEE;font-size:12px;font-weight:600}.macro-list a small{color:var(--muted);font-weight:400}
+.macro-list span{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}.macro-list span b{font-size:12px;margin-left:4px}
+.macro-list li>small{font-size:10px;color:var(--muted)}

@@ -59,7 +59,9 @@ export function buildDriverThesis({report, rows, windowNews}) {
   const evidence = observations.filter(e => topics[d.id].test(e.title));
   const proxySymbol = {rates:'TLT', cost:'USO'}[d.id];
   const proxy = report.drivers.find(p => p.symbol === proxySymbol);
-  return {...d, evidence, proxy, status:proxy?.active || evidence.length ? 'observed' : proxy?.change != null ? 'quiet' : 'unknown', sectorIds:[], candidateSymbols:[]};
+  const macro = (report.macro || []).filter(m => m.driver === d.id);
+  const macroActive = macro.filter(m => m.active);
+  return {...d, evidence, proxy, macro, status:proxy?.active || macroActive.length || evidence.length ? 'observed' : proxy?.change != null || macro.length ? 'quiet' : 'unknown', sectorIds:[], candidateSymbols:[]};
  });
  const candidates = report.stocks.flatMap(stock => {
   const sector = report.sectors.find(s => s.name === stock.sector);

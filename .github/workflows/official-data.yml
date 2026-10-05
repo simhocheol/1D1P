@@ -46,6 +46,13 @@ jobs:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         run: node scripts/check_alpaca.mjs
+      - name: Collect FRED macro series
+        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        id: fred
+        continue-on-error: true
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: node scripts/collect_fred.mjs
       - name: Collect market universe and private bars
         if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
         id: market
@@ -80,5 +87,5 @@ jobs:
           git commit -m 'Update official feed records'
           git push origin HEAD:main
       - name: Surface partial collection failures
-        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure' || steps.earnings.outcome == 'failure'
+        if: steps.collection.outcome == 'failure' || steps.alpaca.outcome == 'failure' || steps.market.outcome == 'failure' || steps.earnings.outcome == 'failure' || steps.fred.outcome == 'failure'
         run: exit 1

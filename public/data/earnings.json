@@ -4,8 +4,8 @@
   "scope": "S&P 500 constituents",
   "from": "2026-10-01",
   "to": "2026-10-31",
-  "checkedAt": "2026-10-05T21:29:47.544Z",
-  "collectedAt": "2026-10-05T21:29:47.544Z",
+  "checkedAt": "2026-10-06T17:04:51.177Z",
+  "collectedAt": "2026-10-06T17:04:51.177Z",
   "status": "ok",
   "events": [
     {
@@ -219,17 +219,6 @@
     },
     {
       "date": "2026-10-15",
-      "symbol": "FCX",
-      "name": "Freeport-McMoRan",
-      "sector": "Materials",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.7266,
-      "revenueEstimate": 7419126023
-    },
-    {
-      "date": "2026-10-15",
       "symbol": "SCHW",
       "name": "Charles Schwab Corporation",
       "sector": "Financials",
@@ -274,14 +263,14 @@
     },
     {
       "date": "2026-10-15",
-      "symbol": "BX",
-      "name": "Blackstone Inc.",
-      "sector": "Financials",
-      "hour": "장 시작 전",
+      "symbol": "JBHT",
+      "name": "J.B. Hunt",
+      "sector": "Industrials",
+      "hour": "장 마감 후",
       "quarter": 3,
       "year": 2026,
-      "epsEstimate": 1.4016,
-      "revenueEstimate": 3513392212
+      "epsEstimate": 2.0227,
+      "revenueEstimate": 3626282977
     },
     {
       "date": "2026-10-15",
@@ -557,17 +546,6 @@
       "year": 2026,
       "epsEstimate": 2.4271,
       "revenueEstimate": 4665880617
-    },
-    {
-      "date": "2026-10-20",
-      "symbol": "JBHT",
-      "name": "J.B. Hunt",
-      "sector": "Industrials",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 2.0227,
-      "revenueEstimate": 3626282977
     },
     {
       "date": "2026-10-20",
@@ -956,17 +934,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "LIN",
-      "name": "Linde plc",
-      "sector": "Materials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 4.5614,
-      "revenueEstimate": 9228557860
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "NEE",
       "name": "NextEra Energy",
       "sector": "Utilities",
@@ -986,17 +953,6 @@
       "year": 2026,
       "epsEstimate": 2.1803,
       "revenueEstimate": 7919983585
-    },
-    {
-      "date": "2026-10-22",
-      "symbol": "KDP",
-      "name": "Keurig Dr Pepper",
-      "sector": "Consumer Staples",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.6255,
-      "revenueEstimate": 7402594807
     },
     {
       "date": "2026-10-22",
@@ -1099,17 +1055,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "FE",
-      "name": "FirstEnergy",
-      "sector": "Utilities",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.9439,
-      "revenueEstimate": 4475528447
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "XEL",
       "name": "Xcel Energy",
       "sector": "Utilities",
@@ -1162,6 +1107,28 @@
       "year": 2026,
       "epsEstimate": 0.4138,
       "revenueEstimate": 3875400750
+    },
+    {
+      "date": "2026-10-22",
+      "symbol": "BX",
+      "name": "Blackstone Inc.",
+      "sector": "Financials",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.4016,
+      "revenueEstimate": 3513392212
+    },
+    {
+      "date": "2026-10-22",
+      "symbol": "NSC",
+      "name": "Norfolk Southern",
+      "sector": "Industrials",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 3.6094,
+      "revenueEstimate": 3500874311
     },
     {
       "date": "2026-10-22",
@@ -1352,17 +1319,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "AOS",
-      "name": "A. O. Smith",
-      "sector": "Industrials",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.9081,
-      "revenueEstimate": 972745897
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "VRSN",
       "name": "Verisign",
       "sector": "Information Technology",
@@ -1415,17 +1371,6 @@
       "year": 2026,
       "epsEstimate": 0.621,
       "revenueEstimate": 9375456865
-    },
-    {
-      "date": "2026-10-23",
-      "symbol": "LYB",
-      "name": "LyondellBasell",
-      "sector": "Materials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 2.6625,
-      "revenueEstimate": 8948556640
     },
     {
       "date": "2026-10-23",
@@ -1660,6 +1605,17 @@
     },
     {
       "date": "2026-10-27",
+      "symbol": "FCX",
+      "name": "Freeport-McMoRan",
+      "sector": "Materials",
+      "hour": "시각 미확인",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.7266,
+      "revenueEstimate": 7419126023
+    },
+    {
+      "date": "2026-10-27",
       "symbol": "JCI",
       "name": "Johnson Controls",
       "sector": "Industrials",
@@ -1745,6 +1701,17 @@
       "year": 2026,
       "epsEstimate": 2.1936,
       "revenueEstimate": 4748540755
+    },
+    {
+      "date": "2026-10-27",
+      "symbol": "FE",
+      "name": "FirstEnergy",
+      "sector": "Utilities",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.9439,
+      "revenueEstimate": 4475528447
     },
     {
       "date": "2026-10-27",
@@ -1965,6 +1932,17 @@
       "year": 2026,
       "epsEstimate": 0.5194,
       "revenueEstimate": 904582260
+    },
+    {
+      "date": "2026-10-27",
+      "symbol": "EXR",
+      "name": "Extra Space Storage",
+      "sector": "Real Estate",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.1868,
+      "revenueEstimate": 826678818
     },
     {
       "date": "2026-10-28",
@@ -2254,17 +2232,6 @@
     },
     {
       "date": "2026-10-28",
-      "symbol": "NSC",
-      "name": "Norfolk Southern",
-      "sector": "Industrials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 3.6094,
-      "revenueEstimate": 3500874311
-    },
-    {
-      "date": "2026-10-28",
       "symbol": "CMG",
       "name": "Chipotle Mexican Grill",
       "sector": "Consumer Discretionary",
@@ -2320,6 +2287,17 @@
     },
     {
       "date": "2026-10-28",
+      "symbol": "FTNT",
+      "name": "Fortinet",
+      "sector": "Information Technology",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.8728,
+      "revenueEstimate": 2102719800
+    },
+    {
+      "date": "2026-10-28",
       "symbol": "GRMN",
       "name": "Garmin",
       "sector": "Consumer Discretionary",
@@ -2350,17 +2328,6 @@
       "year": 2026,
       "epsEstimate": 0.3955,
       "revenueEstimate": 1826441640
-    },
-    {
-      "date": "2026-10-28",
-      "symbol": "EW",
-      "name": "Edwards Lifesciences",
-      "sector": "Health Care",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.7582,
-      "revenueEstimate": 1726165968
     },
     {
       "date": "2026-10-28",
@@ -2650,6 +2617,17 @@
     },
     {
       "date": "2026-10-29",
+      "symbol": "LIN",
+      "name": "Linde plc",
+      "sector": "Materials",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 4.5614,
+      "revenueEstimate": 9228557860
+    },
+    {
+      "date": "2026-10-29",
       "symbol": "DHI",
       "name": "D. R. Horton",
       "sector": "Consumer Discretionary",
@@ -2702,6 +2680,17 @@
       "year": 2027,
       "epsEstimate": 8.4127,
       "revenueEstimate": 5823895071
+    },
+    {
+      "date": "2026-10-29",
+      "symbol": "CTSH",
+      "name": "Cognizant",
+      "sector": "Information Technology",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.4968,
+      "revenueEstimate": 5757330115
     },
     {
       "date": "2026-10-29",
@@ -2925,14 +2914,14 @@
     },
     {
       "date": "2026-10-29",
-      "symbol": "FTNT",
-      "name": "Fortinet",
-      "sector": "Information Technology",
-      "hour": "장 마감 후",
-      "quarter": 3,
+      "symbol": "FDXF",
+      "name": "FedEx Freight",
+      "sector": "Industrials",
+      "hour": "시각 미확인",
+      "quarter": 4,
       "year": 2026,
-      "epsEstimate": 0.8728,
-      "revenueEstimate": 2102719800
+      "epsEstimate": 0.5525,
+      "revenueEstimate": 2248676496
     },
     {
       "date": "2026-10-29",
@@ -3068,6 +3057,17 @@
     },
     {
       "date": "2026-10-29",
+      "symbol": "AOS",
+      "name": "A. O. Smith",
+      "sector": "Industrials",
+      "hour": "시각 미확인",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.9081,
+      "revenueEstimate": 972745897
+    },
+    {
+      "date": "2026-10-29",
       "symbol": "MRNA",
       "name": "Moderna",
       "sector": "Health Care",
@@ -3123,6 +3123,17 @@
     },
     {
       "date": "2026-10-30",
+      "symbol": "LYB",
+      "name": "LyondellBasell",
+      "sector": "Materials",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 2.6625,
+      "revenueEstimate": 8948556640
+    },
+    {
+      "date": "2026-10-30",
       "symbol": "CL",
       "name": "Colgate-Palmolive",
       "sector": "Consumer Staples",
@@ -3164,17 +3175,6 @@
       "year": 2026,
       "epsEstimate": 1.1396,
       "revenueEstimate": 3238770201
-    },
-    {
-      "date": "2026-10-30",
-      "symbol": "PNW",
-      "name": "Pinnacle West Capital",
-      "sector": "Utilities",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 3.1792,
-      "revenueEstimate": 1860197800
     },
     {
       "date": "2026-10-30",

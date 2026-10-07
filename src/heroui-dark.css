@@ -420,3 +420,45 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .ctx-scenario p{margin:0 0 8px;font-size:14px;line-height:1.7;color:#E4E4E7}
 .ctx-scenario dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0 0 8px;font-size:12px;line-height:1.6}
 .ctx-scenario dt{color:#71717A}.ctx-scenario dd{margin:0;color:#D4D4D8;min-width:0}
+/* Home dashboard: two columns of compact cards; details open in a modal */
+.home-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin:0 0 24px;align-items:start}
+.home-col{display:grid;gap:16px;min-width:0}
+@media (max-width:1023px){.home-grid{grid-template-columns:minmax(0,1fr)}}
+.home-card{background:#111113;border:1px solid #27272A;border-radius:20px;padding:20px;min-width:0}
+.home-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.home-card-head h2{display:flex;align-items:center;gap:8px;font-size:17px;margin:0;color:#FAFAFA}
+.home-card-head p{margin:4px 0 0;font-size:12px;color:#A1A1AA}.home-meta{font-size:11px;color:#71717A;white-space:nowrap}
+.home-summary{background:#18181B;border-left:3px solid #338EF7;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.home-summary p{margin:0 0 4px;font-size:14px;line-height:1.65;color:#FAFAFA}.home-summary p:last-child{margin:0}
+.home-rows{display:grid;gap:2px}
+.home-row{position:relative;display:grid;gap:6px;width:100%;text-align:left;background:transparent;border:0;border-radius:10px;padding:10px 28px 10px 10px;color:#E4E4E7;font:inherit;cursor:pointer;min-width:0}
+.home-row:hover,.home-row:focus-visible{background:#18181B}
+.home-row-main{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.home-row-name{display:flex;align-items:center;gap:8px;font-size:14px;min-width:0}
+.home-row-right{display:flex;align-items:center;gap:8px;flex:none}.home-row-right b{font-size:14px;color:#FAFAFA;min-width:64px;text-align:right}
+.home-row-go{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#52525B}
+.ctx-bar.compact{height:8px}.ctx-bar.compact .ctx-track{top:2px;height:4px}.ctx-bar.compact .ctx-dot{top:0;width:8px;height:8px;border-width:0;transform:translateX(-4px)}
+.ctx-bar{display:block}
+.sc-rank{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#27272A;font-size:12px;font-weight:700;flex:none}.sc-rank.r1{background:#338EF7;color:#fff}
+.home-row .ctx-meter{margin:0}
+.trend{display:inline-flex;align-items:center;gap:4px;font-size:13px;flex:none}.trend-up{color:#17C964}.trend-down{color:#F31260}.trend-flat{color:#A1A1AA}
+.home-drivers{display:flex;flex-wrap:wrap;gap:4px}.home-drivers span{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:#A1A1AA;background:#27272A;border-radius:6px;padding:2px 6px}
+.home-drivers .driver-icon{width:auto;height:auto;background:none!important;padding:0;border:0}
+.home-link{background:none;border:0;color:#338EF7;font-size:12px;padding:6px 0;cursor:pointer}
+.home-card .pulse-hero{position:relative;display:block;width:100%;text-align:left;font:inherit;margin:0 0 10px;border:0;cursor:pointer;padding-right:30px}
+.home-card .pulse-groups{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.home-card button.pulse-group{font:inherit;text-align:left;cursor:pointer;padding:10px}
+.home-card button.pulse-group:hover{border-color:#3F3F46}
+.home-card .pulse-history{margin-top:12px}
+.pulse-trail{display:flex;flex-wrap:wrap;gap:4px}.pulse-trail .pulse-group{padding:4px;border-radius:6px;display:inline-flex}
+.pulse-caution{color:#F5A524!important;font-size:13px}
+.info-modal{max-width:520px}.info-modal-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.info-section{background:#18181B;border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.info-section h4{font-size:12px;color:#A1A1AA;margin:0 0 6px;font-weight:600}
+.info-section p,.info-section li{font-size:14px;line-height:1.7;color:#E4E4E7;margin:0}
+.info-section ul{margin:6px 0 0;padding-left:18px}
+.info-big{font-size:28px;font-weight:700;color:#FAFAFA;margin:0 0 10px;display:flex;align-items:center;gap:6px}
+.info-section .info-big{font-size:18px;margin:0}
+.info-legend{font-size:11px!important;color:#A1A1AA!important;margin-top:24px!important}.info-legend i{display:inline-block;vertical-align:middle;margin:0 4px 0 8px}
+.info-modal .pulse-group{display:inline-flex}
+.home-card .home-card-head{background:none!important;border:0!important;padding:0!important;position:static;box-shadow:none}

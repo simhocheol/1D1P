@@ -57,6 +57,7 @@ export function globalSummary(items){
  const by=Object.fromEntries(items.filter(Boolean).map(i=>[i.id,i])),lines=[];
  const krw=by.krw;if(krw?.percentile>=70)lines.push(`원·달러 환율이 ${krw.value}원으로 높은 편이에요. 지금 달러로 바꾸면 비싸게 사는 셈이고, 나중에 환율이 내려가면 원화 수익이 줄 수 있어요.`);else if(krw?.percentile<=30)lines.push(`원·달러 환율이 ${krw.value}원으로 낮은 편이에요. 달러를 싸게 살 수 있는 환경이에요.`);else if(krw)lines.push(`원·달러 환율 ${krw.value}원은 보통 범위예요.`);
  if(by.usjp?.percentile>=70&&by.jpy?.percentile>=70)lines.push('미국과 일본의 금리 차이가 크고 엔화가 약해요. 엔화를 빌려 미국에 투자하는 흐름이 커진 상태라, 갑자기 되돌려지면(2024년 8월처럼) 미국 증시도 흔들릴 수 있어요.');
+ else if(by.jpy?.percentile>=90&&by.usjp?.percentile<=30)lines.push('엔화는 매우 약한데 미국−일본 금리차는 과거보다 좁은 편이에요. 엔화를 빌려 투자할 이득이 줄어 그 돈이 되돌아갈 수 있는 조합이라 지켜볼 필요가 있어요.');
  if(by.jp10?.percentile>=90)lines.push('일본 금리가 수십 년 만에 높은 수준이에요. 일본 투자자들이 해외 자산을 팔고 자국으로 돌아갈 유인이 커져요.');
  if(by.cny?.percentile>=80)lines.push('위안화가 약한 편이에요. 중국 경기 걱정과 관련이 있을 수 있어요.');
  return lines.length?lines:['주요국 환율과 금리는 대체로 보통 범위예요.'];

@@ -29,7 +29,7 @@ export function describe(ind,obs,{now=new Date(),windowYears=20}={}){
  const eraAvg=eras.map(e=>({id:e.id,label:e.label,avg:mean(series.filter(o=>+o.d.slice(0,4)>=e.from&&+o.d.slice(0,4)<=e.to).map(o=>o.v))})).filter(e=>e.avg!=null);
  const out={id:ind.id,name:ind.name,plain:ind.plain,drivers:ind.drivers,unit:ind.unit,asOf:last.d,windowFrom:series.find(o=>o.d>=from)?.d||series[0].d,percentile:pct,position:positionText(pct)};
  if(ind.publicValue){out.value=round(last.v);out.average=round(avg);out.min=round(Math.min(...win));out.max=round(Math.max(...win));out.eras=eraAvg.map(e=>({...e,avg:round(e.avg)}));out.compare=compareText(ind,last.v,avg,eraAvg)}
- else{out.eras=eraAvg.map(e=>({id:e.id,label:e.label,percentile:percentile(win,e.avg)}));out.compare=`최근 ${windowYears}년 중 ${100-pct<=0?'가장 높은':`상위 ${Math.max(1,100-pct)}%`} 수준이에요.`}
+ else{out.eras=eraAvg.map(e=>({id:e.id,label:e.label,percentile:percentile(win,e.avg)}));out.compare=`최근 ${windowYears}년 중 ${pct>=100?'가장 높은':pct>=50?`상위 ${Math.max(1,100-pct)}%`:`하위 ${Math.max(1,pct)}%`} 수준이에요.`}
  return out;
 }
 const round=v=>Number.isFinite(v)?Math.round(v*100)/100:null;

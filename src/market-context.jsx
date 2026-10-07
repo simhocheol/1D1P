@@ -23,7 +23,7 @@ export default function MarketContext(){
     <span className="ctx-head"><strong>{it.name}</strong><span className={`ctx-pos ${tone(it.percentile)}`}>{it.position}</span>{it.value!=null&&<b className="ctx-value">{fmt(it.value,it.unit)}</b>}</span>
     <RangeBar item={it}/>
     <span className="ctx-compare">{it.compare}</span>
-    {open===it.id&&<span className="ctx-more"><span>{it.plain}</span>{it.eras?.length>0&&<span>{it.eras.map(e=>`${e.label} ${it.value!=null?fmt(e.avg,it.unit):`상위 ${Math.max(1,100-e.percentile)}% 수준`}`).join(' · ')}</span>}<span className="ctx-drivers">{it.drivers.map(d=><span key={d}><DriverIcon id={d} size={11}/>{driverName(d)}</span>)}</span><small>{it.windowFrom.slice(0,4)}년~{it.asOf} 기준 · {it.percentile}백분위(100에 가까울수록 이 기간 중 높음)</small></span>}
+    {open===it.id&&<span className="ctx-more"><span>{it.plain}</span>{it.eras?.length>0&&<span>{it.eras.map(e=>`${e.label} ${it.value!=null?fmt(e.avg,it.unit):(e.percentile>=50?`상위 ${Math.max(1,100-e.percentile)}% 수준`:`하위 ${Math.max(1,e.percentile)}% 수준`)}`).join(' · ')}</span>}<span className="ctx-drivers">{it.drivers.map(d=><span key={d}><DriverIcon id={d} size={11}/>{driverName(d)}</span>)}</span><small>{it.windowFrom.slice(0,4)}년~{it.asOf} 기준 · {it.percentile}백분위(100에 가까울수록 이 기간 중 높음)</small></span>}
    </button>)}</div>
    {data.cape&&<p className="fine">참고 · 주가 수준 지표(CAPE)는 공개 데이터가 {data.cape.asOf.slice(0,7)} 이후 갱신되지 않았습니다. 그 시점에 1871년 이후 상위 {Math.max(1,100-data.cape.percentile)}% 수준이었습니다.</p>}
    <p className="fine">출처 · {data.sources}. {data.notice} 투자 권유가 아닙니다.</p>

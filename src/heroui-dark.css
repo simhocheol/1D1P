@@ -407,3 +407,4 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .ctx-more small{font-size:11px;color:#71717A}
 .ctx-drivers{display:flex;flex-wrap:wrap;gap:4px}.ctx-drivers span{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#A1A1AA;background:#27272A;border-radius:6px;padding:2px 6px}
 .ctx-drivers .driver-icon{width:auto;height:auto;background:none!important;padding:0;border:0}
+.ctx-list{align-items:start}

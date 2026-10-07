@@ -1,0 +1,27 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {contextIndicators,describe,overall,percentile,yoy} from '../server/market-context.js';
+
+const ind=id=>contextIndicators.find(i=>i.id===id);
+const now=new Date('2026-10-07T00:00:00Z');
+const series=(f)=>Array.from({length:30*12},(_,i)=>{const y=1997+Math.floor(i/12),m=i%12+1;return {d:`${y}-${String(m).padStart(2,'0')}-01`,v:f(y,m)}});
+test('percentile and plain position', ()=>{
+ assert.equal(percentile([1,2,3,4],4),100);assert.equal(percentile([1,2,3,4],1),25);
+ const d=describe(ind('rate10'),series(y=>y>=2009&&y<=2021?2:4.5),{now});
+ assert.ok(d.percentile>=70);assert.equal(d.value,4.5);
+ assert.ok(d.compare.includes('저금리 시대 평균 2%'));
+});
+test('restricted series publish positions only', ()=>{
+ const d=describe(ind('vix'),series((y,m)=>10+m),{now});
+ assert.equal(d.value,undefined);assert.equal(d.average,undefined);assert.ok(Number.isFinite(d.percentile));
+ assert.ok(d.eras.every(e=>e.avg===undefined));
+});
+test('yoy inflation transform', ()=>{
+ const r=yoy([{d:'2025-01-01',v:100},{d:'2026-01-01',v:103}]);
+ assert.equal(r.length,1);assert.ok(Math.abs(r[0].v-3)<1e-9);
+});
+test('overall reading names the high-rates high-stocks combination', ()=>{
+ const lines=overall([{id:'rate10',percentile:85},{id:'stocks',percentile:97},{id:'curve',percentile:20,value:-0.2}]);
+ assert.ok(lines[0].includes('금리와 주가가 동시에'));assert.ok(lines.some(l=>l.includes('뒤집혀')));
+ assert.deepEqual(overall([]),['대부분의 지표가 과거 보통 범위 안에 있어요.']);
+});

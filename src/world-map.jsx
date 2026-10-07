@@ -1,6 +1,7 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {geoNaturalEarth1,geoPath} from 'd3-geo';
 import {feature} from 'topojson-client';
+import {levelHint} from './etf-hints.js';
 const W=960,H=330;
 const tone=p=>p==null?'na':p>=90?'vhigh':p>=70?'high':p>30?'mid':p>10?'low':'vlow';
 const fmt=(v,u)=>v==null?'—':`${v}${['%','%p','원','엔','위안'].includes(u)?u:''}`;
@@ -32,7 +33,7 @@ export default function WorldMap({items,onPick}){
    {projection&&list.map(r=>{const b=projection(r.label);return <button type="button" key={r.id} className={`world-label t-${tone(r.data[0].percentile)} ${b[0]>W*0.62?'edge-right':b[0]<W*0.3?'edge-left':''} ${b[1]>H*0.5?'edge-low':''}`} style={pct(b)} onMouseEnter={()=>setHover(r.id)} onMouseLeave={()=>setHover('')} onFocus={()=>setHover(r.id)} onBlur={()=>setHover('')} onClick={()=>onPick(r)} aria-haspopup="dialog">
     <strong>{r.name}</strong>
     {r.data.slice(0,2).map(d=><span key={d.id} className="world-line"><span>{d.name.replace(/\(.*\)/,'')}</span><b>{fmt(d.value,d.unit)}</b><em className={`ctx-pos ${tone(d.percentile)}`}>{d.position}</em></span>)}
-    {hover===r.id&&<span className="world-tip" role="tooltip">{r.data.map(d=><span key={d.id}><b>{d.name} · {fmt(d.value,d.unit)}</b><span>{d.compare}</span><small>{d.plain}</small></span>)}<small className="world-tip-more">눌러서 자세히 보기</small></span>}
+    {hover===r.id&&<span className="world-tip" role="tooltip">{r.data.map(d=><span key={d.id}><b>{d.name} · {fmt(d.value,d.unit)}</b><span>{d.compare}</span><small>{d.plain}</small>{levelHint(d)&&<small className="world-tip-etf">몰릴만한 ETF · {levelHint(d).etfs.map(([t])=>t).join(' · ')}</small>}</span>)}<small className="world-tip-more">눌러서 자세히 보기</small></span>}
    </button>})}
    {!geo&&<p className="fine world-loading">지도를 불러오는 중</p>}
   </div>

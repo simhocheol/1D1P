@@ -2,6 +2,10 @@ import React,{useEffect,useState} from 'react';
 import {Compass,Route,Gauge,Globe2,ChevronRight,TrendingUp,TrendingDown,Minus} from 'lucide-react';
 import InfoModal,{DriverTags,Section} from './info-modal.jsx';
 import WorldMap from './world-map.jsx';
+import {levelHint,directionHint} from './etf-hints.js';
+// "Where money tends to go" for the current state; shown in rows (tickers) and modals (why + names).
+export function EtfHint({hint}){return hint&&<Section title="이럴 때 몰릴만한 ETF"><p>{hint.why}</p><div className="sc-chips">{hint.etfs.map(([t,n])=><span key={t} className="in">{t}<small>{n}</small></span>)}</div><p className="fine">흔히 언급되는 대표 ETF 예시예요. 실제 자금 흐름을 측정한 값이 아니고 매수·매도 추천이 아닙니다.</p></Section>}
+const hintLine=h=>h&&<span className="sc-etfs flat">몰릴만한 곳 · {h.etfs.map(([t])=>t).join(' · ')}</span>;
 const fmt=(v,u)=>v==null?'—':`${v}${['%','%p','원','엔','위안'].includes(u)?u:''}`;
 const tone=p=>p==null?'na':p>=90?'vhigh':p>=70?'high':p>30?'mid':p>10?'low':'vlow';
 const rel=p=>p>=100?'가장 높은':p>=50?`상위 ${Math.max(1,100-p)}%`:`하위 ${Math.max(1,p)}%`;
@@ -27,11 +31,12 @@ function IndicatorModal({item,onClose}){
   <Section><RangeBar item={item}/><p className="info-legend"><i className="ctx-dot-key"/>지금 <i className="ctx-tick-key"/>2000~2007년 · 저금리 시대(2009~2021년) 평균</p></Section>
   <Section title="과거와 비교하면"><p>{item.compare}</p>{item.eras?.length>0&&<ul>{item.eras.map(e=><li key={e.id}>{e.label} 평균 · {item.value!=null?fmt(e.avg,item.unit):`이 기간 중 ${rel(e.percentile)} 수준`}</li>)}</ul>}</Section>
   <Section title="이게 뭐예요?"><p>{item.plain}</p></Section>
+  <EtfHint hint={levelHint(item)}/>
   <Section title="연결된 Driver"><DriverTags ids={item.drivers}/></Section>
   <p className="fine">{item.windowFrom.slice(0,4)}년~{item.asOf} 기준 · {item.percentile}백분위(100에 가까울수록 이 기간 중 높음)</p>
  </>}</InfoModal>;
 }
-function IndicatorRows({items,onPick}){return <div className="home-rows">{items.map(it=><Row key={it.id} onPress={()=>onPick(it)} name={it.name} right={<span className="home-row-right"><span className={`ctx-pos ${tone(it.percentile)}`}>{it.position}</span>{it.value!=null&&<b>{fmt(it.value,it.unit)}</b>}</span>} below={<RangeBar item={it} compact/>}/>)}</div>}
+function IndicatorRows({items,onPick}){return <div className="home-rows">{items.map(it=><Row key={it.id} onPress={()=>onPick(it)} name={it.name} right={<span className="home-row-right"><span className={`ctx-pos ${tone(it.percentile)}`}>{it.position}</span>{it.value!=null&&<b>{fmt(it.value,it.unit)}</b>}</span>} below={<><RangeBar item={it} compact/>{hintLine(levelHint(it))}</>}/>)}</div>}
 
 export function ContextCard({data,error}){
  const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='level');
@@ -59,10 +64,11 @@ const TrendIcon=({t})=>t==='up'?<TrendingUp size={15}/>:t==='down'?<TrendingDown
 export function DirectionCard({data,error}){
  const [pick,setPick]=useState(null);const d=data?.direction;
  return <Card icon={Gauge} title="경기 방향" sub="최근 평균을 그 전과 비교해 좋아지는지 나빠지는지">
-  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="home-rows">{d.items.map(it=><Row key={it.id} onPress={()=>setPick(it)} name={it.name} right={<span className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/>{it.trendText}</span>} below={it.source&&<span className="home-row-src">{it.source}</span>}/>)}</div><p className="fine">참고 데이터 · 미국 노동부·노동통계국·인구조사국·연방준비제도·미시간대 공식 발표를 FRED(세인트루이스 연준)에서 받아요. 주간 지표는 최근 4주, 월간 지표는 최근 3개월 평균을 그 전 기간과 비교해 방향을 정하고, 예상치와는 비교하지 않아요.</p></>}
+  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="home-rows">{d.items.map(it=><Row key={it.id} onPress={()=>setPick(it)} name={it.name} right={<span className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/>{it.trendText}</span>} below={<>{it.source&&<span className="home-row-src">{it.source}</span>}{hintLine(directionHint(it))}</>}/>)}</div><p className="fine">참고 데이터 · 미국 노동부·노동통계국·인구조사국·연방준비제도·미시간대 공식 발표를 FRED(세인트루이스 연준)에서 받아요. 주간 지표는 최근 4주, 월간 지표는 최근 3개월 평균을 그 전 기간과 비교해 방향을 정하고, 예상치와는 비교하지 않아요.</p></>}
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name} badge={pick&&<span className={`trend trend-${pick.trend}`}><TrendIcon t={pick.trend}/>{pick.trendText}</span>}>{pick&&<>
    <Section title="최근 변화"><p>{pick.detail}</p></Section>
    <Section title="이게 뭐예요?"><p>{pick.plain}</p></Section>
+   <EtfHint hint={directionHint(pick)}/>
    <Section title="참고한 데이터"><p>{pick.source}</p><p className="fine">{pick.method}</p></Section>
    <Section title="연결된 Driver"><DriverTags ids={pick.drivers}/></Section>
    <p className="fine">{pick.asOf} 발표분까지 반영 · 발표 값의 방향만 보며 예상치와 비교하지 않습니다.</p></>}</InfoModal>
@@ -72,5 +78,5 @@ export function GlobalCard({data,error}){
  const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='global'||['rate10','dollar'].includes(i.id));
  return <Card icon={Globe2} title="세계 속 미국 시장" sub="내 수익에 닿는 환율과 주요국 금리 · 나라에 마우스를 올리면 자세히 보여요" className="home-wide">
   <Status data={data} error={error}/>{data?.global&&<><div className="home-summary">{data.global.summary.map((l,i)=><p key={i}>{l}</p>)}</div><WorldMap items={items} onPick={setPick}/></>}
-  <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name}>{pick&&pick.data.map(d=><Section key={d.id} title={d.name}><p className="info-big">{fmt(d.value,d.unit)} <span className={`ctx-pos ${tone(d.percentile)}`}>{d.position}</span></p><RangeBar item={d}/><p className="world-compare">{d.compare}</p><p className="fine">{d.plain}</p><DriverTags ids={d.drivers}/></Section>)}</InfoModal></Card>;
+  <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name}>{pick&&pick.data.map(d=><Section key={d.id} title={d.name}><p className="info-big">{fmt(d.value,d.unit)} <span className={`ctx-pos ${tone(d.percentile)}`}>{d.position}</span></p><RangeBar item={d}/><p className="world-compare">{d.compare}</p><p className="fine">{d.plain}</p>{levelHint(d)&&<p className="world-hint"><b>몰릴만한 ETF</b> {levelHint(d).etfs.map(([t,n])=>`${t}(${n})`).join(', ')} · {levelHint(d).why}</p>}<DriverTags ids={d.drivers}/></Section>)}</InfoModal></Card>;
 }

@@ -31,3 +31,11 @@ test('sigma and level thresholds', ()=>{
  assert.ok(dailySigma(Array.from({length:30},(_,i)=>100+(i%2)))>0);
  assert.deepEqual([level(1.6),level(0.6),level(0),level(-0.6),level(-2)],[2,1,0,-1,-2]);
 });
+test('overnight day-market session boundaries', async ()=>{
+ const {etSession}=await import('../server/market-pulse.js');
+ assert.equal(etSession(new Date('2026-10-07T05:30:00Z')),'overnight'); // Wed 01:30 ET
+ assert.equal(etSession(new Date('2026-10-07T01:00:00Z')),'overnight'); // Tue 21:00 ET
+ assert.equal(etSession(new Date('2026-10-10T01:00:00Z')),'closed');    // Fri 21:00 ET
+ assert.equal(etSession(new Date('2026-10-12T01:00:00Z')),'overnight'); // Sun 21:00 ET
+ assert.equal(etSession(new Date('2026-10-10T15:00:00Z')),'closed');    // Sat
+});

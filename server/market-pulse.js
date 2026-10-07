@@ -60,8 +60,12 @@ export function summarize(pattern,lead){
 }
 export function etSession(at){
  const p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(at).map(x=>[x.type,x.value]));
- const t=+p.hour*60+ +p.minute;if(['Sat','Sun'].includes(p.weekday))return 'closed';
- return t<240?'closed':t<570?'pre':t<960?'regular':t<1200?'after':'closed';
+ // Overnight (day-market) session runs 20:00-04:00 ET from Sunday night to Friday morning.
+ const t=+p.hour*60+ +p.minute,d=p.weekday;
+ if(d==='Sat')return 'closed';if(d==='Sun')return t>=1200?'overnight':'closed';
+ if(t<240)return 'overnight';
+ if(t>=1200)return d==='Fri'?'closed':'overnight';
+ return t<570?'pre':t<960?'regular':'after';
 }
 // One accumulated record. Only levels and pattern ids are published.
 export function buildPulse({moves,at=new Date()}){

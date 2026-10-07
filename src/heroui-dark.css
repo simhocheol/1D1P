@@ -381,3 +381,4 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .pulse-drivers span{line-height:1.4}
 .pulse-group{align-content:start}
 .pulse-group.inverse.lv1 strong,.pulse-group.inverse.lv2 strong{color:#F31260}.pulse-group.inverse.lv-1 strong,.pulse-group.inverse.lv-2 strong{color:#17C964}
+.pulse-hero small.pulse-caution{color:#F5A524}.pulse-chip em{font-style:normal;font-size:10px;color:#F5A524}

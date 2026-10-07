@@ -29,12 +29,12 @@ test('scenarios rank by support and only name public values', async ()=>{
  const {scenarios}=await import('../server/market-context.js');
  const items=[{id:'rate10',name:'10년물',value:5.3,unit:'%',percentile:100,position:'매우 높음'},{id:'real10',name:'실질',value:2.9,unit:'%',percentile:100,position:'매우 높음'},{id:'stocks',name:'실질 주가',percentile:100,position:'매우 높음'},{id:'dollar',name:'달러',value:121,unit:'',percentile:40,position:'보통'}];
  const r=scenarios(items);
- assert.equal(r[0].rank,1);assert.equal(r[0].kind,'likely');assert.equal(r[0].label,'강함');assert.equal(r[0].score,undefined);
+ assert.equal(r[0].rank,1);assert.equal(r[0].kind,'likely');assert.equal(r[0].label,'강한 시나리오');assert.ok(r[0].etfs.in.length);assert.equal(r[0].score,undefined);
  assert.ok(r.find(x=>x.id==='stretched').basis.includes('실질 주가 매우 높음'));
  assert.equal(r.length,3);
  const full=scenarios([...items,{id:'cpi',value:2,percentile:20},{id:'breakeven',percentile:20},{id:'policy',percentile:30},{id:'curve',percentile:60},{id:'unemp',percentile:20},{id:'vix',percentile:50}]);
  assert.deepEqual(full.map(x=>x.kind),['likely','likely','maybe','unlikely','unlikely']);
- assert.equal(full[4].label,'이런 시나리오는 없어요');assert.ok(full[4].none);
+ assert.equal(full[4].label,'약한 시나리오');assert.ok(full[4].none);
 });
 test('direction compares recent and prior averages with the right sign', async ()=>{
  const {direction,directionIndicators,directionSummary,globalSummary}=await import('../server/market-context.js');

@@ -43,12 +43,13 @@ export function ContextCard({data,error}){
 }
 function Scenarios({data}){
  const [pick,setPick]=useState(null);const list=data?.scenarios||[];
- return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">위 2개는 지금 뚜렷한 움직임, 아래 2개는 지금은 보기 어려운 움직임이에요.</p>
-  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>}/>)}</div>
+ return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">위 2개는 지금 뚜렷한 강한 시나리오, 아래 2개는 지금은 약한 시나리오예요. 약한 쪽은 “지금 하지 않을 움직임”으로 볼 수 있어요.</p>
+  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>} below={sc.etfs&&<span className="sc-etfs">{sc.kind==='unlikely'?'강해지면 몰릴 곳':'몰릴 수 있는 곳'} · {sc.etfs.in.map(([t])=>t).join(' · ')}</span>}/>)}</div>
   <p className="fine">흔히 나타나는 움직임을 설명한 것이며 매수·매도 추천이 아닙니다.</p>
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className={`sc-label ${pick.kind}`}>{pick.label}</span>}>{pick&&<>
    {pick.kind==='unlikely'?<Section title="왜 지금은 아닐까요?"><p>{pick.none}</p></Section>:null}
    <Section title={pick.kind==='unlikely'?'이런 환경이라면 사람들은':'사람들의 움직임'}><p>{pick.act}</p></Section>
+   {pick.etfs&&<Section title="ETF로 치면">{pick.kind==='unlikely'?<p>이 흐름이 강해진다면 {pick.etfs.in.map(([t,n])=>`${t}(${n})`).join(', ')}에 돈이 몰렸을 거예요. 지금은 그 가능성이 낮아요.</p>:<><p>{pick.etfs.in.map(([t,n])=>`${t}(${n})`).join(', ')}에 돈이 몰릴 가능성이 있어요.</p><p className="sc-out">반대로 {pick.etfs.out.map(([t,n])=>`${t}(${n})`).join(', ')}에서는 돈이 빠질 수 있어요.</p></>}<div className="sc-chips">{pick.etfs.in.map(([t,n])=><span key={t} className="in">{t}<small>{n}</small></span>)}{pick.kind!=='unlikely'&&pick.etfs.out.map(([t,n])=><span key={t} className="out">{t}<small>{n}</small></span>)}</div><p className="fine">이런 환경에서 흔히 언급되는 대표 ETF 예시예요. 실제 자금 흐름을 측정한 값이 아니고 매수·매도 추천이 아닙니다.</p></Section>}
    <Section title="근거가 된 지표"><ul>{pick.basis.map(b=><li key={b}>{b}</li>)}</ul></Section>
    {pick.kind!=='unlikely'&&<><Section title="확인할 신호"><p>{pick.watch}</p></Section><Section title="달라지는 경우"><p>{pick.against}</p></Section></>}
    <Section title="연결된 Driver"><DriverTags ids={pick.drivers}/></Section></>}</InfoModal>

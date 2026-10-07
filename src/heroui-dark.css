@@ -489,3 +489,12 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 /* World tooltip opens toward the inside of the map */
 .world-label.edge-right .world-tip{left:auto;right:0;transform:none}.world-label.edge-left .world-tip{left:0;transform:none}
 .world-label.edge-low .world-tip{top:auto;bottom:calc(100% + 8px)}
+/* Home: one rhythm. Vertical gaps between sections equal the 16px column gap. */
+.home-card{margin:0!important}
+.cal-main>*{margin-top:0!important;margin-bottom:16px!important}
+.sc-label{font-size:11px;border-radius:999px;padding:2px 8px;flex:none;white-space:nowrap}
+.sc-label.likely{background:#0B2A4A;color:#7CC4FA}.sc-label.maybe{background:#27272A;color:#D4D4D8}.sc-label.unlikely{background:transparent;color:#71717A;border:1px dashed #3F3F46}
+.sc-name.unlikely{color:#71717A}.sc-rank.unlikely{background:transparent;border:1px dashed #3F3F46;color:#71717A}
+.home-row-src{font-size:11px;color:#71717A}
+.sc-name{display:flex;align-items:center;gap:10px;min-width:0}
+.world-canvas svg{overflow:hidden}

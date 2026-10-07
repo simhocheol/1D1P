@@ -1,22 +1,23 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {geoNaturalEarth1,geoPath} from 'd3-geo';
 import {feature} from 'topojson-client';
-const W=960,H=470;
+const W=960,H=330;
 const tone=p=>p==null?'na':p>=90?'vhigh':p>=70?'high':p>30?'mid':p>10?'low':'vlow';
 const fmt=(v,u)=>v==null?'—':`${v}${['%','%p','원','엔','위안'].includes(u)?u:''}`;
 // Countries on the map: ISO numeric id, where the marker sits, where its label box sits (lon/lat), and indicators.
 export const regions=[
- {id:'us',iso:['840'],name:'미국',at:[-98,39],label:[-112,8],items:['rate10','dollar']},
+ {id:'us',iso:['840'],name:'미국',at:[-98,39],label:[-118,12],items:['rate10','dollar']},
  {id:'eu',iso:['276'],name:'독일 · 유로',at:[10.4,51],label:[-2,24],items:['eur','de10']},
  {id:'cn',iso:['156'],name:'중국',at:[104,35],label:[86,16],items:['cny']},
- {id:'kr',iso:['410'],name:'한국',at:[127.8,36.5],label:[118,62],items:['krw']},
+ {id:'kr',iso:['410'],name:'한국',at:[127.8,36.5],label:[112,58],items:['krw']},
  {id:'jp',iso:['392'],name:'일본',at:[138.5,37],label:[146,8],items:['jpy','jp10','usjp']},
 ];
 export default function WorldMap({items,onPick}){
  const [geo,setGeo]=useState(null),[hover,setHover]=useState('');
  // The map geometry loads lazily so the home bundle stays small.
  useEffect(()=>{let live=true;import('world-atlas/countries-110m.json').then(m=>{if(live)setGeo(feature(m.default,m.default.objects.countries).features.filter(f=>f.id!=='010'))});return()=>{live=false}},[]);
- const projection=useMemo(()=>geo&&geoNaturalEarth1().fitExtent([[0,0],[W,H]],{type:'FeatureCollection',features:geo}),[geo]);
+ // Crop to 50°S–72°N: inhabited land only, much shorter than the full globe.
+ const projection=useMemo(()=>geo&&geoNaturalEarth1().fitExtent([[0,0],[W,H]],{type:'MultiPoint',coordinates:[[-169,72],[179,72],[-169,-50],[179,-50],[0,72],[0,-50]]}),[geo]);
  const path=useMemo(()=>projection&&geoPath(projection),[projection]);
  const by=Object.fromEntries((items||[]).map(i=>[i.id,i]));
  const list=regions.map(r=>({...r,data:r.items.map(id=>by[id]).filter(Boolean)})).filter(r=>r.data.length);

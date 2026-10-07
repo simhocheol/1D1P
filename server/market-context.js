@@ -23,12 +23,12 @@ export const contextIndicators=[
 // Economic direction: is activity improving or worsening? Compares the recent average with the one before it.
 // better: +1 when a rise is good news, -1 when a rise is bad news. mode 'momentum' compares average monthly gains.
 export const directionIndicators=[
- {id:'claims',name:'신규 실업수당 청구',fred:'ICSA',k:4,better:-1,threshold:3,publicValue:true,unit:'건',plain:'이번 주에 처음 실업수당을 신청한 사람 수예요. 매주 나와서 고용이 나빠지는 걸 가장 빨리 보여줘요.',drivers:['demand']},
- {id:'payrolls',name:'일자리 증가 속도',fred:'PAYEMS',k:3,better:1,mode:'momentum',threshold:15,publicValue:true,unit:'천 명/월',plain:'한 달에 새로 생기는 일자리 수예요. 증가 속도가 줄면 경기가 식는 신호예요.',drivers:['demand']},
- {id:'retail',name:'소매판매',fred:'RSAFS',k:3,better:1,threshold:0.5,publicValue:true,unit:'',plain:'가게·온라인에서 팔린 물건의 총액이에요. 미국 경제의 약 70%가 소비라 중요해요.',drivers:['demand','revenue']},
- {id:'industry',name:'산업생산',fred:'INDPRO',k:3,better:1,threshold:0.3,publicValue:true,unit:'',plain:'공장·광산·전력에서 만든 양이에요. 제조업 경기를 보여줘요.',drivers:['demand','supply']},
- {id:'permits',name:'주택 건축 허가',fred:'PERMIT',k:3,better:1,threshold:3,publicValue:true,unit:'',plain:'새 집을 짓겠다고 받은 허가 수예요. 실제 공사보다 먼저 나와서 경기를 미리 보여줘요.',drivers:['demand','rates']},
- {id:'sentiment',name:'소비자 심리',fred:'UMCSENT',k:3,better:1,threshold:3,publicValue:false,unit:'',plain:'가계가 앞으로 경제와 살림살이를 어떻게 느끼는지 묻는 조사예요. 소비보다 먼저 움직여요.',drivers:['demand']},
+ {id:'claims',source:'미국 노동부 · 매주 목요일 발표',name:'신규 실업수당 청구',fred:'ICSA',k:4,better:-1,threshold:3,publicValue:true,unit:'건',plain:'이번 주에 처음 실업수당을 신청한 사람 수예요. 매주 나와서 고용이 나빠지는 걸 가장 빨리 보여줘요.',drivers:['demand']},
+ {id:'payrolls',source:'미국 노동통계국(BLS) 고용보고서 · 매월 첫 금요일',name:'일자리 증가 속도',fred:'PAYEMS',k:3,better:1,mode:'momentum',threshold:15,publicValue:true,unit:'천 명/월',plain:'한 달에 새로 생기는 일자리 수예요. 증가 속도가 줄면 경기가 식는 신호예요.',drivers:['demand']},
+ {id:'retail',source:'미국 인구조사국 · 매월 중순',name:'소매판매',fred:'RSAFS',k:3,better:1,threshold:0.5,publicValue:true,unit:'',plain:'가게·온라인에서 팔린 물건의 총액이에요. 미국 경제의 약 70%가 소비라 중요해요.',drivers:['demand','revenue']},
+ {id:'industry',source:'연방준비제도 · 매월 중순',name:'산업생산',fred:'INDPRO',k:3,better:1,threshold:0.3,publicValue:true,unit:'',plain:'공장·광산·전력에서 만든 양이에요. 제조업 경기를 보여줘요.',drivers:['demand','supply']},
+ {id:'permits',source:'미국 인구조사국 · 매월 중순',name:'주택 건축 허가',fred:'PERMIT',k:3,better:1,threshold:3,publicValue:true,unit:'',plain:'새 집을 짓겠다고 받은 허가 수예요. 실제 공사보다 먼저 나와서 경기를 미리 보여줘요.',drivers:['demand','rates']},
+ {id:'sentiment',source:'미시간대 소비자 조사 · 매월 2회',name:'소비자 심리',fred:'UMCSENT',k:3,better:1,threshold:3,publicValue:false,unit:'',plain:'가계가 앞으로 경제와 살림살이를 어떻게 느끼는지 묻는 조사예요. 소비보다 먼저 움직여요.',drivers:['demand']},
 ];
 const dirText={up:'좋아지는 중',down:'나빠지는 중',flat:'큰 변화 없음'};
 export function direction(ind,obs){
@@ -39,7 +39,7 @@ export function direction(ind,obs){
  const moved=Math.abs(change)>=ind.threshold,good=Math.sign(change)*ind.better>0;
  const trend=!moved?'flat':good?'up':'down';
  const span=ind.k===4?'최근 4주':'최근 3개월',before=ind.k===4?'그 전 4주':'그 전 3개월';
- const out={id:ind.id,name:ind.name,plain:ind.plain,drivers:ind.drivers,asOf:obs.at(-1).d,trend,trendText:dirText[trend]};
+ const out={id:ind.id,name:ind.name,plain:ind.plain,drivers:ind.drivers,asOf:obs.at(-1).d,trend,trendText:dirText[trend],source:`${ind.source} · FRED ${ind.fred}`,method:`${span} 평균을 ${before} 평균과 비교 · ${ind.mode==='momentum'?`월 증가폭 차이 ${ind.threshold}천 명`:`${ind.threshold}%`} 이상 움직이면 방향 판정${ind.better<0?' · 늘면 나쁜 신호':''}`};
  if(ind.publicValue){
   out.detail=ind.mode==='momentum'?`${span} 평균 월 ${Math.round(recent)}${ind.unit==='천 명/월'?'천 명':''} 증가 · ${before} 평균 ${Math.round(prior)}천 명`:`${span} 평균이 ${before}보다 ${Math.abs(round(change))}% ${change>=0?'늘었어요':'줄었어요'}`;
   out.latest=ind.mode==='momentum'?Math.round(vals.at(-1).v):round(obs.at(-1).v);
@@ -109,32 +109,35 @@ export function overall(items){
 const P=(by,id)=>by[id]?.percentile??null,V=(by,id)=>by[id]?.value??null;
 const ev=(by,id)=>{const i=by[id];if(!i)return null;return i.value!=null?`${i.name} ${i.value}${i.unit==='%'||i.unit==='%p'?i.unit:''}(${i.position})`:`${i.name} ${i.position}`};
 export const scenarioLibrary=[
- {id:'yield_hunt',title:'안전한 이자로 돈이 모이는 흐름',score:by=>avg([P(by,'real10'),P(by,'rate10')]),
+ {id:'yield_hunt',none:'금리가 높지 않아서, 이자만 보고 예금·채권으로 몰리는 움직임은 약해요.',title:'안전한 이자로 돈이 모이는 흐름',score:by=>avg([P(by,'real10'),P(by,'rate10')]),
   basis:['real10','rate10'],act:'위험을 크게 지지 않아도 이자가 높으니, 예금·단기 국채·채권형 상품으로 돈을 옮기는 사람이 늘어요. 배당을 보고 사던 주식은 상대적으로 덜 매력적으로 보여요.',
   watch:'국채 금리가 계속 높게 유지되는지, 채권형 상품으로 자금이 계속 들어오는지',against:'금리가 빠르게 내려가면 이 흐름은 약해져요.',drivers:['rates','liquidity']},
- {id:'stretched',title:'비싼 주가 속 “잘 버는 회사” 쏠림',score:by=>avg([P(by,'stocks'),P(by,'real10')]),
+ {id:'stretched',none:'주가가 비싸지 않거나 금리가 낮아서, 소수 대형주로 쏠릴 이유가 적어요.',title:'비싼 주가 속 “잘 버는 회사” 쏠림',score:by=>avg([P(by,'stocks'),P(by,'real10')]),
   basis:['stocks','real10'],act:'주가가 이미 높고 이자도 높아서, 사람들은 아무 주식이나 사기보다 실적이 확실한 대형 기업에 몰려요. 실적이 기대에 못 미치면 크게 팔리는 일이 잦아져요.',
   watch:'실적 발표 후 주가 반응의 크기, 대형주와 중소형주의 수익률 차이',against:'실적이 폭넓게 좋아지거나 금리가 내려가면 쏠림이 풀려요.',drivers:['revenue','margin','rates']},
- {id:'inflation_hedge',title:'물가 대비 자산 찾기',score:by=>avg([P(by,'cpi'),P(by,'breakeven')]),
+ {id:'inflation_hedge',none:'물가가 안정돼 있어서, 원자재·금으로 물가를 대비하려는 움직임은 보기 어려워요.',title:'물가 대비 자산 찾기',score:by=>avg([P(by,'cpi'),P(by,'breakeven')]),
   basis:['cpi','breakeven'],act:'물가가 목표보다 높게 머무르면 원자재·에너지·금처럼 물가와 함께 오르는 자산이나 가격을 올릴 수 있는 기업을 찾는 사람이 늘어요.',
   watch:'월간 물가 발표, 유가·원자재 가격',against:'물가가 2% 가까이 내려오면 약해져요.',drivers:['cost','supply']},
- {id:'strong_dollar',title:'강한 달러의 부담',score:by=>P(by,'dollar'),
+ {id:'strong_dollar',none:'달러가 강하지 않아서, 환율 때문에 해외 매출 기업이 손해 보는 상황은 아니에요.',title:'강한 달러의 부담',score:by=>P(by,'dollar'),
   basis:['dollar'],act:'달러가 강하면 해외에서 돈을 버는 미국 기업의 실적이 줄어 보이고, 미국 밖 자산에서 돈이 빠져 미국으로 들어오는 경향이 있어요.',
   watch:'달러 지수, 해외 매출 비중이 큰 기업의 실적 전망',against:'달러가 약해지면 해외 매출 기업이 다시 주목받아요.',drivers:['fx','revenue']},
- {id:'cut_bet',title:'금리 인하를 기다리는 흐름',score:by=>{const p=P(by,'policy');if(p==null)return null;const c=V(by,'cpi');return p*(c!=null&&c<=3?1:0.7)},
+ {id:'cut_bet',none:'기준금리가 높지 않아서, 금리 인하를 기다리며 움직이는 흐름은 약해요.',title:'금리 인하를 기다리는 흐름',score:by=>{const p=P(by,'policy');if(p==null)return null;const c=V(by,'cpi');return p*(c!=null&&c<=3?1:0.7)},
   basis:['policy','cpi'],act:'기준금리가 높은 상태라 “언제 내릴까”에 관심이 쏠려요. 연준 발언과 고용·물가 발표 하나하나에 주가가 크게 반응해요.',
   watch:'연준 회의 결과와 발언, 고용·물가 발표 직후 반응',against:'물가가 다시 오르면 인하 기대가 꺾여요.',drivers:['rates','policy']},
- {id:'recession_hedge',title:'경기 둔화에 대비하는 흐름',score:by=>{const c=P(by,'curve'),u=P(by,'unemp');if(c==null)return null;return (100-c)*0.7+(u??50)*0.3},
+ {id:'recession_hedge',none:'장단기 금리차가 정상이고 고용도 괜찮아서, 경기 둔화에 대비해 방어 업종으로 옮기는 흐름은 약해요.',title:'경기 둔화에 대비하는 흐름',score:by=>{const c=P(by,'curve'),u=P(by,'unemp');if(c==null)return null;return (100-c)*0.7+(u??50)*0.3},
   basis:['curve','unemp'],act:'장단기 금리차가 작거나 뒤집히면 경기 둔화를 걱정해 필수소비재·헬스케어·유틸리티처럼 경기를 덜 타는 업종으로 옮기는 사람이 늘어요.',
   watch:'장단기 금리차, 실업률·신규 실업수당 청구',against:'금리차가 넓어지고 고용이 튼튼하면 약해져요.',drivers:['demand','rates']},
- {id:'calm_rally',title:'불안이 낮을 때의 추격 매수',score:by=>{const v=P(by,'vix'),s=P(by,'stocks');if(v==null||s==null)return null;return avg([100-v,s])},
+ {id:'calm_rally',none:'시장 불안이 낮지 않거나 주가가 높지 않아서, 들떠서 따라 사는 분위기는 아니에요.',title:'불안이 낮을 때의 추격 매수',score:by=>{const v=P(by,'vix'),s=P(by,'stocks');if(v==null||s==null)return null;return avg([100-v,s])},
   basis:['vix','stocks'],act:'시장이 차분하고 주가가 오르는 중이면 “놓치기 싫어서” 따라 사는 사람이 늘어요. 이런 때는 작은 악재에도 급하게 되파는 일이 생겨요.',
   watch:'공포지수가 갑자기 뛰는지, 거래량이 몰리는 종목',against:'공포지수가 오르면 빠르게 식어요.',drivers:['liquidity','demand']},
 ];
 function avg(a){const v=a.filter(Number.isFinite);return v.length===a.length?v.reduce((s,x)=>s+x,0)/v.length:null}
-export function scenarios(items,n=3){
+// Five scenarios: the two best supported, one in the middle, and the two least supported ("not happening now").
+export function scenarios(items){
  const by=Object.fromEntries(items.filter(Boolean).map(i=>[i.id,i]));
- return scenarioLibrary.map(s=>({s,score:s.score(by)})).filter(x=>Number.isFinite(x.score)).sort((a,b)=>b.score-a.score).slice(0,n)
-  .map(({s,score},i)=>({rank:i+1,id:s.id,title:s.title,strength:score>=80?'강함':score>=60?'보통':'약함',score:Math.round(score),
-   basis:s.basis.map(id=>ev(by,id)).filter(Boolean),act:s.act,watch:s.watch,against:s.against,drivers:s.drivers}));
+ const ranked=scenarioLibrary.map(s=>({s,score:s.score(by)})).filter(x=>Number.isFinite(x.score)).sort((a,b)=>b.score-a.score);
+ const pickIdx=ranked.length>=5?[0,1,Math.floor((ranked.length-1)/2),ranked.length-2,ranked.length-1]:ranked.map((_,i)=>i);
+ return pickIdx.map((idx,i)=>{const {s,score}=ranked[idx];const kind=i<2?'likely':i>=pickIdx.length-2&&pickIdx.length>=5?'unlikely':'maybe';
+  return {rank:i+1,id:s.id,title:s.title,kind,label:kind==='likely'?'강함':kind==='unlikely'?'이런 시나리오는 없어요':score>=60?'보통':'약함',
+   basis:s.basis.map(id=>ev(by,id)).filter(Boolean),act:s.act,none:s.none,watch:s.watch,against:s.against,drivers:s.drivers}});
 }

@@ -42,14 +42,15 @@ export function ContextCard({data,error}){
   <IndicatorModal item={pick} onClose={()=>setPick(null)}/></Card>;
 }
 function Scenarios({data}){
- const [pick,setPick]=useState(null);
- return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">지금 위치가 가장 강하게 뒷받침하는 순서</p>{data&&<div className="home-rows">{(data.scenarios||[]).map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<><span className={`sc-rank r${sc.rank}`}>{sc.rank}</span>{sc.title}</>} right={<span className={`ctx-strength ${sc.strength==='강함'?'strong':sc.strength==='보통'?'mid':'weak'}`}>{sc.strength}</span>} below={<span className="ctx-meter"><i style={{width:`${sc.score}%`}}/></span>}/>)}</div>}
+ const [pick,setPick]=useState(null);const list=data?.scenarios||[];
+ return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">위 2개는 지금 뚜렷한 움직임, 아래 2개는 지금은 보기 어려운 움직임이에요.</p>
+  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>}/>)}</div>
   <p className="fine">흔히 나타나는 움직임을 설명한 것이며 매수·매도 추천이 아닙니다.</p>
-  <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className="ctx-strength strong">근거 강도 {pick.score}/100</span>}>{pick&&<>
-   <Section title="사람들의 움직임"><p>{pick.act}</p></Section>
-   <Section title="근거"><ul>{pick.basis.map(b=><li key={b}>{b}</li>)}</ul></Section>
-   <Section title="확인할 신호"><p>{pick.watch}</p></Section>
-   <Section title="달라지는 경우"><p>{pick.against}</p></Section>
+  <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className={`sc-label ${pick.kind}`}>{pick.label}</span>}>{pick&&<>
+   {pick.kind==='unlikely'?<Section title="왜 지금은 아닐까요?"><p>{pick.none}</p></Section>:null}
+   <Section title={pick.kind==='unlikely'?'이런 환경이라면 사람들은':'사람들의 움직임'}><p>{pick.act}</p></Section>
+   <Section title="근거가 된 지표"><ul>{pick.basis.map(b=><li key={b}>{b}</li>)}</ul></Section>
+   {pick.kind!=='unlikely'&&<><Section title="확인할 신호"><p>{pick.watch}</p></Section><Section title="달라지는 경우"><p>{pick.against}</p></Section></>}
    <Section title="연결된 Driver"><DriverTags ids={pick.drivers}/></Section></>}</InfoModal>
  </div>;
 }
@@ -57,10 +58,11 @@ const TrendIcon=({t})=>t==='up'?<TrendingUp size={15}/>:t==='down'?<TrendingDown
 export function DirectionCard({data,error}){
  const [pick,setPick]=useState(null);const d=data?.direction;
  return <Card icon={Gauge} title="경기 방향" sub="최근 평균을 그 전과 비교해 좋아지는지 나빠지는지">
-  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="home-rows">{d.items.map(it=><Row key={it.id} onPress={()=>setPick(it)} name={it.name} right={<span className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/>{it.trendText}</span>}/>)}</div></>}
+  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="home-rows">{d.items.map(it=><Row key={it.id} onPress={()=>setPick(it)} name={it.name} right={<span className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/>{it.trendText}</span>} below={it.source&&<span className="home-row-src">{it.source}</span>}/>)}</div><p className="fine">참고 데이터 · 미국 노동부·노동통계국·인구조사국·연방준비제도·미시간대 공식 발표를 FRED(세인트루이스 연준)에서 받아요. 주간 지표는 최근 4주, 월간 지표는 최근 3개월 평균을 그 전 기간과 비교해 방향을 정하고, 예상치와는 비교하지 않아요.</p></>}
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name} badge={pick&&<span className={`trend trend-${pick.trend}`}><TrendIcon t={pick.trend}/>{pick.trendText}</span>}>{pick&&<>
    <Section title="최근 변화"><p>{pick.detail}</p></Section>
    <Section title="이게 뭐예요?"><p>{pick.plain}</p></Section>
+   <Section title="참고한 데이터"><p>{pick.source}</p><p className="fine">{pick.method}</p></Section>
    <Section title="연결된 Driver"><DriverTags ids={pick.drivers}/></Section>
    <p className="fine">{pick.asOf} 발표분까지 반영 · 발표 값의 방향만 보며 예상치와 비교하지 않습니다.</p></>}</InfoModal>
  </Card>;

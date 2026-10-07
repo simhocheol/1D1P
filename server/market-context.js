@@ -11,7 +11,56 @@ export const contextIndicators=[
  {id:'dollar',name:'달러 가치',fred:'DTWEXBGS',unit:'',publicValue:true,drivers:['fx'],plain:'주요 교역국 돈과 비교한 달러의 힘이에요. 높으면 수입품은 싸지고 미국 기업의 해외 매출은 줄어 보여요.'},
  {id:'vix',name:'공포지수(VIX)',fred:'VIXCLS',unit:'',publicValue:false,drivers:['credit','liquidity'],plain:'앞으로 한 달간 주가가 얼마나 출렁일지에 대한 시장의 예상이에요. 높을수록 불안해요.'},
  {id:'stocks',name:'실질 주가(S&P 500)',source:'shiller',unit:'',publicValue:false,drivers:['demand','liquidity'],plain:'물가 상승을 빼고 본 S&P 500 지수의 수준이에요. 150년 역사 속 위치를 봐요.'},
+ // World around the US market (group: global). FX from the Fed H.10 release; long rates from OECD via FRED.
+ {id:'krw',group:'global',name:'원·달러 환율',fred:'DEXKOUS',unit:'원',publicValue:true,drivers:['fx'],plain:'1달러를 사는 데 드는 원화예요. 미국 주식 수익은 원화로 돌아오니, 환율이 오르면 수익이 늘고 내리면 줄어요.'},
+ {id:'jpy',group:'global',name:'엔·달러 환율',fred:'DEXJPUS',unit:'엔',publicValue:true,drivers:['fx','liquidity'],plain:'1달러에 몇 엔인지예요. 높을수록 엔화가 약해요. 싼 엔화를 빌려 해외에 투자하는 흐름(엔캐리)과 관련돼요.'},
+ {id:'eur',group:'global',name:'유로 가치(달러 기준)',fred:'DEXUSEU',unit:'달러',publicValue:true,drivers:['fx'],plain:'1유로가 몇 달러인지예요. 높을수록 유로가 강하고 달러가 약해요.'},
+ {id:'cny',group:'global',name:'위안·달러 환율',fred:'DEXCHUS',unit:'위안',publicValue:true,drivers:['fx','demand'],plain:'1달러에 몇 위안인지예요. 위안이 약하면 중국 경기 걱정이나 중국의 수출 경쟁력 강화로 읽혀요.'},
+ {id:'jp10',group:'global',name:'일본 10년물 금리',fred:'IRLTLT01JPM156N',unit:'%',publicValue:true,drivers:['rates'],plain:'일본 정부가 10년간 돈을 빌리는 이자예요. 오르면 일본으로 돈이 돌아가며 해외 자산을 파는 일이 생길 수 있어요.'},
+ {id:'de10',group:'global',name:'독일 10년물 금리',fred:'IRLTLT01DEM156N',unit:'%',publicValue:true,drivers:['rates'],plain:'유럽의 기준 역할을 하는 독일 국채 이자예요. 유럽 경기와 유럽중앙은행 정책을 반영해요.'},
+ {id:'usjp',group:'global',name:'미국−일본 금리차(10년)',derived:['DGS10','IRLTLT01JPM156N'],unit:'%p',publicValue:true,drivers:['rates','liquidity'],plain:'미국과 일본 10년물 이자 차이예요. 클수록 엔화를 빌려 미국에 투자할 유인이 커요. 이 차이가 갑자기 줄면 그 돈이 빠르게 되돌아가며 미국 증시가 흔들릴 수 있어요.'},
 ];
+// Economic direction: is activity improving or worsening? Compares the recent average with the one before it.
+// better: +1 when a rise is good news, -1 when a rise is bad news. mode 'momentum' compares average monthly gains.
+export const directionIndicators=[
+ {id:'claims',name:'신규 실업수당 청구',fred:'ICSA',k:4,better:-1,threshold:3,publicValue:true,unit:'건',plain:'이번 주에 처음 실업수당을 신청한 사람 수예요. 매주 나와서 고용이 나빠지는 걸 가장 빨리 보여줘요.',drivers:['demand']},
+ {id:'payrolls',name:'일자리 증가 속도',fred:'PAYEMS',k:3,better:1,mode:'momentum',threshold:15,publicValue:true,unit:'천 명/월',plain:'한 달에 새로 생기는 일자리 수예요. 증가 속도가 줄면 경기가 식는 신호예요.',drivers:['demand']},
+ {id:'retail',name:'소매판매',fred:'RSAFS',k:3,better:1,threshold:0.5,publicValue:true,unit:'',plain:'가게·온라인에서 팔린 물건의 총액이에요. 미국 경제의 약 70%가 소비라 중요해요.',drivers:['demand','revenue']},
+ {id:'industry',name:'산업생산',fred:'INDPRO',k:3,better:1,threshold:0.3,publicValue:true,unit:'',plain:'공장·광산·전력에서 만든 양이에요. 제조업 경기를 보여줘요.',drivers:['demand','supply']},
+ {id:'permits',name:'주택 건축 허가',fred:'PERMIT',k:3,better:1,threshold:3,publicValue:true,unit:'',plain:'새 집을 짓겠다고 받은 허가 수예요. 실제 공사보다 먼저 나와서 경기를 미리 보여줘요.',drivers:['demand','rates']},
+ {id:'sentiment',name:'소비자 심리',fred:'UMCSENT',k:3,better:1,threshold:3,publicValue:false,unit:'',plain:'가계가 앞으로 경제와 살림살이를 어떻게 느끼는지 묻는 조사예요. 소비보다 먼저 움직여요.',drivers:['demand']},
+];
+const dirText={up:'좋아지는 중',down:'나빠지는 중',flat:'큰 변화 없음'};
+export function direction(ind,obs){
+ if(obs.length<ind.k*2+1)return null;
+ const vals=ind.mode==='momentum'?obs.slice(1).map((o,i)=>({d:o.d,v:o.v-obs[i].v})):obs;
+ const recent=mean(vals.slice(-ind.k).map(o=>o.v)),prior=mean(vals.slice(-ind.k*2,-ind.k).map(o=>o.v));
+ const change=ind.mode==='momentum'?recent-prior:(recent/prior-1)*100;
+ const moved=Math.abs(change)>=ind.threshold,good=Math.sign(change)*ind.better>0;
+ const trend=!moved?'flat':good?'up':'down';
+ const span=ind.k===4?'최근 4주':'최근 3개월',before=ind.k===4?'그 전 4주':'그 전 3개월';
+ const out={id:ind.id,name:ind.name,plain:ind.plain,drivers:ind.drivers,asOf:obs.at(-1).d,trend,trendText:dirText[trend]};
+ if(ind.publicValue){
+  out.detail=ind.mode==='momentum'?`${span} 평균 월 ${Math.round(recent)}${ind.unit==='천 명/월'?'천 명':''} 증가 · ${before} 평균 ${Math.round(prior)}천 명`:`${span} 평균이 ${before}보다 ${Math.abs(round(change))}% ${change>=0?'늘었어요':'줄었어요'}`;
+  out.latest=ind.mode==='momentum'?Math.round(vals.at(-1).v):round(obs.at(-1).v);
+ }else out.detail=`${span} 평균이 ${before}보다 ${change>=0?'높아졌어요':'낮아졌어요'}`;
+ return out;
+}
+export function directionSummary(list){
+ const l=list.filter(Boolean),up=l.filter(x=>x.trend==='up').length,down=l.filter(x=>x.trend==='down').length;
+ if(!l.length)return '경기 방향을 판단할 자료가 부족해요.';
+ if(up>=down+2)return `경기 지표 ${l.length}개 중 ${up}개가 좋아지는 중이에요. 경기는 대체로 힘을 내고 있어요.`;
+ if(down>=up+2)return `경기 지표 ${l.length}개 중 ${down}개가 나빠지는 중이에요. 경기가 식어가는 신호가 늘고 있어요.`;
+ return `좋아지는 지표 ${up}개, 나빠지는 지표 ${down}개로 엇갈려요. 경기가 뚜렷한 방향을 정하지 못한 상태예요.`;
+}
+export function globalSummary(items){
+ const by=Object.fromEntries(items.filter(Boolean).map(i=>[i.id,i])),lines=[];
+ const krw=by.krw;if(krw?.percentile>=70)lines.push(`원·달러 환율이 ${krw.value}원으로 높은 편이에요. 지금 달러로 바꾸면 비싸게 사는 셈이고, 나중에 환율이 내려가면 원화 수익이 줄 수 있어요.`);else if(krw?.percentile<=30)lines.push(`원·달러 환율이 ${krw.value}원으로 낮은 편이에요. 달러를 싸게 살 수 있는 환경이에요.`);else if(krw)lines.push(`원·달러 환율 ${krw.value}원은 보통 범위예요.`);
+ if(by.usjp?.percentile>=70&&by.jpy?.percentile>=70)lines.push('미국과 일본의 금리 차이가 크고 엔화가 약해요. 엔화를 빌려 미국에 투자하는 흐름이 커진 상태라, 갑자기 되돌려지면(2024년 8월처럼) 미국 증시도 흔들릴 수 있어요.');
+ if(by.jp10?.percentile>=90)lines.push('일본 금리가 수십 년 만에 높은 수준이에요. 일본 투자자들이 해외 자산을 팔고 자국으로 돌아갈 유인이 커져요.');
+ if(by.cny?.percentile>=80)lines.push('위안화가 약한 편이에요. 중국 경기 걱정과 관련이 있을 수 있어요.');
+ return lines.length?lines:['주요국 환율과 금리는 대체로 보통 범위예요.'];
+}
 // Fixed historical eras for comparison (inclusive years).
 export const eras=[
  {id:'pre2008',label:'2000~2007년',from:2000,to:2007},
@@ -27,14 +76,14 @@ export function describe(ind,obs,{now=new Date(),windowYears=20}={}){
  const last=series.at(-1),from=`${now.getUTCFullYear()-windowYears}`;
  const win=series.filter(o=>o.d>=from).map(o=>o.v),pct=percentile(win,last.v),avg=mean(win);
  const eraAvg=eras.map(e=>({id:e.id,label:e.label,avg:mean(series.filter(o=>+o.d.slice(0,4)>=e.from&&+o.d.slice(0,4)<=e.to).map(o=>o.v))})).filter(e=>e.avg!=null);
- const out={id:ind.id,name:ind.name,plain:ind.plain,drivers:ind.drivers,unit:ind.unit,asOf:last.d,windowFrom:series.find(o=>o.d>=from)?.d||series[0].d,percentile:pct,position:positionText(pct)};
+ const out={id:ind.id,group:ind.group||"level",name:ind.name,plain:ind.plain,drivers:ind.drivers,unit:ind.unit,asOf:last.d,windowFrom:series.find(o=>o.d>=from)?.d||series[0].d,percentile:pct,position:positionText(pct)};
  if(ind.publicValue){out.value=round(last.v);out.average=round(avg);out.min=round(Math.min(...win));out.max=round(Math.max(...win));out.eras=eraAvg.map(e=>({...e,avg:round(e.avg)}));out.compare=compareText(ind,last.v,avg,eraAvg)}
  else{out.eras=eraAvg.map(e=>({id:e.id,label:e.label,percentile:percentile(win,e.avg)}));out.compare=`최근 ${windowYears}년 중 ${pct>=100?'가장 높은':pct>=50?`상위 ${Math.max(1,100-pct)}%`:`하위 ${Math.max(1,pct)}%`} 수준이에요.`}
  return out;
 }
 const round=v=>Number.isFinite(v)?Math.round(v*100)/100:null;
 function compareText(ind,v,avg,eraAvg){
- const u=ind.unit==='%'||ind.unit==='%p'?ind.unit:'',f=x=>`${round(x)}${u}`;
+ const u=['%','%p','원','엔','위안'].includes(ind.unit)?ind.unit:'',f=x=>`${round(x)}${u}`;
  const parts=[`최근 20년 평균(${f(avg)})보다 ${v>avg?'높아요':'낮아요'}`];
  const zero=eraAvg.find(e=>e.id==='zero'),pre=eraAvg.find(e=>e.id==='pre2008');
  if(zero)parts.push(`저금리 시대 평균 ${f(zero.avg)}`);if(pre)parts.push(`2000년대 초 평균 ${f(pre.avg)}`);

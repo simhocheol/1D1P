@@ -33,3 +33,14 @@ test('scenarios rank by support and only name public values', async ()=>{
  assert.ok(r.find(x=>x.id==='stretched').basis.includes('실질 주가 매우 높음'));
  assert.equal(r.length,3);
 });
+test('direction compares recent and prior averages with the right sign', async ()=>{
+ const {direction,directionIndicators,directionSummary,globalSummary}=await import('../server/market-context.js');
+ const ind=id=>directionIndicators.find(i=>i.id===id);
+ const weekly=v=>v.map((x,i)=>({d:`2026-0${1+Math.floor(i/4)}-0${1+i%4}`,v:x}));
+ assert.equal(direction(ind('claims'),weekly([200,200,200,200,200,200,200,200,240,240,240,240])).trend,'down');
+ assert.equal(direction(ind('retail'),weekly([100,100,100,100,101,101,101])).trend,'up');
+ const pay=direction(ind('payrolls'),weekly([0,200,400,600,700,800,900]));assert.equal(pay.trend,'down');
+ const s=direction(ind('sentiment'),weekly([60,60,60,60,70,70,70]));assert.equal(s.latest,undefined);
+ assert.ok(directionSummary([{trend:'up'},{trend:'up'},{trend:'flat'}]).includes('좋아지는'));
+ assert.ok(globalSummary([{id:'krw',value:1450,percentile:90}])[0].includes('1450원'));
+});

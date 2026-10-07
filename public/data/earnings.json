@@ -4,8 +4,8 @@
   "scope": "S&P 500 constituents",
   "from": "2026-10-01",
   "to": "2026-10-31",
-  "checkedAt": "2026-10-06T21:50:41.554Z",
-  "collectedAt": "2026-10-06T21:50:41.554Z",
+  "checkedAt": "2026-10-07T16:41:10.658Z",
+  "collectedAt": "2026-10-07T16:41:10.658Z",
   "status": "ok",
   "events": [
     {
@@ -90,7 +90,7 @@
       "symbol": "JPM",
       "name": "JPMorgan Chase",
       "sector": "Financials",
-      "hour": "시각 미확인",
+      "hour": "장 시작 전",
       "quarter": 3,
       "year": 2026,
       "epsEstimate": 5.9185,
@@ -101,7 +101,7 @@
       "symbol": "JNJ",
       "name": "Johnson & Johnson",
       "sector": "Health Care",
-      "hour": "시각 미확인",
+      "hour": "장 시작 전",
       "quarter": 3,
       "year": 2026,
       "epsEstimate": 2.5881,
@@ -112,7 +112,7 @@
       "symbol": "C",
       "name": "Citigroup",
       "sector": "Financials",
-      "hour": "시각 미확인",
+      "hour": "장 시작 전",
       "quarter": 3,
       "year": 2026,
       "epsEstimate": 2.7311,
@@ -505,6 +505,17 @@
     },
     {
       "date": "2026-10-20",
+      "symbol": "MMM",
+      "name": "3M",
+      "sector": "Industrials",
+      "hour": "시각 미확인",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 2.4143,
+      "revenueEstimate": 6688619879
+    },
+    {
+      "date": "2026-10-20",
       "symbol": "GPC",
       "name": "Genuine Parts Company",
       "sector": "Consumer Discretionary",
@@ -568,6 +579,17 @@
       "year": 2026,
       "epsEstimate": 0.4672,
       "revenueEstimate": 2062156390
+    },
+    {
+      "date": "2026-10-20",
+      "symbol": "EFX",
+      "name": "Equifax",
+      "sector": "Industrials",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 2.2395,
+      "revenueEstimate": 1714063485
     },
     {
       "date": "2026-10-20",
@@ -780,17 +802,6 @@
     },
     {
       "date": "2026-10-21",
-      "symbol": "EFX",
-      "name": "Equifax",
-      "sector": "Industrials",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 2.2395,
-      "revenueEstimate": 1714063485
-    },
-    {
-      "date": "2026-10-21",
       "symbol": "CME",
       "name": "CME Group",
       "sector": "Financials",
@@ -956,17 +967,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "MCD",
-      "name": "McDonald's",
-      "sector": "Consumer Discretionary",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 3.4212,
-      "revenueEstimate": 7371485171
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "HIG",
       "name": "Hartford (The)",
       "sector": "Financials",
@@ -1019,17 +1019,6 @@
       "year": 2026,
       "epsEstimate": 0.7821,
       "revenueEstimate": 6162296278
-    },
-    {
-      "date": "2026-10-22",
-      "symbol": "LHX",
-      "name": "L3Harris",
-      "sector": "Industrials",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 3.0323,
-      "revenueEstimate": 6018599090
     },
     {
       "date": "2026-10-22",
@@ -1195,6 +1184,17 @@
       "year": 2026,
       "epsEstimate": 0.3838,
       "revenueEstimate": 2892732821
+    },
+    {
+      "date": "2026-10-22",
+      "symbol": "NVR",
+      "name": "NVR, Inc.",
+      "sector": "Consumer Discretionary",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 105.476,
+      "revenueEstimate": 2633298260
     },
     {
       "date": "2026-10-22",
@@ -1418,6 +1418,17 @@
     },
     {
       "date": "2026-10-26",
+      "symbol": "UHS",
+      "name": "Universal Health Services",
+      "sector": "Health Care",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 5.2395,
+      "revenueEstimate": 4763133527
+    },
+    {
+      "date": "2026-10-26",
       "symbol": "PFG",
       "name": "Principal Financial Group",
       "sector": "Financials",
@@ -1459,6 +1470,17 @@
       "year": 2026,
       "epsEstimate": 2.0851,
       "revenueEstimate": 1644439858
+    },
+    {
+      "date": "2026-10-26",
+      "symbol": "PSA",
+      "name": "Public Storage",
+      "sector": "Real Estate",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 2.4173,
+      "revenueEstimate": 1295456431
     },
     {
       "date": "2026-10-26",
@@ -1536,17 +1558,6 @@
       "year": 2026,
       "epsEstimate": 1.6452,
       "revenueEstimate": 22315249272
-    },
-    {
-      "date": "2026-10-27",
-      "symbol": "ADM",
-      "name": "Archer Daniels Midland",
-      "sector": "Consumer Staples",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.5814,
-      "revenueEstimate": 22159248247
     },
     {
       "date": "2026-10-27",
@@ -1649,17 +1660,6 @@
     },
     {
       "date": "2026-10-27",
-      "symbol": "MMM",
-      "name": "3M",
-      "sector": "Industrials",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 2.4143,
-      "revenueEstimate": 6688619879
-    },
-    {
-      "date": "2026-10-27",
       "symbol": "KHC",
       "name": "Kraft Heinz",
       "sector": "Consumer Staples",
@@ -1679,17 +1679,6 @@
       "year": 2026,
       "epsEstimate": 0.8866,
       "revenueEstimate": 5048559962
-    },
-    {
-      "date": "2026-10-27",
-      "symbol": "FISV",
-      "name": "Fiserv",
-      "sector": "Financials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.7544,
-      "revenueEstimate": 4944800410
     },
     {
       "date": "2026-10-27",
@@ -1822,17 +1811,6 @@
       "year": 2026,
       "epsEstimate": 1.6579,
       "revenueEstimate": 2787639137
-    },
-    {
-      "date": "2026-10-27",
-      "symbol": "NVR",
-      "name": "NVR, Inc.",
-      "sector": "Consumer Discretionary",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 105.476,
-      "revenueEstimate": 2633298260
     },
     {
       "date": "2026-10-27",
@@ -2097,17 +2075,6 @@
       "year": 2026,
       "epsEstimate": 0.9447,
       "revenueEstimate": 5100675138
-    },
-    {
-      "date": "2026-10-28",
-      "symbol": "UHS",
-      "name": "Universal Health Services",
-      "sector": "Health Care",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 5.2395,
-      "revenueEstimate": 4763133527
     },
     {
       "date": "2026-10-28",
@@ -2551,17 +2518,6 @@
     },
     {
       "date": "2026-10-29",
-      "symbol": "UBER",
-      "name": "Uber",
-      "sector": "Industrials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.9745,
-      "revenueEstimate": 15004124693
-    },
-    {
-      "date": "2026-10-29",
       "symbol": "BMY",
       "name": "Bristol Myers Squibb",
       "sector": "Health Care",
@@ -2592,17 +2548,6 @@
       "year": 2027,
       "epsEstimate": 47.0581,
       "revenueEstimate": 10837792913
-    },
-    {
-      "date": "2026-10-29",
-      "symbol": "CMI",
-      "name": "Cummins",
-      "sector": "Industrials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 8.3282,
-      "revenueEstimate": 9971788792
     },
     {
       "date": "2026-10-29",
@@ -2639,17 +2584,6 @@
     },
     {
       "date": "2026-10-29",
-      "symbol": "DUK",
-      "name": "Duke Energy",
-      "sector": "Utilities",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.8655,
-      "revenueEstimate": 9000885821
-    },
-    {
-      "date": "2026-10-29",
       "symbol": "MAR",
       "name": "Marriott International",
       "sector": "Consumer Discretionary",
@@ -2669,6 +2603,17 @@
       "year": 2026,
       "epsEstimate": 3.6052,
       "revenueEstimate": 6709845029
+    },
+    {
+      "date": "2026-10-29",
+      "symbol": "LHX",
+      "name": "L3Harris",
+      "sector": "Industrials",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 3.0323,
+      "revenueEstimate": 6018599090
     },
     {
       "date": "2026-10-29",
@@ -3131,6 +3076,17 @@
       "year": 2026,
       "epsEstimate": 2.6625,
       "revenueEstimate": 8948556640
+    },
+    {
+      "date": "2026-10-30",
+      "symbol": "EXC",
+      "name": "Exelon",
+      "sector": "Utilities",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.8177,
+      "revenueEstimate": 6879656076
     },
     {
       "date": "2026-10-30",

@@ -507,3 +507,23 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .sc-etfs.flat{padding-left:0;color:#45D483;opacity:.85}
 .world-tip small.world-tip-etf{color:#45D483}
 .world-hint{font-size:12px!important;color:#D4D4D8!important;margin:6px 0!important}.world-hint b{color:#45D483;margin-right:4px}
+/* ETF tickers: monochrome everywhere */
+.sc-etfs.flat,.sc-etfs{color:#A1A1AA!important;opacity:1}
+.sc-chips span.etf-tk,.sc-chips .in,.sc-chips .out{background:#27272A!important;color:#FAFAFA!important}
+.sc-chips.out span.etf-tk{background:transparent!important;color:#A1A1AA!important;border:1px solid #3F3F46}
+.sc-chips-label{font-size:11px;color:#71717A;align-self:center;margin-right:2px}
+.world-hint b,.world-tip small.world-tip-etf{color:#D4D4D8!important}
+.world-hint .sc-chips{margin:6px 0 2px}
+.etf-tk{cursor:pointer;border-radius:4px;outline-offset:2px}
+.etf-tk.text{color:#D4D4D8;text-decoration:underline dotted #52525B;text-underline-offset:3px}
+.etf-tk.text:hover,.etf-tk.text:focus-visible{color:#FAFAFA;text-decoration-color:#A1A1AA}
+.etf-tk.chip{display:inline-flex;align-items:baseline;gap:5px;font-size:12px;font-weight:700;border-radius:8px;padding:4px 8px;background:#27272A;color:#FAFAFA}
+.etf-tk.chip small{font-weight:400;font-size:11px;color:#A1A1AA}.etf-tk.chip:hover{background:#3F3F46!important}
+.world-etf{font-size:11px;color:#A1A1AA;white-space:nowrap}
+.etf-pop{position:fixed;z-index:1000;background:#111113;border:1px solid #3F3F46;border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.6);padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.etf-pop-head{display:flex;align-items:baseline;gap:8px}.etf-pop-head strong{font-size:15px;color:#FAFAFA}.etf-pop-head span{font-size:12px;color:#A1A1AA}
+.etf-pop iframe{flex:1;width:100%;border:0;border-radius:8px;background:#18181B}
+.etf-pop small{font-size:10px;color:#71717A}
+/* A color-scheme mismatch makes browsers paint an opaque white backdrop behind the iframe. */
+.etf-pop iframe{color-scheme:light;background:transparent}
+.sc-chips span.sc-chips-label{background:none!important;color:#71717A!important;font-weight:400;padding:0;border:0}

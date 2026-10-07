@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {Compass,Route,Gauge,Globe2,ChevronRight,TrendingUp,TrendingDown,Minus} from 'lucide-react';
 import InfoModal,{DriverTags,Section} from './info-modal.jsx';
+import WorldMap from './world-map.jsx';
 const fmt=(v,u)=>v==null?'—':`${v}${['%','%p','원','엔','위안'].includes(u)?u:''}`;
 const tone=p=>p==null?'na':p>=90?'vhigh':p>=70?'high':p>30?'mid':p>10?'low':'vlow';
 const rel=p=>p>=100?'가장 높은':p>=50?`상위 ${Math.max(1,100-p)}%`:`하위 ${Math.max(1,p)}%`;
@@ -36,13 +37,13 @@ export function ContextCard({data,error}){
  const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='level');
  return <Card icon={Compass} title="지금 시장은 어디쯤?" sub="지금 수준이 과거 20년(주가는 150년)과 비교해 높은지 낮은지" meta={data&&`${new Date(data.generatedAt).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'})} 갱신`}>
   <Status data={data} error={error}/>{data&&<><div className="home-summary">{data.summary.map((l,i)=><p key={i}>{l}</p>)}</div><IndicatorRows items={items} onPick={setPick}/>
+  <Scenarios data={data}/>
   {data.cape&&<p className="fine">참고 · CAPE(이익 대비 주가)는 공개 데이터가 {data.cape.asOf.slice(0,7)}에 멈춰 있어요. 그때 1871년 이후 상위 {Math.max(1,100-data.cape.percentile)}% 수준이었어요.</p>}</>}
   <IndicatorModal item={pick} onClose={()=>setPick(null)}/></Card>;
 }
-export function ScenarioCard({data,error}){
+function Scenarios({data}){
  const [pick,setPick]=useState(null);
- return <Card icon={Route} title="이런 시장에서 사람들의 움직임" sub="지금 위치가 가장 강하게 뒷받침하는 순서">
-  <Status data={data} error={error}/>{data&&<div className="home-rows">{(data.scenarios||[]).map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<><span className={`sc-rank r${sc.rank}`}>{sc.rank}</span>{sc.title}</>} right={<span className={`ctx-strength ${sc.strength==='강함'?'strong':sc.strength==='보통'?'mid':'weak'}`}>{sc.strength}</span>} below={<span className="ctx-meter"><i style={{width:`${sc.score}%`}}/></span>}/>)}</div>}
+ return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">지금 위치가 가장 강하게 뒷받침하는 순서</p>{data&&<div className="home-rows">{(data.scenarios||[]).map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<><span className={`sc-rank r${sc.rank}`}>{sc.rank}</span>{sc.title}</>} right={<span className={`ctx-strength ${sc.strength==='강함'?'strong':sc.strength==='보통'?'mid':'weak'}`}>{sc.strength}</span>} below={<span className="ctx-meter"><i style={{width:`${sc.score}%`}}/></span>}/>)}</div>}
   <p className="fine">흔히 나타나는 움직임을 설명한 것이며 매수·매도 추천이 아닙니다.</p>
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className="ctx-strength strong">근거 강도 {pick.score}/100</span>}>{pick&&<>
    <Section title="사람들의 움직임"><p>{pick.act}</p></Section>
@@ -50,7 +51,7 @@ export function ScenarioCard({data,error}){
    <Section title="확인할 신호"><p>{pick.watch}</p></Section>
    <Section title="달라지는 경우"><p>{pick.against}</p></Section>
    <Section title="연결된 Driver"><DriverTags ids={pick.drivers}/></Section></>}</InfoModal>
- </Card>;
+ </div>;
 }
 const TrendIcon=({t})=>t==='up'?<TrendingUp size={15}/>:t==='down'?<TrendingDown size={15}/>:<Minus size={15}/>;
 export function DirectionCard({data,error}){
@@ -65,8 +66,8 @@ export function DirectionCard({data,error}){
  </Card>;
 }
 export function GlobalCard({data,error}){
- const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='global');
- return <Card icon={Globe2} title="세계 속 미국 시장" sub="내 수익에 닿는 환율과 주요국 금리">
-  <Status data={data} error={error}/>{data?.global&&<><div className="home-summary">{data.global.summary.map((l,i)=><p key={i}>{l}</p>)}</div><IndicatorRows items={items} onPick={setPick}/></>}
-  <IndicatorModal item={pick} onClose={()=>setPick(null)}/></Card>;
+ const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='global'||['rate10','dollar'].includes(i.id));
+ return <Card icon={Globe2} title="세계 속 미국 시장" sub="내 수익에 닿는 환율과 주요국 금리 · 나라에 마우스를 올리면 자세히 보여요" className="home-wide">
+  <Status data={data} error={error}/>{data?.global&&<><div className="home-summary">{data.global.summary.map((l,i)=><p key={i}>{l}</p>)}</div><WorldMap items={items} onPick={setPick}/></>}
+  <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name}>{pick&&pick.data.map(d=><Section key={d.id} title={d.name}><p className="info-big">{fmt(d.value,d.unit)} <span className={`ctx-pos ${tone(d.percentile)}`}>{d.position}</span></p><RangeBar item={d}/><p className="world-compare">{d.compare}</p><p className="fine">{d.plain}</p><DriverTags ids={d.drivers}/></Section>)}</InfoModal></Card>;
 }

@@ -25,3 +25,11 @@ test('overall reading names the high-rates high-stocks combination', ()=>{
  assert.ok(lines[0].includes('금리와 주가가 동시에'));assert.ok(lines.some(l=>l.includes('뒤집혀')));
  assert.deepEqual(overall([]),['대부분의 지표가 과거 보통 범위 안에 있어요.']);
 });
+test('scenarios rank by support and only name public values', async ()=>{
+ const {scenarios}=await import('../server/market-context.js');
+ const items=[{id:'rate10',name:'10년물',value:5.3,unit:'%',percentile:100,position:'매우 높음'},{id:'real10',name:'실질',value:2.9,unit:'%',percentile:100,position:'매우 높음'},{id:'stocks',name:'실질 주가',percentile:100,position:'매우 높음'},{id:'dollar',name:'달러',value:121,unit:'',percentile:40,position:'보통'}];
+ const r=scenarios(items);
+ assert.equal(r[0].rank,1);assert.equal(r[0].strength,'강함');assert.ok(r[0].score>=r[1].score);
+ assert.ok(r.find(x=>x.id==='stretched').basis.includes('실질 주가 매우 높음'));
+ assert.equal(r.length,3);
+});

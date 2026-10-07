@@ -53,3 +53,38 @@ export function overall(items){
  if(hi('vix'))lines.push('공포지수가 높아 시장이 불안해하고 있어요.');else if(lo('vix'))lines.push('공포지수는 낮아 시장이 비교적 차분해요.');
  return lines.length?lines:['대부분의 지표가 과거 보통 범위 안에 있어요.'];
 }
+
+// Scenarios: how participants commonly behave in this kind of environment, ranked by how strongly
+// the current positions support each one. Descriptive, not a recommendation.
+const P=(by,id)=>by[id]?.percentile??null,V=(by,id)=>by[id]?.value??null;
+const ev=(by,id)=>{const i=by[id];if(!i)return null;return i.value!=null?`${i.name} ${i.value}${i.unit==='%'||i.unit==='%p'?i.unit:''}(${i.position})`:`${i.name} ${i.position}`};
+export const scenarioLibrary=[
+ {id:'yield_hunt',title:'안전한 이자로 돈이 모이는 흐름',score:by=>avg([P(by,'real10'),P(by,'rate10')]),
+  basis:['real10','rate10'],act:'위험을 크게 지지 않아도 이자가 높으니, 예금·단기 국채·채권형 상품으로 돈을 옮기는 사람이 늘어요. 배당을 보고 사던 주식은 상대적으로 덜 매력적으로 보여요.',
+  watch:'국채 금리가 계속 높게 유지되는지, 채권형 상품으로 자금이 계속 들어오는지',against:'금리가 빠르게 내려가면 이 흐름은 약해져요.',drivers:['rates','liquidity']},
+ {id:'stretched',title:'비싼 주가 속 “잘 버는 회사” 쏠림',score:by=>avg([P(by,'stocks'),P(by,'real10')]),
+  basis:['stocks','real10'],act:'주가가 이미 높고 이자도 높아서, 사람들은 아무 주식이나 사기보다 실적이 확실한 대형 기업에 몰려요. 실적이 기대에 못 미치면 크게 팔리는 일이 잦아져요.',
+  watch:'실적 발표 후 주가 반응의 크기, 대형주와 중소형주의 수익률 차이',against:'실적이 폭넓게 좋아지거나 금리가 내려가면 쏠림이 풀려요.',drivers:['revenue','margin','rates']},
+ {id:'inflation_hedge',title:'물가 대비 자산 찾기',score:by=>avg([P(by,'cpi'),P(by,'breakeven')]),
+  basis:['cpi','breakeven'],act:'물가가 목표보다 높게 머무르면 원자재·에너지·금처럼 물가와 함께 오르는 자산이나 가격을 올릴 수 있는 기업을 찾는 사람이 늘어요.',
+  watch:'월간 물가 발표, 유가·원자재 가격',against:'물가가 2% 가까이 내려오면 약해져요.',drivers:['cost','supply']},
+ {id:'strong_dollar',title:'강한 달러의 부담',score:by=>P(by,'dollar'),
+  basis:['dollar'],act:'달러가 강하면 해외에서 돈을 버는 미국 기업의 실적이 줄어 보이고, 미국 밖 자산에서 돈이 빠져 미국으로 들어오는 경향이 있어요.',
+  watch:'달러 지수, 해외 매출 비중이 큰 기업의 실적 전망',against:'달러가 약해지면 해외 매출 기업이 다시 주목받아요.',drivers:['fx','revenue']},
+ {id:'cut_bet',title:'금리 인하를 기다리는 흐름',score:by=>{const p=P(by,'policy');if(p==null)return null;const c=V(by,'cpi');return p*(c!=null&&c<=3?1:0.7)},
+  basis:['policy','cpi'],act:'기준금리가 높은 상태라 “언제 내릴까”에 관심이 쏠려요. 연준 발언과 고용·물가 발표 하나하나에 주가가 크게 반응해요.',
+  watch:'연준 회의 결과와 발언, 고용·물가 발표 직후 반응',against:'물가가 다시 오르면 인하 기대가 꺾여요.',drivers:['rates','policy']},
+ {id:'recession_hedge',title:'경기 둔화에 대비하는 흐름',score:by=>{const c=P(by,'curve'),u=P(by,'unemp');if(c==null)return null;return (100-c)*0.7+(u??50)*0.3},
+  basis:['curve','unemp'],act:'장단기 금리차가 작거나 뒤집히면 경기 둔화를 걱정해 필수소비재·헬스케어·유틸리티처럼 경기를 덜 타는 업종으로 옮기는 사람이 늘어요.',
+  watch:'장단기 금리차, 실업률·신규 실업수당 청구',against:'금리차가 넓어지고 고용이 튼튼하면 약해져요.',drivers:['demand','rates']},
+ {id:'calm_rally',title:'불안이 낮을 때의 추격 매수',score:by=>{const v=P(by,'vix'),s=P(by,'stocks');if(v==null||s==null)return null;return avg([100-v,s])},
+  basis:['vix','stocks'],act:'시장이 차분하고 주가가 오르는 중이면 “놓치기 싫어서” 따라 사는 사람이 늘어요. 이런 때는 작은 악재에도 급하게 되파는 일이 생겨요.',
+  watch:'공포지수가 갑자기 뛰는지, 거래량이 몰리는 종목',against:'공포지수가 오르면 빠르게 식어요.',drivers:['liquidity','demand']},
+];
+function avg(a){const v=a.filter(Number.isFinite);return v.length===a.length?v.reduce((s,x)=>s+x,0)/v.length:null}
+export function scenarios(items,n=3){
+ const by=Object.fromEntries(items.filter(Boolean).map(i=>[i.id,i]));
+ return scenarioLibrary.map(s=>({s,score:s.score(by)})).filter(x=>Number.isFinite(x.score)).sort((a,b)=>b.score-a.score).slice(0,n)
+  .map(({s,score},i)=>({rank:i+1,id:s.id,title:s.title,strength:score>=80?'강함':score>=60?'보통':'약함',score:Math.round(score),
+   basis:s.basis.map(id=>ev(by,id)).filter(Boolean),act:s.act,watch:s.watch,against:s.against,drivers:s.drivers}));
+}

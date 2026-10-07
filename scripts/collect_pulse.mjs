@@ -10,6 +10,8 @@ if(process.env.ALPACA_CREDENTIALS_JSON){const b=JSON.parse(process.env.ALPACA_CR
 if(!key||!secret)throw Error('Alpaca credentials missing');
 const headers={'APCA-API-KEY-ID':key,'APCA-API-SECRET-KEY':secret};
 async function get(url){for(let i=0;i<3;i++){const r=await fetch(url,{headers,signal:AbortSignal.timeout(30000)});if(r.ok)return r.json();if(r.status<500&&r.status!==429)throw Error(`HTTP ${r.status} ${url.pathname}`);await new Promise(s=>setTimeout(s,1000*(i+1)))}throw Error(`HTTP retry exhausted ${url.pathname}`)}
+// Probe: is the overnight (Blue Ocean) feed available on this plan? Logs status and trade times only, no prices.
+if(process.argv.includes('--probe')){for(const feed of ['overnight','boats']){const u=new URL('https://data.alpaca.markets/v2/stocks/snapshots');u.searchParams.set('symbols','SPY,QQQ,TLT');u.searchParams.set('feed',feed);const r=await fetch(u,{headers,signal:AbortSignal.timeout(30000)});let note='';if(r.ok){const d=await r.json();note=Object.entries(d).map(([s,v])=>`${s}:${v?.latestTrade?.t||'none'}`).join(' ')}else note=(await r.text()).slice(0,160);console.log(`probe feed=${feed} HTTP ${r.status} ${note}`)}}
 const stocks=pulseSymbols.filter(s=>!s.includes('/')),crypto=pulseSymbols.filter(s=>s.includes('/'));
 const etDay=t=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date(t));
 const today=etDay(at),start=new Date(at-120*86400000).toISOString();

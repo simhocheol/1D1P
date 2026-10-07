@@ -22,7 +22,7 @@ jobs:
           ALPACA_CREDENTIALS_JSON: ${{ secrets.ALPACA_CREDENTIALS_JSON }}
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-        run: node scripts/collect_pulse.mjs ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+        run: node scripts/collect_pulse.mjs ${{ github.event_name == 'workflow_dispatch' && '--force --probe' || '' }}
       - name: Commit pulse history
         run: |
           git add public/data/pulse

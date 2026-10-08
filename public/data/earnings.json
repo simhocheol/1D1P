@@ -4,8 +4,8 @@
   "scope": "S&P 500 constituents",
   "from": "2026-10-01",
   "to": "2026-10-31",
-  "checkedAt": "2026-10-07T22:12:50.665Z",
-  "collectedAt": "2026-10-07T22:12:50.665Z",
+  "checkedAt": "2026-10-08T14:18:40.538Z",
+  "collectedAt": "2026-10-08T14:18:40.538Z",
   "status": "ok",
   "events": [
     {
@@ -178,7 +178,7 @@
       "symbol": "BLK",
       "name": "BlackRock",
       "sector": "Financials",
-      "hour": "시각 미확인",
+      "hour": "장 시작 전",
       "quarter": 3,
       "year": 2026,
       "epsEstimate": 14.3954,
@@ -200,7 +200,7 @@
       "symbol": "FAST",
       "name": "Fastenal",
       "sector": "Industrials",
-      "hour": "시각 미확인",
+      "hour": "장 시작 전",
       "quarter": 3,
       "year": 2026,
       "epsEstimate": 0.3443,
@@ -670,6 +670,17 @@
     },
     {
       "date": "2026-10-21",
+      "symbol": "NEE",
+      "name": "NextEra Energy",
+      "sector": "Utilities",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.1852,
+      "revenueEstimate": 8982138494
+    },
+    {
+      "date": "2026-10-21",
       "symbol": "LRCX",
       "name": "Lam Research",
       "sector": "Information Technology",
@@ -890,17 +901,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "INTC",
-      "name": "Intel",
-      "sector": "Information Technology",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 0.3946,
-      "revenueEstimate": 16738400134
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "GD",
       "name": "General Dynamics",
       "sector": "Industrials",
@@ -942,17 +942,6 @@
       "year": 2026,
       "epsEstimate": 5.3041,
       "revenueEstimate": 9929432852
-    },
-    {
-      "date": "2026-10-22",
-      "symbol": "NEE",
-      "name": "NextEra Energy",
-      "sector": "Utilities",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.1852,
-      "revenueEstimate": 8982138494
     },
     {
       "date": "2026-10-22",
@@ -1154,17 +1143,6 @@
     },
     {
       "date": "2026-10-22",
-      "symbol": "CINF",
-      "name": "Cincinnati Financial",
-      "sector": "Financials",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.9291,
-      "revenueEstimate": 3089580000
-    },
-    {
-      "date": "2026-10-22",
       "symbol": "DGX",
       "name": "Quest Diagnostics",
       "sector": "Health Care",
@@ -1228,28 +1206,6 @@
       "year": 2026,
       "epsEstimate": 5.8459,
       "revenueEstimate": 2194047916
-    },
-    {
-      "date": "2026-10-22",
-      "symbol": "CMS",
-      "name": "CMS Energy",
-      "sector": "Utilities",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.1352,
-      "revenueEstimate": 2187711308
-    },
-    {
-      "date": "2026-10-22",
-      "symbol": "TROW",
-      "name": "T. Rowe Price",
-      "sector": "Financials",
-      "hour": "장 시작 전",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 2.7407,
-      "revenueEstimate": 2020800132
     },
     {
       "date": "2026-10-22",
@@ -1448,6 +1404,17 @@
       "year": 2026,
       "epsEstimate": 0.6719,
       "revenueEstimate": 3670973992
+    },
+    {
+      "date": "2026-10-26",
+      "symbol": "CINF",
+      "name": "Cincinnati Financial",
+      "sector": "Financials",
+      "hour": "시각 미확인",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.9291,
+      "revenueEstimate": 3089580000
     },
     {
       "date": "2026-10-26",
@@ -1825,6 +1792,17 @@
     },
     {
       "date": "2026-10-27",
+      "symbol": "CMS",
+      "name": "CMS Energy",
+      "sector": "Utilities",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.1352,
+      "revenueEstimate": 2187711308
+    },
+    {
+      "date": "2026-10-27",
       "symbol": "CNP",
       "name": "CenterPoint Energy",
       "sector": "Utilities",
@@ -1921,6 +1899,17 @@
       "year": 2026,
       "epsEstimate": 1.1868,
       "revenueEstimate": 826678818
+    },
+    {
+      "date": "2026-10-27",
+      "symbol": "ESS",
+      "name": "Essex Property Trust",
+      "sector": "Real Estate",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.4706,
+      "revenueEstimate": 496541391
     },
     {
       "date": "2026-10-28",
@@ -2053,6 +2042,28 @@
       "year": 2027,
       "epsEstimate": 2.7911,
       "revenueEstimate": 5529334021
+    },
+    {
+      "date": "2026-10-28",
+      "symbol": "GEHC",
+      "name": "GE HealthCare",
+      "sector": "Health Care",
+      "hour": "시각 미확인",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 1.2285,
+      "revenueEstimate": 5457796813
+    },
+    {
+      "date": "2026-10-28",
+      "symbol": "TEL",
+      "name": "TE Connectivity",
+      "sector": "Information Technology",
+      "hour": "장 마감 후",
+      "quarter": 4,
+      "year": 2026,
+      "epsEstimate": 3.0973,
+      "revenueEstimate": 5330468667
     },
     {
       "date": "2026-10-28",
@@ -2441,17 +2452,6 @@
     },
     {
       "date": "2026-10-28",
-      "symbol": "ESS",
-      "name": "Essex Property Trust",
-      "sector": "Real Estate",
-      "hour": "장 마감 후",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.4706,
-      "revenueEstimate": 496541391
-    },
-    {
-      "date": "2026-10-28",
       "symbol": "UDR",
       "name": "UDR, Inc.",
       "sector": "Real Estate",
@@ -2471,17 +2471,6 @@
       "year": 2026,
       "epsEstimate": 1.9913,
       "revenueEstimate": 206154527711
-    },
-    {
-      "date": "2026-10-29",
-      "symbol": "AAPL",
-      "name": "Apple Inc.",
-      "sector": "Information Technology",
-      "hour": "장 마감 후",
-      "quarter": 4,
-      "year": 2026,
-      "epsEstimate": 2.0214,
-      "revenueEstimate": 115327453620
     },
     {
       "date": "2026-10-29",
@@ -2515,6 +2504,17 @@
       "year": 2026,
       "epsEstimate": 2.2009,
       "revenueEstimate": 17483752207
+    },
+    {
+      "date": "2026-10-29",
+      "symbol": "INTC",
+      "name": "Intel",
+      "sector": "Information Technology",
+      "hour": "장 마감 후",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 0.3946,
+      "revenueEstimate": 16738400134
     },
     {
       "date": "2026-10-29",
@@ -2738,17 +2738,6 @@
     },
     {
       "date": "2026-10-29",
-      "symbol": "BALL",
-      "name": "Ball Corporation",
-      "sector": "Materials",
-      "hour": "시각 미확인",
-      "quarter": 3,
-      "year": 2026,
-      "epsEstimate": 1.0843,
-      "revenueEstimate": 3841781356
-    },
-    {
-      "date": "2026-10-29",
       "symbol": "TXT",
       "name": "Textron",
       "sector": "Industrials",
@@ -2867,6 +2856,17 @@
       "year": 2026,
       "epsEstimate": 0.5525,
       "revenueEstimate": 2248676496
+    },
+    {
+      "date": "2026-10-29",
+      "symbol": "TROW",
+      "name": "T. Rowe Price",
+      "sector": "Financials",
+      "hour": "장 시작 전",
+      "quarter": 3,
+      "year": 2026,
+      "epsEstimate": 2.7407,
+      "revenueEstimate": 2020800132
     },
     {
       "date": "2026-10-29",

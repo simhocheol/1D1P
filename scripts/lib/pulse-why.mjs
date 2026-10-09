@@ -2,12 +2,12 @@
 import {pulseGroups,levelText} from '../../server/market-pulse.js';
 import {pickMovers,matchNews,whySchema,whyPrompt,validateWhy} from '../../server/pulse-why.js';
 const PREFERRED=['gpt-5.5-mini','gpt-5-mini','gpt-4.1-mini','gpt-4o-mini'];
-async function pickModel(key){
+export async function pickModel(key){
  const r=await fetch('https://api.openai.com/v1/models',{headers:{Authorization:`Bearer ${key}`},signal:AbortSignal.timeout(20000)});
  if(!r.ok)throw Error(`models HTTP ${r.status}`);const ids=(await r.json()).data.map(m=>m.id);
  return PREFERRED.find(m=>ids.includes(m))||ids.find(i=>/^gpt-.*mini$/.test(i));
 }
-async function recentNews(headers){
+export async function recentNews(headers){
  const out=[],syms=[...new Set(pulseGroups.flatMap(g=>g.items.map(([s])=>s.replace('/',''))))];
  // Market-wide news plus news tagged with the pulse ETFs, last 24 hours.
  for(const symbols of [null,syms.join(',')]){let token;

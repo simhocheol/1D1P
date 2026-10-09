@@ -42,7 +42,7 @@ function IndicatorRows({items,onPick}){return <div className="home-rows">{items.
 export function ContextCard({data,error}){
  const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='level');
  return <Card icon={Compass} title="지금 시장은 어디쯤?" sub="지금 수준이 과거 20년(주가는 150년)과 비교해 높은지 낮은지" meta={data&&`${new Date(data.generatedAt).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'})} 갱신`}>
-  <Status data={data} error={error}/>{data&&<><div className="home-summary">{data.summary.map((l,i)=><p key={i}>{l}</p>)}</div><IndicatorRows items={items} onPick={setPick}/>
+  <Status data={data} error={error}/>{data&&<><div className="home-summary">{data.summary.map((l,i)=><p key={i}>{l}</p>)}</div><h3 className="chip-title">지표 {items.length}개 · 눌러서 자세히</h3><div className="ind-chips">{items.map(it=><button key={it.id} type="button" className="ind-chip" onClick={()=>setPick(it)} aria-haspopup="dialog"><span>{it.name}</span><em className={`ctx-pos ${tone(it.percentile)}`}>{it.position.replace('역사적으로 ','')}</em></button>)}</div>
   <Scenarios data={data}/>
   {data.cape&&<p className="fine">참고 · CAPE(이익 대비 주가)는 공개 데이터가 {data.cape.asOf.slice(0,7)}에 멈춰 있어요. 그때 1871년 이후 상위 {Math.max(1,100-data.cape.percentile)}% 수준이었어요.</p>}</>}
   <IndicatorModal item={pick} onClose={()=>setPick(null)}/></Card>;
@@ -50,7 +50,7 @@ export function ContextCard({data,error}){
 function Scenarios({data}){
  const [pick,setPick]=useState(null);const list=data?.scenarios||[];
  return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">위 2개는 지금 뚜렷한 강한 시나리오, 아래 2개는 지금은 약한 시나리오예요. 약한 쪽은 “지금 하지 않을 움직임”으로 볼 수 있어요.</p>
-  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>} below={sc.etfs&&<span className="sc-etfs">{sc.kind==='unlikely'?'강해지면 몰릴 곳':'몰릴 수 있는 곳'} · <EtfList etfs={sc.etfs.in}/></span>}/>)}</div>
+  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>}/>)}</div>
   <p className="fine">흔히 나타나는 움직임을 설명한 것이며 매수·매도 추천이 아닙니다.</p>
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className={`sc-label ${pick.kind}`}>{pick.label}</span>}>{pick&&<>
    {pick.kind==='unlikely'?<Section title="왜 지금은 아닐까요?"><p>{pick.none}</p></Section>:null}

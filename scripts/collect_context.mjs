@@ -28,12 +28,16 @@ for(const ind of contextIndicators.filter(i=>i.derived)){
  try{const [a,b]=ind.derived.map(id=>cache[id]);if(!a||!b)throw Error('source missing');const m=new Map();for(const o of a){const k=o.d.slice(0,7);const x=m.get(k)||[];x.push(o.v);m.set(k,x)}
   const obs=b.filter(o=>m.has(o.d.slice(0,7))).map(o=>{const x=m.get(o.d.slice(0,7));return {d:o.d,v:x.reduce((s,v)=>s+v,0)/x.length-o.v}});items.push(describe(ind,obs))}catch(e){errors.push(`${ind.id}: ${e.message}`)}
 }
+// Bonds tab: recent daily yields (US Treasury / Fed data, public domain) for value, change and sparkline.
+const bondSeries=[['DGS3MO','미국 국채 3개월'],['DGS2','미국 국채 2년'],['DGS10','미국 국채 10년'],['DGS30','미국 국채 30년'],['T10Y2Y','장단기 금리차(10년−2년)'],['DFII10','실질 금리(10년)']];
+const bonds=[];
+for(const [id,label] of bondSeries){try{const obs=cache[id]||await fred(id);const last=obs.slice(-30);bonds.push({id,label,unit:id==='T10Y2Y'?'%p':'%',asOf:last.at(-1).d,value:last.at(-1).v,change:Math.round((last.at(-1).v-last.at(-2).v)*1000)/1000,spark:last.map(o=>o.v)})}catch(e){errors.push(`bond ${id}: ${e.message}`)}await new Promise(s=>setTimeout(s,400))}
 const directions=[];
 for(const ind of directionIndicators){try{directions.push(direction(ind,await fred(ind.fred)))}catch(e){errors.push(`${ind.id}: ${e.message}`)}await new Promise(s=>setTimeout(s,600))}
 try{const s=await shiller(cpi);cape=s.cape;items.push(describe(contextIndicators.find(i=>i.id==='stocks'),s.real,{windowYears:150}))}catch(e){errors.push(`stocks: ${e.message}`)}
 const list=items.filter(Boolean);
 const order=contextIndicators.map(i=>i.id);list.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
-await fs.writeFile('public/data/context.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),summary:overall(list.filter(i=>i.group==="level")),scenarios:scenarios(list),items:list,direction:{summary:directionSummary(directions),items:directions.filter(Boolean)},global:{summary:globalSummary(list)},cape,
+await fs.writeFile('public/data/context.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),summary:overall(list.filter(i=>i.group==="level")),scenarios:scenarios(list),items:list,direction:{summary:directionSummary(directions),items:directions.filter(Boolean)},global:{summary:globalSummary(list)},bonds,cape,
  sources:'FRED(세인트루이스 연방준비은행) · Robert Shiller 주가 데이터(datasets/s-and-p-500)',notice:'VIX와 주가는 이용 조건에 따라 수치 없이 역사 속 위치만 표시합니다.',errors})+'\n');
 console.log(`Context ${list.length}/${contextIndicators.length}${errors.length?` · errors: ${errors.join('; ')}`:''}`);
 if(!list.length)process.exit(1);

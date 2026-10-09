@@ -1,7 +1,8 @@
-// Collects a market pulse every 4 hours and appends it to the public history.
+// Collects a market pulse every hour, appends it to the public history and writes the hourly briefing.
 // Prices stay in memory; only group levels, the pattern and the summary are written.
 import fs from 'node:fs/promises';
-import {explainMovers} from './lib/pulse-why.mjs';
+import {buildBriefing} from './lib/pulse-briefing.mjs';
+import {appendBriefing} from '../server/pulse-briefing.js';
 import {pulseSymbols,dailySigma,buildPulse,appendPulse,etSession} from '../server/market-pulse.js';
 const output=new URL('../public/data/pulse/history.json',import.meta.url);
 const at=new Date();
@@ -38,9 +39,11 @@ for(const s of stocks)moves[s]={change:session==='overnight'?overnightMove(s):mo
 {const u=new URL('https://data.alpaca.markets/v1beta3/crypto/us/snapshots');u.searchParams.set('symbols',crypto.join(','));const d=await get(u);const utc=at.toISOString().slice(0,10);
  for(const s of crypto)moves[s]={change:move(d.snapshots?.[s],t=>t&&t.slice(0,10)===utc),sigma:dailySigma(closes[s]||[])}}
 const pulse=buildPulse({moves,at});
-// Why the biggest movers moved (news + OpenAI). A failure here never blocks the pulse itself.
-try{const w=await explainMovers({groups:pulse.groups,alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY});pulse.why=w.cards;console.log(`Why cards ${w.cards.length}${w.note?` (${w.note})`:''}${w.news!=null?` · news ${w.news}`:''}${w.errors?.length?` · errors: ${w.errors.join('; ')}`:''}`)}catch(e){console.warn(`why skipped: ${e.message}`)}
 let history=null;try{history=JSON.parse(await fs.readFile(output,'utf8'))}catch{}
 await fs.mkdir(new URL('.',output),{recursive:true});
-await fs.writeFile(output,JSON.stringify(appendPulse(history,pulse))+'\n');
+await fs.writeFile(output,JSON.stringify(appendPulse(history,pulse,60))+'\n');
+// Hourly briefing on what changed since the previous pulse. Never blocks the pulse itself.
+const briefFile=new URL('../public/data/pulse/briefing.json',import.meta.url);
+try{const b=await buildBriefing({cur:pulse,prev:history?.items?.at(-1),alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY});let old=null;try{old=JSON.parse(await fs.readFile(briefFile,'utf8'))}catch{}
+ const {note,...item}=b;await fs.writeFile(briefFile,JSON.stringify(appendBriefing(old,item))+'\n');console.log(`Briefing ${item.ai?'AI':'fallback'} · ${note} · ${item.title}`)}catch(e){console.warn(`briefing skipped: ${e.message}`)}
 console.log(`Pulse ${pulse.at} ${pulse.session} feed=${feed} symbols=${Object.values(moves).filter(m=>Number.isFinite(m.change)).length}/${pulseSymbols.length} pattern=${pulse.pattern.id}`);

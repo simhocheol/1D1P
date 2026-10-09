@@ -2,8 +2,8 @@ name: Market pulse
 on:
   workflow_dispatch:
   schedule:
-    # Every 4 hours; the script skips runs outside 04:00-20:00 ET on weekdays.
-    - cron: '20 */4 * * *'
+    # Hourly; the script skips runs while the US market is fully closed (weekend).
+    - cron: '20 * * * *'
 permissions:
   contents: write
 concurrency:

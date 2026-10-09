@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-08T22:04:56.715Z",
+  "checkedAt": "2026-10-09T10:13:35.289Z",
   "source": "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
   "sourceStatus": "ok",
   "scope": "current S&P 500 constituents + curated ETF watch universe (not all ETFs)",
@@ -10,7 +10,7 @@
   "total": 532,
   "failedSymbols": [],
   "newsStatus": "ok",
-  "newsSymbols": 260,
+  "newsSymbols": 246,
   "newsFailedSymbols": [],
   "assets": [
     {
@@ -1163,15 +1163,6 @@
       "industry": "Transaction & Payment Processing Services",
       "hq": "Atlanta, Georgia",
       "founded": "2000",
-      "kind": "stock"
-    },
-    {
-      "symbol": "CTVA",
-      "name": "Corteva",
-      "sector": "Materials",
-      "industry": "Fertilizers & Agricultural Chemicals",
-      "hq": "Indianapolis, Indiana",
-      "founded": "2019",
       "kind": "stock"
     },
     {
@@ -3236,15 +3227,6 @@
       "kind": "stock"
     },
     {
-      "symbol": "PSKY",
-      "name": "Paramount Skydance Corporation",
-      "sector": "Communication Services",
-      "industry": "Movies & Entertainment",
-      "hq": "Los Angeles, California",
-      "founded": "2025 (Paramount Pictures 1912)",
-      "kind": "stock"
-    },
-    {
       "symbol": "PH",
       "name": "Parker Hannifin",
       "sector": "Industrials",
@@ -3722,6 +3704,15 @@
       "kind": "stock"
     },
     {
+      "symbol": "SKYD",
+      "name": "Skydance Corporation",
+      "sector": "Communication Services",
+      "industry": "Movies & Entertainment",
+      "hq": "New York City, New York",
+      "founded": "2025 (Paramount Pictures 1912)",
+      "kind": "stock"
+    },
+    {
       "symbol": "SWKS",
       "name": "Skyworks Solutions",
       "sector": "Information Technology",
@@ -4073,6 +4064,15 @@
       "kind": "stock"
     },
     {
+      "symbol": "TWLO",
+      "name": "Twilio",
+      "sector": "Information Technology",
+      "industry": "Systems Software",
+      "hq": "San Francisco, California",
+      "founded": "2008",
+      "kind": "stock"
+    },
+    {
       "symbol": "TYL",
       "name": "Tyler Technologies",
       "sector": "Information Technology",
@@ -4316,6 +4316,15 @@
       "kind": "stock"
     },
     {
+      "symbol": "VYLR",
+      "name": "Vylor",
+      "sector": "Consumer Staples",
+      "industry": "Agricultural Products & Services",
+      "hq": "Johnston, Iowa",
+      "founded": "2026",
+      "kind": "stock"
+    },
+    {
       "symbol": "WRB",
       "name": "W. R. Berkley Corporation",
       "sector": "Financials",
@@ -4358,15 +4367,6 @@
       "industry": "Movies & Entertainment",
       "hq": "Burbank, California",
       "founded": "1923",
-      "kind": "stock"
-    },
-    {
-      "symbol": "WBD",
-      "name": "Warner Bros. Discovery",
-      "sector": "Communication Services",
-      "industry": "Broadcasting",
-      "hq": "New York City, New York",
-      "founded": "2022 (Warner Bros. 1923)",
       "kind": "stock"
     },
     {

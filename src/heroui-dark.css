@@ -594,3 +594,8 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .bh-row h4{font-size:15px;color:#FAFAFA;margin:0 0 6px;line-height:1.45}
 .bh-row ul{margin:0;padding-left:16px;display:grid;gap:3px;list-style:disc}.bh-row li{font-size:13px;line-height:1.6;color:#A1A1AA}
 @media (max-width:640px){.bh-row{grid-template-columns:1fr}.bh-nav small{margin-left:0}}
+.brief-links{display:grid;gap:4px;margin-top:10px}
+.brief-links>span{font-size:11px;font-weight:600;color:#71717A}
+.brief-links a{display:flex;gap:8px;align-items:baseline;font-size:13px;color:#D4D4D8;text-decoration:none;min-width:0}
+.brief-links a:hover{color:#FAFAFA;text-decoration:underline}
+.brief-links a b{flex:none;font-size:11px;font-weight:600;color:#A1A1AA}

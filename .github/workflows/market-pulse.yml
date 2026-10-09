@@ -1,9 +1,14 @@
 name: Market pulse
 on:
+  # cron-job.org dispatches this hourly with no inputs. force=true records even while the market is closed.
   workflow_dispatch:
+    inputs:
+      force:
+        type: boolean
+        default: false
   schedule:
-    # Hourly; the script skips runs while the US market is fully closed (weekend).
-    - cron: '20 * * * *'
+    # Backup only; GitHub often skips scheduled runs. The script ignores runs within 40 minutes of the last pulse.
+    - cron: '50 * * * *'
 permissions:
   contents: write
 concurrency:
@@ -23,7 +28,7 @@ jobs:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node scripts/collect_pulse.mjs ${{ github.event_name == 'workflow_dispatch' && '--force --probe' || '' }}
+        run: node scripts/collect_pulse.mjs ${{ inputs.force && '--force' || '' }}
       - name: Commit pulse history
         run: |
           git add public/data/pulse

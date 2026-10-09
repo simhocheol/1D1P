@@ -17,3 +17,12 @@ test('briefing validation and fallback', ()=>{
  const f=fallbackBriefing({cur,changes:cardChanges(cur,prev)});assert.equal(f.bullets.length,3);assert.equal(f.ai,false);assert.ok(f.title.includes('금'));
  assert.equal(appendBriefing(appendBriefing(null,{at:'a'}),{at:'a'}).items.length,1);
 });
+test('gdelt query and parsing keep outlet links only', async ()=>{
+ const {gdeltQuery,parseArticles}=await import('../server/gdelt.js');
+ assert.ok(gdeltQuery(['gold','oil']).includes('(gold OR oil)'));
+ const a=parseArticles({articles:[{url:'https://www.reuters.com/markets/x',title:'Gold rises',seendate:'20261009T120000Z'},{url:'http://cnbc.com/y',title:'Insecure'},{url:'https://spam.example/z',title:'Other'},{url:'https://www.cnbc.com/z',title:'gold rises'}]});
+ assert.equal(a.length,1);assert.equal(a[0].domain,'reuters.com');assert.equal(a[0].at,'2026-10-09T12:00:00Z');
+ const {validateBriefing}=await import('../server/pulse-briefing.js');
+ const v=validateBriefing({confident:true,title:'금 상승',bullets:['a','b','c'],news_ids:[0,1],link_ids:[0,5]},[{title:'x'},{title:'y'}],a);
+ assert.equal(v.links.length,1);
+});

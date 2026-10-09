@@ -1,6 +1,12 @@
 name: Collect official data
 on:
+  # cron-job.org dispatches this with no inputs: treated like a scheduled run (slot gating + de-duplication).
+  # Pass manual=true to force a full collection regardless of the slot.
   workflow_dispatch:
+    inputs:
+      manual:
+        type: boolean
+        default: false
   schedule:
     - cron: '15 * * * *'
     # Extra attempts around the publication slots (UTC covers both EDT and EST); slot de-duplication keeps one collection each.
@@ -23,7 +29,7 @@ jobs:
       - name: Collect at 09 and 17 Eastern, respecting DST
         id: collection
         continue-on-error: true
-        run: python scripts/collect_official.py ${{ github.event_name == 'schedule' && '--scheduled' || '' }}
+        run: python scripts/collect_official.py ${{ !inputs.manual && '--scheduled' || '' }}
       - name: Check whether collection slot ran
         id: slot
         run: |
@@ -42,7 +48,7 @@ jobs:
       - run: npm run test:collector
       - run: npm run build
       - name: Verify registered Alpaca market-data credentials
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         id: alpaca
         continue-on-error: true
         env:
@@ -51,21 +57,21 @@ jobs:
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
         run: node scripts/check_alpaca.mjs
       - name: Collect FRED macro series
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         id: fred
         continue-on-error: true
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: node scripts/collect_fred.mjs
       - name: Collect SEC EDGAR filings
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         id: edgar
         continue-on-error: true
         env:
           SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
         run: node scripts/collect_edgar.mjs
       - name: Restore shared report archive
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -75,7 +81,7 @@ jobs:
           if [ -n "$id" ]; then gh api "repos/${{ github.repository }}/actions/artifacts/$id/zip" > "$RUNNER_TEMP/archive.zip" && unzip -o -q "$RUNNER_TEMP/archive.zip" -d private-market/archive; fi
           ls private-market/archive | wc -l
       - name: Collect market universe and private bars
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         id: market
         continue-on-error: true
         env:
@@ -86,7 +92,7 @@ jobs:
           SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
         run: node scripts/collect_market.mjs
       - name: Collect S&P 500 earnings calendar
-        if: github.event_name == 'workflow_dispatch' || steps.slot.outputs.collected == 'true'
+        if: inputs.manual || steps.slot.outputs.collected == 'true'
         id: earnings
         continue-on-error: true
         env:

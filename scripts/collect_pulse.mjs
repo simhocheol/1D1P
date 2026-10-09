@@ -7,13 +7,13 @@ import {pulseSymbols,dailySigma,buildPulse,appendPulse,etSession} from '../serve
 const output=new URL('../public/data/pulse/history.json',import.meta.url);
 const at=new Date();
 if(etSession(at)==='closed'&&!process.argv.includes('--force')){console.log('US market closed (ET); pulse skipped');process.exit(0)}
+// The external hourly trigger and GitHub's backup schedule can both fire: keep one pulse per ~hour.
+try{const last=JSON.parse(await fs.readFile(new URL('../public/data/pulse/history.json',import.meta.url),'utf8')).items.at(-1);if(last&&at-new Date(last.at)<40*6e4&&!process.argv.includes('--force')){console.log('Pulse recorded under 40 minutes ago; skipped');process.exit(0)}}catch{}
 let key=process.env.ALPACA_API_KEY,secret=process.env.ALPACA_SECRET_KEY;
 if(process.env.ALPACA_CREDENTIALS_JSON){const b=JSON.parse(process.env.ALPACA_CREDENTIALS_JSON);key=b.apiKey;secret=b.secretKey}
 if(!key||!secret)throw Error('Alpaca credentials missing');
 const headers={'APCA-API-KEY-ID':key,'APCA-API-SECRET-KEY':secret};
 async function get(url){for(let i=0;i<3;i++){const r=await fetch(url,{headers,signal:AbortSignal.timeout(30000)});if(r.ok)return r.json();if(r.status<500&&r.status!==429)throw Error(`HTTP ${r.status} ${url.pathname}`);await new Promise(s=>setTimeout(s,1000*(i+1)))}throw Error(`HTTP retry exhausted ${url.pathname}`)}
-// Probe: is the overnight (Blue Ocean) feed available on this plan? Logs status and trade times only, no prices.
-if(process.argv.includes('--probe')){for(const feed of ['overnight','boats']){const u=new URL('https://data.alpaca.markets/v2/stocks/snapshots');u.searchParams.set('symbols','SPY,QQQ,TLT');u.searchParams.set('feed',feed);const r=await fetch(u,{headers,signal:AbortSignal.timeout(30000)});let note='';if(r.ok){const d=await r.json();note=Object.entries(d).map(([s,v])=>`${s}:${v?.latestTrade?.t||'none'}`).join(' ')}else note=(await r.text()).slice(0,160);console.log(`probe feed=${feed} HTTP ${r.status} ${note}`)}}
 const stocks=pulseSymbols.filter(s=>!s.includes('/')),crypto=pulseSymbols.filter(s=>s.includes('/'));
 const etDay=t=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York'}).format(new Date(t));
 const session=etSession(at),today=etDay(at),start=new Date(at-120*86400000).toISOString();

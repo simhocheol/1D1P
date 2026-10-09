@@ -41,17 +41,15 @@ function IndicatorRows({items,onPick}){return <div className="home-rows">{items.
 
 export function ContextCard({data,error}){
  const [pick,setPick]=useState(null);const items=(data?.items||[]).filter(i=>i.group==='level');
- return <Card icon={Compass} title="지금 시장은 어디쯤?" sub="지금 수준이 과거 20년(주가는 150년)과 비교해 높은지 낮은지" meta={data&&`${new Date(data.generatedAt).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'})} 갱신`}>
-  <Status data={data} error={error}/>{data&&<><div className="home-summary">{data.summary.map((l,i)=><p key={i}>{l}</p>)}</div><h3 className="chip-title">지표 {items.length}개 · 눌러서 자세히</h3><div className="ind-chips">{items.map(it=><button key={it.id} type="button" className="ind-chip" onClick={()=>setPick(it)} aria-haspopup="dialog"><span>{it.name}</span><em className={`ctx-pos ${tone(it.percentile)}`}>{it.position.replace('역사적으로 ','')}</em></button>)}</div>
+ return <Card icon={Compass} title="지금 시장은 어디쯤?" sub="과거와 비교한 지금 수준" meta={data&&`${new Date(data.generatedAt).toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'})} 갱신`}>
+  <Status data={data} error={error}/>{data&&<><div className="home-summary compact"><p>{data.summary[0]}</p>{data.summary.length>1&&<p className="more">{data.summary.slice(1).join(' ')}</p>}</div><div className="ind-chips">{items.map(it=><button key={it.id} type="button" className="ind-chip" onClick={()=>setPick(it)} aria-haspopup="dialog"><span>{it.name}</span><em className={`ctx-pos ${tone(it.percentile)}`}>{it.position.replace('역사적으로 ','')}</em></button>)}</div>
   <Scenarios data={data}/>
   {data.cape&&<p className="fine">참고 · CAPE(이익 대비 주가)는 공개 데이터가 {data.cape.asOf.slice(0,7)}에 멈춰 있어요. 그때 1871년 이후 상위 {Math.max(1,100-data.cape.percentile)}% 수준이었어요.</p>}</>}
   <IndicatorModal item={pick} onClose={()=>setPick(null)}/></Card>;
 }
 function Scenarios({data}){
  const [pick,setPick]=useState(null);const list=data?.scenarios||[];
- return <div className="home-subsection"><h3><Route size={15}/>이런 시장에서 사람들의 움직임</h3><p className="home-subnote">위 2개는 지금 뚜렷한 강한 시나리오, 아래 2개는 지금은 약한 시나리오예요. 약한 쪽은 “지금 하지 않을 움직임”으로 볼 수 있어요.</p>
-  <div className="home-rows">{list.map(sc=><Row key={sc.id} onPress={()=>setPick(sc)} name={<span className={`sc-name ${sc.kind}`}><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span>{sc.title}</span>} right={<span className={`sc-label ${sc.kind}`}>{sc.label}</span>}/>)}</div>
-  <p className="fine">흔히 나타나는 움직임을 설명한 것이며 매수·매도 추천이 아닙니다.</p>
+ return <div className="home-subsection"><h3><Route size={15}/>사람들의 움직임</h3><div className="ind-chips">{list.map(sc=><button key={sc.id} type="button" className={`ind-chip sc-chip ${sc.kind}`} onClick={()=>setPick(sc)} aria-haspopup="dialog"><span className={`sc-rank r${sc.rank} ${sc.kind}`}>{sc.rank}</span><span>{sc.title}</span><em className={`sc-label ${sc.kind}`}>{sc.kind==='likely'?'강함':sc.kind==='unlikely'?'약함':'보통'}</em></button>)}</div>
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick&&`${pick.rank}. ${pick.title}`} badge={pick&&<span className={`sc-label ${pick.kind}`}>{pick.label}</span>}>{pick&&<>
    {pick.kind==='unlikely'?<Section title="왜 지금은 아닐까요?"><p>{pick.none}</p></Section>:null}
    <Section title={pick.kind==='unlikely'?'이런 환경이라면 사람들은':'사람들의 움직임'}><p>{pick.act}</p></Section>
@@ -64,8 +62,8 @@ function Scenarios({data}){
 const TrendIcon=({t})=>t==='up'?<TrendingUp size={15}/>:t==='down'?<TrendingDown size={15}/>:<Minus size={15}/>;
 export function DirectionCard({data,error}){
  const [pick,setPick]=useState(null);const d=data?.direction;
- return <Card icon={Gauge} title="경기 방향" sub="최근 평균을 그 전과 비교해 좋아지는지 나빠지는지">
-  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="home-rows">{d.items.map(it=><Row key={it.id} onPress={()=>setPick(it)} name={it.name} right={<span className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/>{it.trendText}</span>} below={<>{it.source&&<span className="home-row-src">{it.source}</span>}{hintLine(directionHint(it))}</>}/>)}</div><p className="fine">참고 데이터 · 미국 노동부·노동통계국·인구조사국·연방준비제도·미시간대 공식 발표를 FRED(세인트루이스 연준)에서 받아요. 주간 지표는 최근 4주, 월간 지표는 최근 3개월 평균을 그 전 기간과 비교해 방향을 정하고, 예상치와는 비교하지 않아요.</p></>}
+ return <Card icon={Gauge} title="경기 방향" sub="미국 경기가 좋아지는 중인지">
+  <Status data={data} error={error}/>{d&&<><div className="home-summary"><p>{d.summary}</p></div><div className="ind-chips">{d.items.map(it=><button key={it.id} type="button" className="ind-chip" onClick={()=>setPick(it)} aria-haspopup="dialog"><span>{it.name}</span><em className={`trend trend-${it.trend}`}><TrendIcon t={it.trend}/></em></button>)}</div><p className="fine">공식 발표(노동부·인구조사국·연준·미시간대, FRED) · 최근 평균을 그 전과 비교 · 누르면 출처와 기준</p></>}
   <InfoModal open={pick} onClose={()=>setPick(null)} title={pick?.name} badge={pick&&<span className={`trend trend-${pick.trend}`}><TrendIcon t={pick.trend}/>{pick.trendText}</span>}>{pick&&<>
    <Section title="최근 변화"><p>{pick.detail}</p></Section>
    <Section title="이게 뭐예요?"><p>{pick.plain}</p></Section>

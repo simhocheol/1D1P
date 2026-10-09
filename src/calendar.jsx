@@ -7,6 +7,7 @@ import OfficialFeed,{useOfficialFeed} from './official-feed.jsx';
 import MonthlyDrivers from './monthly-drivers.jsx';
 import PublishGauges from './publish-gauge.jsx';
 import HomeDashboard from './home-dashboard.jsx';
+import CollectButton from './collect-button.jsx';
 import './styles.css';import './dark.css';import './calendar.css';import './framework.css';
 const labels={economic:'경제지표',institution:'기관 발표',earnings:'실적 발표'};
 const sectorKo={'Information Technology':'정보기술',Financials:'금융',Energy:'에너지','Health Care':'헬스케어','Consumer Discretionary':'경기소비재','Consumer Staples':'필수소비재',Industrials:'산업재',Materials:'소재',Utilities:'유틸리티','Real Estate':'부동산','Communication Services':'커뮤니케이션'};
@@ -24,7 +25,7 @@ export default function CalendarPage(){const today=new Date();const [month,setMo
  const isToday=n=>y===today.getFullYear()&&m===today.getMonth()&&n===today.getDate();
  const nav=<div className="cal-month"><Button isIconOnly variant="ghost" aria-label="이전 달" title="이전 달" onPress={()=>move(-1)}><ChevronLeft size={18}/></Button><Button isIconOnly variant="ghost" aria-label="다음 달" title="다음 달" onPress={()=>move(1)}><ChevronRight size={18}/></Button><strong>{y}년 {m+1}월</strong><Button size="sm" variant="outline" onPress={()=>{setMonth(new Date(Date.UTC(today.getFullYear(),today.getMonth(),1)));setDay(today.getDate())}}>오늘</Button></div>;
  const stats=[['검증 거래일',Object.keys(verifiedSessions).length,Object.keys(verifiedSessions).sort().map(d=>d.slice(5).replace('-','/')).join(' · ')],['공식 발표 수집',data?data.events.length:'—','연준 · BLS RSS'],['마지막 수집',data?new Date(data.collectedAt).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hour12:false}):'—',data?'ET':'확인 중']];
- return <main className="cal-main"><div className="cal-heading"><div><span className="cal-eyebrow">OFFICIAL DATA OBSERVATORY · {y}년 {m+1}월</span><h1>시장 캘린더</h1><p>공식 일정·자동 수집 발표·검증 기록만으로 시장 Driver를 관측합니다. 일일 수익을 보장하지 않습니다.</p></div><div className="cal-stats">{stats.map(([k,v,s])=><div key={k}><span>{k}</span><strong>{v}</strong><small>{s}</small></div>)}</div></div>
+ return <main className="cal-main"><div className="cal-heading"><div><span className="cal-eyebrow">OFFICIAL DATA OBSERVATORY · {y}년 {m+1}월</span><h1>시장 캘린더</h1><p>공식 일정·자동 수집 발표·검증 기록만으로 시장 Driver를 관측합니다. 일일 수익을 보장하지 않습니다.</p></div><div className="cal-heading-side"><CollectButton/><div className="cal-stats">{stats.map(([k,v,s])=><div key={k}><span>{k}</span><strong>{v}</strong><small>{s}</small></div>)}</div></div></div>
  <HomeDashboard/>
  <PublishGauges/>
  <MonthlyDrivers year={y} month={m} count={count} day={day} onDay={setDay}/>

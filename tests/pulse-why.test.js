@@ -14,4 +14,5 @@ test('validation keeps supported cards and rejects figures or low confidence', (
  assert.equal(validateWhy({confident:false,title:'x',bullets:['a','b'],tags:[],news_ids:[0]},news,'gold',1),null);
  assert.equal(validateWhy({confident:true,title:'금 1.6% 상승',bullets:['a','b'],tags:[],news_ids:[0]},news,'gold',1),null);
  assert.equal(validateWhy({confident:true,title:'금 상승',bullets:['a','b'],tags:[],news_ids:[]},news,'gold',1),null);
+ assert.equal(validateWhy({confident:true,title:'금 상승',bullets:['a','b'],tags:[],news_ids:[0]},news,'gold',1),null);
 });

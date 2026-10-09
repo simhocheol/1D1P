@@ -4,7 +4,7 @@ import {groupScores,detectPattern,buildPulse,appendPulse,dailySigma,level} from 
 
 const m=(change,sigma=1)=>({change,sigma});
 test('risk-off when stocks fall, haven assets and fear rise', ()=>{
- const z=groupScores({SPY:m(-1.5),QQQ:m(-2),IWM:m(-1.8),GLD:m(1.2),UUP:m(0.8),FXY:m(1),VIXY:m(3),HYG:m(-1),'BTC/USD':m(-1.5)});
+ const z=groupScores({SPY:m(-1.5),QQQ:m(-2),IWM:m(-1.8),GLD:m(1.2),VIXY:m(3),'BTC/USD':m(-1.5),'ETH/USD':m(-2)});
  assert.equal(detectPattern(z).id,'risk_off');
 });
 test('rates group flips the bond ETF sign', ()=>{
@@ -16,7 +16,7 @@ test('inflation scare when oil and rates rise while stocks fall', ()=>{
  assert.equal(detectPattern(z).id,'inflation');
 });
 test('calm and unknown states', ()=>{
- const z=groupScores({SPY:m(0.1),TLT:m(0.1),USO:m(-0.2),DBC:m(0.1),GLD:m(0),HYG:m(0.1),VIXY:m(-0.1)});
+ const z=groupScores({SPY:m(0.1),TLT:m(0.1),USO:m(-0.2),CPER:m(0.1),GLD:m(0),'BTC/USD':m(0.1),VIXY:m(-0.1)});
  assert.equal(detectPattern(z).id,'calm');
  assert.equal(detectPattern(groupScores({SPY:m(1)})).id,'unknown');
 });
@@ -38,4 +38,9 @@ test('overnight day-market session boundaries', async ()=>{
  assert.equal(etSession(new Date('2026-10-10T01:00:00Z')),'closed');    // Fri 21:00 ET
  assert.equal(etSession(new Date('2026-10-12T01:00:00Z')),'overnight'); // Sun 21:00 ET
  assert.equal(etSession(new Date('2026-10-10T15:00:00Z')),'closed');    // Sat
+});
+test('commodity cards are separate groups and old records lack them safely', ()=>{
+ const z=groupScores({GLD:m(1),SLV:m(-1),CPER:m(2),UNG:m(0)});
+ assert.ok(z.gold>0&&z.silver<0&&z.copper>0&&z.natgas===0);
+ assert.equal(detectPattern({stocks:1,rates:1,copper:2,fear:0}).id,'growth');
 });

@@ -2,26 +2,29 @@
 // and a plain-language summary. Public output carries levels only (no prices or statistics).
 
 // sign: -1 flips a proxy so "up" means the group's own quantity rises (TLT price up = rates down).
+// section: 'market' (financial markets) or 'commodity' (physical goods, shown together under 원자재).
 export const pulseGroups=[
- {id:'stocks',name:'주가',items:[['SPY',1],['QQQ',1],['IWM',1]],drivers:['demand','liquidity']},
- {id:'rates',name:'국채 금리',items:[['TLT',-1],['IEF',-1]],drivers:['rates']},
- {id:'oil',name:'유가',items:[['USO',1]],drivers:['cost','supply']},
- {id:'commodities',name:'원자재',items:[['DBC',1],['CPER',1]],drivers:['demand','cost']},
- {id:'grains',name:'곡물',items:[['DBA',1],['CORN',1],['WEAT',1]],drivers:['cost','supply']},
- {id:'safe',name:'안전자산',items:[['GLD',1],['UUP',1],['FXY',1]],drivers:['fx','credit']},
- {id:'risk',name:'위험자산',items:[['HYG',1],['BTC/USD',1]],drivers:['credit','liquidity']},
- {id:'fear',name:'공포지수',items:[['VIXY',1]],drivers:['credit','liquidity']},
+ {id:'stocks',section:'market',name:'주가',items:[['SPY',1],['QQQ',1],['IWM',1]],drivers:['demand','liquidity']},
+ {id:'rates',section:'market',name:'국채 금리',items:[['TLT',-1],['IEF',-1]],drivers:['rates']},
+ {id:'fear',section:'market',name:'공포지수',items:[['VIXY',1]],drivers:['credit','liquidity']},
+ {id:'crypto',section:'market',name:'암호화폐',items:[['BTC/USD',1],['ETH/USD',1]],drivers:['liquidity','credit']},
+ {id:'oil',section:'commodity',name:'유가',items:[['USO',1]],drivers:['cost','supply']},
+ {id:'natgas',section:'commodity',name:'천연가스',items:[['UNG',1]],drivers:['cost','supply']},
+ {id:'gold',section:'commodity',name:'금',items:[['GLD',1]],drivers:['fx','credit']},
+ {id:'silver',section:'commodity',name:'은',items:[['SLV',1]],drivers:['cost','demand']},
+ {id:'copper',section:'commodity',name:'구리',items:[['CPER',1]],drivers:['demand','investment']},
+ {id:'grains',section:'commodity',name:'곡물',items:[['DBA',1],['CORN',1],['WEAT',1]],drivers:['cost','supply']},
 ];
 export const pulseSymbols=[...new Set(pulseGroups.flatMap(g=>g.items.map(([s])=>s)))];
 
 // Each pattern: required group directions. Score is the mean agreement; most conditions must agree.
 export const patterns=[
- {id:'risk_off',name:'위험 회피',when:{stocks:-1,safe:1,fear:1,risk:-1},text:'투자자들이 겁을 먹고 주식 같은 위험한 자산을 팔고, 금·달러처럼 안전한 곳으로 돈을 옮기고 있어요.'},
- {id:'risk_on',name:'위험 선호',when:{stocks:1,fear:-1,risk:1,safe:-1},text:'투자자들이 자신감을 보이며 주식처럼 위험하지만 수익을 기대할 수 있는 자산을 사고 있어요.'},
+ {id:'risk_off',name:'위험 회피',when:{stocks:-1,gold:1,fear:1,crypto:-1},text:'투자자들이 겁을 먹고 주식·암호화폐 같은 위험한 자산을 팔고, 금처럼 안전한 곳으로 돈을 옮기고 있어요.'},
+ {id:'risk_on',name:'위험 선호',when:{stocks:1,fear:-1,crypto:1,gold:-1},text:'투자자들이 자신감을 보이며 주식·암호화폐처럼 위험하지만 수익을 기대할 수 있는 자산을 사고 있어요.'},
  {id:'inflation',name:'물가 걱정',when:{oil:1,rates:1,stocks:-1},text:'기름값과 금리가 함께 오르고 주가는 내려요. 물가가 다시 오를까 걱정하는 모습이에요.'},
- {id:'growth',name:'경기 기대',when:{commodities:1,rates:1,stocks:1},text:'원자재·금리·주가가 같이 올라요. 경기가 좋아질 거라 기대하는 모습이에요.'},
- {id:'easing',name:'금리 하락 기대',when:{rates:-1,stocks:1,risk:1},text:'금리가 내려가고 주식·위험자산이 올라요. 돈 빌리는 비용이 줄어들 거라 기대하는 모습이에요.'},
- {id:'slowdown',name:'경기 둔화 걱정',when:{rates:-1,commodities:-1,stocks:-1},text:'금리·원자재·주가가 함께 내려요. 경기가 식을까 걱정하는 모습이에요.'},
+ {id:'growth',name:'경기 기대',when:{copper:1,rates:1,stocks:1},text:'구리·금리·주가가 같이 올라요. 공장과 건설이 바빠질 거라, 즉 경기가 좋아질 거라 기대하는 모습이에요.'},
+ {id:'easing',name:'금리 하락 기대',when:{rates:-1,stocks:1,crypto:1},text:'금리가 내려가고 주식·암호화폐가 올라요. 돈 빌리는 비용이 줄어들 거라 기대하는 모습이에요.'},
+ {id:'slowdown',name:'경기 둔화 걱정',when:{rates:-1,copper:-1,stocks:-1},text:'금리·구리·주가가 함께 내려요. 경기가 식을까 걱정하는 모습이에요.'},
 ];
 const calmText='큰 지표들이 대부분 평소 범위 안에서 움직였어요. 뚜렷한 방향이 없는 조용한 시장이에요.';
 const mixedText='지표들이 서로 다른 방향으로 움직였어요. 시장이 한쪽으로 의견을 모으지 못한 모습이에요.';

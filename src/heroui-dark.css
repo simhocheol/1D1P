@@ -527,3 +527,5 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 /* A color-scheme mismatch makes browsers paint an opaque white backdrop behind the iframe. */
 .etf-pop iframe{color-scheme:light;background:transparent}
 .sc-chips span.sc-chips-label{background:none!important;color:#71717A!important;font-weight:400;padding:0;border:0}
+.pulse-section+.pulse-section{margin-top:12px}
+.pulse-section-title{font-size:12px;font-weight:600;color:#A1A1AA;margin:0 0 6px}

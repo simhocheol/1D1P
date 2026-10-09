@@ -25,7 +25,8 @@ export async function sectorLayer({headers,at=new Date()}){
 }
 // Latest daily-report candidates with their Driver names, for picks outside the regular session.
 export async function reportCandidates(){
- const idx=await read('../../public/data/reports/index.json');const key=idx?.items?.[0];if(!key)return {candidates:[],report:null};
+ // Newest report with candidates: by date, then post-market (later) before pre-market.
+ const idx=await read('../../public/data/reports/index.json');const key=[...(idx?.items||[])].filter(i=>i.candidates>0).sort((a,b)=>b.date.localeCompare(a.date)||(b.session==='post')-(a.session==='post'))[0];if(!key)return {candidates:[],report:null};
  const r=await read(`../../public/data/reports/${key.date}-${key.session}.json`);const name=id=>drivers.find(d=>d.id===id)?.name||id;
  return {report:{date:key.date,session:key.session},candidates:(r?.candidates||[]).map(c=>({symbol:c.symbol,name:c.name,sector:c.sector,drivers:[...new Set(c.paths.map(p=>name(p.driverId)))]}))};
 }

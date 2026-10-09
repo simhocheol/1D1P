@@ -609,3 +609,13 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .flow-in em{color:#17C964}.flow-out em{color:#F31260}.flow-none em{color:#52525B}
 .flows.compact{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.flows.compact .flow{padding:5px 8px}.flows.compact .flow em{font-size:13px}.flows.compact .flow span{display:none}
 @media (max-width:767px){.flows{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Crowded trading cards */
+.active-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:1023px){.active-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.active-card{background:#18181B;border:1px solid #27272A;border-radius:14px;padding:12px;min-width:0;display:grid;gap:6px}
+.active-card header{display:flex;align-items:center;gap:8px;background:none!important;border:0!important;padding:0!important;position:static!important}
+.active-rank{width:20px;height:20px;border-radius:50%;background:#27272A;display:grid;place-items:center;font-size:11px;font-weight:700;color:#FAFAFA}
+.active-card .etf-tk{font-size:16px;font-weight:700;color:#FAFAFA;text-decoration:none}
+.active-dir{margin-left:auto;font-size:13px;color:#A1A1AA}.active-dir.up{color:#17C964}.active-dir.down{color:#F31260}
+.active-name{margin:0;font-size:12px;color:#D4D4D8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.active-name small{margin-left:6px;color:#71717A}
+.active-card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 8px;margin:0;font-size:12px}.active-card dt{color:#71717A}.active-card dd{margin:0;color:#E4E4E7;text-align:right}

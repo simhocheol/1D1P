@@ -3,6 +3,7 @@
 import fs from 'node:fs/promises';
 import {buildBriefing} from './lib/pulse-briefing.mjs';
 import {fundFlows} from './lib/fund-flow.mjs';
+import {activeStocks} from './lib/active-stocks.mjs';
 import {appendBriefing} from '../server/pulse-briefing.js';
 import {pulseSymbols,dailySigma,buildPulse,appendPulse,etSession} from '../server/market-pulse.js';
 const output=new URL('../public/data/pulse/history.json',import.meta.url);
@@ -45,6 +46,8 @@ await fs.mkdir(new URL('.',output),{recursive:true});
 await fs.writeFile(output,JSON.stringify(appendPulse(history,pulse,60))+'\n');
 // Hourly briefing on what changed since the previous pulse. Never blocks the pulse itself.
 const briefFile=new URL('../public/data/pulse/briefing.json',import.meta.url);
+// Crowded trading (regular session only); outside it the last session's list stays as is.
+if(pulse.session==='regular'){try{const a=await activeStocks({headers,at});if(!a.error)await fs.writeFile(new URL('../public/data/pulse/active.json',import.meta.url),JSON.stringify({version:1,updatedAt:at.toISOString(),barStart:a.barStart,items:a.items})+'\n');console.log(`Active ${a.items.length}${a.error?` (${a.error})`:` · candidates ${a.candidates} · measured ${a.measured}`}`)}catch(e){console.warn(`active skipped: ${e.message}`)}}
 let flows=[];try{const f=await fundFlows({headers,at});flows=f.flows;console.log(`Flows ${flows.filter(x=>x.dir).length}/${flows.length}${f.errors.length?` · errors: ${f.errors.join('; ')}`:''}`)}catch(e){console.warn(`flows skipped: ${e.message}`)}
 try{const b=await buildBriefing({cur:pulse,prev:history?.items?.at(-1),alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY,flows});let old=null;try{old=JSON.parse(await fs.readFile(briefFile,'utf8'))}catch{}
  const {note,...item}=b;await fs.writeFile(briefFile,JSON.stringify(appendBriefing(old,item))+'\n');console.log(`Briefing ${item.ai?'AI':'fallback'} · ${note} · ${item.title}`)}catch(e){console.warn(`briefing skipped: ${e.message}`)}

@@ -26,3 +26,16 @@ test('gdelt query and parsing keep outlet links only', async ()=>{
  const v=validateBriefing({confident:true,title:'금 상승',bullets:['a','b','c'],news_ids:[0,1],link_ids:[0,5]},[{title:'x'},{title:'y'}],a);
  assert.equal(v.links.length,1);
 });
+test('consistency gate catches claims that contradict cards or money flow', async ()=>{
+ const {claimProblems,textClaims}=await import('../server/pulse-briefing.js');
+ const cur={groups:{gold:1,rates:0,stocks:-1,silver:null}},flows=[{id:'commodities',dir:null},{id:'crypto',dir:'flat'}];
+ assert.deepEqual(claimProblems([{target:'gold',direction:'up'},{target:'stocks',direction:'down'}],cur,flows),[]);
+ assert.equal(claimProblems([{target:'rates',direction:'up'}],cur,flows).length,1);
+ assert.equal(claimProblems([{target:'flow:commodities',direction:'in'}],cur,flows).length,1);
+ assert.equal(claimProblems([{target:'flow:crypto',direction:'flat'}],cur,flows).length,0);
+ assert.deepEqual(textClaims('금리 상승 우려에 금이 올랐어요'),[{target:'rates',direction:'up'},{target:'gold',direction:'up'}]);
+ assert.deepEqual(textClaims('은이 하락했어요'),[{target:'silver',direction:'down'}]);
+ assert.equal(textClaims('지난 확인 이후 큰 변화는 없었어요').length,0);
+ assert.ok(textClaims('안전자산인 금·은으로 자금이 일부 옮겨갔어요').some(c=>c.target==='flow:commodities'&&c.direction==='in'));
+ assert.ok(textClaims('주식에서 돈이 빠졌어요').some(c=>c.target==='flow:stocks'&&c.direction==='out'));
+});

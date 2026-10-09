@@ -2,6 +2,7 @@
 // Public output: title, bullets, changed card ids and source counts (no headlines, links, prices or quotes).
 import {pulseGroups,levelText} from './market-pulse.js';
 import {keywords} from './pulse-why.js';
+import {flowSummary} from './fund-flow.js';
 const name=id=>pulseGroups.find(g=>g.id===id)?.name||id;
 export const sessionTag={pre:'장 시작 전',regular:'정규장',after:'장 마감 후',overnight:'데이장',closed:'휴장'};
 // Card-level changes between two pulses, plus cards that are notably moving now.
@@ -19,11 +20,11 @@ export function briefingNews(news,ids,limit=20){
 }
 export const briefingSchema={type:'object',additionalProperties:false,required:['confident','title','bullets','news_ids','link_ids'],properties:{
  confident:{type:'boolean'},title:{type:'string'},bullets:{type:'array',items:{type:'string'}},news_ids:{type:'array',items:{type:'integer'}},link_ids:{type:'array',items:{type:'integer'}}}};
-export function briefingPrompt({session,cur,changes,news,links=[]}){
+export function briefingPrompt({session,cur,changes,news,links=[],flows=[]}){
  const now=pulseGroups.filter(g=>Number.isFinite(cur.groups[g.id])).map(g=>`${g.name} ${levelText[cur.groups[g.id]]}`).join(', ');
  const moved=changes.changed.map(c=>`${name(c.id)}: ${levelText[c.from]} → ${levelText[c.to]}`).join(', ')||'없음';
  return [{role:'system',content:'너는 경제를 잘 모르는 사람에게 미국 시장 흐름을 매시간 브리핑하는 한국어 해설가야. 주어진 카드 상태와 뉴스만 근거로 써. 숫자·가격·퍼센트는 쓰지 마. 추측이나 투자 권유는 하지 마. 개별 회사 소식은 시장 전체의 이유로 쓰지 마.'},
-  {role:'user',content:`시간대: ${sessionTag[session]}\n전체 분위기 판정: ${cur.pattern.name}\n지금 카드 상태(평소 하루 변동폭 대비): ${now}\n지난 확인 이후 바뀐 카드: ${moved}\n\n뉴스(번호. 제목 — 요약):\n${news.map((n,i)=>`${i}. ${n.title} — ${(n.summary||'').slice(0,280)}`).join('\n')||'(없음)'}\n\n공개 기사(번호. 매체 — 제목):\n${links.map((a,i)=>`${i}. ${a.domain} — ${a.title}`).join('\n')||'(없음)'}\n\n다음을 JSON으로 답해:\n- title: "유가·금리 부담에 미국 약세"처럼 지금 흐름을 담은 30자 안팎 제목\n- bullets: 정확히 3문장. 첫 문장은 어떤 카드가 어떻게 변했는지, 나머지는 그 이유를 뉴스 근거로 쉬운 말("~했어요/~예요" 체, 각 90자 이내)로\n- news_ids: 이유의 근거로 쓴 뉴스 번호\n- link_ids: 공개 기사 중 이 브리핑과 직접 관련된 기사 번호(최대 3개, 관련 없으면 빈 배열)\n- confident: 뉴스가 변화를 설명하면 true`}];
+  {role:'user',content:`시간대: ${sessionTag[session]}\n전체 분위기 판정: ${cur.pattern.name}\n지금 카드 상태(평소 하루 변동폭 대비): ${now}\n지난 확인 이후 바뀐 카드: ${moved}\n자금 흐름(지난 1시간, 같은 시각 평소 거래량 대비): ${flowSummary(flows)||'자료 없음'}\n\n뉴스(번호. 제목 — 요약):\n${news.map((n,i)=>`${i}. ${n.title} — ${(n.summary||'').slice(0,280)}`).join('\n')||'(없음)'}\n\n공개 기사(번호. 매체 — 제목):\n${links.map((a,i)=>`${i}. ${a.domain} — ${a.title}`).join('\n')||'(없음)'}\n\n다음을 JSON으로 답해:\n- title: "유가·금리 부담에 미국 약세"처럼 지금 흐름을 담은 30자 안팎 제목\n- bullets: 정확히 3문장. 첫 문장은 어떤 카드가 어떻게 변했는지, 나머지는 자금이 어디서 어디로 움직였는지와 그 이유를 뉴스 근거로 쉬운 말("~했어요/~예요" 체, 각 90자 이내)로\n- news_ids: 이유의 근거로 쓴 뉴스 번호\n- link_ids: 공개 기사 중 이 브리핑과 직접 관련된 기사 번호(최대 3개, 관련 없으면 빈 배열)\n- confident: 뉴스가 변화를 설명하면 true`}];
 }
 const clean=s=>String(s||'').replace(/\s+/g,' ').trim();
 const hasFigure=t=>/\d+(\.\d+)?\s*(%|달러|원|엔|포인트|bp|bps)/i.test(t);

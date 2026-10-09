@@ -4,6 +4,7 @@ import {pulseGroups,patterns,levelText} from '../server/market-pulse.js';
 import InfoModal,{DriverTags,Section} from './info-modal.jsx';
 import {Card} from './market-context.jsx';
 import {quoteTabs,QuoteCard,BondCard} from './quote-cards.jsx';
+import {volText,flowText,pressureText} from '../server/fund-flow.js';
 const sessionName={pre:'장 시작 전',regular:'정규장',after:'장 마감 후',closed:'휴장',overnight:'데이장'};
 const LevelIcon=({v})=>v===2?<ChevronsUp size={15}/>:v===1?<TrendingUp size={15}/>:v===-1?<TrendingDown size={15}/>:v===-2?<ChevronsDown size={15}/>:<Minus size={15}/>;
 const kstTime=at=>new Date(at).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit'});
@@ -12,11 +13,18 @@ const publisherName={benzinga:'Benzinga',reuters:'Reuters',bloomberg:'Bloomberg'
 const json=url=>fetch(url,{cache:'no-cache'}).then(r=>r.ok?r.json():null).catch(()=>null);
 // Related public articles (GDELT): outlet, headline, original link.
 const Related=({links})=>links?.length>0&&<div className="brief-links"><span>관련 뉴스</span>{links.map(l=><a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer"><b>{l.domain}</b>{l.title}</a>)}</div>;
+// Money flow by asset class over the last hour (stages only). Crypto strength is real taker data;
+// the others infer direction from price and volume together.
+function Flows({flows,compact}){
+ if(!flows?.length)return null;
+ return <div className={`flows ${compact?'compact':''}`}><span className="flows-title">자금 흐름 · 지난 1시간</span>{flows.map(f=><div key={f.id} className={`flow flow-${f.dir||'none'}`}><strong>{f.label}</strong><em>{f.dir==='in'?'▲':f.dir==='out'?'▼':'–'} {f.dir?flowText[f.dir]:'거래 없음'}</em>{f.dir&&<span>{volText[f.vol]}{f.pressure?` · ${pressureText[f.pressure]}`:''}{f.lead?` · ${f.lead} 중심`:''}</span>}</div>)}</div>;
+}
 // Hourly AI briefing: which cards changed since the previous check and why.
 function Briefing({b,onHistory}){
  if(!b)return <p className="fine">아직 브리핑이 없어요. 매시간 갱신돼요.</p>;
  return <section className="brief" aria-label="AI 브리핑"><header><span className="brief-kicker"><Sparkles size={16}/>AI 브리핑</span><h3><span className="brief-tag">[{sessionName[b.session]}]</span> {b.title}</h3><button type="button" className="brief-time" onClick={onHistory} aria-haspopup="dialog">{kstStamp(b.at)}<ChevronRight size={14}/></button></header>
   <ul>{b.bullets.map((x,i)=><li key={i}>{x}</li>)}</ul>
+  <Flows flows={b.flows}/>
   <Related links={b.links}/>
   <p className="brief-foot">분위기 판정 · {b.pattern?.name}{b.sources.count>0?` · ${b.sources.count}개 출처(${b.sources.publishers.map(p=>publisherName[p]||p).join(', ')})`:''} · {b.ai?'OpenAI 요약':'자동 정리(근거 뉴스 부족)'}</p>
  </section>;
@@ -28,7 +36,7 @@ function BriefingHistory({items}){
  const list=items.filter(i=>kstDay(i.at)===day).reverse();
  return <div className="bh"><p className="bh-note"><Sparkles size={15}/><b>AI</b> 미국 시장 카드의 변화와 관련 뉴스를 생성형 AI로 요약해요.</p>
   <div className="bh-nav"><button type="button" aria-label="이전 날" disabled={idx>=days.length-1} onClick={()=>setDay(days[idx+1])}><ChevronLeft size={18}/></button><strong>{day?.replaceAll('-','. ')}.</strong><button type="button" aria-label="다음 날" disabled={idx<=0} onClick={()=>setDay(days[idx-1])}><ChevronRight size={18}/></button><small>최신 생성일 기준으로 최대 2주 전까지 볼 수 있어요.</small></div>
-  {list.map(b=><article key={b.at} className={`bh-row ${b.at===latest?'is-new':''}`}><div className="bh-time">{new Date(b.at).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hour12:false})}{b.at===latest&&<em>NEW</em>}</div><div><h4><span className="brief-tag">[{sessionName[b.session]}]</span> {b.title}</h4><ul>{b.bullets.map((x,i)=><li key={i}>{x}</li>)}</ul><Related links={b.links}/></div></article>)}
+  {list.map(b=><article key={b.at} className={`bh-row ${b.at===latest?'is-new':''}`}><div className="bh-time">{new Date(b.at).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hour12:false})}{b.at===latest&&<em>NEW</em>}</div><div><h4><span className="brief-tag">[{sessionName[b.session]}]</span> {b.title}</h4><ul>{b.bullets.map((x,i)=><li key={i}>{x}</li>)}</ul><Flows flows={b.flows} compact/><Related links={b.links}/></div></article>)}
  </div>;
 }
 export default function MarketPulse(){

@@ -600,3 +600,12 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .brief-links a:hover{color:#FAFAFA;text-decoration:underline}
 .brief-links a b{flex:none;font-size:11px;font-weight:600;color:#A1A1AA}
 @media (min-width:1024px){.quote-grid.cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+/* Money flow strip */
+.flows{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:10px}
+.flows-title{grid-column:1/-1;font-size:11px;font-weight:600;color:#71717A}
+.flow{background:#111113;border:1px solid #27272A;border-radius:10px;padding:8px 10px;display:grid;gap:2px;min-width:0}
+.flow strong{font-size:12px;color:#A1A1AA;font-weight:600}.flow em{font-style:normal;font-size:15px;font-weight:700;color:#D4D4D8}
+.flow span{font-size:11px;color:#A1A1AA;line-height:1.4}
+.flow-in em{color:#17C964}.flow-out em{color:#F31260}.flow-none em{color:#52525B}
+.flows.compact{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.flows.compact .flow{padding:5px 8px}.flows.compact .flow em{font-size:13px}.flows.compact .flow span{display:none}
+@media (max-width:767px){.flows{grid-template-columns:repeat(2,minmax(0,1fr))}}

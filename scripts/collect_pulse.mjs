@@ -2,6 +2,7 @@
 // Prices stay in memory; only group levels, the pattern and the summary are written.
 import fs from 'node:fs/promises';
 import {buildBriefing} from './lib/pulse-briefing.mjs';
+import {fundFlows} from './lib/fund-flow.mjs';
 import {appendBriefing} from '../server/pulse-briefing.js';
 import {pulseSymbols,dailySigma,buildPulse,appendPulse,etSession} from '../server/market-pulse.js';
 const output=new URL('../public/data/pulse/history.json',import.meta.url);
@@ -44,6 +45,7 @@ await fs.mkdir(new URL('.',output),{recursive:true});
 await fs.writeFile(output,JSON.stringify(appendPulse(history,pulse,60))+'\n');
 // Hourly briefing on what changed since the previous pulse. Never blocks the pulse itself.
 const briefFile=new URL('../public/data/pulse/briefing.json',import.meta.url);
-try{const b=await buildBriefing({cur:pulse,prev:history?.items?.at(-1),alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY});let old=null;try{old=JSON.parse(await fs.readFile(briefFile,'utf8'))}catch{}
+let flows=[];try{const f=await fundFlows({headers,at});flows=f.flows;console.log(`Flows ${flows.filter(x=>x.dir).length}/${flows.length}${f.errors.length?` · errors: ${f.errors.join('; ')}`:''}`)}catch(e){console.warn(`flows skipped: ${e.message}`)}
+try{const b=await buildBriefing({cur:pulse,prev:history?.items?.at(-1),alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY,flows});let old=null;try{old=JSON.parse(await fs.readFile(briefFile,'utf8'))}catch{}
  const {note,...item}=b;await fs.writeFile(briefFile,JSON.stringify(appendBriefing(old,item))+'\n');console.log(`Briefing ${item.ai?'AI':'fallback'} · ${note} · ${item.title}`)}catch(e){console.warn(`briefing skipped: ${e.message}`)}
 console.log(`Pulse ${pulse.at} ${pulse.session} feed=${feed} symbols=${Object.values(moves).filter(m=>Number.isFinite(m.change)).length}/${pulseSymbols.length} pattern=${pulse.pattern.id}`);

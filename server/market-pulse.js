@@ -7,6 +7,7 @@ export const pulseGroups=[
  {id:'rates',name:'국채 금리',items:[['TLT',-1],['IEF',-1]],drivers:['rates']},
  {id:'oil',name:'유가',items:[['USO',1]],drivers:['cost','supply']},
  {id:'commodities',name:'원자재',items:[['DBC',1],['CPER',1]],drivers:['demand','cost']},
+ {id:'grains',name:'곡물',items:[['DBA',1],['CORN',1],['WEAT',1]],drivers:['cost','supply']},
  {id:'safe',name:'안전자산',items:[['GLD',1],['UUP',1],['FXY',1]],drivers:['fx','credit']},
  {id:'risk',name:'위험자산',items:[['HYG',1],['BTC/USD',1]],drivers:['credit','liquidity']},
  {id:'fear',name:'공포지수',items:[['VIXY',1]],drivers:['credit','liquidity']},

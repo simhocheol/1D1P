@@ -9,7 +9,7 @@ const LevelIcon=({v})=>v===2?<ChevronsUp size={15}/>:v===1?<TrendingUp size={15}
 const kstTime=at=>new Date(at).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit'});
 const kstDay=at=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul'}).format(new Date(at));
 const symbolsOf=g=>g.items.map(([s,sign])=>sign<0?`${s}(반대 방향)`:s).join(' · ');
-const groupPlain={stocks:'미국 대표 주가지수 ETF예요. 시장 전체의 기분을 보여줘요.',rates:'국채 ETF 가격의 반대 방향으로 금리를 봐요. 금리가 오르면 국채 가격은 내려가요.',oil:'원유 ETF예요. 기름값은 물가와 기업 비용에 바로 닿아요.',commodities:'원자재 전반과 구리예요. 구리는 공장·건설에 많이 쓰여 경기의 체온계로 불려요.',safe:'금·달러·엔화예요. 불안할 때 돈이 몰리는 곳이에요.',risk:'하이일드 채권과 비트코인이에요. 자신감이 클 때 돈이 몰리는 곳이에요.',fear:'변동성 ETF예요. 오르면 시장이 불안하다는 뜻이에요.'};
+const groupPlain={stocks:'미국 대표 주가지수 ETF예요. 시장 전체의 기분을 보여줘요.',rates:'국채 ETF 가격의 반대 방향으로 금리를 봐요. 금리가 오르면 국채 가격은 내려가요.',oil:'원유 ETF예요. 기름값은 물가와 기업 비용에 바로 닿아요.',commodities:'원자재 전반과 구리예요. 구리는 공장·건설에 많이 쓰여 경기의 체온계로 불려요.',grains:'농산물 종합·옥수수·밀이에요. 먹거리 물가와 가뭄·전쟁 같은 공급 문제를 먼저 보여줘요.',safe:'금·달러·엔화예요. 불안할 때 돈이 몰리는 곳이에요.',risk:'하이일드 채권과 비트코인이에요. 자신감이 클 때 돈이 몰리는 곳이에요.',fear:'변동성 ETF예요. 오르면 시장이 불안하다는 뜻이에요.'};
 export default function MarketPulse(){
  const [history,setHistory]=useState(null),[error,setError]=useState(''),[pick,setPick]=useState(null),[modal,setModal]=useState(null);
  useEffect(()=>{fetch('/data/pulse/history.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject(Error(r.status===404?'아직 수집된 기록이 없습니다.':`HTTP ${r.status}`))).then(setHistory).catch(e=>setError(e.message))},[]);
@@ -17,7 +17,7 @@ export default function MarketPulse(){
  const days=[...new Set(items.map(i=>kstDay(i.at)))].sort().reverse();
  const dayFlow=cur?items.filter(i=>kstDay(i.at)===kstDay(cur.at)):[];
  const group=modal?.group&&pulseGroups.find(g=>g.id===modal.group);
- return <Card icon={Activity} title="시장 분위기" sub="큰 지표 7묶음을 4시간마다 확인해 누적 · 한국 낮 시간은 데이장" meta={cur&&`${kstDay(cur.at).slice(5).replace('-','/')} ${kstTime(cur.at)} · ${sessionName[cur.session]}`}>
+ return <Card icon={Activity} title="시장 분위기" sub="큰 지표 8묶음을 4시간마다 확인해 누적 · 한국 낮 시간은 데이장" meta={cur&&`${kstDay(cur.at).slice(5).replace('-','/')} ${kstTime(cur.at)} · ${sessionName[cur.session]}`}>
   {!cur?<p className="fine">{error||'불러오는 중'}</p>:<>
    <button type="button" className={`pulse-hero tone-${toneOf(cur.pattern.id)}`} onClick={()=>setModal({flow:true})} aria-haspopup="dialog"><span className="pulse-pattern">{cur.pattern.name}</span><p>{cur.summary}</p>{dayFlow.length>1&&<small>이날 흐름 · {dayFlow.map(i=>i.pattern.name).join(' → ')}</small>}<ChevronRight size={14} className="home-row-go"/></button>
    <div className="pulse-groups">{pulseGroups.map(g=>{const v=cur.groups[g.id];return <button type="button" key={g.id} onClick={()=>setModal({group:g.id})} aria-haspopup="dialog" className={`pulse-group lv${v??'na'} ${g.id==='fear'?'inverse':''} ${cur.lead.includes(g.id)?'is-lead':''}`}><span className="pulse-group-name">{g.name}</span><strong><LevelIcon v={v}/>{v==null?'미수집':levelText[v]}</strong></button>})}</div>

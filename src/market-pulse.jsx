@@ -40,7 +40,7 @@ export default function MarketPulse(){
  return <Card icon={Activity} title="시장 분위기" sub="실시간 시세 카드와 매시간 AI 브리핑" meta={cur&&`판정 ${kstTime(cur.at)} · ${sessionName[cur.session]}`} className="pulse-main">
   <Briefing b={latest} onHistory={()=>setModal({briefs:true})}/>
   <div className="quote-tabs" role="tablist" aria-label="시세 분류">{quoteTabs.map(t=><button key={t.id} type="button" role="tab" aria-selected={tab===t.id} className={tab===t.id?'is-active':''} onClick={()=>setTab(t.id)}>{t.label}</button>)}</div>
-  {active.sections.map(sec=><div key={sec.label} className="quote-section"><h3>{sec.label}</h3><div className="quote-grid">
+  {active.sections.map(sec=><div key={sec.label} className="quote-section"><h3>{sec.label}</h3><div className={`quote-grid ${sec.cols?`cols-${sec.cols}`:''}`}>
    {sec.bonds?(context?.bonds||[]).map(b=><BondCard key={b.id} bond={b}/>):sec.items.map(q=><QuoteCard key={q.symbol} {...q}/>)}
   </div></div>)}
   <p className="fine">{active.note}</p>

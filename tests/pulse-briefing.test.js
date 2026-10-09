@@ -39,3 +39,8 @@ test('consistency gate catches claims that contradict cards or money flow', asyn
  assert.ok(textClaims('안전자산인 금·은으로 자금이 일부 옮겨갔어요').some(c=>c.target==='flow:commodities'&&c.direction==='in'));
  assert.ok(textClaims('주식에서 돈이 빠졌어요').some(c=>c.target==='flow:stocks'&&c.direction==='out'));
 });
+test('reference markers are stripped from briefing text', async ()=>{
+ const {validateBriefing}=await import('../server/pulse-briefing.js');
+ const v=validateBriefing({confident:true,title:'주가 강세',bullets:['가상자산은 정체예요(기사4).','유가 안정 영향이에요(기사2, 기사19).','금도 올랐어요.'],news_ids:[0,1],link_ids:[],claims:[]},[{title:'a'},{title:'b'}],[]);
+ assert.deepEqual(v.bullets,['가상자산은 정체예요.','유가 안정 영향이에요.','금도 올랐어요.']);
+});

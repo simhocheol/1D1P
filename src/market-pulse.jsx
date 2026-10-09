@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {TrendingUp,TrendingDown,Minus,ChevronsUp,ChevronsDown,Activity,ChevronRight} from 'lucide-react';
+import {TrendingUp,TrendingDown,Minus,ChevronsUp,ChevronsDown,Activity,ChevronRight,Sparkles,ChevronDown} from 'lucide-react';
 import {pulseGroups,patterns,levelText} from '../server/market-pulse.js';
 import InfoModal,{DriverTags,Section} from './info-modal.jsx';
 import {Card} from './market-context.jsx';
@@ -11,6 +11,19 @@ const kstDay=at=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul'}).format
 const symbolsOf=g=>g.items.map(([s,sign])=>sign<0?`${s}(반대 방향)`:s).join(' · ');
 const groupPlain={stocks:'미국 대표 주가지수 ETF예요. 시장 전체의 기분을 보여줘요.',rates:'국채 ETF 가격의 반대 방향으로 금리를 봐요. 금리가 오르면 국채 가격은 내려가요.',fear:'변동성 ETF예요. 오르면 시장이 불안하다는 뜻이에요.',crypto:'비트코인·이더리움이에요. 24시간 거래되고, 시장에 돈이 넘치고 자신감이 클 때 가장 먼저 오르는 위험자산이에요.',
  oil:'원유 ETF예요. 기름값은 물가와 기업 비용에 바로 닿아요.',natgas:'천연가스 ETF예요. 전기요금·난방비·공장 연료비를 좌우하고, 날씨와 유럽 공급 문제에 크게 반응해요.',gold:'금 ETF예요. 불안하거나 돈의 가치가 떨어질까 걱정될 때 돈이 피하는 대표 안전자산이에요.',silver:'은 ETF예요. 귀금속이면서 태양광·전자제품에 쓰이는 산업 금속이라, 금과 다르게 움직이면 산업 수요 신호로 읽혀요.',copper:'구리 ETF예요. 전선·건설·전기차에 두루 쓰여 경기의 체온계로 불려요.',grains:'농산물 종합·옥수수·밀이에요. 먹거리 물가와 가뭄·전쟁 같은 공급 문제를 먼저 보여줘요.'};
+const ago=t=>{const m=Math.max(1,Math.round((Date.now()-Date.parse(t))/6e4));return m<60?`${m}분 전`:m<1440?`${Math.round(m/60)}시간 전`:`${Math.round(m/1440)}일 전`};
+const publisherName={benzinga:'Benzinga',reuters:'Reuters',bloomberg:'Bloomberg'};
+// "Why did it move?" cards: AI summary of recent news for the biggest movers, monochrome.
+function WhyCard({card,at}){
+ const [open,setOpen]=useState(false);const g=pulseGroups.find(x=>x.id===card.group);
+ return <article className="why-card"><header><span className="why-kicker"><Sparkles size={13}/>{card.level>0?'왜 올랐을까':'왜 내렸을까'}</span><time>{ago(at)}</time></header>
+  <h3>{card.title} <span className="why-move">{g?.name} {levelText[card.level]}</span></h3>
+  <ul>{card.bullets.map((b,i)=><li key={i}>{b}</li>)}</ul>
+  {card.tags.length>0&&<div className="why-tags">{card.tags.map(t=><span key={t}>{t}</span>)}</div>}
+  <button type="button" className="why-sources" aria-expanded={open} onClick={()=>setOpen(!open)}><span>{card.sources.count}개 출처</span><ChevronDown size={14}/></button>
+  {open&&<p className="why-source-list">{card.sources.publishers.map(p=>publisherName[p]||p).join(' · ')} 등 최근 24시간 뉴스 · OpenAI로 요약 · 뉴스 원문과 링크는 이용 조건에 따라 공개하지 않아요.</p>}
+ </article>;
+}
 export default function MarketPulse(){
  const [history,setHistory]=useState(null),[error,setError]=useState(''),[pick,setPick]=useState(null),[modal,setModal]=useState(null);
  useEffect(()=>{fetch('/data/pulse/history.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject(Error(r.status===404?'아직 수집된 기록이 없습니다.':`HTTP ${r.status}`))).then(setHistory).catch(e=>setError(e.message))},[]);
@@ -21,6 +34,7 @@ export default function MarketPulse(){
  return <Card icon={Activity} title="시장 분위기" sub="시장 지표와 원자재를 4시간마다 확인해 누적 · 한국 낮 시간은 데이장" meta={cur&&`${kstDay(cur.at).slice(5).replace('-','/')} ${kstTime(cur.at)} · ${sessionName[cur.session]}`}>
   {!cur?<p className="fine">{error||'불러오는 중'}</p>:<>
    <button type="button" className={`pulse-hero tone-${toneOf(cur.pattern.id)}`} onClick={()=>setModal({flow:true})} aria-haspopup="dialog"><span className="pulse-pattern">{cur.pattern.name}</span><p>{cur.summary}</p>{dayFlow.length>1&&<small>이날 흐름 · {dayFlow.map(i=>i.pattern.name).join(' → ')}</small>}<ChevronRight size={14} className="home-row-go"/></button>
+   {cur.why?.length>0&&<div className="why-list">{cur.why.map(c=><WhyCard key={c.group} card={c} at={cur.at}/>)}</div>}
    {[['market',null],['commodity','원자재']].map(([sec,label])=>{const gs=pulseGroups.filter(g=>g.section===sec);return <div key={sec} className="pulse-section">{label&&<h3 className="pulse-section-title">{label}</h3>}<div className="pulse-groups">{gs.map(g=>{const v=cur.groups[g.id];return <button type="button" key={g.id} onClick={()=>setModal({group:g.id})} aria-haspopup="dialog" className={`pulse-group lv${v??'na'} ${g.id==='fear'?'inverse':''} ${cur.lead.includes(g.id)?'is-lead':''}`}><span className="pulse-group-name">{g.name}</span><strong><LevelIcon v={v}/>{v==null?'미수집':levelText[v]}</strong></button>})}</div></div>})}
    <div className="pulse-history"><div className="pulse-rows">{days.slice(0,3).map(d=><div key={d} className="pulse-row"><span>{d.slice(5).replace('-','/')}</span><div>{items.filter(i=>kstDay(i.at)===d).map(i=><button key={i.at} type="button" className={`pulse-chip tone-${toneOf(i.pattern.id)} ${i.at===cur.at?'is-active':''}`} onClick={()=>setPick(i.at)} aria-pressed={i.at===cur.at}><small>{kstTime(i.at)}</small>{i.pattern.name}</button>)}</div></div>)}</div>{days.length>3&&<button type="button" className="home-link" onClick={()=>setModal({history:true})}>지난 기록 {days.length}일 모두 보기</button>}</div>
   </>}

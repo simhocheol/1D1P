@@ -1,6 +1,7 @@
 // Collects a market pulse every 4 hours and appends it to the public history.
 // Prices stay in memory; only group levels, the pattern and the summary are written.
 import fs from 'node:fs/promises';
+import {explainMovers} from './lib/pulse-why.mjs';
 import {pulseSymbols,dailySigma,buildPulse,appendPulse,etSession} from '../server/market-pulse.js';
 const output=new URL('../public/data/pulse/history.json',import.meta.url);
 const at=new Date();
@@ -37,6 +38,8 @@ for(const s of stocks)moves[s]={change:session==='overnight'?overnightMove(s):mo
 {const u=new URL('https://data.alpaca.markets/v1beta3/crypto/us/snapshots');u.searchParams.set('symbols',crypto.join(','));const d=await get(u);const utc=at.toISOString().slice(0,10);
  for(const s of crypto)moves[s]={change:move(d.snapshots?.[s],t=>t&&t.slice(0,10)===utc),sigma:dailySigma(closes[s]||[])}}
 const pulse=buildPulse({moves,at});
+// Why the biggest movers moved (news + OpenAI). A failure here never blocks the pulse itself.
+try{const w=await explainMovers({groups:pulse.groups,alpacaHeaders:headers,openaiKey:process.env.OPENAI_API_KEY});pulse.why=w.cards;console.log(`Why cards ${w.cards.length}${w.note?` (${w.note})`:''}${w.news!=null?` · news ${w.news}`:''}${w.errors?.length?` · errors: ${w.errors.join('; ')}`:''}`)}catch(e){console.warn(`why skipped: ${e.message}`)}
 let history=null;try{history=JSON.parse(await fs.readFile(output,'utf8'))}catch{}
 await fs.mkdir(new URL('.',output),{recursive:true});
 await fs.writeFile(output,JSON.stringify(appendPulse(history,pulse))+'\n');

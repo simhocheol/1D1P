@@ -80,5 +80,7 @@ export function buildPulse({moves,at=new Date()}){
 export function appendPulse(history,pulse,keepDays=120){
  const cutoff=Date.parse(pulse.at)-keepDays*86400000;
  const items=[...(history?.items||[]).filter(i=>Date.parse(i.at)>=cutoff&&i.at!==pulse.at),pulse].sort((a,b)=>a.at.localeCompare(b.at));
+ // Keep explanations for a week only so the public history stays small.
+ const whyCut=Date.parse(pulse.at)-7*86400000;for(const i of items)if(i.why&&Date.parse(i.at)<whyCut)delete i.why;
  return {version:1,updatedAt:pulse.at,items};
 }

@@ -529,3 +529,16 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .sc-chips span.sc-chips-label{background:none!important;color:#71717A!important;font-weight:400;padding:0;border:0}
 .pulse-section+.pulse-section{margin-top:12px}
 .pulse-section-title{font-size:12px;font-weight:600;color:#A1A1AA;margin:0 0 6px}
+/* Why-did-it-move cards (monochrome) */
+.why-list{display:grid;gap:8px;margin:0 0 12px}
+.why-card{background:#18181B;border:1px solid #27272A;border-radius:14px;padding:14px 16px;min-width:0}
+.why-card header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.why-kicker{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#D4D4D8}.why-card time{font-size:12px;color:#71717A}
+.why-card h3{font-size:16px;color:#FAFAFA;margin:0 0 8px;line-height:1.4}.why-move{font-size:12px;font-weight:500;color:#A1A1AA;margin-left:4px;white-space:nowrap}
+.why-card ul{margin:0 0 10px;padding-left:18px;display:grid;gap:4px}.why-card li{font-size:13px;line-height:1.65;color:#D4D4D8}
+.why-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.why-tags span{font-size:12px;color:#E4E4E7;background:#27272A;border-radius:999px;padding:4px 10px}
+.why-sources{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;border-top:1px solid #27272A;padding:10px 0 0;color:#A1A1AA;font:inherit;font-size:13px;cursor:pointer}
+.why-sources[aria-expanded=true] svg{transform:rotate(180deg)}
+.why-source-list{font-size:12px;color:#A1A1AA;margin:8px 0 0;line-height:1.6}
+.why-card header{background:none!important;border:0!important;padding:0!important;position:static!important;box-shadow:none!important}
+.why-card ul{list-style:disc!important}.why-card li::marker{color:#71717A}

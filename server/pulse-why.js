@@ -18,13 +18,16 @@ export const keywords={
 export function pickMovers(groups,n=3){return Object.entries(groups).filter(([,v])=>Number.isFinite(v)&&Math.abs(v)>=1).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,n).map(([id,level])=>({id,level}))}
 export function matchNews(groupId,news,limit=12){
  const kw=keywords[groupId]||[];const g=pulseGroups.find(x=>x.id===groupId);const syms=new Set((g?.items||[]).map(([s])=>s.replace('/','')));
- return news.filter(n=>(n.symbols||[]).some(s=>syms.has(s))||kw.some(k=>`${n.title} ${n.summary}`.toLowerCase().includes(k))).slice(0,limit);
+ // Market-level stories only: tagged with the group's own proxies, or untagged / tagged with few symbols.
+ // A story about one company (e.g. a gold miner's output) does not explain the commodity or the index.
+ const marketLevel=n=>(n.symbols||[]).some(x=>syms.has(x))||(n.symbols||[]).length===0||(n.symbols||[]).length>=4;
+ return news.filter(n=>marketLevel(n)&&((n.symbols||[]).some(x=>syms.has(x))||kw.some(k=>`${n.title} ${n.summary}`.toLowerCase().includes(k)))).slice(0,limit);
 }
 export const whySchema={type:'object',additionalProperties:false,required:['confident','title','bullets','tags','news_ids'],properties:{
  confident:{type:'boolean'},title:{type:'string'},bullets:{type:'array',items:{type:'string'}},tags:{type:'array',items:{type:'string'}},news_ids:{type:'array',items:{type:'integer'}}}};
 export function whyPrompt({group,level,context,news}){
  const g=pulseGroups.find(x=>x.id===group);
- return [{role:'system',content:'너는 경제를 잘 모르는 사람에게 시장 움직임을 설명하는 한국어 해설가야. 주어진 뉴스와 지표만 근거로 써. 숫자·가격·퍼센트는 쓰지 마. 추측이나 투자 권유는 하지 마. 근거 뉴스가 이 움직임을 설명하지 못하면 confident=false로 답해.'},
+ return [{role:'system',content:'너는 경제를 잘 모르는 사람에게 시장 움직임을 설명하는 한국어 해설가야. 주어진 뉴스와 지표만 근거로 써. 숫자·가격·퍼센트는 쓰지 마. 추측이나 투자 권유는 하지 마. 개별 회사의 실적·생산·증권사 의견은 시장 전체나 원자재 가격의 이유로 쓰지 마. 근거 뉴스가 이 움직임을 설명하지 못하면 confident=false로 답해.'},
   {role:'user',content:`대상: ${g.name} (${levelText[level]})\n다른 지표: ${context}\n\n뉴스(번호. 제목 — 요약):\n${news.map((n,i)=>`${i}. ${n.title} — ${(n.summary||'').slice(0,300)}`).join('\n')}\n\n다음을 JSON으로 답해:\n- title: "달러 약세로 금 상승"처럼 원인과 움직임을 담은 20자 안팎 제목\n- bullets: 쉬운 말로 된 2~3문장 설명(각 80자 이내, "~했어요/~예요" 체)\n- tags: 원인 키워드 2~3개(각 8자 이내)\n- news_ids: 근거로 쓴 뉴스 번호\n- confident: 뉴스가 움직임을 설명하면 true`}];
 }
 const clean=s=>String(s||'').replace(/\s+/g,' ').trim();

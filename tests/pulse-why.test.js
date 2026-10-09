@@ -6,6 +6,7 @@ const news=[{title:'Gold climbs as dollar weakens',summary:'',symbols:[],source:
 test('picks strongest movers and matches news by keyword or symbol', ()=>{
  assert.deepEqual(pickMovers({gold:2,oil:-1,stocks:0,copper:null}).map(m=>m.id),['gold','oil']);
  assert.equal(matchNews('gold',news).length,2);
+ assert.equal(matchNews('gold',[{title:'Gold miner cuts output target',summary:'',symbols:['NEM']}]).length,0);
 });
 test('validation keeps supported cards and rejects figures or low confidence', ()=>{
  const ok=validateWhy({confident:true,title:'달러 약세로 금 상승',bullets:['달러가 약해졌어요.','중앙은행 수요도 받쳐 줬어요.'],tags:['달러 약세','중앙은행'],news_ids:[0,1,9]},news.slice(0,2),'gold',2);

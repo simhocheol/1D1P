@@ -12,7 +12,6 @@ export const quoteTabs=[
   // One grid, five columns on wide screens: nine cards in two rows; the category rides on each card.
   {label:'에너지 · 금속 · 곡물',cols:5,items:[{label:'WTI 원유',symbol:'TVC:USOIL',flag:'🛢️',tag:'에너지'},{label:'브렌트유',symbol:'TVC:UKOIL',flag:'🛢️',tag:'에너지'},{label:'천연가스',symbol:'OANDA:NATGASUSD',flag:'🔥',tag:'에너지'},{label:'금',symbol:'TVC:GOLD',flag:'🥇',tag:'금속'},{label:'은',symbol:'OANDA:XAGUSD',flag:'🥈',tag:'금속'},
    {label:'구리',symbol:'OANDA:XCUUSD',flag:'🟫',tag:'금속'},{label:'옥수수',symbol:'OANDA:CORNUSD',flag:'🌽',tag:'곡물'},{label:'밀',symbol:'OANDA:WHEATUSD',flag:'🌾',tag:'곡물'},{label:'대두',symbol:'OANDA:SOYBNUSD',flag:'🫘',tag:'곡물'}]}]},
-,
  {id:'crypto',label:'가상자산',note:'가상자산은 24시간 거래돼요. 시세·차트 제공 TradingView(거래소 Bitstamp·Coinbase).',sections:[
   {label:'달러 시세',items:[{label:'비트코인',symbol:'BITSTAMP:BTCUSD',flag:'₿'},{label:'이더리움',symbol:'COINBASE:ETHUSD',flag:'◆'},{label:'솔라나',symbol:'COINBASE:SOLUSD',flag:'◎'},{label:'리플',symbol:'COINBASE:XRPUSD',flag:'✕'}]}]},
 ];

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {TrendingUp,TrendingDown,Minus,ChevronsUp,ChevronsDown,Activity,ChevronRight,Sparkles} from 'lucide-react';
+import {TrendingUp,TrendingDown,Minus,ChevronsUp,ChevronsDown,Activity,ChevronRight,ChevronLeft,Sparkles} from 'lucide-react';
 import {pulseGroups,patterns,levelText} from '../server/market-pulse.js';
 import InfoModal,{DriverTags,Section} from './info-modal.jsx';
 import {Card} from './market-context.jsx';
@@ -18,6 +18,16 @@ function Briefing({b,onHistory}){
   <p className="brief-foot">분위기 판정 · {b.pattern?.name}{b.sources.count>0?` · ${b.sources.count}개 출처(${b.sources.publishers.map(p=>publisherName[p]||p).join(', ')})`:''} · {b.ai?'OpenAI 요약':'자동 정리(근거 뉴스 부족)'}</p>
  </section>;
 }
+const kstDay=at=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul'}).format(new Date(at));
+// Briefing history like a news timeline: one day at a time, newest first, two weeks back.
+function BriefingHistory({items}){
+ const days=[...new Set(items.map(i=>kstDay(i.at)))].sort().reverse(),[day,setDay]=useState(days[0]),idx=days.indexOf(day),latest=items.at(-1)?.at;
+ const list=items.filter(i=>kstDay(i.at)===day).reverse();
+ return <div className="bh"><p className="bh-note"><Sparkles size={15}/><b>AI</b> 미국 시장 카드의 변화와 관련 뉴스를 생성형 AI로 요약해요.</p>
+  <div className="bh-nav"><button type="button" aria-label="이전 날" disabled={idx>=days.length-1} onClick={()=>setDay(days[idx+1])}><ChevronLeft size={18}/></button><strong>{day?.replaceAll('-','. ')}.</strong><button type="button" aria-label="다음 날" disabled={idx<=0} onClick={()=>setDay(days[idx-1])}><ChevronRight size={18}/></button><small>최신 생성일 기준으로 최대 2주 전까지 볼 수 있어요.</small></div>
+  {list.map(b=><article key={b.at} className={`bh-row ${b.at===latest?'is-new':''}`}><div className="bh-time">{new Date(b.at).toLocaleTimeString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',hour12:false})}{b.at===latest&&<em>NEW</em>}</div><div><h4><span className="brief-tag">[{sessionName[b.session]}]</span> {b.title}</h4><ul>{b.bullets.map((x,i)=><li key={i}>{x}</li>)}</ul></div></article>)}
+ </div>;
+}
 export default function MarketPulse(){
  const [history,setHistory]=useState(null),[brief,setBrief]=useState(null),[context,setContext]=useState(null),[tab,setTab]=useState(quoteTabs[0].id),[modal,setModal]=useState(null);
  useEffect(()=>{json('/data/pulse/history.json').then(setHistory);json('/data/pulse/briefing.json').then(setBrief);json('/data/context.json').then(setContext)},[]);
@@ -32,8 +42,8 @@ export default function MarketPulse(){
   </div></div>)}
   <p className="fine">{active.note}</p>
   {cur&&<div className="pulse-judge"><span>카드 판정</span>{pulseGroups.map(g=>{const v=cur.groups[g.id];return <button type="button" key={g.id} onClick={()=>setModal({group:g.id})} className={`pulse-pill lv${v??'na'} ${g.id==='fear'?'inverse':''}`} aria-haspopup="dialog">{g.name}<LevelIcon v={v}/></button>})}<button type="button" className="home-link" onClick={()=>setModal({how:true})}>판정 기준</button></div>}
-  <InfoModal open={modal} onClose={()=>setModal(null)} title={modal?.briefs?'지난 브리핑':modal?.how?'카드 판정 기준':group?.name}>
-   {modal?.briefs&&<div className="brief-list">{[...briefs].reverse().map(b=><Section key={b.at} title={`${kstStamp(b.at)} · ${sessionName[b.session]}`}><p><b>{b.title}</b></p><ul>{b.bullets.map((x,i)=><li key={i}>{x}</li>)}</ul></Section>)}</div>}
+  <InfoModal open={modal} onClose={()=>setModal(null)} title={modal?.briefs?'AI 브리핑':modal?.how?'카드 판정 기준':group?.name}>
+   {modal?.briefs&&<BriefingHistory items={briefs}/>}
    {modal?.how&&<><Section><p>카드마다 대리 ETF의 움직임을 최근 60거래일의 평소 하루 변동폭과 비교해 상승·하락 단계를 매겨요. 여러 카드가 함께 움직이는 모양이 아래 패턴과 맞으면 분위기 이름을 붙여요. 매시간 판정하고, 바뀐 카드를 AI 브리핑이 설명해요.</p><ul>{patterns.map(p=><li key={p.id}><b>{p.name}</b> · {Object.entries(p.when).map(([g,s])=>`${pulseGroups.find(x=>x.id===g).name}${s>0?'↑':'↓'}`).join(' ')}</li>)}</ul></Section></>}
    {group&&cur&&<><Section title="지금"><p className="info-big"><LevelIcon v={cur.groups[group.id]}/> {cur.groups[group.id]==null?(cur.session==='overnight'?'데이장 거래 없음':'미수집'):levelText[cur.groups[group.id]]}</p></Section>
     <Section title="최근 기록"><div className="pulse-trail">{items.slice(-24).map(i=><span key={i.at} title={kstStamp(i.at)} className={`pulse-group lv${i.groups[group.id]??'na'} ${group.id==='fear'?'inverse':''}`}><LevelIcon v={i.groups[group.id]}/></span>)}</div><p className="fine">왼쪽이 오래된 기록, 오른쪽이 최신이에요. 대리지표 · {group.items.map(([s,sign])=>sign<0?`${s}(반대 방향)`:s).join(' · ')}</p></Section>

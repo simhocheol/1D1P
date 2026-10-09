@@ -42,4 +42,5 @@ export function validateBriefing(raw,news){
  const used=ids.map(i=>news[i]);
  return {title,bullets,sources:{count:used.length,publishers:[...new Set(used.map(n=>n.source).filter(Boolean))].slice(0,4)},ai:true};
 }
-export function appendBriefing(file,item,keep=72){const items=[...(file?.items||[]).filter(i=>i.at!==item.at),item].sort((a,b)=>a.at.localeCompare(b.at)).slice(-keep);return {version:1,updatedAt:item.at,items}}
+// Two weeks of hourly briefings (the history modal browses them by day).
+export function appendBriefing(file,item,keep=24*14){const items=[...(file?.items||[]).filter(i=>i.at!==item.at),item].sort((a,b)=>a.at.localeCompare(b.at)).slice(-keep);return {version:1,updatedAt:item.at,items}}

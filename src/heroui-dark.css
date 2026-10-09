@@ -575,3 +575,22 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .ind-chips{display:flex;flex-wrap:wrap;gap:6px}
 .ind-chip{display:inline-flex;align-items:center;gap:6px;background:#18181B;border:1px solid #27272A;border-radius:10px;padding:6px 10px;color:#E4E4E7;font:inherit;font-size:13px;cursor:pointer}
 .ind-chip:hover{border-color:#3F3F46}.ind-chip em{font-style:normal;font-size:10px;padding:1px 6px}
+/* Compact quote cards */
+.quote-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.quote-card{padding:8px 10px 2px;border-radius:12px}
+.quote-card header strong{font-size:13px}.quote-flag{font-size:13px}
+.quote-card iframe{height:66px}
+.quote-card.bond{padding:8px 10px}.bond-body{display:flex;align-items:center;gap:8px;margin-top:6px}
+.bond-value{font-size:17px;display:inline}.bond-change{white-space:nowrap}.quote-spark{height:24px;min-width:40px}
+/* Briefing history modal */
+.info-modal:has(.bh){max-width:760px}
+.bh-note{display:flex;align-items:center;gap:6px;border:1px solid #27272A;border-radius:12px;padding:12px 14px;font-size:14px!important;color:#E4E4E7!important}.bh-note b{color:#7CC4FA}
+.bh-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 6px}.bh-nav strong{font-size:16px;color:#FAFAFA}
+.bh-nav button{background:none;border:0;color:#D4D4D8;cursor:pointer;padding:4px}.bh-nav button:disabled{color:#3F3F46;cursor:default}
+.bh-nav small{margin-left:auto;font-size:11px;color:#71717A}
+.bh-row{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:16px 12px;border-top:1px solid #27272A}
+.bh-row.is-new{background:#18181B;border-radius:12px;border-top-color:transparent}
+.bh-time{font-size:14px;color:#E4E4E7;display:flex;gap:6px;align-items:flex-start}.bh-time em{font-style:normal;font-size:11px;font-weight:700;color:#F31260;background:#2B0C12;border-radius:4px;padding:1px 5px}
+.bh-row h4{font-size:15px;color:#FAFAFA;margin:0 0 6px;line-height:1.45}
+.bh-row ul{margin:0;padding-left:16px;display:grid;gap:3px;list-style:disc}.bh-row li{font-size:13px;line-height:1.6;color:#A1A1AA}
+@media (max-width:640px){.bh-row{grid-template-columns:1fr}.bh-nav small{margin-left:0}}

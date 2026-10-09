@@ -12,11 +12,11 @@ export const quoteTabs=[
   {label:'에너지',items:[{label:'WTI 원유',symbol:'TVC:USOIL',flag:'🛢️'},{label:'브렌트유',symbol:'TVC:UKOIL',flag:'🛢️'},{label:'천연가스',symbol:'OANDA:NATGASUSD',flag:'🔥'}]},
   {label:'금속',items:[{label:'금',symbol:'TVC:GOLD',flag:'🥇'},{label:'은',symbol:'OANDA:XAGUSD',flag:'🥈'},{label:'구리',symbol:'OANDA:XCUUSD',flag:'🟫'}]},
   {label:'곡물',items:[{label:'옥수수',symbol:'OANDA:CORNUSD',flag:'🌽'},{label:'밀',symbol:'OANDA:WHEATUSD',flag:'🌾'},{label:'대두',symbol:'OANDA:SOYBNUSD',flag:'🫘'}]}]},
- {id:'crypto',label:'가상자산',note:'가상자산은 24시간 거래돼요. 시세·차트 제공 TradingView(거래소 Bitstamp·Coinbase·Upbit).',sections:[
-  {label:'달러 시세',items:[{label:'비트코인',symbol:'BITSTAMP:BTCUSD',flag:'₿'},{label:'이더리움',symbol:'COINBASE:ETHUSD',flag:'◆'},{label:'솔라나',symbol:'COINBASE:SOLUSD',flag:'◎'},{label:'리플',symbol:'COINBASE:XRPUSD',flag:'✕'}]},
-  {label:'원화 시세',items:[{label:'비트코인(원)',symbol:'UPBIT:BTCKRW',flag:'₿'},{label:'이더리움(원)',symbol:'UPBIT:ETHKRW',flag:'◆'}]}]},
+ {id:'crypto',label:'가상자산',note:'가상자산은 24시간 거래돼요. 시세·차트 제공 TradingView(거래소 Bitstamp·Coinbase).',sections:[
+  {label:'달러 시세',items:[{label:'비트코인',symbol:'BITSTAMP:BTCUSD',flag:'₿'},{label:'이더리움',symbol:'COINBASE:ETHUSD',flag:'◆'},{label:'솔라나',symbol:'COINBASE:SOLUSD',flag:'◎'},{label:'리플',symbol:'COINBASE:XRPUSD',flag:'✕'}]}]},
 ];
-const widget=symbol=>`https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=kr#${encodeURIComponent(JSON.stringify({symbol,width:'100%',height:'100%',dateRange:'1D',colorTheme:'dark',isTransparent:true,autosize:true,noTimeScale:true}))}`;
+// Compact single-quote widget: price, change and change rate in about 70px.
+const widget=symbol=>`https://s.tradingview.com/embed-widget/single-quote/?locale=kr#${encodeURIComponent(JSON.stringify({symbol,width:'100%',colorTheme:'dark',isTransparent:true}))}`;
 export function QuoteCard({label,symbol,flag}){
  return <article className="quote-card"><header><span className="quote-flag" aria-hidden="true">{flag}</span><strong>{label}</strong></header>
   <iframe title={`${label} 시세`} src={widget(symbol)} loading="lazy" referrerPolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups"/></article>;
@@ -28,7 +28,6 @@ function Spark({values}){
 }
 export function BondCard({bond}){
  const up=bond.change>0,dn=bond.change<0,bp=Math.round(Math.abs(bond.change)*100);
- return <article className="quote-card bond"><header><span className="quote-flag" aria-hidden="true">🇺🇸</span><strong>{bond.label}</strong><span className="quote-fresh">{bond.asOf.slice(5).replace('-','/')} 기준</span></header>
-  <div className="bond-body"><div><b className="bond-value">{bond.value.toFixed(2)}{bond.unit}</b><span className={`bond-change ${up?'up':dn?'down':''}`}>{up?'▲':dn?'▼':'–'} {bp}bp</span></div><Spark values={bond.spark}/></div>
-  <small className="bond-src">최근 30거래일 · FRED</small></article>;
+ return <article className="quote-card bond" title={`${bond.asOf} 기준 · 최근 30거래일 · FRED`}><header><span className="quote-flag" aria-hidden="true">🇺🇸</span><strong>{bond.label}</strong></header>
+  <div className="bond-body"><b className="bond-value">{bond.value.toFixed(2)}{bond.unit}</b><span className={`bond-change ${up?'up':dn?'down':''}`}>{up?'▲':dn?'▼':'–'}{bp}bp</span><Spark values={bond.spark}/></div></article>;
 }

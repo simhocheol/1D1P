@@ -27,9 +27,11 @@ await step('breadth',async()=>{if(!key)throw Error('Alpaca credentials missing')
  out.breadth={count:b.count,today:breadthStage(b.up),trend:breadthStage(b.above50),sectors:Object.fromEntries(Object.entries(b.sectors).map(([k,v])=>[k,{today:breadthStage(v.up),trend:breadthStage(v.above50)}]))}});
 // 3. News attention by sector from market-wide Alpaca news (8 days).
 await step('news',async()=>{if(!key)throw Error('Alpaca credentials missing');const news=[];let t;
- for(let page=0;page<160;page++){const u=new URL('https://data.alpaca.markets/v1beta1/news');u.search=new URLSearchParams({start:new Date(Date.now()-8*864e5).toISOString(),limit:'50',sort:'desc',include_content:'false',...(t?{page_token:t}:{})});
+ for(let page=0;page<200;page++){const u=new URL('https://data.alpaca.markets/v1beta1/news');u.search=new URLSearchParams({start:new Date(Date.now()-10*864e5).toISOString(),limit:'50',sort:'desc',include_content:'false',...(t?{page_token:t}:{})});
   const d=await json(u,alpaca);for(const n of d.news||[])news.push({at:n.created_at,symbols:n.symbols||[]});t=d.next_page_token;if(!t)break}
- out.newsAttention=newsAttention(news,sec);out.newsCount=news.length});
+ // Weekends have little news: anchor the 24-hour window to the end of the last weekday (21:00 UTC).
+ let anchor=new Date();while([0,6].includes(anchor.getUTCDay()))anchor=new Date(anchor-864e5);if(anchor.toDateString()!==new Date().toDateString())anchor.setUTCHours(21,0,0,0);
+ out.newsAttention=newsAttention(news,sec,Math.min(Date.now(),anchor.getTime()));out.newsCount=news.length;out.newsAnchor=new Date(Math.min(Date.now(),anchor.getTime())).toISOString()});
 // 4. Liquidity from FRED.
 await step('liquidity',async()=>{const k=process.env.FRED_API_KEY;if(!k)throw Error('FRED_API_KEY missing');
  const fred=async id=>{const u=new URL('https://api.stlouisfed.org/fred/series/observations');u.search=new URLSearchParams({series_id:id,observation_start:new Date(Date.now()-400*864e5).toISOString().slice(0,10),api_key:k,file_type:'json'});const d=await json(u);return d.observations.filter(o=>o.value!=='.').map(o=>({d:o.date,v:+o.value}))};

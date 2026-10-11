@@ -45,7 +45,12 @@ await step('wiki',async()=>{
  const titles={};for(const line of w.parse.wikitext.split('\n|-')){const sym=/\{\{\s*(?:NyseSymbol|NasdaqSymbol)\s*\|\s*([A-Z.]+)/i.exec(line)?.[1];const art=/\[\[([^\]|#]+)(?:\|[^\]]*)?\]\]/.exec(line)?.[1];if(sym&&art&&sectorOf.has(sym))titles[sym]=art.trim()}
  const end=new Date(Date.now()-864e5),start=new Date(end-30*864e5),f=d=>d.toISOString().slice(0,10).replaceAll('-','');
  const entries=Object.entries(titles);const ratios={};
- for(let i=0;i<entries.length;i+=10){await Promise.all(entries.slice(i,i+10).map(async([s,t])=>{try{const d=await json(`https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/${encodeURIComponent(t.replaceAll(' ','_'))}/daily/${f(start)}/${f(end)}`,ua);const r=attentionRatio(d.items.map(x=>x.views));if(r!=null)ratios[s]=r}catch{}}))}
+ // Wikimedia throttles bursts: 4 at a time, back off and retry on 429/5xx, record failure codes.
+ const codes={};
+ const views=async t=>{for(let k=0;k<4;k++){const r=await fetch(`https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/${encodeURIComponent(t.replaceAll(' ','_'))}/daily/${f(start)}/${f(end)}`,{headers:ua,signal:AbortSignal.timeout(30000)});
+  if(r.ok)return (await r.json()).items.map(x=>x.views);if(r.status!==429&&r.status<500){codes[r.status]=(codes[r.status]||0)+1;return null}await new Promise(x=>setTimeout(x,2000*(k+1)))}codes.retry=(codes.retry||0)+1;return null};
+ for(let i=0;i<entries.length;i+=4){await Promise.all(entries.slice(i,i+4).map(async([s,t])=>{try{const v=await views(t);const r=v&&attentionRatio(v);if(r!=null)ratios[s]=r}catch{codes.error=(codes.error||0)+1}}));await new Promise(x=>setTimeout(x,150))}
+ if(Object.keys(codes).length)out.errors.push(`wiki codes ${JSON.stringify(codes)}`);
  const by={};for(const [s,r] of Object.entries(ratios))(by[sec(s)]||=[]).push(r);
  out.wiki={matched:Object.keys(titles).length,measured:Object.keys(ratios).length,
   top:Object.entries(ratios).filter(([,r])=>r>=1.5).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([s,r])=>({symbol:s,name:universe.find(a=>a.symbol===s)?.name,sector:sec(s),stage:attentionStage(r)})),

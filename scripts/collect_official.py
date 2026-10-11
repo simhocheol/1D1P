@@ -16,10 +16,9 @@ OUTPUT = ROOT / 'public/data/official-feed.json'
 FEEDS = [
     ('fed-press', 'Federal Reserve', 'https://www.federalreserve.gov/feeds/press_all.xml'),
     ('fed-speeches', 'Federal Reserve', 'https://www.federalreserve.gov/feeds/speeches.xml'),
-    ('bls-employment', 'BLS', 'https://www.bls.gov/feed/empsit.rss'),
-    ('bls-cpi', 'BLS', 'https://www.bls.gov/feed/cpi.rss'),
-    ('bls-ppi', 'BLS', 'https://www.bls.gov/feed/ppi.rss'),
 ]
+# BLS blocks GitHub-hosted runners (HTTP 403); BLS release dates and values now come from FRED
+# (scripts/collect_context.mjs → public/data/econ-calendar.json).
 
 def parse_feed(raw, feed_id, agency, fetched_at):
     root = ET.fromstring(raw)

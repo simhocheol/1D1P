@@ -32,10 +32,19 @@ jobs:
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           SEC_CONTACT_EMAIL: ${{ secrets.SEC_CONTACT_EMAIL }}
         run: node scripts/collect_flows.mjs
+      - name: Log and score the funnel (validation)
+        continue-on-error: true
+        env:
+          ALPACA_CREDENTIALS_JSON: ${{ secrets.ALPACA_CREDENTIALS_JSON }}
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: node scripts/collect_validation.mjs
       - name: Commit context
         run: |
           git add public/data/context.json
           if [ -f public/data/flows.json ]; then git add public/data/flows.json; fi
+          if [ -f public/data/econ-calendar.json ]; then git add public/data/econ-calendar.json; fi
+          if [ -f public/data/validation.json ]; then git add public/data/validation.json; fi
           if git diff --cached --quiet; then exit 0; fi
           git config user.name simhocheol
           git config user.email 42663762+simhocheol@users.noreply.github.com

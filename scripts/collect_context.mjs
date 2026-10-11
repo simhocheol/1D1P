@@ -2,6 +2,7 @@
 // Public-domain series publish values; restricted ones (VIX, S&P price) publish positions only.
 import fs from 'node:fs/promises';
 import {parse} from 'csv-parse/sync';
+import {releases,latestResult,calendarEvents} from '../server/econ-calendar.js';
 import {contextIndicators,directionIndicators,describe,overall,scenarios,direction,directionSummary,globalSummary} from '../server/market-context.js';
 const key=process.env.FRED_API_KEY;
 if(!key){console.error('FRED_API_KEY 미등록');process.exit(1)}
@@ -39,5 +40,18 @@ const list=items.filter(Boolean);
 const order=contextIndicators.map(i=>i.id);list.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
 await fs.writeFile('public/data/context.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),summary:overall(list.filter(i=>i.group==="level")),scenarios:scenarios(list),items:list,direction:{summary:directionSummary(directions),items:directions.filter(Boolean)},global:{summary:globalSummary(list)},bonds,cape,
  sources:'FRED(세인트루이스 연방준비은행) · Robert Shiller 주가 데이터(datasets/s-and-p-500)',notice:'VIX와 주가는 이용 조건에 따라 수치 없이 역사 속 위치만 표시합니다.',errors})+'\n');
+// Economic release calendar (replaces hand-entered dates and the blocked BLS feeds).
+try{
+ const api=async(path,params)=>{const u=new URL(`https://api.stlouisfed.org/fred/${path}`);u.search=new URLSearchParams({...params,api_key:key,file_type:'json'}).toString();const r=await fetch(u,{signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error(`${path} HTTP ${r.status}`);return r.json()};
+ const all=(await api('releases',{limit:'1000'})).releases||[];const today=new Date().toISOString().slice(0,10),from=new Date(Date.now()-45*864e5).toISOString().slice(0,10),to=new Date(Date.now()+100*864e5).toISOString().slice(0,10);
+ const found=[],results={},missing=[];
+ for(const rel of releases){const hit=all.find(x=>rel.match.test(x.name.trim()));if(!hit){missing.push(rel.key);continue}
+  const d=await api('release/dates',{release_id:String(hit.id),realtime_start:from,realtime_end:'9999-12-31',include_release_dates_with_no_data:'true',sort_order:'asc',limit:'1000'});
+  const dates=[...new Set((d.release_dates||[]).map(x=>x.date))].filter(x=>x>=from&&x<=to);found.push({rel,dates});
+  if(rel.series){try{const r=latestResult(rel,cache[rel.series]||await fred(rel.series));const past=dates.filter(x=>x<=today);if(r&&past.length)results[rel.key]={releasedOn:past.at(-1),value:r}}catch(e){errors.push(`calendar ${rel.key}: ${e.message}`)}}
+  await new Promise(x=>setTimeout(x,400))}
+ await fs.writeFile('public/data/econ-calendar.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),source:'FRED release calendar (BLS·BEA·Census·Fed 등)',events:calendarEvents(found,results),missing})+'\n');
+ console.log(`Calendar ${found.reduce((n,f)=>n+f.dates.length,0)} dates · ${Object.keys(results).length} results${missing.length?` · unmatched ${missing.join(',')}`:''}`);
+}catch(e){errors.push(`calendar: ${e.message}`)}
 console.log(`Context ${list.length}/${contextIndicators.length}${errors.length?` · errors: ${errors.join('; ')}`:''}`);
 if(!list.length)process.exit(1);

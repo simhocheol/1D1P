@@ -12,13 +12,18 @@ import './styles.css';import './dark.css';import './calendar.css';import './fram
 const labels={economic:'경제지표',institution:'기관 발표',earnings:'실적 발표'};
 const sectorKo={'Information Technology':'정보기술',Financials:'금융',Energy:'에너지','Health Care':'헬스케어','Consumer Discretionary':'경기소비재','Consumer Staples':'필수소비재',Industrials:'산업재',Materials:'소재',Utilities:'유틸리티','Real Estate':'부동산','Communication Services':'커뮤니케이션'};
 const label=s=>sectorKo[s]||s||'섹터 미확인';
+// Economic release dates from FRED (BLS·BEA·Census·Fed), replacing the hand-entered list.
+function useEcon(){const [d,setD]=useState(null);useEffect(()=>{fetch('/data/econ-calendar.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(setD).catch(()=>{})},[]);return d}
 function useEarnings(){const [state,setState]=useState({data:null,error:null});useEffect(()=>{const c=new AbortController();fetch('/data/earnings.json',{signal:c.signal,cache:'no-cache'}).then(r=>{if(!r.ok)throw Error(`HTTP ${r.status}`);return r.json()}).then(data=>{if(!Array.isArray(data.events))throw Error('실적 일정 형식 오류');setState({data,error:null})}).catch(e=>{if(e.name!=='AbortError')setState({data:null,error:e.message})});return()=>c.abort()},[]);return state}
-export default function CalendarPage(){const today=new Date();const [month,setMonth]=useState(new Date(Date.UTC(today.getFullYear(),today.getMonth(),1))),[day,setDay]=useState(today.getDate()),[category,setCategory]=useState('all'),[view,setView]=useState('month');const {data,error}=useOfficialFeed();const earnings=useEarnings();
+export default function CalendarPage(){const today=new Date();const [month,setMonth]=useState(new Date(Date.UTC(today.getFullYear(),today.getMonth(),1))),[day,setDay]=useState(today.getDate()),[category,setCategory]=useState('all'),[view,setView]=useState('month');const {data,error}=useOfficialFeed();const earnings=useEarnings();const econ=useEcon();
  const y=month.getUTCFullYear(),m=month.getUTCMonth(),count=monthDays(y,m),prefix=`${y}-${String(m+1).padStart(2,'0')}`,date=`${prefix}-${String(day).padStart(2,'0')}`;
  const feedEvents=(data?.events||[]).map(e=>({...e,day:Number(e.date.slice(-2)),type:'institution',source:e.agency,time:new Date(e.publishedAt).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit'})+' ET',note:'원문 제목·게시 시각 자동 수집. Driver 분류·영향 분석 대기.',drivers:[]}));
  const earningsEvents=(earnings.data?.events||[]).map(e=>({id:`earn-${e.symbol}-${e.date}`,date:e.date,day:Number(e.date.slice(-2)),type:'earnings',title:`${e.symbol} 실적`,time:e.hour,source:'Finnhub',url:`https://finnhub.io/docs/api/earnings-calendar`,note:`${e.name} · ${label(e.sector)}${e.quarter?` · FY${e.year} Q${e.quarter}`:''}${e.epsEstimate!=null?` · EPS 예상 ${e.epsEstimate}`:''}. 실적 일정 자동 수집이며 일정은 기업 사정으로 바뀔 수 있습니다.`,drivers:['매출·주문','마진·현금흐름']}));
- const manual=calendarEvents.filter(e=>!(e.type==='earnings'&&earningsEvents.some(x=>x.date===e.date&&e.title.includes(x.title.split(' ')[0]))));
- const events=[...manual,...feedEvents,...earningsEvents].filter(e=>e.date.startsWith(prefix)&&(category==='all'||e.type===category));
+ const fmtResult=r=>r?` 최근 결과 · ${r.label} ${r.value>0&&['천 명','%'].includes(r.unit)&&r.label!=='연율 성장률'&&r.label!=='기준금리 상단'?'+':''}${r.value.toLocaleString('ko-KR')}${r.unit==='%'?'%':` ${r.unit}`} (${r.period.slice(0,7)} 기준).`:'';
+ const econEvents=(econ?.events||[]).map(e=>({...e,day:Number(e.date.slice(-2)),url:'https://fred.stlouisfed.org/releases/calendar',note:`FRED 공식 발표 일정.${fmtResult(e.result)}`}));
+ const hasEcon=econEvents.length>0,econKeys=new Set(econEvents.map(e=>e.key));
+ const manual=calendarEvents.filter(e=>!(e.type==='earnings'&&earningsEvents.some(x=>x.date===e.date&&e.title.includes(x.title.split(' ')[0])))&&!(hasEcon&&e.type==='economic')&&!(econKeys.has('fomc')&&e.title.includes('FOMC 회의')));
+ const events=[...manual,...econEvents,...feedEvents,...earningsEvents].filter(e=>e.date.startsWith(prefix)&&(category==='all'||e.type===category));
  const offset=(new Date(Date.UTC(y,m,1)).getUTCDay()+6)%7,weekStart=Math.floor((offset+day-1)/7)*7;
  const cells=Array.from({length:Math.ceil((offset+count)/7)*7},(_,i)=>i-offset+1).filter((_,i)=>view==='month'||(i>=weekStart&&i<weekStart+7));
  function move(n){setMonth(new Date(Date.UTC(y,m+n,1)));setDay(1)}

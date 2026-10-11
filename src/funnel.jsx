@@ -14,7 +14,8 @@ const kst=t=>new Date(t).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'nu
 const verdictClass={유리:'good',중립:'mid',불리:'bad'};
 // Macro → sector → crowded trading → watch list, in one card. Observation, not a recommendation.
 export default function Funnel(){
- const [data,setData]=useState(null),[error,setError]=useState(''),[pick,setPick]=useState(null),[cot,setCot]=useState(false);
+ const [data,setData]=useState(null),[error,setError]=useState(''),[pick,setPick]=useState(null),[cot,setCot]=useState(false),[val,setVal]=useState(null);
+ useEffect(()=>{fetch('/data/validation.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(setVal).catch(()=>{})},[]);
  useEffect(()=>{fetch('/data/pulse/funnel.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject(Error(r.status===404?'첫 수집 후 표시돼요.':`HTTP ${r.status}`))).then(setData).catch(e=>setError(e.message))},[]);
  const sec=pick&&data?.sectors.find(s=>s.id===pick);
  return <Card icon={Filter} title="오늘의 흐름" sub="거시 국면 → 유리한 섹터 → 그 안에 거래가 몰리는 종목" meta={data&&`${kst(data.updatedAt)} 갱신`} className="funnel">
@@ -32,6 +33,10 @@ export default function Funnel(){
     {p.basis==='거래 집중'?<dl><dt>체결강도</dt><dd>{p.strength}</dd><dt>거래량</dt><dd>{p.volume}</dd><dt>VWAP</dt><dd>{p.vwap==='above'?'위':p.vwap==='below'?'아래':'—'}</dd></dl>:<dl><dt>근거</dt><dd>{data.report?`${data.report.date} 리포트`:'리포트'}</dd><dt>Driver</dt><dd>{p.drivers.join(' · ')||'—'}</dd></dl>}
     <span className="fn-chain">{data.regime[0]} → {sectorKo[p.sector]} {data.sectors.find(s=>s.id===p.sector)?.verdict} → {p.basis}</span></article>)}</div>}
   {data.attention?.length>0&&<p className="fn-wiki"><b>위키피디아 관심 급증</b>{data.attention.map(a=><EtfTicker key={a.symbol} symbol={a.symbol} name={a.name}/>)}</p>}
+  </div></div>
+  <div className="fn-step"><span className="fn-no">4</span><div><h3>검증 <small>이 흐름이 실제로 맞았는지 (5거래일 뒤 기준)</small></h3>
+   {!val?.summary?.d5?.days?<p className="fine">기록을 쌓는 중이에요. 매일 장 마감 뒤 그날의 유리 섹터·관찰 종목을 저장하고, 5거래일 뒤부터 결과가 나와요{val?.records?.length?` (지금 ${val.records.length}일 기록)`:''}.</p>:
+   <div className="fn-val">{[['유리 섹터가 시장(S&P 500)을 이긴 비율',val.summary.d5.sectors],['그중 자금이 확인된(✓) 섹터',val.summary.d5.confirmed],['관찰 종목이 자기 섹터를 이긴 비율',val.summary.d5.picks],['· 거래 집중 종목',val.summary.d5.byBasis['거래 집중']],['· 리포트 근거 종목',val.summary.d5.byBasis['리포트 근거']]].map(([l,t])=><span key={l}><b>{l}</b>{t.n?`${Math.round(t.hit/t.n*100)}% (${t.hit}/${t.n})`:'—'}</span>)}<small>최근 {val.summary.d5.days}일 기록 · 1거래일 뒤 기준 섹터 {val.summary.d1.sectors.n?`${Math.round(val.summary.d1.sectors.hit/val.summary.d1.sectors.n*100)}%`:'—'} · 50% 근처면 우연과 비슷해요</small></div>}
   </div></div>
   <p className="fine">거래 집중: 정규장에서 16분 이상 지난 마지막 5분 기준{data.active?.at?`(${etTime(data.active.at)} ET)`:''} · 거래량은 20거래일 같은 시각 대비, 체결강도는 체결 방향 추정, VWAP는 당일 누적 기준. 리포트 근거: 최근 일일 리포트의 판단 후보. 투자 권유가 아닌 관측 기록입니다.</p>
   </>}

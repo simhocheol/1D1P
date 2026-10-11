@@ -650,3 +650,6 @@ html.dark .reaction-legend i.legend-dot.pre{background:#F5A524}
 .fn-money b,.fn-cot b{font-weight:600;color:#71717A}.fn-cot{font:inherit;font-size:12px;cursor:pointer}
 .fn-att{font-style:normal;font-size:10px;font-weight:700;color:#F5A524!important;margin-left:6px}
 .fn-wiki{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;color:#A1A1AA;margin:10px 0 0}.fn-wiki b{color:#71717A;font-weight:600}
+.fn-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px}
+.fn-val span{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#FAFAFA;background:#18181B;border:1px solid #27272A;border-radius:8px;padding:6px 10px}
+.fn-val b{font-weight:400;color:#A1A1AA}.fn-val small{grid-column:1/-1;font-size:11px;color:#71717A}

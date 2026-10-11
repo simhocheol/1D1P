@@ -11,7 +11,6 @@ export const releases=[
  {key:'jolts',match:/^Job Openings and Labor Turnover Survey$/i,title:'구인·이직 보고서(JOLTS)',time:'10:00 ET',drivers:['수요·성장'],series:'JTSJOL',result:'level',unit:'천 건',label:'구인 건수'},
  {key:'industry',match:/^G\.17 Industrial Production and Capacity Utilization$/i,title:'산업생산',time:'09:15 ET',drivers:['수요·성장','공급·경쟁 구조'],series:'INDPRO',result:'mom',unit:'%',label:'전월 대비'},
  {key:'sentiment',match:/^Surveys of Consumers$/i,title:'미시간대 소비자심리',time:'10:00 ET',drivers:['수요·성장'],series:null},
- {key:'fomc',match:/^FOMC Press Release$/i,title:'FOMC 금리 결정',time:'14:00 ET',drivers:['금리·할인율','유동성·자금흐름'],series:'DFEDTARU',result:'level',unit:'%',label:'기준금리 상단'},
 ];
 const round=(v,d=2)=>Math.round(v*10**d)/10**d;
 // Latest result for a release from its series observations (oldest first).
@@ -26,4 +25,17 @@ export function latestResult(rel,obs){
 }
 export function calendarEvents(found,results){
  return found.flatMap(({rel,dates})=>dates.map(d=>({id:`fred-${rel.key}-${d}`,date:d,type:'economic',title:rel.title,time:rel.time,source:'FRED 발표 일정',drivers:rel.drivers,key:rel.key,result:results[rel.key]&&results[rel.key].releasedOn===d?results[rel.key].value:null}))).sort((a,b)=>a.date.localeCompare(b.date));
+}
+// FOMC meeting dates from the Fed's calendar page ("2026 FOMC Meetings" panels). FRED's FOMC release is daily,
+// so it cannot mark meetings. "*" marks meetings with a Summary of Economic Projections.
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+export function parseFomc(html,years){
+ const out=[];
+ for(const y of years){const i=html.indexOf(`${y} FOMC Meetings`);if(i<0)continue;const j=html.indexOf('FOMC Meetings',i+20);const seg=html.slice(i,j>0?j:i+40000);
+  for(const m of seg.matchAll(/fomc-meeting__month[^>]*>\s*<strong>([^<]+)<\/strong>[\s\S]*?fomc-meeting__date[^>]*>([^<]+)</g)){
+   const mon=MONTHS.findIndex(x=>m[1].trim().startsWith(x))+1;const dd=/(\d{1,2})(?:-(\d{1,2}))?/.exec(m[2]);if(!mon||!dd)continue;
+   const sep=m[2].includes('*'),d1=+dd[1],d2=dd[2]?+dd[2]:d1;const iso=d=>`${y}-${String(mon).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+   if(d2!==d1)out.push({id:`fomc-${iso(d1)}`,date:iso(d1),type:'institution',title:'FOMC 회의 · 첫째 날',time:'시간 미공개',source:'Federal Reserve',drivers:['금리·할인율','유동성·자금흐름'],key:'fomc-day1'});
+   out.push({id:`fomc-${iso(d2)}`,date:iso(d2),type:'institution',title:sep?'FOMC 금리 결정 · 경제전망 발표':'FOMC 금리 결정',time:'14:00 ET',source:'Federal Reserve',drivers:['금리·할인율','유동성·자금흐름'],key:'fomc'})}}
+ return out;
 }

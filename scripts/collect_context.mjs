@@ -2,7 +2,7 @@
 // Public-domain series publish values; restricted ones (VIX, S&P price) publish positions only.
 import fs from 'node:fs/promises';
 import {parse} from 'csv-parse/sync';
-import {releases,latestResult,calendarEvents} from '../server/econ-calendar.js';
+import {releases,latestResult,calendarEvents,parseFomc} from '../server/econ-calendar.js';
 import {contextIndicators,directionIndicators,describe,overall,scenarios,direction,directionSummary,globalSummary} from '../server/market-context.js';
 const key=process.env.FRED_API_KEY;
 if(!key){console.error('FRED_API_KEY 미등록');process.exit(1)}
@@ -50,8 +50,10 @@ try{
   const dates=[...new Set((d.release_dates||[]).map(x=>x.date))].filter(x=>x>=from&&x<=to);found.push({rel,dates});
   if(rel.series){try{const r=latestResult(rel,cache[rel.series]||await fred(rel.series));const past=dates.filter(x=>x<=today);if(r&&past.length)results[rel.key]={releasedOn:past.at(-1),value:r}}catch(e){errors.push(`calendar ${rel.key}: ${e.message}`)}}
   await new Promise(x=>setTimeout(x,400))}
- await fs.writeFile('public/data/econ-calendar.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),source:'FRED release calendar (BLS·BEA·Census·Fed 등)',events:calendarEvents(found,results),missing})+'\n');
- console.log(`Calendar ${found.reduce((n,f)=>n+f.dates.length,0)} dates · ${Object.keys(results).length} results${missing.length?` · unmatched ${missing.join(',')}`:''}`);
+ let fomc=[];try{const r=await fetch('https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm',{headers:{'User-Agent':'Mozilla/5.0'},signal:AbortSignal.timeout(30000)});const y=new Date().getUTCFullYear();if(r.ok)fomc=parseFomc(await r.text(),[y,y+1]).filter(e=>e.date>=from&&e.date<=to)}catch(e){errors.push(`fomc: ${e.message}`)}
+ const events=[...calendarEvents(found,results),...fomc].sort((a,b)=>a.date.localeCompare(b.date));
+ await fs.writeFile('public/data/econ-calendar.json',JSON.stringify({version:1,generatedAt:new Date().toISOString(),source:'FRED release calendar (BLS·BEA·Census) · Federal Reserve FOMC calendar',events,missing,fomc:fomc.length})+'\n');
+ console.log(`Calendar ${found.reduce((n,f)=>n+f.dates.length,0)} dates · FOMC ${fomc.length} · ${Object.keys(results).length} results${missing.length?` · unmatched ${missing.join(',')}`:''}`);
 }catch(e){errors.push(`calendar: ${e.message}`)}
 console.log(`Context ${list.length}/${contextIndicators.length}${errors.length?` · errors: ${errors.join('; ')}`:''}`);
 if(!list.length)process.exit(1);

@@ -56,8 +56,8 @@ try{
  let active=prev?.active||null;
  if(pulse.session==='regular'){const a=await activeStocks({headers,at,prefer:new Set(favored.map(f=>f.id))});if(!a.error)active={at:a.barStart,ranked:a.ranked};console.log(`Active ${a.ranked?.length??0}${a.error?` (${a.error})`:` · candidates ${a.candidates} · measured ${a.measured}`}`)}
  const {candidates,report}=await reportCandidates();
- const picks=pickStocks({favored,active:active?.ranked||[],candidates});
- await fs.writeFile(funnelFile,JSON.stringify({version:1,updatedAt:at.toISOString(),session:pulse.session,regime:layer.regime,contextAt:layer.contextAt,sectors:layer.sectors,favored:favored.map(f=>f.id),active,report,picks})+'\n');
+ const picks=pickStocks({favored,active:active?.ranked||[],candidates,attention:layer.attention});
+ await fs.writeFile(funnelFile,JSON.stringify({version:1,updatedAt:at.toISOString(),session:pulse.session,regime:layer.regime,contextAt:layer.contextAt,money:layer.money,attention:layer.attention,sectors:layer.sectors,favored:favored.map(f=>f.id),active,report,picks})+'\n');
  console.log(`Funnel favored ${favored.map(f=>f.name).join(',')||'-'} · picks ${picks.length}`);
 }catch(e){console.warn(`funnel skipped: ${e.message}`)}
 let flows=[];try{const f=await fundFlows({headers,at});flows=f.flows;console.log(`Flows ${flows.filter(x=>x.dir).length}/${flows.length}${f.errors.length?` · errors: ${f.errors.join('; ')}`:''}`)}catch(e){console.warn(`flows skipped: ${e.message}`)}

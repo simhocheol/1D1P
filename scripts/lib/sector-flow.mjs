@@ -12,16 +12,18 @@ export async function sectorLayer({headers,at=new Date()}){
   do{if(t)u.searchParams.set('page_token',t);const d=await get(u);for(const [s,b] of Object.entries(d.bars||{}))(out[s]||=[]).push(...b);t=d.next_page_token}while(t);return out};
  const [daily,hourly]=await Promise.all([pull('1Day',50),pull('1Hour',35)]);
  const context=await read('../../public/data/context.json');const macro=macroSectorScores(context);
+ const flows=await read('../../public/data/flows.json');
  const close=s=>(daily[s]||[]).map(b=>b.c),spy=close('SPY');
  const list=sectors.map(s=>{
   const h=(hourly[s.etf]||[]).filter(b=>Date.parse(b.t)+3600e3<=end.getTime());
   const fresh=h.length&&end-Date.parse(h.at(-1).t)<=3*3600e3;const f=fresh?symbolFlow(h.map(b=>({t:b.t,o:b.o,c:b.c,v:b.v}))):null;
   const flow=f?{dir:f.ratio>=0.9&&f.z>=0.5?'in':f.ratio>=0.9&&f.z<=-0.5?'out':'flat',vol:volStage(f.ratio)}:null;
   const rs1w=relStrength(close(s.etf),spy,5),rs1m=relStrength(close(s.etf),spy,21);
-  const v=sectorVerdict({macro:macro[s.id],rs1w,rs1m,flow});
-  return {id:s.id,name:s.name,etf:s.etf,macro:{score:macro[s.id].score,plus:macro[s.id].plus.slice(0,3),minus:macro[s.id].minus.slice(0,3)},rs1w:rsStage(rs1w),rs1m:rsStage(rs1m),flow,...v};
+  const etf=flows?.etf?.[s.etf]||null;const v=sectorVerdict({macro:macro[s.id],rs1w,rs1m,flow,etf:etf?.week});
+  return {id:s.id,name:s.name,etf:s.etf,macro:{score:macro[s.id].score,plus:macro[s.id].plus.slice(0,3),minus:macro[s.id].minus.slice(0,3)},rs1w:rsStage(rs1w),rs1m:rsStage(rs1m),flow,etfFlow:etf,breadth:flows?.breadth?.sectors?.[s.id]||null,attention:{news:flows?.newsAttention?.[s.id]||null,wiki:flows?.wiki?.sectors?.[s.id]||null},...v};
  }).sort((a,b)=>b.total-a.total);
- return {regime:regimeLine(context),sectors:list,contextAt:context?.generatedAt||null};
+ return {regime:regimeLine(context),sectors:list,contextAt:context?.generatedAt||null,
+  money:flows?{asOf:flows.generatedAt,liquidity:flows.liquidity||null,breadth:flows.breadth?{today:flows.breadth.today,trend:flows.breadth.trend}:null,cot:flows.cot||null,market:flows.etf?.SPY||null}:null,attention:flows?.wiki?.top||[]};
 }
 // Latest daily-report candidates with their Driver names, for picks outside the regular session.
 export async function reportCandidates(){

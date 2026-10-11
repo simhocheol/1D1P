@@ -55,16 +55,19 @@ export const rsStage=v=>v==null?null:v>=2?'strong':v>=0.5?'up':v<=-2?'weak':v<=-
 export const rsText={strong:'시장보다 강함',up:'시장보다 약간 강함',flat:'시장과 비슷',down:'시장보다 약간 약함',weak:'시장보다 약함'};
 const rsPoint={strong:2,up:1,flat:0,down:-1,weak:-2};
 // Final verdict: macro score plus what the money is actually doing (1-month strength and the last hour's flow).
-export function sectorVerdict({macro,rs1w,rs1m,flow}){
- const measured=(rsPoint[rsStage(rs1m)]??0)+(rsPoint[rsStage(rs1w)]??0)/2+(flow?.dir==='in'?1:flow?.dir==='out'?-1:0);
+// etf: real 5-day creations/redemptions stage (from SPDR NAV history), which outweighs price-based guesses.
+const etfPoint={strong_in:1,in:0.5,flat:0,out:-0.5,strong_out:-1};
+export function sectorVerdict({macro,rs1w,rs1m,flow,etf}){
+ const measured=(rsPoint[rsStage(rs1m)]??0)+(rsPoint[rsStage(rs1w)]??0)/2+(flow?.dir==='in'?1:flow?.dir==='out'?-1:0)+(etfPoint[etf]??0);
  const total=Math.sign(macro.score)*Math.min(Math.abs(macro.score),3)+measured;
  const confirmed=macro.score>0&&measured>0;
  return {total:Math.round(total*10)/10,verdict:total>=2?'유리':total<=-2?'불리':'중립',confirmed};
 }
 // Funnel picks: active stocks inside favored sectors first, then daily-report candidates there.
-export function pickStocks({favored,active,candidates,n=5}){
+export function pickStocks({favored,active,candidates,attention,n=5}){
  const fav=new Set(favored.map(f=>f.id));const out=[],seen=new Set();
  for(const a of active.filter(a=>fav.has(a.sector))){if(out.length>=n)break;out.push({...a,basis:'거래 집중'});seen.add(a.symbol)}
  for(const c of (candidates||[]).filter(c=>fav.has(c.sector)&&!seen.has(c.symbol))){if(out.length>=n)break;out.push({symbol:c.symbol,name:c.name,sector:c.sector,basis:'리포트 근거',drivers:c.drivers||[]});seen.add(c.symbol)}
- return out;
+ const att=new Map((attention||[]).map(a=>[a.symbol,a.stage]));
+ return out.map(p=>att.has(p.symbol)?{...p,attention:att.get(p.symbol)}:p);
 }
